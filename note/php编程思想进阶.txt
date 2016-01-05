@@ -1,0 +1,42 @@
+php编程思想进阶
+
+第一阶段：面向过程
+刚开始的第一个小项目，用来练手，然后我全部是流程化的编程。
+缺点：代码结构不清晰，不容易维护。
+
+
+
+第二阶段：OOP
+采用OO类的编程方式进行改写。我以前写PHP，几乎全部是结构化的代码。开始写OO方面的代码，还真的不熟悉了。
+以前做JAVA的时候，写Class是很得心应手的。重新开始学习OO，几个小时，慢慢就摸熟悉了。
+然后第二个版本出来了，全部在一个类中，调用了N个互不相干的方法。实例化这个类，然后调用，搞定。
+缺点：结构不明晰，不便于维护。
+
+
+
+第三阶段：MVC
+采用了MVC模式，更易于维护。
+数据可以从后台用模板引擎刷视图，也可以后台返回json给js刷视图。
+
+（1）Model层：构造一个Class类，然后在PHP5中的public function __construct(){}，对一些私有变量进行初始化，然后在需要的地方调用$this->_var；它只负责和数据源打交道，比如DB，文件，或者其他。
+ 
+（2）Control层：构造一个Class类，然后引入Model的文件，对部分数据进行业务逻辑的处理，其中一般有个方法：render()，然后就可以把需要的数据渲染到smarty中去。由于很多smarty的生成方法都相同，于是我在Control中也写了一个getSmarty()方法，其实可以写入到一个common的PHP文件中。
+	/** 
+     *  @param string $dir  //从什么目录生成模板文件 
+     */  
+    function getSmarty($dir)  
+    {  
+        require('Smarty.class.php');  
+        $s = new Smarty;  
+        $s->debugging = false;  
+        $s->template_dir = $dir.'/template/';  
+        $s->compile_dir = $dir.'/template_c/';  
+        $s->left_delimiter  =  '<{';  
+        $s->right_delimiter =  '}>';  
+        $s->compile_check = true;  
+        $s->debugging = false;  
+        return $s;  
+    }  
+（3）index.php文件，引入Control层的类文件，然后实例化一个成员，直接调用$class->render()，就OK了。
+
+

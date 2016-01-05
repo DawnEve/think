@@ -1,0 +1,93 @@
+Application
+├─Common         应用公共模块
+│  ├─Common      应用公共函数目录
+│  └─Conf        应用公共配置文件目录
+├─Home           默认生成的Home模块
+│  ├─Conf        模块配置文件目录
+│  ├─Common      模块函数公共目录
+│  ├─Controller  模块控制器目录
+│  ├─Model       模块模型目录
+│  └─View        模块视图文件目录
+├─Runtime        运行时目录
+│  ├─Cache       模版缓存目录
+│  ├─Data        数据目录
+│  ├─Logs        日志目录
+│  └─Temp        缓存目录
+
+
+新版采用模块化的设计架构，下面是一个应用目录下面的模块目录结构，每个模块可以方便的卸载和部署，并且支持公共模块。
+
+Application      默认应用目录（可以设置）
+├─Common         公共模块（不能直接访问）
+├─Home           前台模块
+├─Admin          后台模块
+├─...            其他更多模块
+├─Runtime        默认运行时目录（可以设置）
+
+
+每个模块是相对独立的，其目录结构如下：
+
+├─Module         模块目录
+│  ├─Conf        配置文件目录
+│  ├─Common      公共函数目录
+│  ├─Controller  控制器目录
+│  ├─Model       模型目录
+│  ├─Logic       逻辑目录（可选）
+│  ├─Service     Service目录（可选）
+│  ... 更多分层目录可选
+│  └─View        视图目录
+
+
+由于采用多层的MVC机制，除了Conf和Common目录外，每个模块下面的目录结构可以根据需要灵活设置和添加，所以并不拘泥于上面展现的目录
+
+
+Core（核心）
+
+ThinkPHP的核心部分包括核心函数库、惯例配置、核心类库（包括基础类和内置驱动及核心行为），这些是ThinkPHP必不可少的部分。
+
+ThinkPHP/Common/functions.php // 核心函数库
+ThinkPHP/Conf/convention.php  // 惯例配置文件
+ThinkPHP/Conf/debug.php  // 惯例调试配置文件
+ThinkPHP/Mode/common.php  // 普通模式定义文件
+ThinkPHP/Library/Think // 核心类库包
+ThinkPHP/Library/Behavior // 系统行为类库
+ThinkPHP/Library/Think/App.class.php // 核心应用类
+ThinkPHP/Library/Think/Cache.class.php // 核心缓存类
+ThinkPHP/Library/Think/Controller.class.php // 基础控制器类
+ThinkPHP/Library/Think/Db.class.php // 数据库操作类
+ThinkPHP/Library/Think/Dispatcher.class.php // URL解析调度类
+ThinkPHP/Library/Think/Exception.class.php // 系统基础异常类
+ThinkPHP/Library/Think/Hook.class.php // 系统钩子类
+ThinkPHP/Library/Think/Log.class.php // 系统日志记录类
+ThinkPHP/Library/Think/Model.class.php // 系统基础模型类
+ThinkPHP/Library/Think/Route.class.php // 系统路由类
+ThinkPHP/Library/Think/Storage.class.php // 系统存储类
+ThinkPHP/Library/Think/Template.class.php // 内置模板引擎类
+ThinkPHP/Library/Think/Think.class.php // 系统引导类
+ThinkPHP/Library/Think/View.class.php // 系统视图类
+
+Behavior目录下面是系统内置的一些行为类库，内置驱动则分布在各个不同的驱动目录下面（参考下面的驱动部分）。
+
+
+Driver（驱动）
+驱动包括
+
+ThinkPHP/Library/Think/Cache/Driver // 缓存驱动类库
+ThinkPHP/Library/Think/Db/Driver // 数据库驱动类库
+ThinkPHP/Library/Think/Log/Driver // 日志记录驱动类库
+ThinkPHP/Library/Think/Session/Driver // Session驱动类库
+ThinkPHP/Library/Think/Storage/Driver // 存储驱动类库
+ThinkPHP/Library/Think/Template/Driver // 第三方模板引擎驱动类库
+ThinkPHP/Library/Think/Template/TagLib // 内置模板引擎标签库扩展类库
+
+
+
+
+
+
+
+
+
+
+
+

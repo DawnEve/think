@@ -1,0 +1,38 @@
+新的移动开发方案：React Native 
+
+React Native 官方文档中文版
+http://reactnative.cn/docs/getting-started.html#content
+en:http://facebook.github.io/react-native/docs/getting-started.html
+
+React Native:A FRAMEWORK FOR BUILDING NATIVE APPS USING REACT
+http://facebook.github.io/react-native/
+
+如何评价 React Native？
+http://www.zhihu.com/question/27852694
+
+《React Native：用JavaScript开发移动应用》
+http://item.jd.com/11785195.html
+
+整理了一份React-Native学习指南
+http://www.tuicool.com/articles/zaInUbA
+
+USE REACT NATIVE:BUILD NATIVE IOS AND ANDROID APPS WITH JAVASCRIPT
+http://www.reactnative.com/
+
+推荐 11 款 React Native 开源移动 UI 组件
+http://www.oschina.net/news/61214/11-react-native-ui-components
+
+Amaze UI React:基于 React.js 开发的 Web 组件库
+http://amazeui.org/react/
+
+天猫一个ppt：
+http://yunpan.taobao.com/s/GeUkc7lAfI
+天猫卖家中心：https://myseller.taobao.com/seller_admin.htm
+
+阮一峰的博客：
+http://www.ruanyifeng.com/blog/archives.html
+
+
+
+
+
