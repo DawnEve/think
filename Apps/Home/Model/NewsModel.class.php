@@ -11,10 +11,14 @@ class NewsModel extends Model{
 			'limit'=>2,
 		),
 		
+		'default'=>array(
+			'where'=>array('id>=1'),
+		),
+		
 	);
 
 	function __construct(){
-		parent::__construct();//ÕâÒ»¾äÒ»¶¨Òª¼ÓÉÏ£¡
+		parent::__construct();//è¿™ä¸€å¥ä¸€å®šè¦åŠ ä¸Šï¼
 		echo '<h1>from news model.</h1>';
 	}
 }

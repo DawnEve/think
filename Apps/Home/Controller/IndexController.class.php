@@ -98,8 +98,9 @@ class IndexController extends Controller {
 		echo '<hr>URL_PATHINFO_DEPR: ', C('URL_PATHINFO_DEPR');
 		echo '<hr>URL_MODEL: ', C('URL_MODEL');
 		echo '<hr>URL_MODEL: ', U();
-		
 	}
+
+
 }
 
 /*

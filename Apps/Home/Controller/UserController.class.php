@@ -375,6 +375,14 @@ class UserController extends Controller {
 		//MyDump( $user->select() );//cache
 		MyDump( $user->cache(true)->select() );//cache
 	}
+	
+	//==================================================================
+	//==================================================================
+	function create(){
+	    $u=M('User');
+	    dump( $u->create() );
+	}
+	
 }
 
 //http://tp.dawneve.cc/index.php/home/User/index
