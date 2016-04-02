@@ -11,6 +11,7 @@ return array(
 	
 	
 	
+	
 	//router config
 	'URL_ROUTER_ON'=>true,
 	

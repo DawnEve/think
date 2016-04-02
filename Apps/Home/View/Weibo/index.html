@@ -1,0 +1,100 @@
+<title>我的微博</title>
+
+<style>
+	body,div,p,textarea,ul,li,form,input{margin:0; padding:0;}
+	body{background:#EFF5DD;}
+	.center{width:900px; margin:0 auto;}
+	.right{float:right; }
+	h2{padding-top:10px;}
+	
+	.header{background:#fafafa;}
+	.header .title{font-size:12px;  padding:10px; background:#33CCFF; color:#fff;font-weight:600;}
+	.header form{ padding:20px 10px; overflow:hidden;}
+	.header input, .header textarea{padding:2px 5px;}
+	.right input[type='submit']{background:#eee; margin:20px; padding:10px 25px;border:0; background:#33CCFF;}
+	
+	.header textarea{width:100%;}
+	.header .out-link a{text-decoration:none; font-size:12px;}
+	.header .out-link a:hover{text-decoration:underline;}
+	.header .out-link a:after{content: ' /';}
+	
+	.content{ padding-top: 10px;}
+	.content .item{background:#fff; margin:20px 0; padding:5px; overflow:hidden;
+	    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+	    border-radius: 2px;
+	}
+	.content .item .info{font-size:12px; font-family:Georgia; background:#FFF; color:#9A9A9A; border-bottom:1px dashed #D1D7DC;}
+	.content .item .text{
+	    font: 25px/1.7 Georgia,'Arial','Microsoft YaHei';
+
+	    overflow: hidden;
+	    /*
+	    line-height: 23px;
+	    */
+	    word-wrap: break-word;
+	    padding:15px; 
+	}
+	
+	.content .item .control{margin:0 5px;}
+	.content .item .control a{color:#d9d9d9;}
+	.content .item .control a:hover{color:#ff9600;}
+	
+	.footer{margin-top:50px;padding:20px 0;
+		background:#000;color:#fff; font-family:'微软雅黑'; 
+
+		text-align:center;
+		width:100%;
+	}
+	
+	.footer a{color:#fff;}
+</style>
+
+<!-- 
+	<br><a href="__URL__/add">添加</a>
+ -->
+
+<div class='header'>
+	<div class='center'>
+		<h2>我的微博  
+			<span class='out-link'>
+				<a target='_blank' href='http://translate.google.cn/'>谷歌翻译</a>
+				<a target='_blank' href='http://dict.youdao.com/'>youdao</a>
+				<a target='_blank' href='http://lofter.dawneve.cc/'>lofter</a>
+			</span>
+		</h2>
+		<div class='title'>请输入内容：</div>
+		<form method='post' action="__URL__/insert">
+			<textarea type='text' name='content'  rows="10" cols="105"></textarea><br />
+			<div class=right>
+				<input type='submit' value='发布'>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+
+<div class=content>
+	<div class=center>
+		<volist name="weibo" id="vo" empty="暂时没有数据">
+			<div class=item>
+				<div class=info>
+					<span>#{$vo.id}, {$vo.add_time|date='Y-m-d H:i:s',###}, by {$vo.uid}, cate:{$vo.cid|default='Null'}</span>
+					<div class='control right'>
+						<a href='__URL__/delete/id/{$vo.id}'>删除</a>
+					</div>
+				</div>
+				<div class=text>{$vo.content|nl2br}</div>
+				
+			</div>
+		</volist>
+	</div>
+</div>
+
+
+
+<div class=footer>
+	<div class=center>
+		&copy;2016 MioStudio, All rights reserved | <a href='#'>Go to top</a>
+	</div>
+</div>

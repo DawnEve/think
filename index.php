@@ -22,6 +22,8 @@ define('RUNTIME_PATH','./Runtime/');
 
 // 绑定Admin模块到当前入口文件================?//默认绑定的是Home模块。
 //define('BIND_MODULE','Admin');
+//绑定模块名到入口文件
+//define('BIND_MODULE', 'GK');//在application文件夹下建立admin模块
 
 
 // 定义应用目录

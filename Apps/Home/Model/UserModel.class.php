@@ -2,24 +2,24 @@
 namespace Home\Model;
 use Think\Model;
 class UserModel extends Model{
-	//protected $tablePrefix='t_';//ĞŞ¸Ä±íÇ°×º
-	//protected $tableName='abc';//ĞŞ¸Ä±íÃû 'think.think_abc' doesn't exist
-	//protected $trueTableName='abc';//ĞŞ¸Ä±íÕæÃû 'think.abc' doesn't exist
-	//protected $dbName='test';//ĞŞ¸ÄÊı¾İ¿âÃû 'test.think_user' doesn't exist 
+	//protected $tablePrefix='t_';//ä¿®æ”¹è¡¨å‰ç¼€
+	//protected $tableName='abc';//ä¿®æ”¹è¡¨å 'think.think_abc' doesn't exist
+	//protected $trueTableName='abc';//ä¿®æ”¹è¡¨çœŸå 'think.abc' doesn't exist
+	//protected $dbName='test';//ä¿®æ”¹æ•°æ®åº“å 'test.think_user' doesn't exist 
 	
 	/*
-	//¶¨Òå×Ô¶¯ÑéÖ¤
+	//å®šä¹‰è‡ªåŠ¨éªŒè¯
 	protected $_validate=array(
-		array('name','require','±êÌâ±ØĞë'),
+		array('name','require','æ ‡é¢˜å¿…é¡»'),
 	);
 	
-	//¶¨Òå×Ô¶¯Íê³É
+	//å®šä¹‰è‡ªåŠ¨å®Œæˆ
 	protected $_auto=array(
 		array('create_time','time',1,'function'),
 	);
 	*/
 	
-	//type¶¨ÒåÃ¿¸ö×Ö¶ÎµÄÀàĞÍ£¬¿ÉÒÔÓÀÔ¶×Ö¶ÎÑéÖ¤¡£
+	//typeå®šä¹‰æ¯ä¸ªå­—æ®µçš„ç±»å‹ï¼Œå¯ä»¥æ°¸è¿œå­—æ®µéªŒè¯ã€‚
 	protected $fields=array('id','user','email','_pk'=>'id',
 		'type'=>array('id'=>'smallint', 'user'=>'varchar')	);
 	

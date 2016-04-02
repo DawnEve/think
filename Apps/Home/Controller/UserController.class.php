@@ -333,7 +333,7 @@ class UserController extends Controller {
 		echo '<hr>method:',__method__;
 		
 		$user=M('Info');
-		MyDump( $user->field('id,SUM(weight) as sum')->group('uid')->select() );//别名
+		MyDump( $user->field('id,SUM(weight) as sum')->group('uid')->select() );//group
 	}
 	
 	function table5(){
@@ -351,10 +351,13 @@ class UserController extends Controller {
 		echo '<hr>method:',__method__;
 		
 		$user=M('User');
-		//MyDump( $user->join('think_info ON think_user.id = think_info.uid ')->select() );//连接查询
+		MyDump( $user->join('think_info ON think_user.id = think_info.uid ')->select() );//连接查询
+		
 		//MyDump( $user->alias('a')->field('a.id,a.user,b.height,b.weight')->join('think_info b ON a.id= b.uid')->select() );//内连接
+		
+		
 		//MyDump( $user->alias('a')->field('a.id,a.user,b.height,b.weight')->join('think_info b ON a.id= b.uid','RIGHT')->select() );//右链接
-		MyDump( $user->alias('a')->field('a.id,a.user,b.height,b.weight')->join('think_info b ON a.id= b.uid','LEFT')->select() );//左链接
+		//MyDump( $user->alias('a')->field('a.id,a.user,b.height,b.weight')->join('think_info b ON a.id= b.uid','LEFT')->select() );//左链接
 	}
 	
 	function table7(){
@@ -363,7 +366,7 @@ class UserController extends Controller {
 		echo '<hr>method:',__method__;
 		
 		$user=M('User');
-		MyDump( $user->field('id')->union('select id form __INFO__')->select() );//UNION todo
+		MyDump( $user->field('id')->union('select id from __INFO__')->select() );//UNION
 	}
 	
 	function cache(){

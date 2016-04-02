@@ -14,7 +14,9 @@ class IndexController extends Controller {
 	
 		echo '<pre>', C('name');
 		echo '<br>',U();
+		echo 'hello';
 		echo '<br>','Index->index';
+		echo '</pre>';
 		//$this->show('wjl');
 		//echo '<pre>', C('email');
 		//echo '<pre>', C('my_config2', null, 'default_config');//可以设置默认值
