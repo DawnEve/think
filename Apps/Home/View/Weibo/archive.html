@@ -1,0 +1,43 @@
+<html>
+<!-- 
+	<br><a href="__URL__/add">添加</a>
+ -->
+<head>
+<title>博客存档</title>
+</head>
+<body>
+<div class='header archive'>	
+	<div class=center>	
+		<include file="header" />
+		<div class='title'>博客存档(目前是全部内容)：</div>		
+	</div>
+</div>
+
+
+
+<div class='content archive'>
+	<div class=center>	
+		<volist name="weibo" id="vo" empty="暂时没有数据">
+			<div class=item>
+				<div class=info>
+					<span>#{$vo.id}, {$vo.add_time|date='Y-m-d H:i:s',###}, by {$vo.uid}, 
+						<if condition="$vo.cid neq '0'">
+							cate: {$vo.name}
+						<else />
+							cate:Null
+						</if>
+					</span>
+
+				</div>
+				<div class=text>{$vo.content|nl2br}</div>
+				
+			</div>
+		</volist>
+	</div>
+</div>
+
+
+<include file="footer" />
+
+</body>
+</html>

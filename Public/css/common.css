@@ -2,14 +2,14 @@ body,div,p,textarea,ul,li,form,input{margin:0; padding:0;}
 	body{background:#EFF5DD;}
 	.center{width:900px; margin:0 auto;}
 	.right{float:right; }
-	h2{padding-top:10px;}
+	h2{padding-top:10px;  padding:0;    margin-bottom:10px;}
 	h2>a{text-decoration:none; color:#000;}
 	
 	.header{background:#fafafa;}
 	.header .title{font-size:12px;  padding:10px; background:#33CCFF; color:#fff;font-weight:600;}
-	.header form{ padding:20px 10px; overflow:hidden;}
+	.header form{ padding:20px 10px 0; overflow:hidden;}
 	.header input, .header textarea{padding:2px 5px;}
-	.header .right input[type='submit']{margin:20px; padding:10px 25px;border:0; background:#33CCFF;}
+	.header .right input[type='submit']{margin:32px; padding:10px 25px;border:0; background:#33CCFF;}
 	.header .right input[type='submit']:hover{background:#01BFFE;}
 	.header .left select{font-size:20px; margin:30px; padding:5px 10px;}
 	.header textarea{width:100%;}
@@ -46,3 +46,19 @@ body,div,p,textarea,ul,li,form,input{margin:0; padding:0;}
 	}
 	
 	.footer a{color:#fff;}
+	
+/*
+archive styles
+*/
+	.archive a{color:black;}
+	.archive{font-size:smaller; background:#eee;}
+	.archive .title{background:black;}
+	.archive .item .control{margin:0 5px;}
+	.archive .item .control a{color:#d9d9d9;}
+	.archive .item .control a:hover{color:#ff9600;}
+	.archive .center{width:90%;}
+	
+	.archive .item .info{ font-size:6px; }
+	.archive .item .text{ font: 15px/1.2 Georgia,'Arial','Microsoft YaHei'; }
+	
+	

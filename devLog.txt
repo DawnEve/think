@@ -36,6 +36,11 @@ mysql> select * from think_weibo_category;
 0.2 分类功能。分离js和css文件。
 0.3 分类后的不能删除，也不显示删除按钮。分类前的显示删除按钮。
 
+0.4 重构视图，加入 archive 字段和视图。 
+	增加字段：alter table think_weibo add archive int(10);
+	看该字段： select id,uid,archive from think_weibo;
+	修改已经录音的： update think_weibo set archive =20160512 where id<45;
+ 
 
 
 

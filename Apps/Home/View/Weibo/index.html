@@ -1,27 +1,16 @@
-<title>我的微博</title>
+<html>
 
-<import type='css' file="css.common" />
+<body>
 <import file='js.my' />
 
 <!-- 
 	<br><a href="__URL__/add">添加</a>
  -->
 
+	
 <div class='header'>
 	<div class='center'>
-		<h2><a href='__URL__'>我的微博</a>  
-			<span class='out-link'>
-				<a target='_blank' href='http://translate.google.cn/'>谷歌翻译</a>
-				<a target='_blank' href='http://dict.youdao.com/'>youdao</a>
-				<a target='_blank' href='http://lofter.dawneve.cc/'>lofter</a>
-				<a target='_blank' href='http://zhengzhi2014.blog.163.com/'>blog</a>
-				<a target='_blank' href='http://study.163.com/find.htm#/courselist?ct=47'>video</a>
-				<a target='_blank' href='http://pan.baidu.com/s/1qXHOpHi' title='密码:x7ur'>record</a>
-				
-			</span>
-		</h2>
-		
-		
+		<include file="header" />
 		<div class='title'>请输入内容：</div>
 		<form method='post' action="__URL__/insert">
 			<textarea type='text' name='content'  rows="10" cols="105"></textarea><br />
@@ -39,7 +28,6 @@
 				</select>
 			</div>
 		</form>
-			
 			
 	</div>
 </div>
@@ -65,10 +53,6 @@
 						<if condition="$vo.cid neq '0'">
 						<else /> <a href='__URL__/delete/id/{$vo.id}'>删除</a>
 						</if>
-						
-
-
-
 
 					</div>
 				</div>
@@ -80,14 +64,7 @@
 </div>
 
 
+<include file="footer" />
 
-<div class=footer>
-	<div class=center>
-		&copy;2016 MioStudio, All rights reserved | <a href='#'>Go to top</a> | 
-		<a target='_blank' href='http://user.yeeyan.org/u/459202'>译言</a>
-		<a target='_blank' href='http://study.163.com/course/introduction/1254013.htm#/courseDetail'>雅思听力</a>
-		<a target='_blank' href='http://study.163.com/course/introduction/917004.htm#/courseDetail'>雅思口语</a>
-		<a target='_blank' href='http://study.163.com/course/introduction/1253010.htm#/courseDetail'>雅思阅读</a>
-		<a target='_blank' href='http://study.163.com/course/courseMain.htm?courseId=1255001'>雅思写作</a>
-	</div>
-</div>
+</body>
+</html>

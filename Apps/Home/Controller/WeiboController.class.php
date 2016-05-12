@@ -11,13 +11,14 @@ class WeiboController extends Controller {
 			$weibo=M('weibo')->alias('a')
 				->field('a.id, a.uid, a.content, a.add_time, a.cid, b.name, b.pid')
 				->join('think_weibo_category b ON a.cid = b.id', 'LEFT')
-				->where('cid=' . $tag)
+				->where('cid=' . $tag . ' and archive is null')
 				->order('add_time DESC')
 				->select();
 		}else{
 			$weibo=M('weibo')->alias('a')
 				->field('a.id, a.uid, a.content, a.add_time, a.cid, b.name, b.pid')
 				->join('think_weibo_category b ON a.cid = b.id', 'LEFT')
+				->where('archive is null')
 				->order('add_time DESC')
 				->select();
 		}
@@ -32,7 +33,7 @@ class WeiboController extends Controller {
 	}
 		
 	
-	
+	//插入
 	public function insert(){
 		$form=D('weibo');
 		if($form->create()){
@@ -45,8 +46,8 @@ class WeiboController extends Controller {
 		}else{
 			$this->error($form->getError());
 		}
-		
 	}
+		
 	
 	//删除
 	public function delete($id){
@@ -58,5 +59,21 @@ class WeiboController extends Controller {
 		}else{
 			$this->error('删除失败！不能删除分类后的数据！');
 		}
+	}
+	
+	
+	//显示全部
+	public function archive(){
+		$weibo=M('weibo')->alias('a')
+			->field('a.id, a.uid, a.content, a.add_time, a.cid, b.name, b.pid')
+			->join('think_weibo_category b ON a.cid = b.id', 'LEFT')
+			->order('add_time DESC')
+			->select();
+
+		//dump($weibo);
+		
+		$this->assign('weibo', $weibo);
+		
+		$this->display();
 	}
 }
