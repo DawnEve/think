@@ -1,1 +1,44 @@
-01.weibo项目，构建了发帖和删除功能，没有权限控制。
+weibo项目
+----------------------------
+--微博信息表
+CREATE TABLE `think_weibo` (
+	`id` int(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `uid` int(20) NOT NULL,
+  `content` text DEFAULT NULL,
+  `add_time` varchar(30) DEFAULT NULL,
+  `cid` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--微博分类表
+CREATE TABLE `think_weibo_category` (
+  `id` int(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `name` text DEFAULT NULL,
+  `pid` int(10)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into think_weibo_category(id,name,pid) values(1,'雅思',0);
+insert into think_weibo_category(name,pid) values('听力',1),('口语',1),('阅读',1),('写作',1);
+
+mysql> select * from think_weibo_category;
++----+------+------+
+| id | name | pid  |
++----+------+------+
+|  1 | 雅思 |    0 |
+|  2 | 听力 |    1 |
+|  3 | 口语 |    1 |
+|  4 | 阅读 |    1 |
+|  5 | 写作 |    1 |
++----+------+------+
+5 rows in set (0.00 sec)
+
+
+0.1 构建了基本界面。发帖和删除功能，没有权限控制。和lofter域名偶联。
+0.2 分类功能。分离js和css文件。
+0.3 分类后的不能删除，也不显示删除按钮。分类前的显示删除按钮。
+
+
+
+
+
+
+

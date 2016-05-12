@@ -14,7 +14,7 @@ class IndexController extends Controller {
 	
 		echo '<pre>', C('name');
 		echo '<br>',U();
-		echo 'hello';
+		echo 'hello  王军亮的首页';
 		echo '<br>','Index->index';
 		echo '</pre>';
 		//$this->show('wjl');

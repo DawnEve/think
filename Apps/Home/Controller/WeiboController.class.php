@@ -4,11 +4,28 @@ use Think\Controller;
 
 
 class WeiboController extends Controller {
-	public function index(){
+	public function index($tag=-1){
 		//echo "我的微博<br><a href=".U('Weibo/add').">添加</a>";
+		//$weibo=M('weibo')->order('add_time DESC')->select();
+		if($tag>0){
+			$weibo=M('weibo')->alias('a')
+				->field('a.id, a.uid, a.content, a.add_time, a.cid, b.name, b.pid')
+				->join('think_weibo_category b ON a.cid = b.id', 'LEFT')
+				->where('cid=' . $tag)
+				->order('add_time DESC')
+				->select();
+		}else{
+			$weibo=M('weibo')->alias('a')
+				->field('a.id, a.uid, a.content, a.add_time, a.cid, b.name, b.pid')
+				->join('think_weibo_category b ON a.cid = b.id', 'LEFT')
+				->order('add_time DESC')
+				->select();
+		}
 		
-		$weibo=M('weibo')->order('add_time DESC')->select();
+			
 		//dump($weibo);
+		
+		
 		$this->assign('weibo', $weibo);
 		
 		$this->show();
@@ -34,7 +51,7 @@ class WeiboController extends Controller {
 	//删除
 	public function delete($id){
 		$weibo = M("weibo"); // 实例化对象
-		$result=$weibo->where("id=$id and cid is null" )->delete();//只能删除没有分类的
+		$result=$weibo->where("id=$id and (cid is null or cid=0)" )->delete();//只能删除没有分类的
 
 		if($result){
 			$this->success('删除成功');
