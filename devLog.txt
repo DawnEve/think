@@ -41,6 +41,7 @@ mysql> select * from think_weibo_category;
 	看该字段： select id,uid,archive from think_weibo;
 	修改已经录音的： update think_weibo set archive =20160512 where id<45;
  
+	第二期录音：update think_weibo set archive =20160514 where id in (88,45,46,47,48,51,52,54,56,59,60,61,62,63,64,65,68,69,77,78,79,85,86);
 
 
 
