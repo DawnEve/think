@@ -13,5 +13,5 @@ class WeiboModel extends Model{
 	protected $_validate=array(
 		array('content','require','内容必须'),
 	);
-		
+			
 }

@@ -76,4 +76,12 @@ class WeiboController extends Controller {
 		
 		$this->display();
 	}
+	
+	//友情链接
+	public function link(){
+		
+		
+		
+	}
+	
 }
