@@ -1,5 +1,4 @@
 
-
 2015-12-23 23:07:10
 m主要对数据库操作，也多用于处理接口，
 c控制器，控制逻辑，将v返回的数据做逻辑判断，去调用m
@@ -8,7 +7,19 @@ c控制器，控制逻辑，将v返回的数据做逻辑判断，去调用m
 MySql手册速查：http://c.biancheng.net/cpp/html/1456.html
 
 
+================================
 --------------------------------
+7:44 2016/6/26
+files on big PC:
+videos: F:\BaiduYunDownload\thinkphp3.2\
+pdf:F:\BaiduYunDownload\李炎恢ThinkPHP讲义代码\docs
+
+docs:F:\xampp\htdocs\think\backup
+code:F:\xampp\htdocs\think\
+--------------------------------
+================================
+
+
 11:54 2015/12/24
 开始学习tp手册：
 

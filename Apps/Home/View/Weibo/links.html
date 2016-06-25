@@ -1,0 +1,25 @@
+<charset='utf8'>
+
+<style>
+	div,p,a,span{padding:0; margin:0; }
+	body{font-family:'微软雅黑'; }
+	.wrap{ margin:10px auto; width:1000px; }
+	.item{ margin:5px; padding:10px; border:1px solid #eee;}
+	.item a{color:blue; padding-right:20px;}
+
+</style>
+
+
+<div class=wrap>
+	<h1>主流英文报纸、杂志的链接 <a target='_blank' href='../weibo'>Weibo</a></h1>
+	
+	<volist name="links" id="vo" empty="暂时没有数据">
+		<div class=item>
+			<p>
+				<a target='_blank' href="{$vo[0]}">{$vo[1]}</a>
+				<span>{$vo[2]}</span>
+			</p>
+		</div>
+	</volist>
+
+</div>
