@@ -3,14 +3,14 @@ namespace Home\Controller;
 use Think\Controller;
 
 class UserController extends Controller {
-    public function index(){
+    public function index($id){
 		echo 'UserController->index: ';
 		
 		//echo C('URL_MODEL',1);
 		//echo U('Index/Login');
 		
 		$data=M('User');
-		$result=$data->find(18);
+		$result=$data->find(1);
 		//dump($result);
 		$this->assign('data',$result);
 		$this->display();
@@ -19,6 +19,19 @@ class UserController extends Controller {
 		//D('User','Logic'); //实例化UserLogic
 		
 	}
+	
+	function testE(){
+	   echo '123<hr>';
+	   $User = A('User','Event');
+//	   $User = new \Home\Event\UserEvent();
+	   echo $User->index();
+	}
+	
+   function testL(){
+       echo '456<hr>';
+       $User = A('User','Logic');
+       echo $User->index();
+    }
 	
     public function add(){
 		echo 'UserController->add';

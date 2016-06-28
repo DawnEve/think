@@ -6,12 +6,7 @@ use Think\Controller;
 
 class IndexController extends Controller {
 
-
-	
-
-
-    public function index(){
-	
+	public function index(){
 		echo '<pre>', C('name');
 		echo '<br>',U();
 		echo 'hello  王军亮的首页';
@@ -26,12 +21,27 @@ class IndexController extends Controller {
 		//dump(C());//获取所有设置结果
 		
         //$this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover{color:blue;}</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p><br/>版本 V{$Think.version}</div><script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"></script><thinkad id="ad_55e75dfae343f5a1"></thinkad><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>','utf-8');
+        echo '<hr>URL_MODEL: ', C('URL_MODEL');
+        echo '<hr>URL_MODEL: ', U();
+        echo '<hr>THINK_PATH: ', THINK_PATH;
+        
+	}
+    
+    function path(){
+        echo APP_PATH;
     }
 	
 	function model(){
 		echo 'model';
-		$user=M('User','think_');
+		//$user=M('User','think_');
+		$user=M('User');
 		dump($user->select());
+	}
+	
+	function model_1(){
+	    $DB_CONFIG2 = 'mysql://root:@localhost:3306/test';
+        $user=new \Think\Model('User','t_',$DB_CONFIG2); //可以定义第三个参数
+        dump($user->select());
 	}
 	
 	function model2(){
@@ -44,7 +54,8 @@ class IndexController extends Controller {
 	function model3(){
 		echo 'model3';
 		//关于M方法
-		$user=new UserModel();
+//		$user=new UserModel();
+		$user=new \Home\Model\UserModel();
 		dump($user->select());
 	}
 	

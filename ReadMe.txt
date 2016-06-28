@@ -14,8 +14,10 @@ files on big PC:
 videos: F:\BaiduYunDownload\thinkphp3.2\
 pdf:F:\BaiduYunDownload\李炎恢ThinkPHP讲义代码\docs
 
-docs:F:\xampp\htdocs\think\backup
 code:F:\xampp\htdocs\think\
+docs:F:\xampp\htdocs\think\backup
+onlineDocs:http://www.kancloud.cn/manual/thinkphp
+
 --------------------------------
 ================================
 
@@ -223,7 +225,11 @@ http://www.kancloud.cn/manual/thinkphp/1698
 		//静态路由定义不受URL后缀影响。静态路由是完全匹配。
 	),
 
-
+	
+??为什么以下两个url都指向同一个控制器？
+	- http://tp.dawneve.cc/admin.php
+	- http://tp.dawneve.cc/index.php/Admin/
+	
 	
 ===========================
 视图

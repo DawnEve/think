@@ -39,7 +39,7 @@ return array(
 	//'URL_PATHINFO_DEPR'=> '-',
  
 	//URL的模式
-	'URL_MODEL'=>0,
+	'URL_MODEL'=>1,
 
 		
 );

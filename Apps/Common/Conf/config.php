@@ -2,9 +2,17 @@
 return array(
 	//'配置项'=>'配置值'
 	
+    //禁止/允许访问模块列表
+    //'MODULE_DENY_LIST' => array('Runtime','Commen','Admin'),
+    //'MODULE_ALLOW_LIST' => array('Admin','GK'),
+
+    //设置pathinfo模式的默认分隔符
+    //'URL_PATHINFO_DEPR'=> '-',
+
 	//关闭字段缓存
 	//'DB_FIELDS_CACHE'=>false,
-
+    
+    
 	//页面调试开关
 	'SHOW_PAGE_TRACE' => true,
 	

@@ -1,11 +1,13 @@
 <?php
 namespace GK\Controller;
 use Think\Controller;
+
 class IndexController extends Controller {
 	/*
 	 * 负责显示
 	 */
     public function index(){
+    	/*
     	// 获取父级数据
     	$data=M('knowledge')->where('pid=0')->order('klID')->select();
         //递归构建树形结构
@@ -13,6 +15,8 @@ class IndexController extends Controller {
 		//输出树形结构
 		echo '<pre>';
 		print_r($this->tree);
+		*/
+    	echo 'from GK';
 	}
 
 	
