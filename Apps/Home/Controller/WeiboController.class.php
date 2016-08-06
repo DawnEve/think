@@ -85,7 +85,7 @@ class WeiboController extends Controller {
 			array('https://www.yahoo.com/','雅虎新闻','门户新闻'),
 			array('http://edition.cnn.com/','CNN','Breaking News, Latest News and Videos'),
 			array('http://www.latimes.com/','洛杉矶时报','California, national and world news'),
-			array('http://www.thetimes.co.uk/','The Times','News and opinion from The Times & The Sunday Times.'),
+			array('http://www.thetimes.co.uk/','The Times','News and opinion from The Times & The Sunday Times.【短小精悍，仅有预览】'),
 			array('http://www.51voa.com/','VOA','新闻'),
 			array('http://www.newsweek.com/','Newsweek 新闻周刊','News, Analysis, Politics, Business, Technology, Lifestyle, Photos and Video'),
 			array('http://www.nationalgeographic.com/','国家地理','Images of Animals, Nature, and Cultures'),

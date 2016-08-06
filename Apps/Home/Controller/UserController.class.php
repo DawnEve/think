@@ -399,6 +399,67 @@ class UserController extends Controller {
 	    dump( $u->create() );
 	}
 	
+	//静态验证
+	function valid2(){
+	    $user=D('User');
+	    $data=array(
+	       'user'=>'张三2',
+	       //'email'=>'Jimmy2@163.com',
+	       'add_time'=>time(),
+	    
+	       'psw'=>'12345',
+	       'repsw'=>'123456',
+	    );
+	   
+	    $rs=$user->create($data);
+	    
+        if(!$rs){
+            dump($user->getError());
+            
+//            $this->ajaxReturn($user->getError());
+        }else{
+            echo '全部通过验证';
+            //$user->add();
+        }
+        
+        dump($rs);   
+	}
+	
+	
+	//动态验证
+    function valid3(){
+        $user=M('User');//可以使用M()方法
+        //制定规则
+        $rules=array(
+            array('user','require','用户名必须填写',1),
+            array('email','require','邮箱必须填写',1),
+        );
+        //模拟表单数据
+        $data=array(
+           'user'=>'张三2',
+           //'email'=>'Jimmy2@163.com',
+        );
+        $rs=$user->validate($rules)->create($data);//在create前使用validate方法验证，传入规则
+        if(!$rs){
+            dump($user->getError());
+        }else{
+            echo '所有数据都通过验证了~~';
+        }
+    }
+    
+    
+    //自动完成
+    function auto2(){
+        $user=D('User');
+        $data=array('id'=>31, 'user'=>'', 'email'=>'tc2@qq.com', 'modi_time'=>time() );
+        if($user->create($data)){
+            dump($user->save());//使用场景：更新时如果密码为空则不修改密码
+        }else{
+            echo '自动完成失败';
+        }
+    }
+    
+    
 }
 
 //http://tp.dawneve.cc/index.php/home/User/index

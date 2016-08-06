@@ -1,5 +1,5 @@
-<?php
-//�Ŵ�
+﻿<?php
+//排错
 function debug($s,$isDetail=false){
 	echo '<pre>';
 	if($isDetail){
@@ -11,7 +11,7 @@ function debug($s,$isDetail=false){
 	die();
 }
 
-//�Ŵ�
+//排错
 function MyDump($s,$isDetail=false){
 	echo '<pre>';
 	if($isDetail){
@@ -20,4 +20,12 @@ function MyDump($s,$isDetail=false){
 		print_r($s);
 	}
 	echo '</pre>';
+}
+
+//目的：User模型中的自动验证
+function checkLength2($str){
+    if( strlen($str) < 6){
+        return false;
+    }
+    return true;
 }

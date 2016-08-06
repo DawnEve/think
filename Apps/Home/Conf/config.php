@@ -41,5 +41,9 @@ return array(
 	//URL的模式
 	'URL_MODEL'=>1,
 
-		
+	//设置模板
+	//'LAYOUT_ON'=>true, //打开布局，将改变渲染流程
+    //'LAYOUT_NAME'=>'layout', //设置布局入口文件名
+
 );
+

@@ -1,0 +1,20 @@
+<extend name="base" />
+
+
+
+<block name="menu">view4菜单</block>
+<block name="left">view4左边分栏</block>
+<block name="main">
+    <hr />
+	<include file="Public/header" />
+	<hr />
+    <h2>view4主内容</h2>
+    {$staus?'正常':'错误'}
+    
+    <hr>
+    <if condition="$status eq true">
+        true~~
+    <else />
+        false~~
+    </if>
+</block>
