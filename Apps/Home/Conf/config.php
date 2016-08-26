@@ -9,9 +9,6 @@ return array(
 	'URL_CASE_INSENSITIVE'  =>  true,  
 	
 	
-	
-	
-	
 	//router config
 	'URL_ROUTER_ON'=>true,
 	
@@ -39,7 +36,7 @@ return array(
 	//'URL_PATHINFO_DEPR'=> '-',
  
 	//URL的模式
-	'URL_MODEL'=>1,
+	'URL_MODEL'=>0,
 
 	//设置模板
 	//'LAYOUT_ON'=>true, //打开布局，将改变渲染流程

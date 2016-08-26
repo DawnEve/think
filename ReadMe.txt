@@ -236,3 +236,10 @@ http://www.kancloud.cn/manual/thinkphp/1698
 ===========================
 ThinkPHP中的视图主要就是指模板文件和模板引擎
 
+视图中的URL生成：
+<img src=<?php echo U('Aid/index2'); ?> >
+<img src="__URL__/index2">
+
+
+
+
