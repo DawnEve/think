@@ -29,7 +29,7 @@ class WeiboController extends Controller {
 		
 		$this->assign('weibo', $weibo);
 		
-		$this->show();
+		$this->display('Weibo/index');
 	}
 		
 	

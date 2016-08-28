@@ -47,7 +47,12 @@ mysql> select * from think_weibo_category;
 0.5 http://tp.dawneve.cc/weibo/index.html
 增强了微博的url生成，模板中使用{:U("Weibo/index")}生成目录。
 
-
+0.6 模板中无法使用{:U()}输出过于复杂的链接，比如后面带参数，且参数是数组变量，
+解决办法：直接使用原生php。
+<?php //实在解决不了引号问题了，就用原生php
+      echo U('Weibo/index',array('tag'=>$vo[cid])); ?>
+                        
+                        
 
 
 

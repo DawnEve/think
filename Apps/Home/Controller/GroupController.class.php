@@ -22,4 +22,15 @@ class GroupController extends Controller{
         $this->redirect('Group/index','id=1&name=wjl',3,'跳转中...');
     }
     
+    //尝试A()方法
+    function a(){
+        $w=A('Home/Weibo');
+        $w->index();
+    }
+    
+    //尝试A()方法
+    function a2(){
+       R('Weibo/index');
+    }
+    
 }
