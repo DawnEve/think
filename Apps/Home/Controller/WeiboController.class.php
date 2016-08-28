@@ -109,4 +109,9 @@ class WeiboController extends Controller {
 		$this->display();
 	}
 	
+    //防范非法操作
+    function _empty(){
+        echo 'This page ['.CONTROLLER_NAME . '->' .ACTION_NAME. '] is not found!';
+    }
+	
 }

@@ -1,10 +1,10 @@
-
+﻿
 2015-12-23 23:07:10
-m��Ҫ�����ݿ������Ҳ�����ڴ����ӿڣ�
-c�������������߼�����v���ص��������߼��жϣ�ȥ����m
+m主要对数据库操作，也多用于处理接口，
+c控制器，控制逻辑，将v返回的数据做逻辑判断，去调用m
 
 
-MySql�ֲ��ٲ飺http://c.biancheng.net/cpp/html/1456.html
+MySql手册速查：http://c.biancheng.net/cpp/html/1456.html
 
 
 ================================
@@ -12,7 +12,7 @@ MySql�ֲ��ٲ飺http://c.biancheng.net/cpp/html/1456.html
 7:44 2016/6/26
 files on big PC:
 videos: F:\BaiduYunDownload\thinkphp3.2\
-pdf:F:\BaiduYunDownload\���׻�ThinkPHP�������\docs
+pdf:F:\BaiduYunDownload\李炎恢ThinkPHP讲义代码\docs
 
 code:F:\xampp\htdocs\think\
 docs:F:\xampp\htdocs\think\backup
@@ -23,155 +23,155 @@ onlineDocs:http://www.kancloud.cn/manual/thinkphp
 
 
 11:54 2015/12/24
-��ʼѧϰtp�ֲ᣺
+开始学习tp手册：
 
-�ٷ��ĵ���http://document.thinkphp.cn/manual_3_2.html
-�����ĵ���http://www.kancloud.cn/manual/thinkphp/1682
+官方文档：http://document.thinkphp.cn/manual_3_2.html
+看云文档：http://www.kancloud.cn/manual/thinkphp/1682
 ===========================
 
-�������ţ�http://www.kancloud.cn/thinkphp/thinkphp_quickstart
+快速入门：http://www.kancloud.cn/thinkphp/thinkphp_quickstart
 
 ===========================
-����
+基础
 ===========================
-1.Ŀ¼�ṹ��
-	��֪ʶ�㣺
-		|- �����ռ䡣	���������ռ���Զ����������ʵ�֣�
-		|- �������ô���&��	common�µĺ���
-		|- ��Щ�ط����ִ�Сд�������ļ�����thinkPHPתΪСд
-		|- 4��URLģʽ��
-		|- ģ�������ǩ�����ʵ�֣�
-		|- ���԰���һЩ������������ѡ���ô������ã�
+1.目录结构：
+	新知识点：
+		|- 命名空间。	基于命名空间的自动加载类如何实现？
+		|- 函数引用传参&。	common下的函数
+		|- 那些地方区分大小写？配置文件都被thinkPHP转为小写
+		|- 4种URL模式。
+		|- 模板引擎标签库如何实现？
+		|- 语言包是一些常见错误的提醒。怎么灵活配置？
 	
-# Ŀ¼�ṹ
-	����Library/Ŀ¼����22��class�ļ�������namespace Think;
-		����12���ļ��С�����namespace Think;	
+# 目录结构
+	├─Library/目录下有22个class文件。都是namespace Think;
+		下有12个文件夹。都是namespace Think;	
 
 		namespace Think\Cache\Driver;
 		use Think\Cache;
 	
-	����Library/BehaviorĿ¼����18����Ϊ�ࡣ
-	����Library/OrgĿ¼����2���ļ��У�Net��Util
-	����Library/Vendor    ���������Ŀ¼������smarty��
+	├─Library/Behavior目录下有18个行为类。
+	├─Library/Org目录下有2个文件夹：Net和Util
+	├─Library/Vendor    第三方类库目录。其中smarty。
 	
-	����Mode ���Ӧ��ģʽĿ¼ 4���ļ���3���ļ��С�
-		    // �����ļ���ô�ϲ��ģ����߸���ǰ�ߣ�
+	├─Mode 框架应用模式目录 4个文件，3个文件夹。
+		    // 配置文件这么合并的，后者覆盖前者：
 			'config'    =>  array(
-				THINK_PATH.'Conf/convention.php',   // ϵͳ��������
-				CONF_PATH.'config'.CONF_EXT,      // Ӧ�ù�������
+				THINK_PATH.'Conf/convention.php',   // 系统惯例配置
+				CONF_PATH.'config'.CONF_EXT,      // 应用公共配置
 			),
 
-	 ����Tpl ϵͳģ��Ŀ¼
+	 ├─Tpl 系统模板目录
 
-# ����ļ�����
-	��֪ʶ�㣺
-		|- ģ�滺����ô���ɣ�
-		|- ����MVC������ʲô��
+# 入口文件定义
+	新知识点：
+		|- 模版缓存怎么生成？
+		|- 多层的MVC机制是什么？
 		
-	�Զ������ࣨû��������think.class.php��148�У�public static function autoload($class)
+	自动加载类（没看懂）：think.class.php的148行：public static function autoload($class)
 	
 	-----------------------------
-	>>npp��Ŀ¼��Ԥ�������
-	������explorer�����������ص�ַ:http://sourceforge.net/projects/npp-plugins/files/
+	>>npp的目录树预览插件：
+	是用了explorer这个插件，下载地址:http://sourceforge.net/projects/npp-plugins/files/
 	-----------------------------
 
-# ������
-	��֪ʶ�㣺
-	|- Think/Controler�µ�$this->view��ʲô��
-		call_user_func(array(&$o, $method));��ʲô��˼��
+# 控制器
+	新知识点：
+	|- Think/Controler下的$this->view是什么？
+		call_user_func(array(&$o, $method));是什么意思？
 		
-	���������������ʽ�ǣ������������շ巨������ĸ��д��+Controller
+	控制器类的命名方式是：控制器名（驼峰法，首字母大写）+Controller
 
-# �����淶
+# 命名规范
 http://www.kancloud.cn/manual/thinkphp/1687
 
-	���飺
-		��ѭ��ܵ������淶��Ŀ¼�淶��
-		���������о�����������ģʽ�����緢�����⣻
-		�࿴����־�ļ��������������⣻
-			--��־�ļ���λ�ã�F:\xampp\htdocs\think\Runtime\Logs\Home
-		����ʹ��I������ȡ��������ĺ�ϰ�ߣ�
-		���»��߻����ı������������Ҫ���������RuntimeĿ¼��
+	建议：
+		遵循框架的命名规范和目录规范；
+		开发过程中尽量开启调试模式，及早发现问题；
+		多看看日志文件，查找隐患问题；
+			--日志文件的位置：F:\xampp\htdocs\think\Runtime\Logs\Home
+		养成使用I函数获取输入变量的好习惯；
+		更新或者环境改变后遇到问题首要问题是清空Runtime目录；
 
-		F:\xampp\htdocs\think\Apps\myClass\curl����
+		F:\xampp\htdocs\think\Apps\myClass\curl函数
 
 		
 		
 ===========================
-����
+配置
 ===========================
-# ��������
-	|- ��ô�������ȡ�������ļ��أ�
+# 多种配置
+	|- 怎么用数组存取的配置文件呢？
 	
-	֧�ֹ������á��������á�ģ�����á��������úͶ�̬���á�
-	��ThinkPHP�У�һ����˵Ӧ�õ������ļ����Զ����صģ����ص�˳���ǣ�
-		��������->Ӧ������->ģʽ����->��������->״̬����->ģ������->��չ����->��̬����
+	支持惯例配置、公共配置、模块配置、调试配置和动态配置。
+	在ThinkPHP中，一般来说应用的配置文件是自动加载的，加载的顺序是：
+		惯例配置->应用配置->模式配置->调试配置->状态配置->模块配置->扩展配置->动态配置
 
-# ��̬����
-	���Ե�ǰ��ȡ��Ч��
+# 动态配置
+	仅对当前读取有效。
 
 
 ===========================
-�ܹ�
+架构
 ===========================
-# ģ�黯���
-	һ��������ThinkPHPӦ�û���ģ��/������/������ƣ����ң��������Ҫ�Ļ�������֧�ֶ�����ļ��Ͷ༶��������
+# 模块化设计
+	一个完整的ThinkPHP应用基于模块/控制器/操作设计，并且，如果有需要的话，可以支持多入口文件和多级控制器。
 
-	ģ�黯��Ƶ�˼������ģ��������Ҫ�Ĳ��֣�ģ����ʵ��һ�����������ļ��������ļ���MVC�ļ���Ŀ¼���ļ��ϡ�
+	模块化设计的思想下面模块是最重要的部分，模块其实是一个包含配置文件、函数文件和MVC文件（目录）的集合。
 
 
-	// ��Adminģ�鵽��ǰ����ļ�================????????����ɶ��˼��
+	// 绑定Admin模块到当前入口文件================????????这是啥意思？
 	define('BIND_MODULE','Admin');
 
-	// ����Ӧ��Ŀ¼
+	// 定义应用目录
 	define('APP_PATH','./Apps/');
 
-	//http://serverName/index.php/ģ��/������/����
+	//http://serverName/index.php/模块/控制器/操作
 
-# URLģʽ
-	|- .htaccess�ļ��������д����
+# URL模式
+	|- .htaccess文件里面的重写规则？
 
 	http://tp.dawneve.cc/home/user/login/var/value
 
-# ���MVC
+# 多层MVC
 http://www.kancloud.cn/manual/thinkphp/1698
-	Ĭ�ϵ�ģ�Ͳ���Model������Ҳ���Ը������ã�����
-	��ģ�Ͳ�ķֲ㻮���Ǻ����ģ�������Ա���Ը�����Ŀ����Ҫ���ɶ��������ģ�ͷֲ㣬
+	默认的模型层是Model，我们也可以更改设置，例如
+	对模型层的分层划分是很灵活的，开发人员可以根据项目的需要自由定义和增加模型分层，
 
-	��ͼ��View���㣺
-		-- ��ͼ����ģ���ģ��������ɣ���ģ���п���ֱ��ʹ��PHP����
-		-- Ĭ�ϵ���ͼ����ViewĿ¼�����ǿ��Ե����������£�
-			'DEFAULT_V_LAYER'       =>  'Mobile', // Ĭ�ϵ���ͼ�����Ƹ���ΪMobile
-			��ͼ��λ�ã�
+	视图（View）层：
+		-- 视图层由模板和模板引擎组成，在模板中可以直接使用PHP代码
+		-- 默认的视图层是View目录，我们可以调整设置如下：
+			'DEFAULT_V_LAYER'       =>  'Mobile', // 默认的视图层名称更改为Mobile
+			视图的位置：
 				UserController->read
-				ģ�����:./Apps/Home/View/User/read.html
+				模板存在:./Apps/Home/View/User/read.html
 
-	��������Controller����
-		���ʿ����� Home/Controller/UserController.class.php �������£�
+	控制器（Controller）层
+		访问控制器 Home/Controller/UserController.class.php 定义如下：
 		
-		�¼������� Home/Event/UserEvent.class.php �������£�
-		�� UserEvent�����ڲ����¼���Ӧ������ֻ�����ڲ����ã�
+		事件控制器 Home/Event/UserEvent.class.php 定义如下：
+		而 UserEvent负责内部的事件响应，并且只能在内部调用：
 		http://www.kancloud.cn/manual/thinkphp/1698
 			Home\Event\UserEvent Object
-				//ʵ����һ��UserEvent����ֻ���ڲ����á�
+				//实例化一个UserEvent对象。只能内部调用。
 				$a=A('User','Event');
 				$a->hi();
 				echo '<pre>';
 				print_r($a);
 				
-		�û�ֻ��Ҫ������ͼ����û��C�������Ҳ���Զ�ʶ��??????
+		用户只需要定义视图，在没有C的情况下也能自动识别。??????
 			http://tp.dawneve.cc/index.php?c=blog&a=list		
 				
-# CBDģʽ
-	ThinkPHP������ȫ�µ�CBD������Core+��ΪBehavior+����Driver���ܹ�ģʽ
+# CBD模式
+	ThinkPHP引入了全新的CBD（核心Core+行为Behavior+驱动Driver）架构模式
 	
-	Driver�������������°����չ���棬�Ѿ�ȡ����������չ��ģʽ��չ���ĳ����ò�ͬ��Ӧ��ģʽ���ɡ�
-	Behavior����Ϊ����
-		������Щϵͳ���ñ�ǩ֮�⣬������Ա��������Ӧ���������Լ���Ӧ�ñ�ǩ�����κ���Ҫ���ص�λ���������´��뼴�ɣ�
-		����ǩλ��������AOP�����еġ����桱����Ϊ����Χ����������桱�����б�̡�
+	Driver（驱动）：在新版的扩展里面，已经取消了引擎扩展和模式扩展，改成配置不同的应用模式即可。
+	Behavior（行为）：
+		除了这些系统内置标签之外，开发人员还可以在应用中添加自己的应用标签，在任何需要拦截的位置添加如下代码即可：
+		而标签位置类似于AOP概念中的“切面”，行为都是围绕这个“切面”来进行编程。
 
-		������Ϊ�� ������Ϊλ�� ThinkPHP/Behavior/ Ŀ¼����
-		��Ϊ���壺
+		核心行为： 核心行为位于 ThinkPHP/Behavior/ 目录下面
+		行为定义：
 
 
 
@@ -179,31 +179,31 @@ http://www.kancloud.cn/manual/thinkphp/1698
 	call_user_func(array(&$o, $method));
 	http://tieba.baidu.com/p/4231187056?pid=81178002953
 	//-----------------------------------
-	д���ļ�ʱ��ô���ñ����ʽ��
-	//$fp = @fopen("Log.html", "w"); //��¼���񵽵�ҳ��Դ��
-	$fp = @fopen("Log.html", "w, ccs=<utf-8>");//����utf-8��ʽ
+	写入文件时怎么设置编码格式？
+	//$fp = @fopen("Log.html", "w"); //记录捕获到的页面源码
+	$fp = @fopen("Log.html", "w, ccs=<utf-8>");//保持utf-8格式
 	
 	fwrite($fp,'some text here'); 
 	fclose($fp);
 	//-----------------------------------
 
 ===========================
-·��
+路由
 ===========================
-# ·�ɹ���
+# 路由规则
 
-1.ȥ��index.php
-	��Ҫʹ��.htaccess�ļ���
+1.去掉index.php
+	需要使用.htaccess文件。
 	
-2.ȥ��ģ������
-ԭ����http://tp.dawneve.cc/Home/news/year
-ϣ����http://tp.dawneve.cc/news/year
-��ϵͳ�������ã��������޸ģ�
-	'MODULE_ALLOW_LIST'      =>  array('Home','Admin'),//������ģ�飬������һ���Ĭ��ģ����ܷ��ʡ�
-	'DEFAULT_MODULE'        =>  'Home',  // Ĭ��ģ��
+2.去掉模块名：
+原来：http://tp.dawneve.cc/Home/news/year
+希望：http://tp.dawneve.cc/news/year
+在系统惯例设置，改两处修改：
+	'MODULE_ALLOW_LIST'      =>  array('Home','Admin'),//允许的模块，加上这一句和默认模块才能访问。
+	'DEFAULT_MODULE'        =>  'Home',  // 默认模块
 
 
-3.���þ�̬·�ɣ�
+3.设置静态路由：
 	http://tp.dawneve.cc/u
 	
 	//router config
@@ -212,31 +212,31 @@ http://www.kancloud.cn/manual/thinkphp/1698
 		'u'=>'user/index',
 	}
 
-	����ͼ�г�����{$Think.get.id}
+	在视图中常量：{$Think.get.id}
 
-	·�ɹ���'news/:year/:month/:day' => array('News/archive', 'status=1'),
+	路由规则：'news/:year/:month/:day' => array('News/archive', 'status=1'),
 	url: http://tp.dawneve.cc/news/2015/12/20
-	��ͼ�У�{$Think.get.year}��{$Think.get.month}��{$Think.get.day}��
+	视图中：{$Think.get.year}年{$Think.get.month}月{$Think.get.day}日
 
 
-	��̬·�ɣ�http://tp.dawneve.cc/news/top.shtml
+	静态路由：http://tp.dawneve.cc/news/top.shtml
 	'URL_MAP_RULES'=>array(
 		'news/top' => 'news/archive?type=top',
-		//��̬·�ɶ��岻��URL��׺Ӱ�졣��̬·������ȫƥ�䡣
+		//静态路由定义不受URL后缀影响。静态路由是完全匹配。
 	),
 
 	
-??Ϊʲô��������url��ָ��ͬһ����������
+??为什么以下两个url都指向同一个控制器？
 	- http://tp.dawneve.cc/admin.php
 	- http://tp.dawneve.cc/index.php/Admin/
 	
 	
 ===========================
-��ͼ
+视图
 ===========================
-ThinkPHP�е���ͼ��Ҫ����ָģ���ļ���ģ������
+ThinkPHP中的视图主要就是指模板文件和模板引擎
 
-��ͼ�е�URL���ɣ�
+视图中的URL生成：
 <img src=<?php echo U('Aid/index2'); ?> >
 <img src="__URL__/index2">
 

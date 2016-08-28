@@ -18,4 +18,8 @@ class EmptyController extends Controller{
     protected function city($name){
         echo '当前城市： ' . $name;
     }
+    
+    function _empty(){
+        echo CONTROLLER_NAME . '->' .ACTION_NAME. ' is not found!';
+    }
 }

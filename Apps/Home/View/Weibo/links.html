@@ -6,12 +6,18 @@
 	.wrap{ margin:10px auto; width:1000px; }
 	.item{ margin:5px; padding:10px; border:1px solid #eee;}
 	.item a{color:blue; padding-right:20px;}
-
+    .footer{    margin-top: 50px;
+    padding: 20px 0;
+    background: #000;
+    color: #fff;
+    font-family: '微软雅黑';
+    text-align: center;
+    width: 100%;}
 </style>
 
 
 <div class=wrap>
-	<h1>主流英文报纸、杂志的链接 <a target='_blank' href='../weibo'>Weibo</a></h1>
+	<h1>主流英文报纸、杂志的链接 <a target='_blank' href='{:U("Weibo/index")}'>Weibo</a></h1>
 	
 	<volist name="links" id="vo" empty="暂时没有数据">
 		<div class=item>
@@ -21,5 +27,10 @@
 			</p>
 		</div>
 	</volist>
+</div>
 
+<div class=footer>
+    <div class=wrap>
+    2016 &copy; 拂晓学术版权所有
+    </div>
 </div>
