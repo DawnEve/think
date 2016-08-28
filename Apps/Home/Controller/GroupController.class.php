@@ -11,7 +11,15 @@ class GroupController extends Controller{
     
     //首页
 	function index(){
-        echo 'Group-index;';
+        echo 'Group-index;<hr>';
+        
+        //打印出所有配置项
+        dump(C());
+    }
+    
+    //重定向到操作
+    function go(){
+        $this->redirect('Group/index','id=1&name=wjl',3,'跳转中...');
     }
     
 }

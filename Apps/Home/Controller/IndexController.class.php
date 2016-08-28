@@ -9,7 +9,7 @@ class IndexController extends Controller {
 	public function index(){
 		echo '<pre>', C('name');
 		echo '<br>',U();
-		echo 'hello  王军亮的首页';
+		echo 'hello  Jimmy的首页';
 		echo '<br>','Index->index';
 		echo '</pre>';
 		//$this->show('wjl');
