@@ -34,4 +34,30 @@ class BlogController extends Controller {
 	function page(){
 	   $this->display();
 	}
+	
+	function man(){
+	   //echo '123';
+	   R('Admin/User/number');
+	}
+	
+	//实例化Event控制器
+	function getData(){
+	   $u=A('User','Event');
+	   $u->hi();
+	}
+	
+	function data(){
+	   //$t=new \Home\Model\BlogModel();//Home\Model\BlogModel  $t->output()
+	   //$t=M();//Think\Model
+	   //$t=M('Blog');//Think\Model
+	   //$t=D();//Think\Model
+	   $t=D('Blog');//Home\Model\BlogModel  $t->output()
+	   dump($t);
+	}
+	
+	//自我验证
+	function auth(){
+		echo '123';
+	    B('Home\Behavior\AuthCheck');
+	}
 }
