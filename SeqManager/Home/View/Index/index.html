@@ -1,0 +1,6 @@
+<h1>Index - index {:session('id')}</h1>
+
+{:authcheck('index',$_SESSION['id'],'or','<div style="color:red"> index </div>')}
+{:authcheck('add',$_SESSION['id'],'or','<div style="color:red"> add </div>')}
+{:authcheck('edit',$_SESSION['id'],'or','<div style="color:red"> edit </div>')}
+{:authcheck('delete',$_SESSION['id'],'or','<div style="color:red"> delete </div>')}
