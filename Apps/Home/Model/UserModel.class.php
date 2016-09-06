@@ -75,4 +75,22 @@ class UserModel extends Model{
 		echo '[from UserModel->__construct()]<hr>';
 	}
     */
+	
+	
+    //返回一维数组
+    function checkLogin($user='Tom',$passwd=''){
+        $info = $this->getByUser($user);
+        if($info != null){
+            if(md5($passwd) == $info['passwd']){
+            	unset($info['passwd']);//防止密码泄露
+                return $info;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+    
+    
 }

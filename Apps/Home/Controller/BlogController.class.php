@@ -3,12 +3,53 @@ namespace Home\Controller;
 use Think\Controller;
 
 class BlogController extends Controller {
+    //登录检测
+    public function login(){
+    	//1.验证用户名和密码是否正确
+		$m=new \Home\Model\UserModel();
+		//$m = D('User');
+		$rs = $m->checkLogin('Timoc','123456');
+		if($rs===false){
+            echo '用户名或密码错误！';
+		}else{
+            echo '登录成功';
+            //2.登录信息持久化
+            session('user',$rs);
+            $id=$rs['id'];
+            
+		    //dump(session('user'));
+		    //3.跳转到首页
+		    //方法1 使用函数，url需要时U方法生成的，或绝对地址
+		    redirect(U('Blog/index',array('uid'=>$id)),3,'正在跳转到后台！(function)'); 
+		    //方法2 使用方法，url只需要使用控制器和操作
+		    //$this->redirect('Blog/index',array('uid'=>$id),3,'正在跳转到后台！(method)'); 
+		}
+	}
+	
     public function index(){
-		echo 'BlogController->index';
-		
+		$u=session('user');
+		if($u!=null){
+		   echo '登录名： ' . $u['user'];
+		   echo ' | <a href="'.U('logout').'">'."退出" . '</a>';
+		}else{
+	        echo '请登录!';
+    		$this->display();
+		}
+
 		//D('User'); //实例化UserModel
 		//D('User','Logic'); //实例化UserLogic
 	}
+	
+	//logotu
+	function logout(){
+	   session(null);
+	   redirect(U('index'));
+	}
+	
+	function session(){
+	   dump(session('user'));
+	}
+	
 	public function test(){
 	   //echo 'user->test method.';
 	   echo U("Blog/index") . '<hr>';
@@ -20,7 +61,7 @@ class BlogController extends Controller {
 	}
 	
 	//url生成
-	function login(){
+	function login2(){
 		//C('URL_MODEL', 0);
 		echo C('URL_MODEL') . ' - ';
 	    echo U('User/login');
@@ -60,4 +101,40 @@ class BlogController extends Controller {
 		echo '123';
 	    B('Home\Behavior\AuthCheck');
 	}
+	
+	//验证码图片生成
+	function verifyIMG(){
+	   $config=array(
+	       //'imageW'=>120, 
+	       //'imageH'=>30, 
+	       //'fontSize'=>14, 
+	       'length'=>4,
+	       'fontttf'=>'4.ttf',
+	       //'useImgBg '=>false,
+	       //'useZh '=>true, //为什么数组中定义没用？
+	   );
+	   $vr=new \Think\Verify($config);
+
+	   //开启验证码背景图片功能 随机使用 ThinkPHP/Library/Think/Verify/bgs 目录下面的图片
+	   $vr->useImgBg = false;
+	   
+	   // 验证码字体使用 ThinkPHP/Library/Think/Verify/ttfs/5.ttf
+	   //$vr->useZh = true; 
+	   
+	   ob_clean();
+	   $vr->entry(1);
+	}
+	
+	
+	//验证码图片生成
+    function verify($code, $id =1){
+         $verify = new \Think\Verify(); 
+         $rs = $verify->check($code, $id);
+         dump( $rs);
+         //return $rs;
+    }
+    
+   
+
+    
 }
