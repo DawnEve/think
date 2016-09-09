@@ -1,0 +1,16 @@
+<style>
+html,body,div,p{margin:0;padding:0;}
+html{background:#efeeef;}
+.box{border:1px solid #aaa; margin:10px; padding:10px; background:#fff;}
+.box p.title{color:#0096ff; background:#fff;}
+</style>
+
+<div style="width:1200px; margin:0 auto;">
+<volist name="info" id="vo">
+	<div class='box'>
+	    <p class=title>{$vo.id} | {$vo.add_time|date="Y-m-d H:i:s",###}</p>
+	    <p>{$vo.content}</p>
+	</div>
+</volist>
+{$pagelist}
+</div>

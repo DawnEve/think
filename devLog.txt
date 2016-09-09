@@ -53,6 +53,6 @@ mysql> select * from think_weibo_category;
       echo U('Weibo/index',array('tag'=>$vo[cid])); ?>
                         
                         
-
-
+0.7 links数据定义在WeiboLogic中。
+Logic层不经过数据库，直接返回数据。
 

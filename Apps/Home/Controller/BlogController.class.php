@@ -134,7 +134,60 @@ class BlogController extends Controller {
          //return $rs;
     }
     
+    //调用自定义类，并实例化
+    function page2(){
+        $page=new \Component\Page();
+        $info = $page->fpage();
+        echo ($info);
+    }
    
-
     
+    
+    //这里读取，分页1
+    function showlist(){
+    	$wb=D('Weibo');
+        //1.获取总条目
+        $total=$wb->count();
+        //2.实例化分页对象
+        $per=5;
+        $page=new \Component\Page($total,$per);//自定义分页类
+        //3.拼装sql语句
+        $sql="select * from think_weibo ". $page->limit;
+        $info=$wb->query($sql);
+        //4.获得页码代码
+        $pagelist=$page->fpage(); //自定义分页类
+        //5.模板显示
+        $this->assign('info',$info);
+        $this->assign('pagelist',$pagelist);
+        $this->display();
+    }
+    
+//这里读取，分页1
+    function showlist2(){
+        $wb=D('Weibo');
+        //1.获取总条目
+        $total=$wb->count();
+        //2.实例化分页对象
+        $per=5;
+        
+        //$page=new \Component\Page($total,$per);//自定义分页类
+        $page=new \Think\Page($total, $per);//tp内置分页类
+        
+        //3.拼装sql语句
+        $sql="select * from think_weibo ". $page->limit;
+        $info=$wb->query($sql);
+        //4.获得页码代码
+        //$pagelist=$page->fpage(); //自定义分页类
+        $pagelist=$page->show();//tp内置分页类
+        //5.模板显示
+        $this->assign('info',$info);
+        $this->assign('pagelist',$pagelist);
+        $this->display();
+    }
+
+    //从logic层直接获取数据，不经过数据库
+    function test2(){
+        $user=A('User','Logic');
+        echo $user->getdata();
+    }
 }
