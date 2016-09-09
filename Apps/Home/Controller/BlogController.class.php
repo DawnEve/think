@@ -190,4 +190,60 @@ class BlogController extends Controller {
         $user=A('User','Logic');
         echo $user->getdata();
     }
+    
+    //文件缓存-保存
+    function s1(){
+        S('name','tom002',10);//10s有效期
+        S('address',array(
+            'city'=>'zz',
+            'school'=>'zzu',
+            'road'=>'Kexue Road',
+        ));
+        $obj=new \stdClass();
+        $obj->width=100;
+        $obj->height=200;
+        //$obj->get=function(){ return $this->width; };//Serialization of 'Closure' is not allowed
+        S('box',$obj);
+        echo 'ok';
+    }
+
+    //文件缓存-获取
+    function s2(){
+    	echo '<pre>';
+        echo S('name') . '<br>';
+        print_r(S('address'));
+        //获取数组元素
+        $add=S('address');
+        echo $add['city'].'<hr>';
+        
+        print_r(S('box'));
+    }
+    
+    //文件缓存-删除
+    function s3(){
+        S('box',null);
+        echo 'deleted';
+    }
+    
+    
+    //用户获取数据
+    function y1(){
+        echo $this->y2('name');
+    }
+    
+    //缓存获取函数
+    //获取数据，被其他方法调用
+    function y2($name, $time=5){
+        $info=S($name);
+        //如果有缓存，则用缓存
+        if($info){
+            return $info;
+        }else{
+    	   //如果没有缓存，则从数据库中读取，并缓存起来
+    	   $info='data from mysql' . date('H:i:s', time());//从数据库中读取数据
+    	   S($name,$info,$time);//缓存数据,有效期10s
+           return $info;
+        }
+    }
+    	
 }
