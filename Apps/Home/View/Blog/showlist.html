@@ -1,16 +1,30 @@
 <style>
 html,body,div,p{margin:0;padding:0;}
-html{background:#efeeef;}
+body{background:#efeeef; font-family:'微软雅黑'}
+.wrap{width:1200px; margin:0 auto;}
 .box{border:1px solid #aaa; margin:10px; padding:10px; background:#fff;}
 .box p.title{color:#0096ff; background:#fff;}
+.pagelist{background:#aaa;padding:3px;}
+.pagelist a{padding:5px;}
+
+.footer{background:#000;color:#fff;padding:20px 5px; margin-top:20px;}
 </style>
 
-<div style="width:1200px; margin:0 auto;">
+<div class=wrap>
+<h1>分页</h1>
+
 <volist name="info" id="vo">
 	<div class='box'>
-	    <p class=title>{$vo.id} | {$vo.add_time|date="Y-m-d H:i:s",###}</p>
-	    <p>{$vo.content}</p>
+	    <p class=title>#{$vo.id} | {$vo.add_time|date="Y-m-d H:i:s",###}</p>
+	    <p>{$vo.content|nl2br}</p>
 	</div>
 </volist>
-{$pagelist}
+<div class='pagelist'>{$pagelist}</div>
+</div>
+
+
+<div class='footer'>
+    <div class=wrap>
+        &copy;2016
+    </div>
 </div>

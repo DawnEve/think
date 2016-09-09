@@ -152,6 +152,9 @@ class Think {
             include self::$_map[$class];
         }elseif(false !== strpos($class,'\\')){
           $name           =   strstr($class, '\\', true);
+  	 
+  	      //是否是Think/Org等几个文件夹，或者是否在库文件ThinkPHP\Library/下
+  	      //LIB_PATH = F:\xampp\htdocs\think\ThinkPHP\Library/
           if(in_array($name,array('Think','Org','Behavior','Com','Vendor')) || is_dir(LIB_PATH.$name)){ 
               // Library目录下面的命名空间自动定位
               $path       =   LIB_PATH;
