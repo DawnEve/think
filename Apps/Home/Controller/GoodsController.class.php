@@ -29,8 +29,8 @@ EOT;
 	}
 
 	
-	//上传附件
-	function add(){
+	//上传附件 - 备份
+	function add_backup(){
        if(!empty($_POST)){
            $goods=D('Goods');
            //判断附件是否上传，
@@ -92,6 +92,66 @@ array(9) {
        }else{
            $this->display();
        }
+    }
+    
+    
+    //上传附件
+    function add(){
+       if(!empty($_POST)){
+           $goods=D('Goods');
+           //判断附件是否上传，
+           //如果有附件则实例化upload(),把附件上传到指定位置
+           //然后把附件的路径名获得，保存到$_POST中
+           if(!empty($_FILES)){
+                //实例化类
+                $config=array(
+                    'maxSize'    =>    3145728, 
+                    'rootPath'=>'./Public/',
+                    'savePath'=>'Upload/',
+                    'subName'       =>  array('date', 'Ymd'),
+                    'exts'       =>    array('jpg', 'gif', 'png', 'jpeg'),  
+                );
+                $upload=new \Think\Upload($config);
+                //执行上传
+                $z=$upload->uploadOne($_FILES['goods_big_img']);
+                //判断上传是否成功
+                if(!$z){
+                    die( $upload->getError() );
+                }else{
+                    //拼接图片路径，并添加到$_POST中
+                    $img_url = $z['savepath'] . $z['savename'];
+                    //dump($img_url);//string(35) "Upload/20160909/57d25a40285bd.jpg"
+                    $_POST['goods_big_img']=$img_url;
+                    
+                    //生成缩略图
+                    $bigimg = $upload->rootPath . $img_url;
+                    $image=new \Think\Image();
+                    $small_img_url = $upload->rootPath . $z['savepath'] .'small_'. $z['savename'];
+                    $image->open($bigimg)->thumb(150,150)->save($small_img_url);
+                    $_POST['goods_small_img']=$small_img_url;
+                }
+           }
+           
+           $goods->create();//收集数据
+           $goods->goods_create_time=time();
+           $r=$goods->add();
+           if($r){
+                echo 'success';
+           }else{
+                echo 'error~~~';
+           }
+       }else{
+           $this->display();
+       }
+    }
+    
+    //制作缩略图
+    function thumb(){
+        $image = new \Think\Image(); 
+        $image->open('./Public/Upload/20160909/57d25f4c19d89.jpg');//将图片裁剪为400x400并保存为corp.jpg
+        $thumb_url='/Public/Upload/20160909/thumb_57d25f4c19d89.jpg';
+        $image->thumb(300, 350)->save('.'.$thumb_url);
+        echo '<img src="'.$thumb_url.'">';
     }
 	
 }
