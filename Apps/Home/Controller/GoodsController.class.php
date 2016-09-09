@@ -3,8 +3,8 @@ namespace Home\Controller;
 use Think\Controller;
 
 class GoodsController extends Controller{
-    function index($table='Weibo'){
-        $g=M($table)->select();//二维数组，返回1或多条结果
+    function index($table='Goods'){
+        $g=M($table)->order('goods_id desc')->select();//二维数组，返回1或多条结果
         //$g=M($table)->find();//一维数组，返回一条结果
         dump($g);
     }
@@ -26,6 +26,72 @@ EOT;
 	    }else{
 	        echo '无记录更新';
 	    }
-	    
 	}
+
+	
+	//上传附件
+	function add(){
+       if(!empty($_POST)){
+           $goods=D('Goods');
+           //判断附件是否上传，
+           //如果有附件则实例化upload(),把附件上传到指定位置
+           //然后把附件的路径名获得，保存到$_POST中
+           if(!empty($_FILES)){
+            //dump($_FILES['goods_big_img']);
+            /*
+array(5) {
+  ["name"] => string(26) "QQ图片20160605182806.jpg"
+  ["type"] => string(10) "image/jpeg"
+  ["tmp_name"] => string(24) "F:\xampp\tmp\php2C80.tmp"
+  ["error"] => int(0)
+  ["size"] => int(254691)
+}
+             * */
+           	    //实例化类
+           	    $config=array(
+           	        'rootPath'=>'./Public/',
+           	        'savePath'=>'Upload/',
+           	        'subName'       =>  array('date', 'Ymd'),
+           	    );
+           	    $upload=new \Think\Upload($config);
+           	    //执行上传
+           	    $z=$upload->uploadOne($_FILES['goods_big_img']);
+           	        /*
+dump($z);
+array(9) {
+  ["name"] => string(26) "QQ图片20160605182806.jpg"
+  ["type"] => string(10) "image/jpeg"
+  ["size"] => int(254691)
+  ["key"] => int(0)
+  ["ext"] => string(3) "jpg"
+  ["md5"] => string(32) "2ee1bc65a552a90ee8431696eb4107f9"
+  ["sha1"] => string(40) "6393a860ff70080fb9c9c678a0db6f5262ae33bc"
+  ["savename"] => string(17) "57d259a6a1b2d.jpg"
+  ["savepath"] => string(18) "Upload/2016-09-09/"
+}
+           	         * */
+           	    //判断上传是否成功
+           	    if(!$z){
+           	        die( $upload->getError() );
+           	    }else{
+           	    	//拼接图片路径，并添加到$_POST中
+           	    	$img_url = $z['savepath'] . $z['savename'];
+           	        //dump($img_url);//string(35) "Upload/2016-09-09/57d25a40285bd.jpg"
+           	        $_POST['goods_big_img']=$img_url;
+           	    }
+           }
+           
+           $goods->create();//收集数据
+           $goods->goods_create_time=time();
+           $r=$goods->add();
+           if($r){
+                echo 'success';
+           }else{
+                echo 'error~~~';
+           }
+       }else{
+           $this->display();
+       }
+    }
+	
 }
