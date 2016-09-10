@@ -5,16 +5,33 @@ use Think\Controller;
 class ManagerController extends Controller {
     public function index(){
         //首页显示主控界面
-        
-        if($user = session('user')){
+        $user = session('user');
+        if(!empty($user)){
             //echo ' | <a href="'.U('logout').'">logout</a>';
-            dump($user);
+            //dump($user);
             $this->display();
         }else{
             redirect('login');
         }
-        
     }
+    
+    //头部
+    function head(){
+        $this->display('head');
+    }
+    
+    //左侧
+    function left(){
+        $this->display('left');
+    }
+    
+    //右侧
+    function right(){
+        $this->display('right');
+    }
+    
+    
+    
     
     //登录页面
     function login(){
@@ -25,17 +42,24 @@ class ManagerController extends Controller {
        	}else{
     	   //2.否则看是否是登录post，如果是，则验证，
        		if(!empty($_POST)){
-       		   $usr=I('username');
+       		   //从Model中验证登录
+       		   $name=I('username');
                $psw=I('password');
-               session('user',array($usr, $psw));
-               //echo '登录成功';
-               redirect('index');
+               $rs=D('Manager')->checkNamePsw($name,$psw);
+               if(false === $rs){
+               	   $this->error('用户名或密码错误！');
+                   //$this->display();
+               }else{
+	               //写入session
+	               session('user',$rs);
+	               //跳转到后台首页
+	               redirect('index');
+               }
        		}else{
-       	   //3.否则显示登录页面
+       	        //3.否则显示登录页面
        		   $this->display();
        		}
        	}
-    	//echo '已经登录';
     }
     
     //退出
@@ -48,5 +72,9 @@ class ManagerController extends Controller {
     //空方法
     function _empty(){
         echo 'Invalid!';
+    }
+    
+    function test(){
+        echo md5('123456');
     }
 }
