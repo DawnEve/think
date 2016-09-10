@@ -1,7 +1,6 @@
 序列管理系统。
 -----------------
 数据表前缀是seq_
-
 -----------------
 
 F:\xampp\apache\conf\extra
@@ -26,5 +25,7 @@ F:\xampp\apache\conf\extra
 
 >>v0.1.1 复制.htaccess文件。
 http://seq.dawneve.cc/Index/index.html
+
+>>v0.1.2 rbac 测试
 
 

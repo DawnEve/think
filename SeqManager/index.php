@@ -34,6 +34,19 @@ define('APP_PATH','./'); //当前文件夹下创建应用
 header("Content-type: text/html; charset=utf-8");
 
 
+
+//定义一些系统常量,模板中使用
+$site_url='http://'.$_SERVER['SERVER_NAME'].'/';//string(22) "http://seq.dawneve.cc/"
+define('CSS_URL',$site_url . 'Public/Admin/css/');
+define('IMG_URL',$site_url . 'Public/Admin/img/');
+ 
+
+
+
+
+
+
+
 // 引入ThinkPHP入口文件
 require '../ThinkPHP/ThinkPHP.php';
 

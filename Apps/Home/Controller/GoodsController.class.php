@@ -153,5 +153,9 @@ array(9) {
         $image->thumb(300, 350)->save('.'.$thumb_url);
         echo '<img src="'.$thumb_url.'">';
     }
+    
+    function lang($lang){
+        echo L('');
+    }
 	
 }
