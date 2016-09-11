@@ -1,0 +1,39 @@
+<?php
+namespace Admin\Common;
+use Think\Controller;
+
+class AdminController extends Controller {
+    public function _initialize(){
+        //如果是超级管理员，直接返回
+        $user=session('user');
+        $uid=$user['mg_id']; 
+        if(1==$uid) return;
+    	//当前控制器和操作方法
+        $name = CONTROLLER_NAME.'-'.ACTION_NAME; 
+        //如果是登陆页，也直接返回
+        if(in_array($name, array(
+            'Manager-login',
+            'Manager-index',
+            'Manager-head',
+            'Manager-left',
+            'Manager-right',
+            'Manager-logout',
+        ))) return;
+        
+        //否则，获取验证
+        $sql='select role_auth_ac from sw_manager as a, sw_role as b 
+            where a.mg_role_id=b.role_id and a.mg_id='.$uid;
+        $auths=M()->query($sql);
+        //当前url是否在权限内
+        $rs=in_array($name,explode(',',$auths[0]['role_auth_ac']));
+        //如果没有权限，则跳转
+        if(!$rs){
+            $this->error('没有权限访问该url',U('Manager/index'));
+            die();
+        }
+    }
+    
+    function _empty(){
+        echo CONTROLLER_NAME.'/'.ACTION_NAME . ' is Invalid!';
+    }
+}

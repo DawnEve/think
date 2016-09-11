@@ -1,8 +1,8 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;
+use Admin\Common\AdminController;
 
-class ManagerController extends Controller {
+class ManagerController extends AdminController {
 	//首页
     public function index(){
         //首页显示主控界面
@@ -26,6 +26,7 @@ class ManagerController extends Controller {
     function left(){
     	//1.根据角色mg_id获得role_id;
     	$user=session('user');
+    	$mg_id=$user['mg_id'];
     	$mg_role_id=$user['mg_role_id'];
     	/*
 array(4) {
@@ -41,7 +42,7 @@ array(4) {
     	//dump($role_auth_ids);//string(8) "2,3,8,11"
         //3.根据$role_auth_ids查询具体权限
     	//3.5如果是超级管理员(admin)，则获取所有权限
-    	if(1==$mg_role_id){
+    	if(1==$mg_id){
 	        $p_auth_info=M('Auth')->where("auth_level = 0")->select();//顶级权限
 	        $c_auth_info=M('Auth')->where("auth_level = 1")->select();//次级权限
     	}else{
@@ -74,7 +75,7 @@ array(4) {
     	//$uid = session('user')['mg_id'];
     	//$user=M('manager')->find($uid);
     	//dump($user);
-    	//dump(session('user'));
+    	dump(session('user'));
     	$this->assign('user',session('user'));
         $this->display('right');
     }
