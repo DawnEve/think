@@ -72,10 +72,12 @@ array(4) {
     
     //右侧
     function right(){
-    	//$uid = session('user')['mg_id'];
-    	//$user=M('manager')->find($uid);
-    	//dump($user);
-    	dump(session('user'));
+    	$user = session('user');
+    	$role_id = $user['mg_role_id'];
+    	$role_name=M('Role')->where('role_id='.$role_id)->getField('role_name');
+    	//dump($role_name);
+    	//dump(session('user'));
+    	$this->assign('role_name',$role_name);
     	$this->assign('user',session('user'));
         $this->display('right');
     }

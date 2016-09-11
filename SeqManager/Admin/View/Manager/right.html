@@ -33,7 +33,7 @@
                         <tr>
                             <td style="font-weight: bold; font-size: 16px"><?php echo $r2[username]; ?></td></tr>
                             <tr>
-                                <td>级别:<?php if($r2[states]==2){ echo"超级管理员";}else  if($r2[states]==1){ echo"财务人员";}else  if($r2[states]==0){ echo"一般管理员";} ?><br></td>
+                                <td>级别: {$role_name}<br></td>
                             </tr>
                         <tr>
                             <td>欢迎进入网站管理中心！</td></tr>
@@ -56,6 +56,9 @@
                 <td></td></tr></table>
         <table cellspacing=0 cellpadding=2 width="95%" align=center border=0>
             <tr>
+                <td align=right width=100>ID：</td>
+                <td style="color: #880000">{$user.mg_id}</td></tr>
+            <tr>
                 <td align=right width=100>登陆帐号：</td>
                 <td style="color: #880000">{$user.mg_name}</td></tr>
 
@@ -63,9 +66,6 @@
                 <td align=right>注册时间：</td>
                 <td style="color: #880000">{$user.mg_time|date="Y-m-d H:i:s",###}</td></tr>
 
-            <tr>
-                <td align=right>上线时间：</td>
-                <td style="color: #880000"><?php echo date('Y-m-d h:i:s', time());?></td></tr>
             <tr>
                 <td align=right>ip地址：</td>
                 <td style="color: #880000"><?php echo $_SERVER["REMOTE_ADDR"];?></td></tr>

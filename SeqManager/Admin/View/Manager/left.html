@@ -52,7 +52,7 @@
         <?php if($c['auth_pid'] == $p['auth_id']){ ?>
                         <tr height=20>
                             <td align=middle width=30><img height=9 src="{$Think.const.IMG_URL}/menu_icon.gif" width=9></td>
-                            <td><a class=menuchild href="addmember.php" target=right>{$c.auth_name}</a></td></tr>
+                            <td><a class=menuchild href="/Admin/{$c.auth_c}/{$c.auth_a}" target=right>{$c.auth_name}</a></td></tr>
         <?php }?>
      </volist>
      

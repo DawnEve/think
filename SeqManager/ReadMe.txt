@@ -31,7 +31,7 @@ http://seq.dawneve.cc/Index/index.html
 >>v0.1.4 超级管理员需要所有权限。Manager/left
 >>v0.1.5 没显示权限，但是直接输入url访问敏感权限怎么办？
     在父类控制器中进行权限过滤。
-    
+>>v0.1.6 left的链接不对，修正。    
     
 
 
