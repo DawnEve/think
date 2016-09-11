@@ -28,4 +28,8 @@ http://seq.dawneve.cc/Index/index.html
 
 >>v0.1.2 rbac 测试
 >>v0.1.3 left is OK.根据不同权限相应显示。
+>>v0.1.4 超级管理员需要所有权限。Manager/left
+
+
+
 

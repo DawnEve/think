@@ -40,8 +40,14 @@ array(4) {
     	$role_auth_ids=$auth_info[0]['role_auth_ids'];
     	//dump($role_auth_ids);//string(8) "2,3,8,11"
         //3.根据$role_auth_ids查询具体权限
-        $p_auth_info=M('Auth')->where("auth_pid = 0 and auth_id in ($role_auth_ids)")->select();//顶级权限
-        $c_auth_info=M('Auth')->where("auth_pid != 0 and auth_id in ($role_auth_ids)")->select();//次级权限
+    	//3.5如果是超级管理员(admin)，则获取所有权限
+    	if(1==$mg_role_id){
+	        $p_auth_info=M('Auth')->where("auth_level = 0")->select();//顶级权限
+	        $c_auth_info=M('Auth')->where("auth_level = 1")->select();//次级权限
+    	}else{
+	        $p_auth_info=M('Auth')->where("auth_level = 0 and auth_id in ($role_auth_ids)")->select();//顶级权限
+	        $c_auth_info=M('Auth')->where("auth_level = 1 and auth_id in ($role_auth_ids)")->select();//次级权限
+    	}
     	//dump($p_auth_info);
     	//dump($c_auth_info);
     	/*
