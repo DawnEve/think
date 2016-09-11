@@ -3,6 +3,7 @@ namespace Admin\Controller;
 use Think\Controller;
 
 class ManagerController extends Controller {
+	//首页
     public function index(){
         //首页显示主控界面
         $user = session('user');
@@ -17,19 +18,69 @@ class ManagerController extends Controller {
     
     //头部
     function head(){
+    	$this->assign('user',session('user'));
         $this->display('head');
     }
     
     //左侧
     function left(){
-        $this->display('left');
+    	//1.根据角色mg_id获得role_id;
+    	$user=session('user');
+    	$mg_role_id=$user['mg_role_id'];
+    	/*
+array(4) {
+  ["mg_id"] => string(1) "2"
+  ["mg_name"] => string(3) "tom"
+  ["mg_time"] => string(1) "0"
+  ["mg_role_id"] => string(1) "2"
+}
+    	 * */
+    	//2.由role_id获取role_auth_ids
+    	$auth_info=M('Role')->where(array('role_id'=>$mg_role_id))->select();
+    	$role_auth_ids=$auth_info[0]['role_auth_ids'];
+    	//dump($role_auth_ids);//string(8) "2,3,8,11"
+        //3.根据$role_auth_ids查询具体权限
+        $p_auth_info=M('Auth')->where("auth_pid = 0 and auth_id in ($role_auth_ids)")->select();//顶级权限
+        $c_auth_info=M('Auth')->where("auth_pid != 0 and auth_id in ($role_auth_ids)")->select();//次级权限
+    	//dump($p_auth_info);
+    	//dump($c_auth_info);
+    	/*
+ array(4) {
+  [0] => array(7) {
+    ["auth_id"] => string(1) "2"
+    ["auth_name"] => string(12) "订单管理"
+    ["auth_pid"] => string(1) "0"
+    ["auth_c"] => string(0) ""
+    ["auth_a"] => string(0) ""
+    ["auth_path"] => string(1) "2"
+    ["auth_level"] => string(1) "0"
+  }
+    	 * */
+        
+    	//显示模板
+    	$this->assign('p_auth_info',$p_auth_info);
+    	$this->assign('c_auth_info',$c_auth_info);
+    	$this->display('left');
     }
     
     //右侧
     function right(){
+    	//$uid = session('user')['mg_id'];
+    	//$user=M('manager')->find($uid);
+    	//dump($user);
+    	//dump(session('user'));
+    	$this->assign('user',session('user'));
         $this->display('right');
     }
     
+    /*
+array(4) {
+  ["mg_id"] => string(1) "2"
+  ["mg_name"] => string(3) "tom"
+  ["mg_time"] => string(1) "0"
+  ["mg_role_id"] => string(1) "2"
+}
+     * */
     
     
     
@@ -38,7 +89,7 @@ class ManagerController extends Controller {
     	//1.如果已经登录，则跳转。
        	$user=session('user');
        	if(!empty($user)){
-       	    redirect('index',1);
+       	    redirect('index');
        	}else{
     	   //2.否则看是否是登录post，如果是，则验证，
        		if(!empty($_POST)){
@@ -71,10 +122,12 @@ class ManagerController extends Controller {
     
     //空方法
     function _empty(){
-        echo 'Invalid!';
+        echo 'Invalid Action!';
     }
     
     function test(){
-        echo md5('123456');
+        //echo md5('admin');
+        //echo time();
+        echo get_client_ip();//202.196.120.202
     }
 }
