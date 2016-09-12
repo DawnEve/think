@@ -73,8 +73,12 @@ array(4) {
     //右侧
     function right(){
     	$user = session('user');
-    	$role_id = $user['mg_role_id'];
-    	$role_name=M('Role')->where('role_id='.$role_id)->getField('role_name');
+    	if(1==$user['mg_id']){
+    		  $role_name='超级管理员';
+    	}else{
+	    	$role_id = $user['mg_role_id'];
+	    	$role_name=M('Role')->where('role_id='.$role_id)->getField('role_name');
+    	}
     	//dump($role_name);
     	//dump(session('user'));
     	$this->assign('role_name',$role_name);
@@ -125,7 +129,7 @@ array(4) {
     //退出
     function logout(){
         session(null);
-        redirect('login',1,'退出成功！');
+        redirect('login',0,'退出成功！');
     }
 
     
