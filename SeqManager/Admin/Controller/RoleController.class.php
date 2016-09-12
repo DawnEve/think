@@ -29,7 +29,12 @@ class RoleController extends AdminController {
     }
     
     //显示角色的权限
-    function distribute($role_id){
+    function distribute($role_id=-1){
+    	//0.0如果没有指定role_id，则跳转到showlist页面
+    	if($role_id<=0){
+    	   $this->redirect('showlist','',2,'未指定对象错误！请先指定操作对象，2秒后跳转...');
+    	}
+    	
     	//0.1如果是提交数据
     	if(!empty($_POST)){
     	   //0.2调用模型中的方法，保存权限

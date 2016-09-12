@@ -28,8 +28,9 @@ class AdminController extends Controller {
         $rs=in_array($name,explode(',',$auths[0]['role_auth_ac']));
         //如果没有权限，则报错并跳转
         if(!$rs){
-            $this->error('没有权限访问该url',U('Manager/index'));
-            die();
+            //$this->error('没有权限访问该url',U('Manager/index'));
+            $name = CONTROLLER_NAME.'/'.ACTION_NAME;
+            die("没有权限访问该页面[$name].");
         }
     }
     

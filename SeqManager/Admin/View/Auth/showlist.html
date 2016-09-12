@@ -32,13 +32,23 @@
                 <tbody><tr style="font-weight: bold;">
                         <td>ID</td>
                         <td>名称</td>
+                        <td >父id</td>
+                        <td >控制器</td>
+                        <td >操作名</td>
+                        <td >全路径</td>
+                        <td >级别</td>
                         <td >操作</td>
                     </tr>
                     
-                  <foreach name="role_info" item="vo" >
+                  <foreach name="auth_info" item="vo" >
                      <tr id="product1">
-                        <td>{$vo.role_id}</td>
-                        <td>{$vo.role_name}</td>
+                        <td>{$vo.auth_id}</td>
+                        <td>{$vo.auth_name}</td>
+                        <td>{$vo.auth_pid}</td>
+                        <td>{$vo.auth_c}</td>
+                        <td>{$vo.auth_a}</td>
+                        <td>{$vo.auth_path}</td>
+                        <td>{$vo.auth_level}</td>
                         <td><a href='<?php echo U("Role/distribute",array("role_id"=>$vo['role_id'])) ;?>'>分配权限</a></td>
                       </tr>
                    </foreach>
@@ -52,7 +62,7 @@
     页码
     </td>
     <td style="height:28px;width:60%;">
-    当前共有{$role_info_num}个角色</td></tr>
+    当前共有{$auth_info_num}个权限</td></tr>
 </table>
 
         </div>
