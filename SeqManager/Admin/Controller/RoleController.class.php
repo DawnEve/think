@@ -22,7 +22,6 @@ class RoleController extends AdminController {
   }
 }
          * */
-        //echo 'Role-showlist';
         //dump($role_info);
         $this->assign('role_info',$role_info);
         $this->assign('role_info_num',count($role_info));
@@ -38,15 +37,25 @@ class RoleController extends AdminController {
     	   $rs=$role->saveAuth(I('auth_id'),$role_id);
     	   if($rs===true){
     	       //跳转到上一页
-    	       redirect('showlist',1,'修改成功！');
+    	       $this->success('分配权限成功',U('showlist'));
+    	       exit();
     	   }else{
-    	       exit($rs);
+    	       $this->success('分配权限失败' .dump($rs),U('showlist'));
+    	       die();
     	   }
     	}
     	
         //1.根据role_id查询对应的角色名字；
         $rinfo=D('Role')->getByRole_id($role_id);
         $this->assign('role_name', $rinfo['role_name']);
+        
+        //1.5 当前角色对应的ids查询出来
+        $role_info=D('Role')->find($role_id);
+        $role_auth_ids_arr=explode(',',$role_info['role_auth_ids']);
+        $this->assign('role_auth_ids_arr',$role_auth_ids_arr);
+        //dump($role_auth_ids_arr);die();
+        
+        
         
         //2.查询全部的权限信息，放入模板显示并进行权限分配。
         $p_auth_info=M('Auth')->where("auth_level = 0")->select();//顶级权限
@@ -70,16 +79,4 @@ array(10) {
   }
          * */
     }
-    
 }
-
-/*
-array(1) {
-  ["user"] => array(4) {
-    ["mg_id"] => string(1) "1"
-    ["mg_name"] => string(5) "admin"
-    ["mg_time"] => string(10) "1473501831"
-    ["mg_role_id"] => string(1) "1"
-  }
-}
- * */

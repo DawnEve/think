@@ -17,13 +17,6 @@ class RoleModel extends Model {
 		   }
 		}
 		$auth_ac=rtrim($auth_ac,',');//删除最后一个逗号
-		
-		/*
-array(2) {
-  [0] => string(1) "1"
-  [1] => string(1) "8"
-}
-		 * */
 	   //执行更新操作
 	   $data=array(
 	       'role_id'=>$role_id,

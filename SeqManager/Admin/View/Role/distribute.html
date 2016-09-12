@@ -27,11 +27,15 @@
             
 	            <foreach name='p_auth_info' item='p'>
 	                <ul>
-	                    <li>{$p.auth_name}<input type=checkbox name='auth_id[]'  value={$p.auth_id} />
+	                    <li>{$p.auth_name}<input type=checkbox name='auth_id[]'  value={$p.auth_id} 
+                           <?php if(in_array($p['auth_id'], $role_auth_ids_arr)) echo " checked ";?>
+	                     />
 	                        <ul>
 			                    <foreach name='c_auth_info' item='c'>
 			                        <?php if($p['auth_id'] == $c['auth_pid']){ ?>
-			                          <li>{$c.auth_name}<input type=checkbox name='auth_id[]' value={$c.auth_id} /></li>
+			                          <li>{$c.auth_name}<input type=checkbox name='auth_id[]' value={$c.auth_id}
+			                          <?php if(in_array($c['auth_id'], $role_auth_ids_arr)) echo " checked ";?>
+			                           /></li>
 			                        <?php   }  ?>
 			                    </foreach>
 	                        </ul>
@@ -40,6 +44,7 @@
 	            </foreach>
 	            
 	            <input type='submit' value='分配权限'>
+	            <input type='button' onclick="history.back(-1)" value='返回'>
             
             </form>
         </div>
