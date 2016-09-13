@@ -29,3 +29,10 @@ body{
     background-color: #E8F2FC;
     border-bottom: solid #1c94c4 1px
 }
+.right{ 
+    float:right; 
+    margin-right:100px;
+}
+.red{
+    color:red;
+}

@@ -2,14 +2,24 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <title>角色列表</title>
-        <link href="{$Think.const.CSS_URL}/mine.css" type="text/css" rel="stylesheet" />
+        <title>权限列表</title>
+        <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet" />
+        <link href="{$Think.const.CSS_URL}/mine.css?time=20160912" type="text/css" rel="stylesheet" />
     </head>
     <body>
-        <style>
-            .tr_color{background-color: #9F88FF}
-        </style>
-        <div></div>
+       <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
+            <tr height=28>
+                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：权限管理->权限列表 
+                    <span class='right'><a href="{:U('add')}">【添加权限】</a></span>
+                </td>
+            </tr>
+            <tr>
+                <td bgcolor=#b1ceef height=1></td></tr>
+            <tr height=20>
+                <td background={$Think.const.IMG_URL}/shadow_bg.jpg></td></tr>
+        </table>
+        
+        
         <div class="div_search">
             <span>
                 <form action="listzuopin.php" method="get" accept-charset="utf-8">
@@ -36,8 +46,6 @@
                         <td >控制器</td>
                         <td >操作名</td>
                         <td >全路径</td>
-                        <td >级别</td>
-                        <td >操作</td>
                     </tr>
                     
                   <foreach name="auth_info" item="vo" >
@@ -48,8 +56,6 @@
                         <td>{$vo.auth_c}</td>
                         <td>{$vo.auth_a}</td>
                         <td>{$vo.auth_path}</td>
-                        <td>{$vo.auth_level}</td>
-                        <td><a href='<?php echo U("Role/distribute",array("role_id"=>$vo['role_id'])) ;?>'>分配权限</a></td>
                       </tr>
                    </foreach>
                    
