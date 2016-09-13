@@ -3,6 +3,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html;charset=utf-8">
         <title>分配权限</title>
+        <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet">
         <link href="{$Think.const.CSS_URL}/mine.css" type="text/css" rel="stylesheet">
         <style>
             li{ list-style:none; }
@@ -23,39 +24,35 @@
         <div style="font-size: 13px;margin: 10px 5px">
             <form action="__SELF__" method="post" enctype="multipart/form-data">
             
-	                <ul>
+	         <ul>
 	            <foreach name='p_auth_info' item='p'>
-	                    <li>{$p.auth_name}<input type=checkbox name='auth_id[]'  value={$p.auth_id} 
-                           <?php if(in_array($p['auth_id'], $role_auth_ids_arr)) echo " checked ";?>
-	                     />
-	                     
-	                        <ul>
-			                    <foreach name='c_auth_info' item='c'>
-			                        <?php if($p['auth_id'] == $c['auth_pid']){ ?>
-			                          <li>{$c.auth_name}<input type=checkbox name='auth_id[]' value={$c.auth_id}
-			                          <?php if(in_array($c['auth_id'], $role_auth_ids_arr)) echo " checked ";?>
-			                           />
-			                           
-			                             <ul>
-			                                 <foreach name='g_auth_info' item='g'>
-			                                     <?php if($c['auth_id'] == $g['auth_pid']){ ?>
-			                                     <li>
-			                                     {$g.auth_name}<input type=checkbox name='auth_id[]'  value={$g.auth_id} 
-						                           <?php if(in_array($g['auth_id'], $role_auth_ids_arr)) echo " checked ";?>
-						                         />
-			                                     </li>
-			                                     <?php }?>
-			                                 </foreach>
-			                             </ul>
-			                           
-			                           </li>
-			                        <?php   }  ?>
-			                    </foreach>
-	                        </ul>
-	                        
-	                     </li>                
+                    <li>{$p.auth_name}
+                    <input type=checkbox name='auth_id[]'  value={$p.auth_id} <?php if(in_array($p['auth_id'], $role_auth_ids_arr)) echo " checked ";?> />
+                     
+		               <foreach name='c_auth_info' item='c'>
+		                <?php if($p['auth_id'] == $c['auth_pid']){ ?>
+                           <ul>
+	                          <li>{$c.auth_name}
+	                             <input type=checkbox name='auth_id[]' value={$c.auth_id} <?php if(in_array($c['auth_id'], $role_auth_ids_arr)) echo " checked ";?> />
+	                           
+	                             <foreach name='g_auth_info' item='g'>
+	                               <?php if($c['auth_id'] == $g['auth_pid']){ ?>
+	                                 <ul>
+	                                     <li>{$g.auth_name}
+	                                     <input type=checkbox name='auth_id[]'  value={$g.auth_id}<?php if(in_array($g['auth_id'], $role_auth_ids_arr)) echo " checked ";?> />
+	                                     </li>
+	                                 </ul>
+	                               <?php }?>
+	                             </foreach>
+	                           
+	                           </li>
+                           </ul>
+		                <?php   }  ?>
+		                </foreach>
+                        
+                     </li>                
 	            </foreach>
-	                </ul>
+	          </ul>
 	            
 	            <input type='submit' value='分配权限'>
 	            <input type='button' onclick="history.back(-1)" value='返回'>
