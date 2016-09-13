@@ -86,9 +86,10 @@ $pos2 = strpos($mystring, $findme2);
 
 var_dump($pos2);//bool(false)
 
-
-
-
-
-
 ```
+
+## 序列管理系统  
+
+SeqManager/ReadMe.txt
+
+
