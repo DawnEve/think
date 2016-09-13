@@ -45,11 +45,13 @@ class RoleController extends AdminController {
         //2.查询全部的权限信息，放入模板显示并进行权限分配。
         $p_auth_info=M('Auth')->where("auth_level = 0")->select();//顶级权限
         $c_auth_info=M('Auth')->where("auth_level = 1")->select();//次级权限
+        $g_auth_info=M('Auth')->where("auth_level = 2")->select();//次次级权限
             
         //3.显示
         //dump($c_auth_info);
         $this->assign('p_auth_info',$p_auth_info);
         $this->assign('c_auth_info',$c_auth_info);
+        $this->assign('g_auth_info',$g_auth_info);
         $this->display();
         /*
 array(10) {

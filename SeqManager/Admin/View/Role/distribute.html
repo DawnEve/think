@@ -10,7 +10,6 @@
     </head>
 
     <body>
-
         <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
             <tr height=28>
                 <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：系统管理->分配权限</td></tr>
@@ -20,28 +19,43 @@
                 <td background={$Think.const.IMG_URL}/shadow_bg.jpg></td></tr>
         </table>
                 
-                
         <div>正在为角色 <b>{$role_name}</b> 分配权限：</div>
         <div style="font-size: 13px;margin: 10px 5px">
             <form action="__SELF__" method="post" enctype="multipart/form-data">
             
-	            <foreach name='p_auth_info' item='p'>
 	                <ul>
+	            <foreach name='p_auth_info' item='p'>
 	                    <li>{$p.auth_name}<input type=checkbox name='auth_id[]'  value={$p.auth_id} 
                            <?php if(in_array($p['auth_id'], $role_auth_ids_arr)) echo " checked ";?>
 	                     />
+	                     
 	                        <ul>
 			                    <foreach name='c_auth_info' item='c'>
 			                        <?php if($p['auth_id'] == $c['auth_pid']){ ?>
 			                          <li>{$c.auth_name}<input type=checkbox name='auth_id[]' value={$c.auth_id}
 			                          <?php if(in_array($c['auth_id'], $role_auth_ids_arr)) echo " checked ";?>
-			                           /></li>
+			                           />
+			                           
+			                             <ul>
+			                                 <foreach name='g_auth_info' item='g'>
+			                                     <?php if($c['auth_id'] == $g['auth_pid']){ ?>
+			                                     <li>
+			                                     {$g.auth_name}<input type=checkbox name='auth_id[]'  value={$g.auth_id} 
+						                           <?php if(in_array($g['auth_id'], $role_auth_ids_arr)) echo " checked ";?>
+						                         />
+			                                     </li>
+			                                     <?php }?>
+			                                 </foreach>
+			                             </ul>
+			                           
+			                           </li>
 			                        <?php   }  ?>
 			                    </foreach>
 	                        </ul>
+	                        
 	                     </li>                
-	                </ul>
 	            </foreach>
+	                </ul>
 	            
 	            <input type='submit' value='分配权限'>
 	            <input type='button' onclick="history.back(-1)" value='返回'>
