@@ -18,5 +18,33 @@ class ManagerModel extends Model {
         }
 	   return ;
 	}
+	
+	//修改管理员信息
+	function upd($mg_id){
+	   $_POST['mg_id']=$mg_id;
+	   $_POST['mg_mod_time']=time();//修改时间
+	   $this->create();
+	   if($this->save()){
+	       return true;
+	   }else{
+	       return $this->getError();
+	   }
+	}
 
+	//插入数据
+	function addManager(){
+        //检查是否重名
+        $mg_name=I('mg_name');
+        $rs=$this->getBymg_name($mg_name);
+        if($rs!=null){
+            echo '该用户名已经存在，请换一个用户名再试试吧-.-<br>';
+            myBtn_back();
+        }
+        		
+		//如果没有重名，则插入
+        $_POST['mg_time']=time();
+        $_POST['mg_mod_time']=time();
+        $this->create();
+        return $this->add();
+	}
 }

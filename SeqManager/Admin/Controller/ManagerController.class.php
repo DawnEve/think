@@ -132,6 +132,90 @@ array(4) {
         redirect('login',0,'退出成功！');
     }
 
+    //列表
+    function showlist(){
+        $mg_info=M('Manager')->select();
+        $this->assign('mg_info',$mg_info);
+        
+        //查询全部角色信息
+        $role_arr=D('Role')->getRoleArr();
+        $this->assign('role_arr',$role_arr);
+        //dump($role_arr[1]);
+        
+        $this->assign('mg_info_num',count($mg_info));
+       /*
+        array(3) {
+  [0] => array(5) {
+    ["mg_id"] => string(1) "1"
+    ["mg_name"] => string(5) "admin"
+    ["mg_pwd"] => string(32) "e10adc3949ba59abbe56e057f20f883e"
+    ["mg_time"] => string(10) "1473501831"
+    ["mg_role_id"] => string(1) "1"
+  }
+        * */
+        $this->display();
+    }
+    
+    //修改用户的角色信息等
+    function upd($mg_id){
+    	//1.如果是post提交，则在模型中保存数据
+    	if(!empty($_POST)){
+    	   $rs=D('Manager')->upd($mg_id);
+    	   if(true === $rs){
+    	       $this->success('成功',U('showlist'));
+    	   }else{
+    	       $this->error('失败！'.$rs,U('showlist'));
+    	   }
+    	   die();
+    	}
+    	
+    	
+    	
+    	//2.获取该管理员信息
+        $mg_info=M('Manager')->find($mg_id);
+        /*
+         array(5) {
+  ["mg_id"] => string(1) "2"
+  ["mg_name"] => string(3) "tom"
+  ["mg_pwd"] => string(32) "e10adc3949ba59abbe56e057f20f883e"
+  ["mg_time"] => string(10) "1473500231"
+  ["mg_role_id"] => string(1) "2"
+}
+         * */
+        $this->assign('mg_info',$mg_info);
+        
+        //3.查询全部角色信息
+        $role_arr=D('Role')->getRoleArr();
+        $this->assign('role_arr',$role_arr);
+        
+        $this->display();
+    }
+    
+    
+    //添加管理员
+    function add(){
+        //1.如果是post提交，则在模型中插入数据
+        if(!empty($_POST)){
+            $rs=D('Manager')->addManager();
+           
+           if($rs>0){
+               $this->success('成功',U('showlist'));
+           }else{
+               $this->error('失败！'.$mg->getError() ,U('showlist'));
+           }
+           die();
+        }
+        
+        
+        
+        //2.查询全部角色信息
+        $role_arr=D('Role')->getRoleArr();
+        $this->assign('role_arr',$role_arr);
+        
+        $this->display();
+    }
+    
+    
     
     //空方法
     function _empty(){

@@ -48,6 +48,12 @@ http://seq.dawneve.cc/Index/index.html
 [todo]还差一个用户管理，用来设置用户角色。
 
 >>v0.2.2 完善之前细微差错，css纠正等。
+<?php $v=$role_arr[$vo['mg_role_id']]; echo $v?$v:'超级管理员'?>
+
+>>v0.2.3 管理员列表showlist、添加add、更新upd。
+
+
+
 
 
 

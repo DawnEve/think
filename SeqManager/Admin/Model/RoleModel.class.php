@@ -29,5 +29,24 @@ class RoleModel extends Model {
 	       return $this->getError();
 	   }
 	}
+	
+	//1.获取role二维数组
+	//2.变二维数组为array(1=>'角色1', 2=>'角色2', )
+	function getRoleArr(){
+	   $role_info=$this->select();
+        /*
+array(2) {
+  [0] => array(4) {
+    ["role_id"] => string(1) "1"
+    ["role_name"] => string(6) "老板"
+    ["role_auth_ids"] => string(26) "1,4,5,6,7,3,11,12,13,14,15"
+    ["role_auth_ac"] => string(101) "Goods-showlist,Goods-add,Goods-cate,User-comment,Auth-showlist,Auth-add,Role-showlist,Role-distribute"
+  }
+         * */
+        //变二维数组为array(1=>'角色1', 2=>'角色2', )
+        $role_arr=getOneArr($role_info, 'role_id','role_name');
+        $role_arr[0]='超级管理员';
+        return $role_arr;
+	}
 
 }
