@@ -47,4 +47,6 @@ class ManagerModel extends Model {
         $this->create();
         return $this->add();
 	}
+	
+
 }

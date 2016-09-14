@@ -52,8 +52,9 @@ http://seq.dawneve.cc/Index/index.html
 
 >>v0.2.3 管理员列表showlist、添加add、更新upd。
 
+>>v0.2.4 管理员列表删除del
+ [todo]直接删除，不太好。需要添加js提示确认。
 
-
-
+>>v
 
 

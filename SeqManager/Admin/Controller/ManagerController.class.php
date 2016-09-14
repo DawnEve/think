@@ -206,8 +206,6 @@ array(4) {
            die();
         }
         
-        
-        
         //2.查询全部角色信息
         $role_arr=D('Role')->getRoleArr();
         $this->assign('role_arr',$role_arr);
@@ -215,7 +213,16 @@ array(4) {
         $this->display();
     }
     
-    
+    //删除数据
+    function del($mg_id){
+       $mg=M('Manager');
+       $rs=$mg->delete($mg_id);
+       if($rs>0){
+            $this->success('成功',U('showlist'));
+       }else{
+            $this->error('失败',U('showlist'));
+       }
+    }
     
     //空方法
     function _empty(){

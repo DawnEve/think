@@ -58,7 +58,10 @@
                         <td>{$vo.mg_mod_time|date="Y-m-d H:i:s",###}</td>
                         <td><?php echo $role_arr[$vo['mg_role_id']];?></td>
                         
-                        <td><a href='<?php echo U("Manager/upd",array("mg_id"=>$vo['mg_id'])) ;?>'>修改</a></td>
+                        <td>
+                            <a href='<?php echo U("Manager/upd",array("mg_id"=>$vo['mg_id'])) ;?>'>修改</a> | 
+                            <a href='<?php echo U("Manager/del",array("mg_id"=>$vo['mg_id'])) ;?>'>删除</a>
+                        </td>
                       </tr>
                    </foreach>
                    
