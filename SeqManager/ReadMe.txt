@@ -57,6 +57,7 @@ http://seq.dawneve.cc/Index/index.html
 
 >>v0.2.5 Role/add()
 
+>>v0.2.6 view的细节调整。db中增加：Seq、Oligo
 
 
 
