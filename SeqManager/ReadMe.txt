@@ -59,5 +59,9 @@ http://seq.dawneve.cc/Index/index.html
 
 >>v0.2.6 view的细节调整。db中增加：Seq、Oligo
 
+>>v0.2.7 
+[fix]添加用户时，密码应该使用md5加密。
+
+
 
 

@@ -44,6 +44,7 @@ class ManagerModel extends Model {
 		//如果没有重名，则插入
         $_POST['mg_time']=time();
         $_POST['mg_mod_time']=time();
+        $_POST['mg_pwd']=md5($_POST['mg_pwd']);
         $this->create();
         return $this->add();
 	}
