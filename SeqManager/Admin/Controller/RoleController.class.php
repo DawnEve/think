@@ -66,4 +66,28 @@ array(10) {
   }
          * */
     }
+    
+    
+    //添加角色
+    function add(){
+        //1.如果是post提交，则在模型中插入数据
+        if(!empty($_POST)){
+            $role=D('Role');
+            $role->create();
+            $rs=$role->add();
+           
+           if($rs>0){
+               $this->success('成功!请为该角色分配权限...',U('Role/distribute',array('role_id'=>$rs)));
+           }else{
+               $this->error('失败！'.$role->getError() ,U('showlist'));
+           }
+           exit();
+        }
+        
+        //2.查询全部角色信息
+//        $role_arr=D('Role')->getRoleArr();
+//        $this->assign('role_arr',$role_arr);
+        
+        $this->display();
+    }
 }

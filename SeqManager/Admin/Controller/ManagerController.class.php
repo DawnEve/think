@@ -215,6 +215,11 @@ array(4) {
     
     //删除数据
     function del($mg_id){
+        if(1==$mg_id){
+            $this->error('不允许删除【超级管理员】！',U('showlist'));
+            exit();
+        }
+        //
        $mg=M('Manager');
        $rs=$mg->delete($mg_id);
        if($rs>0){
