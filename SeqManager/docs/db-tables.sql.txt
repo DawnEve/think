@@ -1,0 +1,142 @@
+
+CREATE TABLE `wjl_auth` (
+`auth_id` smallint(6) UNSIGNED NULL AUTO_INCREMENT,
+`auth_name` varchar(30) NOT NULL,
+`auth_pid` smallint(6) NULL,
+`auth_c` varchar(32) NULL,
+`auth_a` varchar(32) NULL,
+`auth_path` varchar(32) NULL,
+`auth_level` tinyint(4) NULL,
+PRIMARY KEY (`auth_id`),
+UNIQUE KEY `auth_name` (`auth_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `wjl_manager` (
+`mg_id` int(11) NOT NULL AUTO_INCREMENT,
+`mg_name` varchar(30) NOT NULL,
+`mg_pwd` varchar(32) NULL,
+`mg_role_id` tinyint(3) NULL,
+`mg_time` int(10) NULL,
+`mg_mod_time` int(10) NULL,
+PRIMARY KEY (`mg_id`),
+UNIQUE KEY `mg_name` (`mg_name`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `wjl_role` (
+`role_id` smallint(6) NULL AUTO_INCREMENT,
+`role_name` varchar(30) NOT NULL,
+`role_auth_ids` varchar(128) NULL,
+`role_auth_ac` text NOT NULL,
+PRIMARY KEY (`role_id`),
+UNIQUE KEY `role_name` (`role_name`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- 前三个表示已经添加过的，后几个表是刚新添加的。
+
+
+CREATE TABLE `wjl_fridge` (
+`f_id` smallint(6) NULL,
+`f_name` varchar(100) NOT NULL,
+`f_place` text NULL,
+`f_note` text NULL,
+`condition` smallint(1) NOT NULL DEFAULT '1',# 正常为1，进回收站为0，回收站内可删除或恢复
+PRIMARY KEY (`f_id`),
+UNIQUE KEY `f_name` (`f_name`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `wjl_box` (
+`box_id` smallint(6) UNSIGNED NULL AUTO_INCREMENT,
+`box_name` varchar(100) NOT NULL,
+`box_place` text NULL,
+`box_note` text NULL,
+`condition` smallint(1) NOT NULL DEFAULT '1',# 正常为1，进回收站为0，回收站内可删除或恢复
+`box_fid` smallint(6) NULL,
+`box_uid` smallint(6) NULL,
+PRIMARY KEY (`box_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `wjl_seq` (
+`seq_id` smallint(6) NULL AUTO_INCREMENT,
+`seq_name` varchar(100) NOT NULL,
+`seq_order_no` varchar(20) NULL,
+`seq_sequence` text NULL,
+`seq_en_site` varchar(20) NULL,
+`note` text NULL,
+`file_ids` varchar(20) NULL,
+`seq_time` int(10) NULL,
+`seq_mod_time` int(10) NULL,
+`cate_id` int(10) NULL,
+`tag_ids` varchar(100) NULL,
+`fridge_id` smallint(6) NULL,
+`box_id` smallint(6) NULL,
+`palce` varchar(20) NULL,
+`condition` smallint(1) NOT NULL DEFAULT '1',# 正常为1，进回收站为0，回收站内可删除或恢复
+`seq_oligo_ids` varchar(20) NULL,
+`seq_uid` smallint(6) NULL,
+PRIMARY KEY (`seq_id`) 
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `wjl_oligo` (
+`oligo_id` smallint(6) NULL AUTO_INCREMENT,
+`oligo_name` varchar(100) NOT NULL,
+`oligo_order_no` varchar(20) NULL,
+`oligo_sequence` text NULL,
+`oligo_en_site` varchar(20) NULL,
+`note` text NULL,
+`file_ids` varchar(20) NULL,
+`oligo_time` int(10) NULL,
+`oligo_mod_time` int(10) NULL,
+`cate_id` int(10) NULL,
+`tag_ids` varchar(100) NULL,
+`fridge_id` smallint(6) NULL,
+`box_id` smallint(6) NULL,
+`palce` varchar(20) NULL,
+`condition` smallint(1) NOT NULL DEFAULT '1',# 正常为1，进回收站为0，回收站内可删除或恢复
+`oligo_uid` smallint(6) NULL,
+PRIMARY KEY (`oligo_id`) 
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `wjl_file` (
+`file_id` smallint(6) NULL,
+`file_name` varchar(100) NOT NULL,
+`file_path` varchar(50) NULL,
+`file_time` int(10) NULL,
+`file_mod_time` int(10) NULL,
+`file_uid` smallint(6) NULL,
+`condition` smallint(1) NOT NULL DEFAULT '1',# 正常为1，进回收站为0，回收站内可删除或恢复
+PRIMARY KEY (`file_id`),
+UNIQUE KEY `file_path` (`file_path`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `wjl_cate` (
+`cate_id` smallint(6) NULL AUTO_INCREMENT,
+`cate_name` varchar(100) NOT NULL,
+`cate_uid` smallint(6) NULL,
+`condition` smallint(1) NOT NULL DEFAULT '1',# 正常为1，进回收站为0，回收站内可删除或恢复
+PRIMARY KEY (`cate_id`) 
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `wjl_tag` (
+`tag_id` smallint(6) NULL AUTO_INCREMENT,
+`tag_name` varchar(100) NOT NULL,
+`tag_uid` smallint(6) NULL,
+`condition` smallint(1) NOT NULL DEFAULT '1',# 正常为1，进回收站为0，回收站内可删除或恢复
+PRIMARY KEY (`tag_id`) 
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

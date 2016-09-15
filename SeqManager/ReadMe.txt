@@ -62,6 +62,29 @@ http://seq.dawneve.cc/Index/index.html
 >>v0.2.7 
 [fix]添加用户时，密码应该使用md5加密。
 
+===========================================
+>>v0.2.8 添加数据表：
+用户部分：
+    wjl_auth
+    wjl_role
+    wjl_manager
+分类部分：
+    wjl_cate
+    wjl_tag
+保存位置部分：
+    wjl_fridge
+    wjl_box
+核心序列信息：
+    wjl_seq
+    wjl_oligo
+    wjl_file
+
+图纸见：docs/db-tables.png
+sql语句见：docs/db-tables.txt
+===========================================
+
+
+
 
 
 
