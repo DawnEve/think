@@ -29,7 +29,6 @@ return array(
 	'DB_CHARSET'=> 'utf8', // 字符集
 	'DB_DEBUG'  =>  TRUE, // 数据库调试模式 开启后可以记录SQL日志
  
- 
 	
 	
 	//修改键值对名称：模块m、控制器c、操作a
@@ -37,4 +36,8 @@ return array(
 	//'VAR_MODULE'=>'mm',
 	//'VAR_CONTROLLER'=>'cc',
 	//'VAR_ACTION'=>'aa',
+	
+    // 预先加载的标签库
+    //'TAGLIB_PRE_LOAD' => 'Cx,Home\\TagLib\\Mytag',
+    //'TAGLIB_BUILD_IN' => 'Home\TagLib\Mytag',// 定义成内置标签
 );

@@ -5,7 +5,7 @@
 
 F:\xampp\apache\conf\extra
 
-
+http://seq.dawneve.cc
 
 >>v0.1.0 定义模块为当前文件，定义vhosts解析：
 

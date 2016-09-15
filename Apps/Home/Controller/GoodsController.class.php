@@ -157,5 +157,20 @@ array(9) {
     function lang($lang){
         echo L('');
     }
+    
+    
+    //自定义标签库
+    function tag2(){      
+        $data=array(
+            1=>'股东',
+            2=>'老板',
+            30=>'经理',
+            4=>'员工',
+        );
+        $this->assign('data',$data);
+        //选择的部分
+        $this->assign('sel',4);
+        $this->display();
+    }
 	
 }
