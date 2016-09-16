@@ -81,6 +81,7 @@ class CateController extends AdminController {
        //$rs=$mg->delete($mg_id);//彻底删除
        $rs=$md->save(array(
             'cate_id'=>$id,
+            'cate_mod_time'=>time(),
             'condition'=>0,//0 进入回收站
        ));
        if($rs>0){

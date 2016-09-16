@@ -44,6 +44,7 @@
                         <td>No.</td>
                         <td>表名</td>
                         <td>标题</td>
+                        <td>最后操作日期</td>
                         <td>操作</td>
                     </tr>
                     
@@ -53,6 +54,7 @@
                         <td>{$tb_name}</td>
                         
                         <td><?php echo $vo[$prefix.'_name'];?></td>
+                        <td><?php echo date('Y-m-d H:i:s',$vo[$prefix.'_mod_time']);?></td>
                         
                         <td>
                             <a href='<?php echo U("Recycle/restore",array("tb_name"=>$tb_name,'id'=>$vo[$prefix.'_id'])) ;?>'>还原条目</a> | 

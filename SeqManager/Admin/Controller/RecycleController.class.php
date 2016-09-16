@@ -15,8 +15,9 @@ class RecycleController extends AdminController {
     		$this->assign('prefix',$prefix);
     		//删除的数据
     		$data[$tb_name]=M($tb_name)->where('`condition`=0')->order($prefix.'_mod_time DESC')->select();
-    		$this->assign('data',$data['box']);
-//    		dump($data['box']);
+    		$this->assign('data',$data[$tb_name]);
+    		//dump($data['box']);
+
             //1.如果具体表格，则使用模板2
     		$this->display(ACTION_NAME . '2');
     	}else{
@@ -52,6 +53,7 @@ class RecycleController extends AdminController {
         $m=M($tb_name);
         $data=array(
             $prefix.'_id'=>$id,
+            $prefix.'_mod_time'=>time(),
             'condition'=>1,
         );
         if($m->save($data)){

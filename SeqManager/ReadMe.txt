@@ -131,4 +131,7 @@ $mg_info=M('Manager')->where('`condition`=1')->select();
     </td>
     
 >>v0.3.9 Cate/upd()  Cate/del()  
->>
+    但是回收站只能看到统计数字，看不到明细！！
+>>v0.3.9 纠正Recycle控制器小错误，模板添加最后修改时间。
+
+
