@@ -5,7 +5,7 @@ use Admin\Common\AdminController;
 class RoleController extends AdminController {
     //显示角色列表
     public function showlist(){
-        $role_info=M('Role')->select(); dump($role_info);
+        $role_info=M('Role')->select();
         $this->assign('role_info',$role_info);
         $this->assign('role_info_num',count($role_info));
         $this->display();

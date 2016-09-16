@@ -21,7 +21,7 @@ alter table wjl_manager add `condition` smallint(1) NOT NULL DEFAULT '1';# æ­£å¸
 CREATE TABLE `wjl_role` (
 `role_id` smallint(6) NULL AUTO_INCREMENT,
 `role_name` varchar(30) NOT NULL,
-`role_auth_ids` varchar(128) NULL,
+`role_auth_ids` text NULL,
 `role_auth_ac` text NOT NULL,
 PRIMARY KEY (`role_id`),
 UNIQUE KEY `role_name` (`role_name`)

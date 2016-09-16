@@ -21,8 +21,8 @@ $r2=mysql_fetch_array($result);
                                    width=260></td>
                 <td style="font-weight: bold; color: #fff; padding-top: 20px" 
                     align=middle>当前用户：{$user.mg_name} &nbsp;&nbsp; <a style="color: #fff" 
-                                                        href="#" 
-                                                        target=main>修改口令</a> &nbsp;&nbsp; <a style="color: #fff" 
+                                                        href="{:U('resetMyPwd')}" 
+                                                        target='right'>修改口令</a> | <a style="color: #fff" 
                                                         onclick="if (confirm('确定要退出吗？')) return true; else return false;" 
                                                         href="{:U('logout')}" target=_top>退出系统</a> 
                 </td>

@@ -18,6 +18,7 @@ class AdminController extends Controller {
             'Manager-left',
             'Manager-right',
             'Manager-logout',
+            'Manager-resetMyPwd',
         ))) return;
         
         //3.否则，进行验证

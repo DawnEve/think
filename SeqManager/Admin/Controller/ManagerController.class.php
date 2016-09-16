@@ -228,9 +228,13 @@ array(4) {
        }
     }
     
-    function test(){
-        //echo md5('admin');
-        //echo time();
-        echo get_client_ip();//202.196.120.202
+    //重置密码
+    function resetPwd($mg_id){
+        getName();
+        echo $mg_id;
+    }
+    //重置自己的密码
+    function resetMyPwd(){
+        getName();
     }
 }

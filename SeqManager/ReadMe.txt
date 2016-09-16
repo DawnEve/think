@@ -79,12 +79,19 @@ http://seq.dawneve.cc/Index/index.html
     wjl_oligo
     wjl_file
 
-图纸见：docs/db-tables.png
-sql语句见：docs/db-tables.txt
+图纸见：docs/db/db-tables.png
+sql语句见：docs/db/db-tables.txt
 ===========================================
 >>v0.2.9 系统分解：分析功能和方法
 
 >>v0.3.0 系统框架基本完成！
+
+>>v0.3.1 auth数据添加完毕
+添加的权限数据在 docs/db/wjl_auth.sql.txt 
+
+>>v0.3.2 控制器内方法的微调。
+增加修改密码、修改自自密码两个选项。
+调整role表中的role_auth_ids为text类型。
 
 
 
