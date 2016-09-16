@@ -135,7 +135,7 @@ array(4) {
 
     //列表
     function showlist(){
-        $mg_info=M('Manager')->select();
+        $mg_info=M('Manager')->where('`condition`=1')->select();
         $this->assign('mg_info',$mg_info);
         
         //查询全部角色信息
@@ -216,13 +216,18 @@ array(4) {
     
     //删除数据
     function del($mg_id){
-        if(1==$mg_id){
+       if(1==$mg_id){
             $this->error('不允许删除【超级管理员】！',U('showlist'));
             exit();
-        }
-        //
+       }
+       
+       //放到回收站
        $mg=M('Manager');
-       $rs=$mg->delete($mg_id);
+       //$rs=$mg->delete($mg_id);//彻底删除
+       $rs=$mg->save(array(
+            'mg_id'=>$mg_id,
+            'condition'=>0,//0 进入回收站
+       ));
        if($rs>0){
             $this->success('成功',U('showlist'));
        }else{

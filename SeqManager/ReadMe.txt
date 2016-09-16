@@ -108,5 +108,7 @@ right.html
 */
 ?>
 
+>>v0.3.4 Manager/del() 仅仅是condition=0
+
 
 

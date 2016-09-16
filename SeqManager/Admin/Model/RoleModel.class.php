@@ -33,7 +33,7 @@ class RoleModel extends Model {
 	//1.获取role二维数组
 	//2.变二维数组为array(1=>'角色1', 2=>'角色2', )
 	function getRoleArr(){
-	   $role_info=$this->select();
+	   $role_info=$this->where('`condition`=1')->select();
         /*
 array(2) {
   [0] => array(4) {

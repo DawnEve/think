@@ -4,7 +4,8 @@ use Admin\Common\AdminController;
 
 class RecycleController extends AdminController {
     public function showlist(){
-        getName();
+        //getName();
+        $this->display();
     }
     
     //TODO
