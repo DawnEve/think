@@ -21,17 +21,28 @@ class CateController extends AdminController {
     public function add(){
         //1.如果有post数据
         if(!empty($_POST)){
+           //获取数据
+           $user=session('user');
+           $cate_name=I('cate_name');
+           
            //保存数据
            $md=D('Cate');
-           $user=session('user');// dump($user);die();//debug
+           
+           //如果同名条目已经存在，则添加失败
+           $rs_exist = $md->where("cate_name= '".$cate_name."'")->select();
+           if(!empty($rs_exist)){
+               $this->error('添加失败！该分类已经存在.', U());
+               exit();
+           }
+           //拼接数据
            $data=array(
-                'cate_name'=>I('cate_name'),
+                'cate_name'=>$cate_name,
                 'cate_uid'=>$user['mg_id'],
                 'condition'=>1,
                 'cate_time'=>time(),
                 'cate_mod_time'=>time(),
            );
-           $wjl=$md->create($data);
+           $md->create($data);
            
            $rs=$md->add();
            //判断结果

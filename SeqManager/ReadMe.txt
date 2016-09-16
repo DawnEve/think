@@ -134,4 +134,7 @@ $mg_info=M('Manager')->where('`condition`=1')->select();
     但是回收站只能看到统计数字，看不到明细！！
 >>v0.3.9 纠正Recycle控制器小错误，模板添加最后修改时间。
 
+[bug]能重复添加相同标签 Cate/add();
+>>v0.4.0 修复刚才的bug。保证Cate/add()不会重名。
+    
 
