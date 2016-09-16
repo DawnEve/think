@@ -130,4 +130,5 @@ $mg_info=M('Manager')->where('`condition`=1')->select();
         <a href='<?php echo U("del",array('id'=>$vo['cate_id'])) ;?>'>删除</a> 
     </td>
     
-    
+>>v0.3.9 Cate/upd()  Cate/del()  
+>>
