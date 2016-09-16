@@ -4,7 +4,12 @@ use Admin\Common\AdminController;
 
 class CateController extends AdminController {
     public function showlist(){
-        getName();
+    	$user=session('user');
+    	$md=M('Cate');
+    	$info=$md->where('`condition`=1 and cate_uid='.$user['mg_id'])->select(); 
+        $this->assign('info',$info);
+        $this->assign('info_num',count($info));
+        $this->display();
     }
     
     /*

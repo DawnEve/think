@@ -119,3 +119,15 @@ $mg_info=M('Manager')->where('`condition`=1')->select();
 >>v0.3.6 Recycle/restore() Recycle/delete() 还原条目 彻底删除
 
 >>v0.3.7 Cate/add() 需要从简单的入手，复杂的就会好搞一点。
+>>v0.3.8 Cate/showlist() 
+    <td>
+        <a href='<?php echo U("Recycle/restore",array("tb_name"=>$tb_name,'id'=>$vo[$prefix.'_id'])) ;?>'>还原条目</a> | 
+        <a href='<?php echo U("Recycle/delete",array("tb_name"=>$tb_name,'id'=>$vo[$prefix.'_id'])) ;?>'>彻底删除</a>
+    </td>
+    
+    <td>
+        <a href='<?php echo U("upd",array('id'=>$vo['cate_id'])) ;?>'>修改</a> | 
+        <a href='<?php echo U("del",array('id'=>$vo['cate_id'])) ;?>'>删除</a> 
+    </td>
+    
+    
