@@ -21,7 +21,7 @@ class AdminController extends Controller {
         ))) return;
         
         //3.否则，进行验证
-        $sql='select role_auth_ac from sw_manager as a, sw_role as b 
+        $sql='select role_auth_ac from wjl_manager as a, wjl_role as b 
             where a.mg_role_id=b.role_id and a.mg_id='.$uid;
         $auths=M()->query($sql);
         //当前url是否在权限内
@@ -35,6 +35,6 @@ class AdminController extends Controller {
     }
     
     function _empty(){
-        echo CONTROLLER_NAME.'/'.ACTION_NAME . ' is Invalid!';
+        echo CONTROLLER_NAME.'/'.ACTION_NAME . ' is Invalid! Please contace 王军亮 for help.';
     }
 }

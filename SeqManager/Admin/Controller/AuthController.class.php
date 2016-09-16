@@ -49,9 +49,23 @@ class AuthController extends AdminController {
         $this->display();
     }
     
+    //todo
+    public function upd(){
+        getName();
+    }
+    
+    //todo
+    public function del(){
+        getName();
+    }
+    
+    
+    /**
+     * 私有方法，只能内部使用
     //获取Auth_info数据
     //分别用于showlist显示，和add下拉框(level<2)
-    function getInfo($auth_level=false){
+     */
+    private function getInfo($auth_level=false){
     	$auth=M('Auth');
         //从属关系使用order全路径表示 
         if(false === $auth_level){

@@ -82,9 +82,9 @@ http://seq.dawneve.cc/Index/index.html
 图纸见：docs/db-tables.png
 sql语句见：docs/db-tables.txt
 ===========================================
+>>v0.2.9 系统分解：分析功能和方法
 
-
-
+>>v0.3.0 系统框架基本完成！
 
 
 

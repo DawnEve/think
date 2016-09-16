@@ -2,7 +2,7 @@
 namespace Admin\Controller;
 use Admin\Common\AdminController;
 
-class ManagerController extends AdminController {
+class TestController extends AdminController {
 	//首页 【已经不需要了[useless]】
     public function index(){
         //首页显示主控界面

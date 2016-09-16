@@ -3,9 +3,9 @@ namespace Admin\Controller;
 use Admin\Common\AdminController;
 
 class RoleController extends AdminController {
-	//显示角色列表
+    //显示角色列表
     public function showlist(){
-        $role_info=M('Role')->select();
+        $role_info=M('Role')->select(); dump($role_info);
         $this->assign('role_info',$role_info);
         $this->assign('role_info_num',count($role_info));
         $this->display();
@@ -13,25 +13,25 @@ class RoleController extends AdminController {
     
     //显示角色的权限
     function distribute($role_id=-1){
-    	//0.0如果没有指定role_id，则跳转到showlist页面
-    	if($role_id<=0){
-    	   $this->redirect('showlist','',2,'未指定对象错误！请先指定操作对象，2秒后跳转...');
-    	}
-    	
-    	//0.1如果是提交数据
-    	if(!empty($_POST)){
-    	   //0.2调用模型中的方法，保存权限
-    	   $role=D('Role');
-    	   $rs=$role->saveAuth(I('auth_id'),$role_id);
-    	   if($rs===true){
-    	       //跳转到上一页
-    	       $this->success('分配权限成功',U('showlist'));
-    	   }else{
-    	       $this->success('分配权限失败' .dump($rs),U('showlist'));
-    	   }
-    	   exit();
-    	}
-    	
+        //0.0如果没有指定role_id，则跳转到showlist页面
+        if($role_id<=0){
+           $this->redirect('showlist','',2,'未指定对象错误！请先指定操作对象，2秒后跳转...');
+        }
+        
+        //0.1如果是提交数据
+        if(!empty($_POST)){
+           //0.2调用模型中的方法，保存权限
+           $role=D('Role');
+           $rs=$role->saveAuth(I('auth_id'),$role_id);
+           if($rs===true){
+               //跳转到上一页
+               $this->success('分配权限成功',U('showlist'));
+           }else{
+               $this->success('分配权限失败' .dump($rs),U('showlist'));
+           }
+           exit();
+        }
+        
         //1.根据role_id查询对应的角色名字；
         $rinfo=D('Role')->getByRole_id($role_id);
         $this->assign('role_name', $rinfo['role_name']);
@@ -89,5 +89,15 @@ array(10) {
 //        $this->assign('role_arr',$role_arr);
         
         $this->display();
+    }
+    
+    //TODO
+    public function upd(){
+        getName();
+    }
+    
+    //TODO
+    public function del(){
+        getName();
     }
 }
