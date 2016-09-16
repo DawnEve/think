@@ -116,5 +116,5 @@ $mg_info=M('Manager')->where('`condition`=1')->select();
 
 >>v0.3.5 Recycle/showlist() 两个视图，一个是统计，一个是明细。
 
-
+>>v0.3.6 Recycle/restore() Recycle/delete() 还原条目 彻底删除
 

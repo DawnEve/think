@@ -39,15 +39,52 @@ class RecycleController extends AdminController {
     }
     
     
-    //TODO
+    //还原条目
     public function restore($tb_name,$id){
-        //getName();
-        echo $tb_name.'-'.$id;
+    	if(empty($tb_name) or empty($id)){
+    	   die('Invalid Parameter');
+    	}
+    	//获取数据
+        $tables=$this->getTables();
+        $prefix=$tables[$tb_name];
+        
+        //修改condition=1
+        $m=M($tb_name);
+        $data=array(
+            $prefix.'_id'=>$id,
+            'condition'=>1,
+        );
+        if($m->save($data)){
+            $this->success('成功',U('showlist'));
+        }else{
+            $this->success('失败' . $m->getError(),U('showlist'));
+        }
     }
     
-    //TODO
+    //彻底删除
     public function delete($tb_name,$id){
-        echo $tb_name.'-'.$id;
+        if(empty($tb_name) or empty($id)){
+           die('Invalid Parameter');
+        }
+        //获取数据
+        $tables=$this->getTables();
+        $prefix=$tables[$tb_name];
+        
+        //如果不是condition=0，则直接返回
+        $m=M($tb_name);
+        $con=$m->where($prefix.'_id='.$id)->getField('condition');
+        if($con!=0){
+            $this->error('放入回收站的条目才能删除！',U('showlist'));
+            die();
+        }
+        
+        //已经放到回收站，则可以删除了
+        if($m->delete($id)){
+            $this->success('成功',U('showlist'));
+        }else{
+            $this->success('失败' . $m->getError(),U('showlist'));
+        }
+        
     }
     
     /*
