@@ -46,17 +46,18 @@ UNIQUE KEY `mg_name` (`mg_name`)
 
 -- 前三个表示已经添加过的，后几个表是刚新添加的。
 
-
+DROP TABLE IF EXISTS `wjl_fridge`;
 CREATE TABLE `wjl_fridge` (
 `fr_id` smallint(6) NULL,
 `fr_name` varchar(100) NOT NULL,
 `fr_place` text NULL,
 `fr_note` text NULL,
+`fr_uid` smallint(6) NULL,
 `condition` smallint(1) NOT NULL DEFAULT '1',# 正常为1，进回收站为0，回收站内可删除或恢复
 `fr_time` int(10) NULL,
 `fr_mod_time` int(10) NULL,
 PRIMARY KEY (`fr_id`),
-UNIQUE KEY `f_name` (`fr_name`)
+UNIQUE KEY `fr_name` (`fr_name`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

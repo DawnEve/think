@@ -109,6 +109,12 @@ right.html
 ?>
 
 >>v0.3.4 Manager/del() 仅仅是condition=0
+$mg_info=M('Manager')->where('`condition`=1')->select();
+
+<td>{$vo.mg_time|date="Y-m-d H:i:s",###}</td>
+<td>{$vo.mg_mod_time|date="Y-m-d H:i:s",###}</td>
+
+>>v0.3.5 Recycle/showlist() 两个视图，一个是统计，一个是明细。
 
 
 
