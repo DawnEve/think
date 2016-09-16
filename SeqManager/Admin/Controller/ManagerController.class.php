@@ -73,15 +73,17 @@ array(4) {
     function right(){
     	$user = session('user');
     	if(1==$user['mg_id']){
-    		  $role_name='超级管理员';
+    		$role_name='超级管理员';
     	}else{
 	    	$role_id = $user['mg_role_id'];
 	    	$role_name=M('Role')->where('role_id='.$role_id)->getField('role_name');
     	}
+    	$user_new=M('Manager')->find($user['mg_id']);
+    	
     	//dump($role_name);
     	//dump(session('user'));
     	$this->assign('role_name',$role_name);
-    	$this->assign('user',session('user'));
+    	$this->assign('user',$user_new);
         $this->display('right');
     }
     
@@ -233,8 +235,62 @@ array(4) {
         getName();
         echo $mg_id;
     }
-    //重置自己的密码
+    
+    /**
+     * 重置自己的密码
+     * 
+     * */
     function resetMyPwd(){
-        getName();
+        $user=session('user');
+    	//0.1如果是post提交，
+    	if(empty($user['mg_id'])){
+    	   $this->error('请登录后操作！',U('login'));
+    	   die();
+    	}
+    	if(!empty($_POST)){
+    	    $mg=M('Manager');
+	        $pwd_in_db=$mg->where('mg_id='.$user['mg_id'])->getField('mg_pwd');
+	        $old_mg_pwd=md5(I('old_mg_pwd'));//旧密码
+	        $mg_pwd=md5(I('mg_pwd'));//新密码
+	        //1.验证旧密码输入是正确的
+	        if($old_mg_pwd == $pwd_in_db){
+	          //2.更新新密码 
+	           $_POST['mg_id']=$user['mg_id'];
+	           $_POST['mg_pwd']=$mg_pwd;
+	           $_POST['mg_mod_time']=time();
+	           $mg->create();
+	           
+	           if($mg->save()){
+	               $this->success('密码修改成功！',U('right'));
+	           }else{
+	               $this->error('密码修改失败-.-'.$mg->getError(),U('right'));
+	           }
+	           die();
+	        }else{
+	           $this->error('输入的旧密码不正确！请重试。',U());
+	        }
+	        die();
+    	}else{
+    	   $this->display();
+    	}
+    	
+    	
+        
+        /*
+         array(1) {
+  ["user"] => array(6) {
+    ["mg_id"] => string(1) "5"
+    ["mg_name"] => string(9) "王军亮"
+    ["mg_role_id"] => string(1) "2"
+    ["mg_time"] => string(10) "1473822134"
+    ["mg_mod_time"] => string(10) "1474010238"
+    ["condition"] => string(1) "1"
+  }
+}
+         * */
+
+        
+
+        
     }
 }

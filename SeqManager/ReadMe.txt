@@ -92,6 +92,21 @@ sql语句见：docs/db/db-tables.txt
 >>v0.3.2 控制器内方法的微调。
 增加修改密码、修改自自密码两个选项。
 调整role表中的role_auth_ids为text类型。
+修改密码为不需要权限验证的。
+
+>>v0.3.3 Manager/resetMyPwd() 修改自己的密码；
+right.html
+删掉老模板中的无用php代码。
+<?php
+/*
+    include_once("checksession.php");
+    include_once("../db.php");
+    $query = "select * from beian_manage where username='$_SESSION[adminusername2]' ";
+    $result = mysql_db_query($DataBase, $query); 
+    $r2=mysql_fetch_array($result);
+    date_default_timezone_set('PRC');
+*/
+?>
 
 
 

@@ -2,14 +2,14 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <title>管理员修改</title>
+        <title>修改我的密码</title>
         <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet" />
         <link href="{$Think.const.CSS_URL}/mine.css?time=20160913" type="text/css" rel="stylesheet" />
     </head>
     <body>
        <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
             <tr height=28>
-                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：系统管理->管理员修改</td>
+                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：用户管理->修改我的密码</td>
             </tr>
             <tr>
                 <td bgcolor=#b1ceef height=1></td></tr>
@@ -23,23 +23,13 @@
             <table class="table_a" border="1" width="100%">
                 
                 <tr>
-                    <td>名称:</td>
-                    <td><input type=text name='mg_name' size=50 value="{$mg_info.mg_name}"></td>
+                    <td>旧密码:</td>
+                    <td><input type=text name='old_mg_pwd' size=50 ></td>
                 </tr>
-                <tr>
-                    <td>角色:</td>
-                    <td>
-                       <select name=mg_role_id style='width:200px;'>
-<?php
-foreach($role_arr as $k=>$v){
-    $selected='';
-    if($mg_info['mg_role_id']==$k){
-        $selected='selected';
-    }                            
-    echo "<option ".$selected." value ='".$k."'>$v</option>\n"; 
-}?>
-                        </select>
-                    </td>
+                
+                  <tr>
+                    <td>新密码:</td>
+                    <td><input type=text name='mg_pwd' size=50 ></td>
                 </tr>
                 
                 <tr>
