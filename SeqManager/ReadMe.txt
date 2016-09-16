@@ -118,3 +118,4 @@ $mg_info=M('Manager')->where('`condition`=1')->select();
 
 >>v0.3.6 Recycle/restore() Recycle/delete() 还原条目 彻底删除
 
+>>v0.3.7 Cate/add() 需要从简单的入手，复杂的就会好搞一点。
