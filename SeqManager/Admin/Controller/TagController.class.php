@@ -29,9 +29,9 @@ class TagController extends AdminController {
            $md=D('Tag');
            
            //如果同名条目已经存在，则添加失败
-           $rs_exist = $md->where("tag_name= '".$tag_name."'")->select();
+           $rs_exist = $md->where("tag_uid = $uid AND tag_name= '".$tag_name."'")->select();
            if(!empty($rs_exist)){
-               $this->error('添加失败！该标签已经存在.', U());
+               $this->error('添加失败！该标签已经存在.(可能在回收站)', U());
                exit();
            }
            //拼接数据

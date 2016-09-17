@@ -29,9 +29,10 @@ class CateController extends AdminController {
            $md=D('Cate');
            
            //如果同名条目已经存在，则添加失败
-           $rs_exist = $md->where("cate_name= '".$cate_name."'")->select();
+           $uid=$user['mg_id'];
+           $rs_exist = $md->where("cate_uid = $uid AND cate_name= '".$cate_name."'")->select();
            if(!empty($rs_exist)){
-               $this->error('添加失败！该分类已经存在.', U());
+               $this->error('添加失败！该分类已经存在.(可能在回收站)', U());
                exit();
            }
            //拼接数据

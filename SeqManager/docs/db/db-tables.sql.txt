@@ -48,7 +48,7 @@ UNIQUE KEY `mg_name` (`mg_name`)
 
 DROP TABLE IF EXISTS `wjl_fridge`;
 CREATE TABLE `wjl_fridge` (
-`fr_id` smallint(6) NULL,
+`fr_id` smallint(6) NOT NULL AUTO_INCREMENT,
 `fr_name` varchar(100) NOT NULL,
 `fr_place` text NULL,
 `fr_note` text NULL,
@@ -57,8 +57,11 @@ CREATE TABLE `wjl_fridge` (
 `fr_time` int(10) NULL,
 `fr_mod_time` int(10) NULL,
 PRIMARY KEY (`fr_id`),
-UNIQUE KEY `fr_name` (`fr_name`)
+CONSTRAINT un_code UNIQUE (`fr_name`,`fr_uid`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- unique key : http://www.w3school.com.cn/sql/sql_unique.asp
+
 
 
 
