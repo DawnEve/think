@@ -2,14 +2,17 @@
 namespace Admin\Controller;
 use Admin\Common\AdminController;
 
-class RecycleController extends AdminController {
+class SearchController extends AdminController {
     public function index(){
-        getName();
+        //getName();
+        
+        
+        $this->display();
     }
     
     //TODO
     public function advSeach(){
-        getName();
+        //getName();
     }
     
 }
