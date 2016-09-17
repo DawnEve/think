@@ -96,9 +96,9 @@ class CateController extends AdminController {
             'condition'=>0,//0 进入回收站
        ));
        if($rs>0){
-            $this->success('成功',U('showlist'));
+            $this->success('成功放到回收站',U('showlist'));
        }else{
-            $this->error('失败',U('showlist'));
+            $this->error('失败'.$md->getError(), U('showlist'));
        }
     }
     
