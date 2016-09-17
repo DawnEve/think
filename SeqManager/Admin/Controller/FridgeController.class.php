@@ -50,7 +50,8 @@ class FridgeController extends AdminController {
                 'fr_mod_time'=>time(),
            );
                       
-           $md->create($data);
+           $w=$md->create($data);
+           dump($w);die();
            
            $rs=$md->add();
            //判断结果

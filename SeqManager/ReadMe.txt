@@ -173,10 +173,12 @@ _______________________________________________
     (1)只有admin用户可以增删改冰箱，普通用户只能看到冰箱列表。视图中用if mg_id==1实现。回收站中不再显示fridge。
     (2)数据表 wjl_box / cate / tag 加入了UNIQUE约束。
 
+>>v0.4.4 box盒子: add(), showlist(), del(), upd()
+    showlist()要显示具体某个冰箱中的盒子，
 
+    <html:select name='role_name' options="data" selected="sel" />
 
-
-
+[bug]upd()的时候，名字不能重复！
 
 
 
