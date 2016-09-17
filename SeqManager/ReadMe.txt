@@ -140,9 +140,49 @@ $mg_info=M('Manager')->where('`condition`=1')->select();
 ==============================
 >>v0.4.1 标签控制器  Tag/add(), Tag/showlist(), Tag/del(),  Tag/upd() 
 >>v0.4.2 冰箱控制器 add(), showlist(), del(), upd()
-[bug]发现冰箱不能共享
+[fix][bug]发现冰箱不能共享。
+    >不需要共享，冰箱是超级管理员添加、删除、修改的。普通研究生只能查看冰箱。
+
 [bug]发现数据表unique key用的不对，应该是name和uid合成的。
-    -- unique key : http://www.w3school.com.cn/sql/sql_unique.asp
+
+http://dev.mysql.com/downloads/workbench/
+
+_______________________________________________
+    SQL UNIQUE 约束-- unique key : http://www.w3school.com.cn/sql/sql_unique.asp
+UNIQUE 约束唯一标识数据库表中的每条记录。
+UNIQUE 和 PRIMARY KEY 约束均为列或列集合提供了唯一性的保证。
+PRIMARY KEY 拥有自动定义的 UNIQUE 约束。
+请注意，每个表可以有多个 UNIQUE 约束，但是每个表只能有一个 PRIMARY KEY 约束。
+
+(1)创建时添加        CONSTRAINT un_code UNIQUE (`fr_name`,`fr_uid`)
+        
+    修改3个用户表之外其余的数据表的key？wjl_box / cate / tag
+(2)创建后添加
+ALTER TABLE wjl_cate
+ADD CONSTRAINT uc_code UNIQUE (`cate_name`,`cate_uid`);
+
+ALTER TABLE wjl_tag
+ADD CONSTRAINT uc_code UNIQUE (`tag_name`,`tag_uid`);
+
+(3)删除
+ALTER TABLE Persons
+DROP INDEX uc_PersonID
+_______________________________________________
     
-    
+>>v0.4.3 fix[0.4.3]的2个bug。
+    (1)只有admin用户可以增删改冰箱，普通用户只能看到冰箱列表。视图中用if mg_id==1实现。回收站中不再显示fridge。
+    (2)数据表 wjl_box / cate / tag 加入了UNIQUE约束。
+
+
+
+
+
+
+
+
+
+
+
+
+
 

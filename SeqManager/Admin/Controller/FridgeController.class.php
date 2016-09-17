@@ -5,8 +5,11 @@ use Admin\Common\AdminController;
 class FridgeController extends AdminController {
     public function showlist(){
         $user=session('user');
+        $this->assign('uid',$user['mg_id']);
+        
         $md=M('Fridge');
-        $info=$md->where('`condition`=1 and fr_uid='.$user['mg_id'])->select(); 
+//        $info=$md->where('`condition`=1 and fr_uid='.$user['mg_id'])->select(); 
+        $info=$md->where('`condition`=1 and fr_uid=1')->select(); 
         $this->assign('info',$info);
         $this->assign('info_num',count($info));
         $this->display();

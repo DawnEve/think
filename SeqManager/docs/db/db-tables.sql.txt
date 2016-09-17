@@ -64,7 +64,7 @@ CONSTRAINT un_code UNIQUE (`fr_name`,`fr_uid`)
 
 
 
-
+DROP TABLE IF EXISTS `wjl_box`;
 CREATE TABLE `wjl_box` (
 `box_id` smallint(6) UNSIGNED NULL AUTO_INCREMENT,
 `box_name` varchar(100) NOT NULL,
@@ -75,7 +75,8 @@ CREATE TABLE `wjl_box` (
 `box_uid` smallint(6) NULL,
 `box_time` int(10) NULL,
 `box_mod_time` int(10) NULL,
-PRIMARY KEY (`box_id`)
+PRIMARY KEY (`box_id`),
+CONSTRAINT un_code UNIQUE (`box_name`,`box_uid`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -92,6 +93,10 @@ CREATE TABLE `wjl_cate` (
 PRIMARY KEY (`cate_id`) 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE wjl_cate
+ADD CONSTRAINT uc_code UNIQUE (`cate_name`,`cate_uid`);
+
+
 
 DROP TABLE IF EXISTS `wjl_tag`;
 CREATE TABLE `wjl_tag` (
@@ -104,6 +109,8 @@ CREATE TABLE `wjl_tag` (
 PRIMARY KEY (`tag_id`) 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE wjl_tag
+ADD CONSTRAINT uc_code UNIQUE (`tag_name`,`tag_uid`);
 
 
 

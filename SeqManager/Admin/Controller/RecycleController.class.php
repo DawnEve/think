@@ -93,12 +93,21 @@ class RecycleController extends AdminController {
      * 数据表名字和表前缀
      * */
     private function getTables(){
-        return array(
+    	$data=array(
             'seq'=>'seq','oligo'=>'oligo','file'=>'file',
             'cate'=>'cate','tag'=>'tag',
-            'fridge'=>'fr','box'=>'box',
-            //'auth'=>'auth','role'=>'role','manager'=>'manager',
+            'box'=>'box',
         );
+        //如果是管理员，则回收站有更多东西。
+        $user=session('user');
+        if($user['mg_id']==1){
+            $data2=array(
+                'fridge'=>'fr',
+                'auth'=>'auth','role'=>'role','manager'=>'manager',
+            );
+            $data=array_merge($data,$data2);
+        }
+        return $data;
     }
     
 }
