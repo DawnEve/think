@@ -12,4 +12,9 @@ class HelpController extends AdminController {
         getName();
         echo '/'.$id;
     }
+    
+    //关于
+    public function about(){
+        $this->display();
+    }
 }

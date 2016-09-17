@@ -3,18 +3,26 @@ namespace Admin\Controller;
 use Admin\Common\AdminController;
 
 class BoxController extends AdminController {
-    public function showlist(){
-        $user=session('user');
+    public function showlist($fr_id=0){
+        //1.获取用户信息
+    	$user=session('user');
         $this->assign('uid',$user['mg_id']);
-        
-        $md=M('Box');
-        $info=$md->where('`condition`=1 and box_uid='.$user['mg_id'])->select(); 
-        $this->assign('info',$info);
-        $this->assign('info_num',count($info));
-        
-        //从Logic层获取冰箱数据列表array(1=>'1号冰箱',2=>'2号冰箱');
+        //2.从Logic层获取冰箱数据列表array(1=>'1号冰箱',2=>'2号冰箱');
         $fr_data=A('Fridge','Logic')->getList();
         $this->assign('fr_data',$fr_data);
+        
+        $md=M('Box');
+    	if($fr_id>0){
+        	//3.1.如果有冰箱id，则仅显示该id号冰箱里的盒子，
+            $info=$md->where('`condition`=1 and box_uid='.$user['mg_id'].' AND box_fr_id='.$fr_id)->select(); 
+    	}else{
+	    	//3.2.如果没有冰箱id，则显示全部信息
+	        $info=$md->where('`condition`=1 and box_uid='.$user['mg_id'])->select(); 
+    	}
+        
+        $this->assign('info',$info);
+        $this->assign('info_num',count($info));
+   	    $this->assign('fr_id',$fr_id);
         
         $this->display();
     }

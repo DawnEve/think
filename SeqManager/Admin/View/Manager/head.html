@@ -20,10 +20,10 @@ $r2=mysql_fetch_array($result);
                 <td width=260><img height=56 src="{$Think.const.IMG_URL}/header_left.jpg" 
                                    width=260></td>
                 <td style="font-weight: bold; color: #fff; padding-top: 20px" 
-                    align=middle>当前用户：{$user.mg_name} &nbsp;&nbsp; <a style="color: #fff" 
-                                                        href="{:U('resetMyPwd')}" 
-                                                        target='right'>修改口令</a> | <a style="color: #fff" 
-                                                        onclick="if (confirm('确定要退出吗？')) return true; else return false;" 
+                    align=middle>当前用户：
+                    <a style="color: #fff" href="{:U('right')}" target='right'>{$user.mg_name}</a> |  
+                    <a style="color: #fff" href="{:U('resetMyPwd')}" target='right'>修改口令</a> | 
+                    <a style="color: #fff" onclick="if (confirm('确定要退出吗？')) return true; else return false;" 
                                                         href="{:U('logout')}" target=_top>退出系统</a> 
                 </td>
                 <td align=right width=268><img height=56 

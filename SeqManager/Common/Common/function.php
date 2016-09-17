@@ -10,7 +10,7 @@ function authcheck($name, $uid, $relation='or',$t,$f='<p>没有权限</p>'){
 
 //输出当前控制器和操作方法
 function getName(){
-    echo CONTROLLER_NAME.'/'.ACTION_NAME;
+    echo CONTROLLER_NAME.'/'.ACTION_NAME . ' 正在开发中.';
 }
 
 //由二维数组生成一维数组

@@ -10,7 +10,10 @@
     <body>
        <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
             <tr height=28>
-                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：位置管理->盒子列表 
+                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：位置管理->盒子列表<?php 
+if($fr_id>0){ echo '-> 冰箱【' . $fr_data[I('fr_id')] . '】内的盒子'; }
+                ?> 
+                 
                     <span class='right'><a href="{:U('add')}">【添加盒子】</a></span>
                 </td>
             </tr>
