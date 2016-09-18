@@ -1,12 +1,3 @@
-<?php
-/*
-include_once("checksession.php");
-include_once("../db.php");
-$query = "select * from beian_manage where username='$_SESSION[adminusername2]' ";
-$result = mysql_db_query($DataBase, $query); 
-$r2=mysql_fetch_array($result);
-*/
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
@@ -22,9 +13,10 @@ $r2=mysql_fetch_array($result);
                 <td style="font-weight: bold; color: #fff; padding-top: 20px" 
                     align=middle>当前用户：
                     <a style="color: #fff" href="{:U('right')}" target='right'>{$user.mg_name}</a> |  
+                    <a style="color: #fff" href="{:U('Search/index')}" target='right'>搜索</a> | 
                     <a style="color: #fff" href="{:U('resetMyPwd')}" target='right'>修改口令</a> | 
-                    <a style="color: #fff" onclick="if (confirm('确定要退出吗？')) return true; else return false;" 
-                                                        href="{:U('logout')}" target=_top>退出系统</a> 
+                    <a style="color: #fff" href="{:U('logout')}" target='top' 
+                        onclick="if (confirm('确定要退出吗？')) return true; else return false;">退出系统</a> 
                 </td>
                 <td align=right width=268><img height=56 
                                                src="{$Think.const.IMG_URL}/header_right.jpg" width=268></td></tr></table>

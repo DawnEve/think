@@ -213,12 +213,27 @@ _______________________________________________
         </switch>
 
 >>v0.4.8 改造Search　GUI为js点击、提交数据。初步的ajax提交和返回。
-http://seq.dawneve.cc/Admin/Search/index 
+GUI:http://seq.dawneve.cc/Admin/Search/index 
+api:http://seq.dawneve.cc/Admin/Api/cate
 
  <div id='by_btn'> 这一段已经是历史了。
     <a class='btn<?php if(I('by')=='cate') echo " blue";?>'  href="{:U('',array('by'=>'cate'))}">按照类别索引</a>
     <a class='btn<?php if(I('by')=='tag') echo " blue";?>' href="{:U('',array('by'=>'tag'))}">按照标签索引</a>
     <a class='btn<?php if(I('by')=='keyword' or empty(I('by'))) echo " blue";?>' href="{:U('',array('by'=>'keyword'))}">按照关键词搜索</a>
 </div>
+
+>>v0.4.9 删减文件。修改头部head链接。
+
+<?php
+/*
+include_once("checksession.php");
+include_once("../db.php");
+$query = "select * from beian_manage where username='$_SESSION[adminusername2]' ";
+$result = mysql_db_query($DataBase, $query); 
+$r2=mysql_fetch_array($result);
+*/
+?>
+
+>>
 
 

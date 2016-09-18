@@ -88,7 +88,7 @@ $('#search').on('click',function(){
       },
       success: function(result) {
           var str='<table class="table_a" border="1" width="100%">';
-          str += "<tr><td>id</td><td>名字</td><td>创建时间</td><td>上次修改时间</td></tr>";
+          str += "<tr><th>id</th><th>名字</th><th>创建时间</th><th>上次修改时间</th></tr>";
           for(var i=0;i<result.length; i++){
              var dt=result[i];
              //n(dt); wjl=dt;
