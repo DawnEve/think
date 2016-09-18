@@ -234,6 +234,6 @@ $r2=mysql_fetch_array($result);
 */
 ?>
 
->>
+>>v0.5.0 搜索页面Ajax基本成型，css基本成型。
 
 

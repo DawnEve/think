@@ -43,7 +43,7 @@ tr.title{
 }
 
 /*---------------------------buttons---------------------------*/
-    .center{ width:500px; margin:30px auto; }
+    .center{ width:700px; margin:30px auto; }
     #kw{ height: 20px;
 	    padding: 9px 7px;
 	    font: 16px arial;
@@ -52,7 +52,10 @@ tr.title{
 	    vertical-align: top;
 	    outline: none;
 	    box-shadow: none; 
-	    width:300px;
+	    width:400px;
+    }
+    #kw:hover{
+        border-color:#4791ff;
     }
     .search{
         cursor: pointer;

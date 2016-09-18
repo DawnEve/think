@@ -2,16 +2,16 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <title>我的检索</title>
-        <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet" />
-        <link href="{$Think.const.CSS_URL}/mine.css?time=201609181" type="text/css" rel="stylesheet" />
+        <title>我的搜索</title>
+        <link href="{$Think.const.CSS_URL}/admin.css?time={:time();}" type="text/css" rel="stylesheet" />
+        <link href="{$Think.const.CSS_URL}/mine.css?time=201609184" type="text/css" rel="stylesheet" />
         <script src="{$Think.const.js_URL}/jquery-3.1.0.min.js"></script>
     </head>
     
     <body>
        <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
             <tr height=28>
-                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：搜索->我的检索                 
+                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：搜索->我的搜索                 
                 </td>
             </tr>
             <tr>
@@ -56,8 +56,30 @@
 </div>
     </body>
 <script>
+//tools
 function n(s){console.log(s);}
 function m$(o){return document.getElementById(o);}
+
+function UnixToDate(unixTime, isFull, timeZone){
+    if (typeof (timeZone) == 'number')
+    {
+        unixTime = parseInt(unixTime) + parseInt(timeZone) * 60 * 60;
+    }
+    var time = new Date(unixTime * 1000);
+    var ymdhis = "";
+    ymdhis += time.getUTCFullYear() + "-";
+    ymdhis += (time.getUTCMonth()+1) + "-";
+    ymdhis += time.getUTCDate();
+    if (isFull === true)
+    {
+        ymdhis += " " + time.getUTCHours() + ":";
+        ymdhis += time.getUTCMinutes() + ":";
+        ymdhis += time.getUTCSeconds();
+    }
+    return ymdhis;
+}
+
+
 window.onload=function(){
 	//点击显示查找方式
 	var aA=$('#by_btn a');
@@ -87,18 +109,26 @@ $('#search').on('click',function(){
 		info_type:f.info_type.value,
       },
       success: function(result) {
+          //组装结果
           var str='<table class="table_a" border="1" width="100%">';
           str += "<tr><th>id</th><th>名字</th><th>创建时间</th><th>上次修改时间</th></tr>";
-          for(var i=0;i<result.length; i++){
-             var dt=result[i];
-             //n(dt); wjl=dt;
-        	 str += "<tr><td>"+dt[prefix+'_id']+"</td><td>"+dt[prefix+'_name']+"</td>";
-        	 str += "<td>"+dt[prefix+'_time']+"</td><td>"+dt[prefix+'_mod_time']+"</td></tr>";
+          var L=result.length;
+          if(L>0){
+	          for(var i=0;i<L; i++){
+	             var dt=result[i];
+	             //拼接id和name（带链接）
+	        	 str += "<tr><td>"+dt[prefix+'_id']+"</td>";
+	        	 str +="<td><a href='{:U("Cate/showlist")}?id="+i+"'>"+dt[prefix+'_name']+"</a></td>";
+
+	        	 //拼接日期
+	             var time=UnixToDate( dt[prefix+'_time'], true);
+	             var mod_time=UnixToDate( dt[prefix+'_mod_time'], true);
+	        	 str += "<td>"+time+"</td><td>"+mod_time+"</td></tr>";
+	          }
           }
           str += "</table>";
+          str += "<p>共搜索到"+L+"条记录。</p>";
         m$( "search_list" ).innerHTML=str;
- 	    //console.log(result);
- 	    //console.log(result);
       }
     });
 });

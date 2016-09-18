@@ -59,8 +59,8 @@
 57  回收站列表   8   Recycle showlist    8-57    1
 58  还原条目    57  Recycle restore 8-57-58 2
 59  彻底删除    57  Recycle delete  8-57-59 2
-60  我的检索    9   Search  index   9-60    1
-61  全局检索    9   Search  advSearch   9-61    1
+60  我的搜索    9   Search  index   9-60    1
+61  全局搜索    9   Search  advSearch   9-61    1
 62  快速入门    10  Help    index   10-62   1
 63  用户手册    10  Help    article 10-63   1
 64  关于本系统   10  Help    about   10-64   1
@@ -130,8 +130,8 @@ INSERT INTO `wjl_auth` VALUES (56, '分配权限', 52, 'Role', 'distribute', '7-
 INSERT INTO `wjl_auth` VALUES (57, '回收站列表', 8, 'Recycle', 'showlist', '8-57', 1, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (58, '还原条目', 57, 'Recycle', 'restore', '8-57-58', 2, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (59, '彻底删除', 57, 'Recycle', 'delete', '8-57-59', 2, 1473822830, 1473822831, 1);
-INSERT INTO `wjl_auth` VALUES (60, '我的检索', 9, 'Search', 'index', '9-60', 1, 1473822830, 1473822831, 1);
-INSERT INTO `wjl_auth` VALUES (61, '全局检索', 9, 'Search', 'advSearch', '9-61', 1, 1473822830, 1473822831, 1);
+INSERT INTO `wjl_auth` VALUES (60, '我的搜索', 9, 'Search', 'index', '9-60', 1, 1473822830, 1473822831, 1);
+INSERT INTO `wjl_auth` VALUES (61, '全局搜索', 9, 'Search', 'advSearch', '9-61', 1, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (62, '快速入门', 10, 'Help', 'index', '10-62', 1, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (66, '重置密码', 44, 'Manager', 'resetPwd', '6-44-66', 2, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (67, '重置自己的密码', 44, 'Manager', 'resetMyPwd', '6-44-67', 2, 1473822830, 1473822831, 1);
