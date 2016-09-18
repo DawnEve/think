@@ -5,7 +5,7 @@ use Admin\Common\AdminController;
 class SearchController extends AdminController {
     public function index(){
         //getName();
-        dump($_POST);
+        //dump($_POST);
         
         $this->display();
     }

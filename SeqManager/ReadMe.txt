@@ -212,5 +212,13 @@ _______________________________________________
             <default /><include file="index_keyword_2" />
         </switch>
 
+>>v0.4.8 改造Search　GUI为js点击、提交数据。初步的ajax提交和返回。
+http://seq.dawneve.cc/Admin/Search/index 
+
+ <div id='by_btn'> 这一段已经是历史了。
+    <a class='btn<?php if(I('by')=='cate') echo " blue";?>'  href="{:U('',array('by'=>'cate'))}">按照类别索引</a>
+    <a class='btn<?php if(I('by')=='tag') echo " blue";?>' href="{:U('',array('by'=>'tag'))}">按照标签索引</a>
+    <a class='btn<?php if(I('by')=='keyword' or empty(I('by'))) echo " blue";?>' href="{:U('',array('by'=>'keyword'))}">按照关键词搜索</a>
+</div>
 
 

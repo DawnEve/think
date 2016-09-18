@@ -44,15 +44,15 @@ tr.title{
 
 /*---------------------------buttons---------------------------*/
     .center{ width:500px; margin:30px auto; }
-    #kw{ height: 38px;
-    padding: 9px 7px;
-    font: 16px arial;
-    border: 1px solid #b8b8b8;
-    border-bottom: 1px solid #ccc;
-    vertical-align: top;
-    outline: none;
-    box-shadow: none; 
-    width:300px;
+    #kw{ height: 20px;
+	    padding: 9px 7px;
+	    font: 16px arial;
+	    border: 1px solid #b8b8b8;
+	    border-bottom: 1px solid #ccc;
+	    vertical-align: top;
+	    outline: none;
+	    box-shadow: none; 
+	    width:300px;
     }
     .search{
         cursor: pointer;

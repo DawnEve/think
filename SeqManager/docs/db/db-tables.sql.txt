@@ -115,14 +115,14 @@ ADD CONSTRAINT uc_code UNIQUE (`tag_name`,`tag_uid`);
 
 
 
-
+DROP TABLE IF EXISTS `wjl_seq`;
 CREATE TABLE `wjl_seq` (
 `seq_id` smallint(6) NULL AUTO_INCREMENT,
 `seq_name` varchar(100) NOT NULL,
 `seq_order_no` varchar(20) NULL,
 `seq_sequence` text NULL,
 `seq_en_site` varchar(20) NULL,
-`note` text NULL,
+`seq_note` text NULL,
 `file_ids` varchar(20) NULL,
 `seq_time` int(10) NULL,
 `seq_mod_time` int(10) NULL,
@@ -138,14 +138,14 @@ PRIMARY KEY (`seq_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
+DROP TABLE IF EXISTS `wjl_oligo`;
 CREATE TABLE `wjl_oligo` (
 `oligo_id` smallint(6) NULL AUTO_INCREMENT,
 `oligo_name` varchar(100) NOT NULL,
 `oligo_order_no` varchar(20) NULL,
 `oligo_sequence` text NULL,
 `oligo_en_site` varchar(20) NULL,
-`note` text NULL,
+`olibo_note` text NULL,
 `file_ids` varchar(20) NULL,
 `oligo_time` int(10) NULL,
 `oligo_mod_time` int(10) NULL,
@@ -164,6 +164,7 @@ DROP TABLE IF EXISTS `wjl_file`;
 CREATE TABLE `wjl_file` (
 `file_id` smallint(6) NULL,
 `file_name` varchar(100) NOT NULL,
+`file_note` text NULL,
 `file_path` varchar(50) NULL,
 `file_time` int(10) NULL,
 `file_mod_time` int(10) NULL,

@@ -25,14 +25,18 @@ class ApiController extends Controller {
         
     }
     
-    //TODO
-    function __call($a,$b){
-    	dump($a);
-    	dump($b);
-    	dump($_GET);
-    	dump($_POST);
-    	//$this->ajaxReturn($data);
-        //$this->ajaxReturn(M('Cate')->select());
+    //ajax返回数据表数据
+    function __call($tb_name,$xx){
+    	if(IS_AJAX){//判读是否为post提交过了
+	       $data=array(
+	        'username'=>I('username'),
+	        'content'=>I('content'),
+	        'time'=>time()  
+	       );
+	      $data_send=$data;
+    	}
+      
+        $this->ajaxReturn(M($tb_name)->select());
     }
     
 }
