@@ -187,4 +187,16 @@ array(9) {
         $this->display();
     }
 	
+    //ajax
+    function ajax(){
+        $arr=array(
+            1=>'book',
+            2=>'note',
+            3=>'pen',
+            4=>'fruit',
+        );
+        $str='<b>book</b>';
+        $this->ajaxReturn(M('user')->select(),'json');
+        
+    }
 }
