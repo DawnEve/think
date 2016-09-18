@@ -183,8 +183,34 @@ _______________________________________________
 
 >>v0.4.5 Help/about(), 点击冰箱显示盒子列表。
 >>v0.4.6 搜索页面的按钮。
+>>v0.4.7 ajax() 
+===========================================
+    //http://jquery.com/ jq3.1
+    //http://www.tuicool.com/articles/Y7fyUv
+    
+    var hiddenBox = $( "#banner-message" );
+    $( "#button-container button" ).on( "click", function( event ) {
+      hiddenBox.show();
+    });
 
 
+    $.ajax({
+      url: "/api/getWeather",
+      data: {
+        zipcode: 97201
+      },
+      success: function( result ) {
+        $( "#weather-temp" ).html( "<strong>" + result + "</strong> degrees" );
+      }
+    });
+===========================================
+
+        {/*选择模板*/}
+        <switch name="Think.get.by">
+            <case value="cate"><include file="index_cate" /></case>
+            <case value="tag"><include file="index_tag" /></case>
+            <default /><include file="index_keyword_2" />
+        </switch>
 
 
 

@@ -5,7 +5,7 @@ use Admin\Common\AdminController;
 class SearchController extends AdminController {
     public function index(){
         //getName();
-        
+        dump($_POST);
         
         $this->display();
     }
@@ -13,6 +13,10 @@ class SearchController extends AdminController {
     //TODO
     public function advSeach(){
         //getName();
+    }
+    
+    function getData(){
+        $this->ajaxReturn(M('Cate')->select());
     }
     
 }
