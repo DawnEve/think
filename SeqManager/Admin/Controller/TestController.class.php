@@ -1,9 +1,9 @@
 <?php
 namespace Admin\Controller;
-use Admin\Common\AdminController;
+use Think\Controller;
 
-class TestController extends AdminController {
-	//首页 【已经不需要了[useless]】
+class TestController extends Controller {
+    //首页 【已经不需要了[useless]】
     public function index(){
         //首页显示主控界面
         $user = session('user');
@@ -18,40 +18,40 @@ class TestController extends AdminController {
     
     //头部
     function head(){
-    	$this->assign('user',session('user'));
+        $this->assign('user',session('user'));
         $this->display('head');
     }
     
     //左侧
     function left(){
-    	//1.根据角色mg_id获得role_id;
-    	$user=session('user');
-    	$mg_id=$user['mg_id'];
-    	$mg_role_id=$user['mg_role_id'];
-    	/*
+        //1.根据角色mg_id获得role_id;
+        $user=session('user');
+        $mg_id=$user['mg_id'];
+        $mg_role_id=$user['mg_role_id'];
+        /*
 array(4) {
   ["mg_id"] => string(1) "2"
   ["mg_name"] => string(3) "tom"
   ["mg_time"] => string(1) "0"
   ["mg_role_id"] => string(1) "2"
 }
-    	 * */
-    	//2.由role_id获取role_auth_ids
-    	$auth_info=M('Role')->where(array('role_id'=>$mg_role_id))->select();
-    	$role_auth_ids=$auth_info[0]['role_auth_ids'];
-    	//dump($role_auth_ids);//string(8) "2,3,8,11"
+         * */
+        //2.由role_id获取role_auth_ids
+        $auth_info=M('Role')->where(array('role_id'=>$mg_role_id))->select();
+        $role_auth_ids=$auth_info[0]['role_auth_ids'];
+        //dump($role_auth_ids);//string(8) "2,3,8,11"
         //3.根据$role_auth_ids查询具体权限
-    	//3.5如果是超级管理员(admin)，则获取所有权限
-    	if(1==$mg_id){
-	        $p_auth_info=M('Auth')->where("auth_level = 0")->select();//顶级权限
-	        $c_auth_info=M('Auth')->where("auth_level = 1")->select();//次级权限
-    	}else{
-	        $p_auth_info=M('Auth')->where("auth_level = 0 and auth_id in ($role_auth_ids)")->select();//顶级权限
-	        $c_auth_info=M('Auth')->where("auth_level = 1 and auth_id in ($role_auth_ids)")->select();//次级权限
-    	}
-    	//dump($p_auth_info);
-    	//dump($c_auth_info);
-    	/*
+        //3.5如果是超级管理员(admin)，则获取所有权限
+        if(1==$mg_id){
+            $p_auth_info=M('Auth')->where("auth_level = 0")->select();//顶级权限
+            $c_auth_info=M('Auth')->where("auth_level = 1")->select();//次级权限
+        }else{
+            $p_auth_info=M('Auth')->where("auth_level = 0 and auth_id in ($role_auth_ids)")->select();//顶级权限
+            $c_auth_info=M('Auth')->where("auth_level = 1 and auth_id in ($role_auth_ids)")->select();//次级权限
+        }
+        //dump($p_auth_info);
+        //dump($c_auth_info);
+        /*
  array(4) {
   [0] => array(7) {
     ["auth_id"] => string(1) "2"
@@ -62,26 +62,26 @@ array(4) {
     ["auth_path"] => string(1) "2"
     ["auth_level"] => string(1) "0"
   }
-    	 * */
-    	//显示模板
-    	$this->assign('p_auth_info',$p_auth_info);
-    	$this->assign('c_auth_info',$c_auth_info);
-    	$this->display('left');
+         * */
+        //显示模板
+        $this->assign('p_auth_info',$p_auth_info);
+        $this->assign('c_auth_info',$c_auth_info);
+        $this->display('left');
     }
     
     //右侧
     function right(){
-    	$user = session('user');
-    	if(1==$user['mg_id']){
-    		  $role_name='超级管理员';
-    	}else{
-	    	$role_id = $user['mg_role_id'];
-	    	$role_name=M('Role')->where('role_id='.$role_id)->getField('role_name');
-    	}
-    	//dump($role_name);
-    	//dump(session('user'));
-    	$this->assign('role_name',$role_name);
-    	$this->assign('user',session('user'));
+        $user = session('user');
+        if(1==$user['mg_id']){
+              $role_name='超级管理员';
+        }else{
+            $role_id = $user['mg_role_id'];
+            $role_name=M('Role')->where('role_id='.$role_id)->getField('role_name');
+        }
+        //dump($role_name);
+        //dump(session('user'));
+        $this->assign('role_name',$role_name);
+        $this->assign('user',session('user'));
         $this->display('right');
     }
     
@@ -98,31 +98,31 @@ array(4) {
     
     //登录页面
     function login(){
-    	//1.如果已经登录，则跳转。
-       	$user=session('user');
-       	if(!empty($user)){
-       	    redirect('index');
-       	}else{
-    	   //2.否则看是否是登录post，如果是，则验证，
-       		if(!empty($_POST)){
-       		   //从Model中验证登录
-       		   $name=I('username');
+        //1.如果已经登录，则跳转。
+        $user=session('user');
+        if(!empty($user)){
+            redirect('index');
+        }else{
+           //2.否则看是否是登录post，如果是，则验证，
+            if(!empty($_POST)){
+               //从Model中验证登录
+               $name=I('username');
                $psw=I('password');
                $rs=D('Manager')->checkNamePsw($name,$psw);
                if(false === $rs){
-               	   $this->error('用户名或密码错误！');
+                   $this->error('用户名或密码错误！');
                    //$this->display();
                }else{
-	               //写入session
-	               session('user',$rs);
-	               //跳转到后台首页
-	               redirect('index');
+                   //写入session
+                   session('user',$rs);
+                   //跳转到后台首页
+                   redirect('index');
                }
-       		}else{
-       	        //3.否则显示登录页面
-       		   $this->display();
-       		}
-       	}
+            }else{
+                //3.否则显示登录页面
+               $this->display();
+            }
+        }
     }
     
     //退出
@@ -157,20 +157,20 @@ array(4) {
     
     //修改用户的角色信息等
     function upd($mg_id){
-    	//1.如果是post提交，则在模型中保存数据
-    	if(!empty($_POST)){
-    	   $rs=D('Manager')->upd($mg_id);
-    	   if(true === $rs){
-    	       $this->success('成功',U('showlist'));
-    	   }else{
-    	       $this->error('失败！'.$rs,U('showlist'));
-    	   }
-    	   die();
-    	}
-    	
-    	
-    	
-    	//2.获取该管理员信息
+        //1.如果是post提交，则在模型中保存数据
+        if(!empty($_POST)){
+           $rs=D('Manager')->upd($mg_id);
+           if(true === $rs){
+               $this->success('成功',U('showlist'));
+           }else{
+               $this->error('失败！'.$rs,U('showlist'));
+           }
+           die();
+        }
+        
+        
+        
+        //2.获取该管理员信息
         $mg_info=M('Manager')->find($mg_id);
         /*
          array(5) {
@@ -232,5 +232,11 @@ array(4) {
         //echo md5('admin');
         //echo time();
         echo get_client_ip();//202.196.120.202
+    }
+    
+    
+    function getCate(){
+        $m=getlist('box');
+        dump($m);
     }
 }

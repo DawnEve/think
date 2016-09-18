@@ -51,7 +51,7 @@ class FridgeController extends AdminController {
            );
                       
            $w=$md->create($data);
-           dump($w);die();
+           //dump($w);die();
            
            $rs=$md->add();
            //判断结果

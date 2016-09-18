@@ -145,7 +145,7 @@ CREATE TABLE `wjl_oligo` (
 `oligo_order_no` varchar(20) NULL,
 `oligo_sequence` text NULL,
 `oligo_en_site` varchar(20) NULL,
-`olibo_note` text NULL,
+`oligo_note` text NULL,
 `file_ids` varchar(20) NULL,
 `oligo_time` int(10) NULL,
 `oligo_mod_time` int(10) NULL,
@@ -153,7 +153,7 @@ CREATE TABLE `wjl_oligo` (
 `tag_ids` varchar(100) NULL,
 `fridge_id` smallint(6) NULL,
 `box_id` smallint(6) NULL,
-`palce` varchar(20) NULL,
+`place` varchar(20) NULL,
 `condition` smallint(1) NOT NULL DEFAULT '1',# 正常为1，进回收站为0，回收站内可删除或恢复
 `oligo_uid` smallint(6) NULL,
 PRIMARY KEY (`oligo_id`) 

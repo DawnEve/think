@@ -176,6 +176,8 @@ _______________________________________________
 >>v0.4.4 box盒子: add(), showlist(), del(), upd()
     showlist()要显示具体某个冰箱中的盒子，
 
+    <taglib name="html" />
+    
     <html:select name='role_name' options="data" selected="sel" />
 
 [bug]upd()的时候，名字不能重复！
@@ -235,5 +237,35 @@ $r2=mysql_fetch_array($result);
 ?>
 
 >>v0.5.0 搜索页面Ajax基本成型，css基本成型。
+    unix时间 http://www.cnblogs.com/freespider/p/3730709.html
+
+>>v0.5.1 Oligo页面 add()。修改数据库Oligo字段错误。 
+[TODO]还差文件上传、tag添加提示功能。。
+    HTML fieldset 标签 -- 表单分组
+    如果一个页面的表单项太多,我们最好把它们分组显示,就像使用p标签分开段落一样,可以使用fieldset与legend标签对表单内容分组.
+    fieldset 标签 -- 对表单进行分组
+    http://www.dreamdu.com/xhtml/tag_fieldset/
+    
+    例:冻存管保存在第1行第8列就记做 (1,8). 多个管则用多个表示.
+    
+    
+    /**
+     * 更好用的获取列表的函数
+     */
+    //获取数据列表array(1=>'1号冰箱',2=>'2号冰箱');
+    function getList($tb_name, $tb_prefix=null,$uid=0){
+        if($uid==0){ $user=session('user'); $uid=$user['mg_id'];}
+        if(strlen($tb_prefix)>0){}else{ $tb_prefix=$tb_name; }
+        $info_arr=M($tb_name)
+            ->field($tb_prefix.'_id,'.$tb_prefix.'_name')
+            ->where('`condition`>0 AND '.$tb_prefix.'_uid='.$uid)
+            ->select();   
+        return getOneArr($info_arr, $tb_prefix.'_id', $tb_prefix.'_name');
+    }
+
+    调用 $m=getlist('manager','mg');
+
+
+
 
 
