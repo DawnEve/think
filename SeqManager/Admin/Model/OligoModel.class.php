@@ -103,7 +103,7 @@ class OligoModel extends Model {
             }
         }
         if($file_links==''){
-            $file_links='【没有附件】';
+            $file_links='【没有附件】<br>';
         }
 	    
         $info['file_links']=$file_links;

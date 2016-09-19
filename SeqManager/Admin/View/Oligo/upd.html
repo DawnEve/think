@@ -54,6 +54,7 @@
                 <tr>
                     <td>附件:</td>
                     <td>
+                        <div id=file_list>
                         {$info.file_links}
                             <span>
                                 <input type='file' name='file_ids[]'>
@@ -97,7 +98,7 @@ function del_file_btn(div,n){
 //文件添加按钮
 function add_file_btn(){
     //添加span标签
-    var oSpan=document.createElement('span');
+    var oSpan=document.createElement('span'); 
     //添加file按钮
     var oInput=document.createElement('input');
     oInput.setAttribute('type','file');
@@ -111,14 +112,14 @@ function add_file_btn(){
     var oBr=document.createElement('br');
 
     //添加到span中
-    oSpan.appendChild(oInput);
+    oSpan.appendChild(oInput); 
     oSpan.appendChild(oADel);
     oSpan.appendChild(oBr);
     
     //插入到原来dom中
     //父级.appendChild(子节点);
     var file_line=document.getElementById('file_list') 
-    file_line.appendChild(oSpan);
+    file_line.appendChild(oSpan); 
 }
 </script>
                     </td>

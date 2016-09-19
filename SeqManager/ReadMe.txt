@@ -395,7 +395,7 @@ id  file_ids
 2    5,6   
 3    __   
 
-
+>>v0.5.9-1 Oligo页面:upd($id): addFile js代码出错,原来是div id被删了。
 
 
 
