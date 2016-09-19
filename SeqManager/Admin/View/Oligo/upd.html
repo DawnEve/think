@@ -7,6 +7,7 @@
         <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet" />
         <link href="{$Think.const.CSS_URL}/mine.css?time=20160913" type="text/css" rel="stylesheet" />
         <link href="{$Think.const.CSS_URL}/tags.css?time=20160921" type="text/css" rel="stylesheet" />
+        <script src="{$Think.const.js_URL}/jquery-3.1.0.min.js"></script>
     </head>
     <body>
        <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
@@ -53,20 +54,42 @@
                 <tr>
                     <td>附件:</td>
                     <td>
-                        <div id='file_list'>
+                        {$info.file_links}
                             <span>
                                 <input type='file' name='file_ids[]'>
-                                <a href="javascript:void(0);" onclick="del_file_btn(this)">删除</a>
+                                <a href="javascript:void(0);" onclick="del_file_btn(this,0)">删除</a>
                                 <br />
                             </span>
                         </div>
                         <a href='javascript:add_file_btn()'>添加</a>
 <script>
 //tools
-function $(s){return document.getElementById(s);}
+function m$(s){return document.getElementById(s);}
 
 //文件删除按钮
-function del_file_btn(div){
+function del_file_btn(div,n){
+	if(!confirm('确实要【彻底删除】该文件(id='+n+')吗?')){
+	    return false;
+	}
+	if(n>0){
+	    //ajax 1.删除数据库的文件信息；2.删除文件
+
+	    $.ajax({
+	        url: "/Admin/Api/file/",
+	        data: {
+	          method: 'del',
+	          id: n,
+	        },
+	        success: function( result ) {
+		       // console.log(result);
+		       if(result[0]==1){
+		    	    alert('成功删掉文件(id='+result[1]+')');
+			   }else{
+		    	    alert('失败:'+result[1]);
+		       }
+	        }
+	    });
+	}
     var pDiv=div.parentNode;
     pDiv.parentNode.removeChild(pDiv);
 }
@@ -413,10 +436,10 @@ window.onload=function(){
     //=================================
     // 展示和隐藏tag提示框
     //=================================
-    var tag_input=$('tag_input');
-    $('old').onmouseover=tag_input.onclick=function(oEvent){
+    var tag_input=m$('tag_input');
+    m$('old').onmouseover=tag_input.onclick=function(oEvent){
         //显示该层内容
-        $('old').style.display='block';
+        m$('old').style.display='block';
         //取消冒泡
         var oEvent = oEvent || window.event;
         if(document.all){
@@ -430,8 +453,8 @@ window.onload=function(){
         this.onmouseout=function(){
             document.onclick = function(){
                 //隐藏层代码
-                if($('old').style.display=='block')
-                    $('old').style.display='none';
+                if(m$('old').style.display=='block')
+                    m$('old').style.display='none';
             };
         }
     };

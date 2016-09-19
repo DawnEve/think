@@ -26,6 +26,21 @@ class ApiController extends Controller {
     }
     
     //ajax返回数据表数据
+    function cate($tb_name,$xx){
+    	if(IS_AJAX){//判读是否为post提交过了
+	       $data=array(
+	        'username'=>I('username'),
+	        'content'=>I('content'),
+	        'time'=>time()  
+	       );
+	      $data_send=$data;
+    	}
+      
+        $this->ajaxReturn(M($tb_name)->select());
+    }
+    
+    
+    //ajax返回数据表数据
     function __call($tb_name,$xx){
     	if(IS_AJAX){//判读是否为post提交过了
 	       $data=array(
@@ -37,6 +52,22 @@ class ApiController extends Controller {
     	}
       
         $this->ajaxReturn(M($tb_name)->select());
+    }
+    
+    function file($method,$id){
+        if(IS_AJAX){//判读是否为post提交过了
+           $data=array(
+            'method'=>I('method'),
+            'id'=>I('id'),
+           );
+          $data_send=$data;
+        }
+        
+        //删除文件
+        if($data['method']=='del'){
+	        $rs=D('File')->ajaxDel($id);
+	        $this->ajaxReturn($rs);
+        }
     }
     
 }

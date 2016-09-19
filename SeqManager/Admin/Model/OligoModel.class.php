@@ -72,7 +72,8 @@ class OligoModel extends Model {
     
     
     //获取某id的完整数据
-    function getDetail($uid,$oligo_id){
+    function getDetail($uid,$oligo_id,$withDel=false){
+            //debug($withDel);
     	//获得某oligo详细数据，1.cate和2.tag标准化
         $info_raw = $this->where('`condition`>0 and oligo_uid='.$uid)->select($oligo_id);
         $arr_all = $this->id2name($info_raw);
@@ -86,10 +87,19 @@ class OligoModel extends Model {
         $file_links=''; 
         if(!empty($file_ids)){
             $current_file_id_list=explode(',',$file_ids); 
-            $file_data=M('File')->select($file_ids); 
+            $file_data=M('File')->where('`condition`>0 and oligo_uid='.$uid)->select($file_ids); 
             $i=1;
+            
             foreach($file_data as $file){
-                $file_links .= '附件'.($i++).': <a href="/Public/'.$file['file_path'].'">'.$file['file_name'].'</a><br>';
+//            	debug($file);
+                if($withDel==true){
+                	//添加删除按钮
+                	$file_links .='<span>附件'.($i++).': <a href="/Public/'.$file['file_path'].'">'.$file['file_name'].'</a>
+						&nbsp;&nbsp;<a href="javascript:void(0);" onclick="del_file_btn(this,'.$file['file_id'].')">删除</a>
+						<br /></span>';
+                }else{
+                    $file_links .= '附件'.($i++).': <a href="/Public/'.$file['file_path'].'">'.$file['file_name'].'</a><br>';
+                }
             }
         }
         if($file_links==''){

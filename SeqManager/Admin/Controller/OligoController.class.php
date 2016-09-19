@@ -175,7 +175,7 @@ array(22) {
         }
         
         //2.如果没有post数据，则显示表单      
-        $info=D('Oligo')->getDetail($uid,$oligo_id);
+        $info=D('Oligo')->getDetail($uid,$oligo_id,true);
         $this->assign('info',$info);
         
         //debug($info);

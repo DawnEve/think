@@ -23,8 +23,9 @@ class FileController extends Controller {
         getName();
     }
     
-    public function del(){
-        getName();
+    public function del($id){
+        $wjl=D('File')->ajaxDel($id);
+        dump($wjl);
     }
     
     public function search(){

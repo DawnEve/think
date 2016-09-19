@@ -377,10 +377,25 @@ substr_count($haystack, $needle [,$offset [,$length]])
 
 >>v0.5.8 Oligo页面:del($id)。Recycle/showlist/tb_name/oligo.html 原来第一列是No.编号，现在改为id。
     
->>v0.5.9 Oligo页面:upd($id); upd()视图中使用了自定义的Mytag标签扩展。
+>>v0.5.9 Oligo页面:upd($id): upd()视图中使用了自定义的Mytag标签扩展。
     <html:select name='cate_id' options="cate_list" selected="cate_id" />
         使用了自定义的Mytag.class.php 
     <Mytag:html_options name='cate_id' options="cate_list" selected="cate_id" />
     
+>>v0.5.9-1 Oligo页面:upd($id): file的显示、ajax彻底删除文件。
+
+    [TODO]FileModel/ajaxDel()的第3有缺陷：怎么sql批量删掉已经删掉的文件id
+    比如 
+id  file_ids
+1    2,3,4    
+2    3,5,6    
+3    3    
+    中间删掉3，变成
+1    2,4   
+2    5,6   
+3    __   
+
+
+
 
 
