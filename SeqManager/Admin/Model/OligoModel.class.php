@@ -24,14 +24,14 @@ class OligoModel extends Model {
         }
         
         //返回结果
-        return $this->id2name($info);
+        return $this->id2name($info,$cate_id,$tag_id);
     }
     
     
     
     //把cate_id和tag_ids换成cate名字、tag链接
-    function id2name($info){
-    //改造cate_id
+    function id2name($info,$cate_id=0,$tag_id=0){
+        //改造cate_id
         $cate_list=getList('cate');
         //改造tag_ids
         $tag_list=getList('tag');
@@ -67,6 +67,52 @@ class OligoModel extends Model {
         
         //返回结果 数组
         return array($info,$hint_text);
+    }
+    
+    
+    
+    //获取某id的完整数据
+    function getDetail($uid,$oligo_id){
+    	//获得某oligo详细数据，1.cate和2.tag标准化
+        $info_raw = $this->where('`condition`>0 and oligo_uid='.$uid)->select($oligo_id);
+        $arr_all = $this->id2name($info_raw);
+        $info = $arr_all[0][0];//一维数组
+        
+        //3.file怎么办?
+        $file_ids=$info['file_ids'];
+        //debug($file_ids);//string(9) "1,2,3,4,5"
+        
+        //分解file_ids
+        $file_links=''; 
+        if(!empty($file_ids)){
+            $current_file_id_list=explode(',',$file_ids); 
+            $file_data=M('File')->select($file_ids); 
+            $i=1;
+            foreach($file_data as $file){
+                $file_links .= '附件'.($i++).': <a href="/Public/'.$file['file_path'].'">'.$file['file_name'].'</a><br>';
+            }
+        }
+        if($file_links==''){
+            $file_links='【没有附件】';
+        }
+	    
+        $info['file_links']=$file_links;
+        
+        //4.palce:
+        //4.1盒子信息
+        $box_info=M('Box')->where('`condition`>0 and box_uid='.$uid)->find($info['box_id']);
+        $info['box_id']=$box_info['box_id'];
+        $info['box_name']=$box_info['box_name'];
+        $info['box_place']=$box_info['box_place'];
+        
+        //4.2从box查询fridge
+        $box_fr_id=$box_info['box_fr_id'];
+        $fr_info=M('Fridge')->where('`condition`>0')->find($box_fr_id);
+        $info['fr_id']=$fr_info['fr_id'];
+        $info['fr_name']=$fr_info['fr_name'];
+        
+        //debug($info);
+        return $info;
     }
 
 }

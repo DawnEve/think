@@ -41,3 +41,15 @@ function getList($tb_name, $tb_prefix=null,$uid=0){
         ->select();   
     return getOneArr($info_arr, $tb_prefix.'_id', $tb_prefix.'_name');
 }
+
+
+/**
+ * debug专用
+ * 
+ */
+function debug($para,$die=true){
+    dump($para);
+    if($die) die();
+}
+
+

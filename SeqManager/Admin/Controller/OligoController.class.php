@@ -24,12 +24,45 @@ class OligoController extends AdminController {
     
     //显示具体要求
     public function detail($id=''){
-    	if(empty($id)){
+    	$oligo_id=$id;
+    	//1.如果没有指定id，则返回showlist页面
+    	if(empty($oligo_id)){
     	   $this->error('Error:请指定条目id',U('showlist'));
     	   die();
     	}
         
-        
+    	
+    	//2.获取oligo数据
+    	$user=session('user');
+    	$uid=$user['mg_id'];
+    	$info=D('Oligo')->getDetail($uid,$oligo_id);
+        $this->assign('info',$info);
+        /*
+array(22) {
+  ["oligo_id"] => string(1) "6"
+  ["oligo_name"] => string(10) "5个文件"
+  ["oligo_order_no"] => string(4) "xx02"
+  ["oligo_sequence"] => string(6) "aaattt"
+  ["oligo_en_site"] => string(5) "BamHI"
+  ["oligo_note"] => string(10) "5个文件"
+  ["file_ids"] => string(9) "1,2,3,4,5"
+  ["oligo_time"] => string(10) "1474273061"
+  ["oligo_mod_time"] => string(10) "1474273061"
+  ["cate_id"] => string(1) "2"
+  ["tag_ids"] => string(2) "15"
+  ["box_id"] => string(1) "1"
+  ["place"] => string(6) " (1,8)"
+  ["condition"] => string(1) "1"
+  ["oligo_uid"] => string(1) "5"
+  ["cate_name"] => string(5) "phage"
+  ["tag_name_links"] => string(59) "<a class=tag href='/admin/Oligo/showlist/tag_id/15'>cd8</a>"
+  ["file_links"] => string(423) "附件1: <a href="/Public/Uploads/20160919/57df9f258845a.jpeg">20130717130913_WSUWJ.thumb.700_0.jpeg</a><br>附件2: <a href="/Public/Uploads/20160919/57df9f2588842.jpg">island.jpg</a><br>附件3: <a href="/Public/Uploads/20160919/57df9f2589207.jpg">jeff1.jpg</a><br>附件4: <a href="/Public/Uploads/20160919/57df9f2589bcb.jpg">jeff2.jpg</a><br>附件5: <a href="/Public/Uploads/20160919/57df9f258a58f.jpg">vr2.jpg</a><br>"
+  ["box_name"] => string(17) "phage保存菌种"
+  ["box_place"] => string(58) "第2层左起第1个抽屉第3层从外向内第1个位置"
+  ["fr_id"] => string(1) "1"
+  ["fr_name"] => string(8) "4冰箱1"
+}
+         * */
         $this->display();
     }
     

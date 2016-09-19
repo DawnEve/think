@@ -363,7 +363,21 @@ refer:http://blog.csdn.net/vvhesj/article/details/22299413
 
 http://zhidao.baidu.com/question/2117404446457704387.html?qbl=relate_question_0&word=mysql%20%D5%FD%D4%F2%20%BD%E1%CE%B2%BB%F2%D5%DF%CA%C7%B6%BA%BA%C5&hideOtherAnswer=true&newAnswer=1
 
->>v0.5.7 Oligo页面 detail($id):
+>>v0.5.7 Oligo页面 detail($id): (1)cate;(2)tag;(3)files;(4)place;
+showlist()增加一列 文件数。
     [2048] Declaration of Admin\Controller\OligoController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') 
     因为show()方法报错，所以都改成了detail()方法。
+
+
+substr_count
+在php中查找字符串出现次数的查找可以通过substr_count()函数来实现，下面我来给各位同学详细介绍这些函数了。
+substr_count($haystack, $needle [,$offset [,$length]])
+/$haystack表示母字符串，$needl表示要查找的字符
+//$offset表示查找的起点,$length表示查找的长度,均为可选参数
+
+
+
+
+
+
 

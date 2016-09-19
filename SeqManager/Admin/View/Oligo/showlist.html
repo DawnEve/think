@@ -47,6 +47,7 @@
                         <td>分类</td>
                         <td>标签</td>
                         <td>备注</td>
+                        <td>附件数</td>
                         <td>创建时间</td>
                         <td>上次修改时间</td>
                         <td >操作</td>
@@ -67,6 +68,12 @@
                         
                         
                         <td>{$vo.oligo_note}</td>
+                        <td>
+<?php 
+if($vo['file_ids']==''){ echo 0;}
+else{echo (substr_count($vo['file_ids'],',')+1);}
+?>
+                        </td>
                         <td>{$vo.oligo_time|date="Y-m-d H:i:s",###}</td>
                         <td>{$vo.oligo_mod_time|date="Y-m-d H:i:s",###}</td>
                         <td>
