@@ -21,8 +21,16 @@ class OligoController extends AdminController {
         $this->display();
     }
     
-    public function detail(){
-        getName();
+    
+    //显示具体要求
+    public function detail($id=''){
+    	if(empty($id)){
+    	   $this->error('Error:请指定条目id',U('showlist'));
+    	   die();
+    	}
+        
+        
+        $this->display();
     }
     
     public function add(){

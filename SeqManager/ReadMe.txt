@@ -335,7 +335,9 @@ http://www.thinkphp.cn/topic/8684.html
 ?>
 >>v0.5.6-2 Oligo页面 showlist(): (3)单击标签，显示该标签的列表。
 >>v0.5.6-3 Mysql匹配已经严谨。没有该标签id则该标签不显示。
-
+    [bug]html标签库的select如果没有补齐参数，则会报错。
+    
+    
 OligoModel/getData()有TODO问题：mysql匹配不严谨。
 求助 http://tieba.baidu.com/p/4790195093
     mysql语句正则匹配，tag_ids字段是标签的id组成的字符串。
@@ -360,4 +362,8 @@ refer:http://blog.csdn.net/vvhesj/article/details/22299413
 14 3,5,7,8
 
 http://zhidao.baidu.com/question/2117404446457704387.html?qbl=relate_question_0&word=mysql%20%D5%FD%D4%F2%20%BD%E1%CE%B2%BB%F2%D5%DF%CA%C7%B6%BA%BA%C5&hideOtherAnswer=true&newAnswer=1
+
+>>v0.5.7 Oligo页面 detail($id):
+    [2048] Declaration of Admin\Controller\OligoController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') 
+    因为show()方法报错，所以都改成了detail()方法。
 
