@@ -177,12 +177,11 @@ array(22) {
         //2.如果没有post数据，则显示表单      
         $info=D('Oligo')->getDetail($uid,$oligo_id,true);
         $this->assign('info',$info);
-        
         //debug($info);
-        $this->assign('cate_id',$info['cate_id']);//fr_id
+        
+        $this->assign('cate_id',$info['cate_id']);//cate_id
         $this->assign('fr_id',$info['fr_id']);//fr_id
         $this->assign('box_id',$info['box_id']);//box_id
-        //debug($info);
         
         //2.1获取分类数据
         $this->assign('cate_list',getlist('cate'));

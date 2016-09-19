@@ -397,5 +397,6 @@ id  file_ids
 
 >>v0.5.9-1 Oligo页面:upd($id): addFile js代码出错,原来是div id被删了。
 
+>>v0.6.0 Oligo页面:upd($id): tag部分的显示、添加
 
 
