@@ -300,6 +300,8 @@ http://www.thinkphp.cn/topic/8684.html
 　　$s2=implode(',',$days_array);
 
 
+>>v0.5.1 Oligo页面 add()。多文件上传按钮的添加、删除js代码。
+
 
 
 

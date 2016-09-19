@@ -51,7 +51,50 @@
                 
                 <tr>
                     <td>附件:</td>
-                    <td><input type='file' name='file_ids[]'></td>
+                    <td>
+	                    <div id='file_list'>
+	                        <span>
+	                            <input type='file' name='file_ids[]'>
+	                            <a href="javascript:void(0);" onclick="del_file_btn(this)">删除</a>
+	                            <br />
+	                        </span>
+	                    </div>
+	                    <a href='javascript:add_file_btn()'>添加</a>
+<script>
+//tools
+function $(s){return document.getElementById(s);}
+function del_file_btn(div){
+    var pDiv=div.parentNode;
+    pDiv.parentNode.removeChild(pDiv);
+}
+
+function add_file_btn(){
+	//添加span标签
+    var oSpan=document.createElement('span');
+	//添加file按钮
+    var oInput=document.createElement('input');
+    oInput.setAttribute('type','file');
+    oInput.setAttribute('name','file_ids[]');
+    //添加删除按钮
+    var oADel=document.createElement('a');
+    oADel.setAttribute('href','javascript:void(0);');
+    oADel.setAttribute('onclick','del_file_btn(this)');
+    oADel.innerHTML='删除';
+    //添加br换行
+    var oBr=document.createElement('br');
+
+    //添加到span中
+    oSpan.appendChild(oInput);
+    oSpan.appendChild(oADel);
+    oSpan.appendChild(oBr);
+    
+    //插入到原来dom中
+    //父级.appendChild(子节点);
+    var file_line=document.getElementById('file_list') 
+    file_line.appendChild(oSpan);
+}
+</script>
+                    </td>
                 </tr>
                 
  
@@ -70,7 +113,7 @@
                 <tr>
                     <td>添加标签:</td>
                     <td><input type=text name='tag_ids' size=50>
-                        <span class=red> 标签可以有0个到多个，请用英文的逗号,隔开</span>
+                        <span class=red> 请使用空格或回车分隔不同标签, 最多可输入5个 </span>
                     </td>
                 </tr>
 

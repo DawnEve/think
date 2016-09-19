@@ -173,6 +173,8 @@ CREATE TABLE `wjl_file` (
 
 `file_time` int(10) NULL,
 `file_mod_time` int(10) NULL,
+`cate_id` int(10) NULL,
+`tag_ids` varchar(100) NULL,
 `file_uid` smallint(6) NULL,
 `condition` smallint(1) NOT NULL DEFAULT '1',# 正常为1，进回收站为0，回收站内可删除或恢复
 PRIMARY KEY (`file_id`),
