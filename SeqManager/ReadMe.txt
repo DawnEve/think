@@ -306,6 +306,14 @@ http://www.thinkphp.cn/topic/8684.html
     <input type=text name='tag_ids' size=50>
     <span class=red> 请使用空格或回车分隔不同标签, 最多可输入5个 </span>
 
+>>v0.5.3 Oligo页面 add(): 后台标签的存储、与新建。
+    php从value求key。
+        在数组中搜索键值 "red"，并返回它的键名：
+    <?php
+    $a=array("a"=>"red","b"=>"green","c"=>"blue");
+    echo array_search("red",$a);
+    ?>                
 
-                    
-
+    //从tag_name字符串到tag_ids
+    $str="protein100,cd47,Good";
+    $rs=A('Tag','Logic')->get_tag_ids($str);

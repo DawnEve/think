@@ -253,4 +253,13 @@ array(4) {
         dump($$file_ids);
     }
     
+    
+    //tags的保存
+    function tags(){
+    	//从tag_name字符串到tag_ids
+    	$str="protein100,cd47,Good";
+        $rs=A('Tag','Logic')->get_tag_ids($str);
+        
+        dump($rs);
+    }
 }

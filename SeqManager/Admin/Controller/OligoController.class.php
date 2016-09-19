@@ -46,6 +46,10 @@ class OligoController extends AdminController {
 	            $file_ids=implode(',',$file_ids_arr);//"1,2,3"; 
            }
            
+           //从tag_name字符串到tag_ids
+           $str=I('tag_ids');//"protein100,cd47,Good";
+           $tag_ids=A('Tag','Logic')->get_tag_ids($str);
+           
            //拼接数据
            $data=array(
                 //核心信息
@@ -58,7 +62,7 @@ class OligoController extends AdminController {
            
                 //类别信息
                 'cate_id'=>I('cate_id'),
-                'tag_ids'=>I('tag_ids'),
+                'tag_ids'=>$tag_ids,
                 
                 //位置信息
                 'fridge_id'=>I('fridge_id'),
