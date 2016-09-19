@@ -5,6 +5,19 @@
         <title>引物列表</title>
         <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet" />
         <link href="{$Think.const.CSS_URL}/mine.css?time=20160914" type="text/css" rel="stylesheet" />
+<style>
+.tag{
+        color: #1E50A2;
+    margin: 0 5px 0 0;
+    cursor: pointer;
+    background: aliceblue;
+    border-radius: 10px;
+    padding: 0px 5px;
+}
+.tag:hover{
+    background:#9ACCFF;
+}
+</style>
     </head>
     
     <body>
@@ -50,7 +63,7 @@
                             <a href="{:U('Oligo/showlist', array('cate_id'=>$vo['cate_id']))}">
                             {$vo.cate_name}</a>
                         </td>
-                        <td>{$vo.tag_ids}</td>
+                        <td>{$vo.tag_name_links}</td>
                         
                         
                         <td>{$vo.oligo_note}</td>

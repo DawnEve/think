@@ -333,6 +333,18 @@ http://www.thinkphp.cn/topic/8684.html
 <?php 
     if(isset($hint_text)){ echo '->'.$hint_text; }
 ?>
+>>v0.5.6-2 Oligo页面 showlist(): (3)单击标签，显示该标签的列表
 
-
+OligoModel/getData()有TODO问题：mysql匹配不严谨。
+求助 http://tieba.baidu.com/p/4790195093
+    mysql语句正则匹配，tag_ids字段是标签的id组成的字符串。
+    要匹配tag_ids字段带有5的，不能是55或者50等；
+    比如可以是 
+    5 
+    5,6
+    2,3,5 
+    3,4,5,6,7 这几种情况，
+    不能是 3,55,60  
+    
+    
 
