@@ -32,7 +32,9 @@ class OligoController extends AdminController {
            //文件上传
             //上传文件、保存文件名和地址到数据库、返回文件id
            $file_ids='';
-           if(!empty($_FILES)){
+           //判断是否有文件，且文件大小超过0
+           //dump($_FILES['file_ids']['size'][0]);die();
+           if (!empty($_FILES) && isset($_FILES["file_ids"]) && $_FILES["file_ids"]["size"][0]>0){
 	           $file_ids_arr=A('File')->upload();
 	            /*
 					array(3) {
@@ -52,7 +54,7 @@ class OligoController extends AdminController {
                 'oligo_sequence'=>I('oligo_sequence'),
                 'oligo_en_site'=>I('oligo_en_site'),
                 'oligo_note'=>I('oligo_note'),
-                'file_ids'=>$file_ids, // todo file_ids
+                'file_ids'=>$file_ids,
            
                 //类别信息
                 'cate_id'=>I('cate_id'),
@@ -71,7 +73,6 @@ class OligoController extends AdminController {
            );
                       
            $w=$md->create($data);
-           //dump($w);die();
            
            $rs=$md->add();
            //判断结果

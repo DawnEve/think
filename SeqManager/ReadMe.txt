@@ -300,8 +300,12 @@ http://www.thinkphp.cn/topic/8684.html
 　　$s2=implode(',',$days_array);
 
 
->>v0.5.1 Oligo页面 add()。多文件上传按钮的添加、删除js代码。
+>>v0.5.1 Oligo页面 add():多文件上传按钮的添加、删除js代码。
+
+>>v0.5.2 Oligo页面 add():标签的js增删、提示。
+    <input type=text name='tag_ids' size=50>
+    <span class=red> 请使用空格或回车分隔不同标签, 最多可输入5个 </span>
 
 
-
+                    
 
