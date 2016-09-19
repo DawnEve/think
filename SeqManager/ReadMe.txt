@@ -333,7 +333,8 @@ http://www.thinkphp.cn/topic/8684.html
 <?php 
     if(isset($hint_text)){ echo '->'.$hint_text; }
 ?>
->>v0.5.6-2 Oligo页面 showlist(): (3)单击标签，显示该标签的列表
+>>v0.5.6-2 Oligo页面 showlist(): (3)单击标签，显示该标签的列表。
+>>v0.5.6-3 Mysql匹配已经严谨。没有该标签id则该标签不显示。
 
 OligoModel/getData()有TODO问题：mysql匹配不严谨。
 求助 http://tieba.baidu.com/p/4790195093
@@ -345,6 +346,18 @@ OligoModel/getData()有TODO问题：mysql匹配不严谨。
     2,3,5 
     3,4,5,6,7 这几种情况，
     不能是 3,55,60  
-    
-    
+
+MySql 查询以逗号分隔的字符串的方法(正则)  
+解决: select oligo_id, tag_ids from wjl_oligo where tag_ids REGEXP '(^|,)5($|,)';
+refer:http://blog.csdn.net/vvhesj/article/details/22299413
+
+2 3,5
+3 5,6
+5 3,5,7
+7 5,15
+10 5
+13 3,5,6
+14 3,5,7,8
+
+http://zhidao.baidu.com/question/2117404446457704387.html?qbl=relate_question_0&word=mysql%20%D5%FD%D4%F2%20%BD%E1%CE%B2%BB%F2%D5%DF%CA%C7%B6%BA%BA%C5&hideOtherAnswer=true&newAnswer=1
 

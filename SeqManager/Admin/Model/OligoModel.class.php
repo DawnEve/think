@@ -34,11 +34,14 @@ class OligoModel extends Model {
 	        
 	        //分裂tag_ids
 	        $info[$k]['tag_name_links']='';
+	        $current_tag_name='';
 	        if(!empty($v['tag_ids'])){
-	           $current_tag_id_list=explode(',',$v['tag_ids']);
+	           $current_tag_id_list=explode(',',$v['tag_ids']); //dump($current_tag_id_list);die();
 	               foreach($current_tag_id_list as $current_tag_id){
-	                   $current_tag_name=$tag_list[$current_tag_id];
-	                   $info[$k]['tag_name_links'] .= "<a class=tag href='/admin/Oligo/showlist/tag_id/".$current_tag_id."'>".$current_tag_name."</a>";
+	               	   if(array_key_exists($current_tag_id,$tag_list)){
+		                   $current_tag_name=$tag_list[$current_tag_id];
+		                   $info[$k]['tag_name_links'] .= "<a class=tag href='/admin/Oligo/showlist/tag_id/".$current_tag_id."'>".$current_tag_name."</a>";
+	               	   }
 	               }
 		       //$info[$k]['tag_name_links']=$tag_list[$v['tag_ids']];
 	        }
