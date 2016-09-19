@@ -321,6 +321,7 @@ http://www.thinkphp.cn/topic/8684.html
 //TODO 盒子内的坐标没有处理！前台js验证脚本。
 
 
-    
+>>v0.5.4 Oligo页面 add():单击显示tag提示框，鼠标移出来提示框消失。
+>>v0.5.5 Oligo页面 showlist():  
 
     

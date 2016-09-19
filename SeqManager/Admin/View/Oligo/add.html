@@ -128,7 +128,7 @@ function add_file_btn(){
    <div class="new">
         <ul class="clearfix"></ul>
         <div class="tag-input">
-            <input type="text" name="input" value="" maxlength="20">
+            <input type="text" name="input" value="" maxlength="20" id='tag_input'>
         </div>
     </div>
     
@@ -141,7 +141,7 @@ function add_file_btn(){
     </div>
     
     
-    <div class="old">      
+    <div class="old" id='old'>      
         <div class="fc06">使用过的标签：</div>
         <div class="ztag">
             <foreach name="tag_list" item="vo">
@@ -244,7 +244,7 @@ window.onload=function(){
     var aLi=oUl.getElementsByTagName('li');
     //初始化时获取焦点
     var oNewTag_input=oNewTag.getElementsByTagName('input')[0];
-    oNewTag_input.focus();
+    //oNewTag_input.focus();
     
     //----------------------------
     //事件及其处理函数
@@ -409,7 +409,34 @@ window.onload=function(){
         //return the new dom
         return li;
     }
-    
+
+    //=================================
+    // 展示和隐藏tag提示框
+    //=================================
+    var tag_input=$('tag_input');
+    $('old').onmouseover=tag_input.onclick=function(oEvent){
+    	//显示该层内容
+    	$('old').style.display='block';
+    	//取消冒泡
+        var oEvent = oEvent || window.event;
+        if(document.all){
+            oEvent.cancelBubble = true;
+        }else{
+            oEvent.stopPropagation();
+        }
+        document.onclick = null;
+        
+		// 隐藏tag提示框
+        this.onmouseout=function(){
+		    document.onclick = function(){
+		        //隐藏层代码
+		    	if($('old').style.display=='block')
+		            $('old').style.display='none';
+		    };
+        }
+    };
+
+
 }
 
 </script>
