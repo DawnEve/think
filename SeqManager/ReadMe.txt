@@ -317,3 +317,10 @@ http://www.thinkphp.cn/topic/8684.html
     //从tag_name字符串到tag_ids
     $str="protein100,cd47,Good";
     $rs=A('Tag','Logic')->get_tag_ids($str);
+    
+//TODO 盒子内的坐标没有处理！前台js验证脚本。
+
+
+    
+
+    
