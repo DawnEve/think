@@ -377,7 +377,10 @@ substr_count($haystack, $needle [,$offset [,$length]])
 
 >>v0.5.8 Oligo页面:del($id)。Recycle/showlist/tb_name/oligo.html 原来第一列是No.编号，现在改为id。
     
-
-
+>>v0.5.9 Oligo页面:upd($id); upd()视图中使用了自定义的Mytag标签扩展。
+    <html:select name='cate_id' options="cate_list" selected="cate_id" />
+        使用了自定义的Mytag.class.php 
+    <Mytag:html_options name='cate_id' options="cate_list" selected="cate_id" />
+    
 
 

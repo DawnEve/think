@@ -91,14 +91,7 @@ array(22) {
            //dump($_FILES['file_ids']['size'][0]);die();
            if (!empty($_FILES) && isset($_FILES["file_ids"]) && $_FILES["file_ids"]["size"][0]>0){
 	           $file_ids_arr=A('File')->upload();
-	            /*
-					array(3) {
-					  [0] => string(2) "40"
-					  [1] => string(2) "41"
-					  [2] => string(2) "42"
-					}
-	             * */
-	            $file_ids=implode(',',$file_ids_arr);//"1,2,3"; 
+	           $file_ids=implode(',',$file_ids_arr);//"1,2,3"; 
            }
            
            //从tag_name字符串到tag_ids
@@ -157,8 +150,53 @@ array(22) {
     }
     
     public function upd($id){
-        getName();
+    	$oligo_id=$id;
+        //1.如果是post提交，则保存数据
+        $user=session('user');
+        $uid=$user['mg_id'];
+        if(!empty($_POST)){
+           $md=M('Oligo');
+           $data=array(
+                'oligo_id'=>$id,
+                'fr_name'=>I('fr_name'),
+                'fr_place'=>I('fr_place'),
+                'fr_note'=>I('fr_note'),
+           
+                'fr_mod_time'=>time(),
+           );
+           //dump($data);die();
+           
+           if($md->save($data)){
+               $this->success('成功',U('showlist'));
+           }else{
+               $this->error('失败！'.$md->getError(), U('showlist'));
+           }
+           die();
+        }
+        
+        //2.如果没有post数据，则显示表单      
+        $info=D('Oligo')->getDetail($uid,$oligo_id);
+        $this->assign('info',$info);
+        
+        //debug($info);
+        $this->assign('cate_id',$info['cate_id']);//fr_id
+        $this->assign('fr_id',$info['fr_id']);//fr_id
+        $this->assign('box_id',$info['box_id']);//box_id
+        //debug($info);
+        
+        //2.1获取分类数据
+        $this->assign('cate_list',getlist('cate'));
+        //2.2获取标签数据
+        $this->assign('tag_list',getlist('tag'));
+        //2.3获取冰箱数据
+        $this->assign('fridge_list',getlist('fridge','fr',1));
+        //2.4获取盒子数据
+        $this->assign('box_list',getlist('box'));
+        
+        $this->display();
     }
+    
+    
     
     public function del($id){
        //放到回收站
@@ -175,6 +213,8 @@ array(22) {
             $this->error('失败'.$md->getError(), U('showlist'));
        }
     }
+    
+    
     
     public function search(){
         getName();
