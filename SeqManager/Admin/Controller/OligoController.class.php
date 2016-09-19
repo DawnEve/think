@@ -30,8 +30,20 @@ class OligoController extends AdminController {
            }
            
            //文件上传
-           $file_ids="1,2,3";//TODO 
-           
+            //上传文件、保存文件名和地址到数据库、返回文件id
+           if(empty($_FILES)){
+           	   $file_ids='';
+           }else{
+	           $file_ids_arr=A('File')->upload();
+	            /*
+					array(3) {
+					  [0] => string(2) "40"
+					  [1] => string(2) "41"
+					  [2] => string(2) "42"
+					}
+	             * */
+	            $file_ids=implode(',',$file_ids_arr);//"1,2,3"; 
+           }
            
            //拼接数据
            $data=array(

@@ -239,4 +239,18 @@ array(4) {
         $m=getlist('box');
         dump($m);
     }
+    
+    
+    function upload(){
+        //0.如果没有提交，则显示表单
+        if(empty($_FILES)){
+           $this->display();
+           //die();
+        }
+        
+        //上传文件、保存文件名和地址到数据库、返回文件id
+        $file_ids=A('File')->upload();
+        dump($$file_ids);
+    }
+    
 }

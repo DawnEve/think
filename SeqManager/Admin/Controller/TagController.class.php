@@ -23,10 +23,11 @@ class TagController extends AdminController {
         if(!empty($_POST)){
            //获取数据
            $user=session('user');
+           $uid=$user['mg_id'];
            $tag_name=I('tag_name');
            
            //保存数据
-           $md=D('Tag');
+           $md=M('Tag');
            
            //如果同名条目已经存在，则添加失败
            $rs_exist = $md->where("tag_uid = $uid AND tag_name= '".$tag_name."'")->select();

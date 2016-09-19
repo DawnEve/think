@@ -265,6 +265,40 @@ $r2=mysql_fetch_array($result);
 
     调用 $m=getlist('manager','mg');
 
+>>v0.5.1 Oligo页面 add()。上传文件！File数据表添加数据size type ext
+    1.多文件上传：缺少添加js代码；
+    2.标签添加：缺少用户优化功能。
+
+(1)
+    <img src="/Public/Uploads/20160918/57de9c2803c53.jpg">
+    保存路径file_path= Uploads/20160918/57de9c2803c53.jpg
+    原始名字name= island.jpg
+    key 附件上传的表单名称:photo
+    savepath 上传文件的保存路径:Uploads/20160918/
+    name 上传文件的原始名称:island.jpg
+    savename 上传文件的保存名称:57de9c2803c53.jpg
+    size 上传文件的大小:73629
+    type 上传文件的MIME类型:image/jpeg
+    ext 上传文件的后缀类型:jpg
+    
+[TPbug] call_user_func() expects parameter 1 to be a valid callback, 
+no array or string given F:\xampp\htdocs\think\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+[TPbug:url]http://seq.dawneve.cc/Admin/Test/upload
+[fix] if($this->callback) $data = call_user_func($this->callback, $file);
+
+(2)
+圆角按钮样式：http://bbs.lampbrother.net/read-htm-tid-149269.html
+
+(3)
+ThinkPHP批量插入数据addAll(),如何获得数据的受影响行数！
+http://www.thinkphp.cn/topic/8684.html
+
+(4)数组和字符串互相转换
+    $s1='Mon-Tue-Wed-Thu-Fri';
+　　$days_array=explode('-',$s1);
+　　$days_array 变量现在是一个有5个元素的数组，其元素 Mon 的索引为0，Tue 的索引为1，等等。
+　　$s2=implode(',',$days_array);
+
 
 
 

@@ -10,6 +10,7 @@ deploy_key_rsa
 # dirs
 backup
 dustbin
+Uploads
 
 #zip(s)²»±¸·İ
 *.rar
