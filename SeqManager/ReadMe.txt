@@ -250,7 +250,7 @@ $r2=mysql_fetch_array($result);
     
     
     /**
-     * 更好用的获取列表的函数
+     * 更好用的获取列表的函数 goodcode
      */
     //获取数据列表array(1=>'1号冰箱',2=>'2号冰箱');
     function getList($tb_name, $tb_prefix=null,$uid=0){
@@ -323,9 +323,16 @@ http://www.thinkphp.cn/topic/8684.html
 
 >>v0.5.4 Oligo页面 add():单击显示tag提示框，鼠标移出来提示框消失。
 >>v0.5.5 解决回收站泄露问题。
-    auth,role,manager都添加了_uid属性。
-        回收站中统计和显示都使用_uid和condition。
+    (1)auth,role,manager都添加了_uid属性。
+    (2)回收站中统计和显示都使用_uid和condition。
 
-    >>v0.5.6 Oligo页面 showlist():  
-
+>>v0.5.6 Oligo页面 showlist():  (1)全部显示列表，(2)单击分类，只显示该分类的列表；
+    todo (3)单击标签，显示该标签的列表
     
+最好用的一句话
+<?php 
+    if(isset($hint_text)){ echo '->'.$hint_text; }
+?>
+
+
+
