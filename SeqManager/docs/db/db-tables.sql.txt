@@ -14,6 +14,11 @@ UNIQUE KEY `auth_name` (`auth_name`)
 alter table wjl_auth add `auth_time` int(10) default 1473822830;#  after `auth_level`;
 alter table wjl_auth add `auth_mod_time` int(10) default 1473822831;
 
+
+alter table wjl_auth add `auth_uid` smallint(6) default 1;
+alter table wjl_role add `role_uid` smallint(6) default 1;
+alter table wjl_manager add `mg_uid` smallint(6) default 1;
+
 alter table wjl_auth add `condition` smallint(1) NOT NULL DEFAULT '1';# 正常为1，进回收站为0，回收站内可删除或恢复
 alter table wjl_role add `condition` smallint(1) NOT NULL DEFAULT '1';# 正常为1，进回收站为0，回收站内可删除或恢复
 alter table wjl_manager add `condition` smallint(1) NOT NULL DEFAULT '1';# 正常为1，进回收站为0，回收站内可删除或恢复

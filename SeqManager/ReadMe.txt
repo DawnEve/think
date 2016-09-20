@@ -322,6 +322,10 @@ http://www.thinkphp.cn/topic/8684.html
 
 
 >>v0.5.4 Oligo页面 add():单击显示tag提示框，鼠标移出来提示框消失。
->>v0.5.5 Oligo页面 showlist():  
+>>v0.5.5 解决回收站泄露问题。
+    auth,role,manager都添加了_uid属性。
+        回收站中统计和显示都使用_uid和condition。
+
+    >>v0.5.6 Oligo页面 showlist():  
 
     

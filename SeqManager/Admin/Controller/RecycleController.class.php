@@ -7,14 +7,19 @@ class RecycleController extends AdminController {
         //getName();
         //数据表名字和表前缀
         $tables=$this->getTables();
+    	//当前表的字段前缀
+    	$prefix=$tables[$tb_name];
+    	$this->assign('prefix',$prefix);
+    	
+   		$user=session('user');
     	if(!empty($tb_name)){
     		//当前表
     		$this->assign('tb_name',$tb_name);
-    		//当前表的字段前缀
-    		$prefix=$tables[$tb_name];
-    		$this->assign('prefix',$prefix);
     		//删除的数据
-    		$data[$tb_name]=M($tb_name)->where('`condition`=0')->order($prefix.'_mod_time DESC')->select();
+    		$data[$tb_name]=M($tb_name)
+    		      ->where('`condition`=0 and '.$prefix.'_uid='.$user['mg_id'])
+    		      ->order($prefix.'_mod_time DESC')
+    		      ->select();
     		$this->assign('data',$data[$tb_name]);
     		//dump($data['box']);
 
@@ -25,7 +30,11 @@ class RecycleController extends AdminController {
 	        //对表格进行循环统计
 	        $data=array();
 	        foreach($tables as $tb=>$value){
-	            $data[$tb]=M($tb)->where('`condition`=0')->count();
+	        	$prefix2=$tables[$tb];
+	            $data[$tb]=M($tb)
+	               //->where('`condition`=0')
+	               ->where('`condition`=0 and '.$prefix2.'_uid='.$user['mg_id'])
+	               ->count();
 	        }
 	        /*
 	         array(10) {
@@ -103,7 +112,7 @@ class RecycleController extends AdminController {
         if($user['mg_id']==1){
             $data2=array(
                 'fridge'=>'fr',
-                'auth'=>'auth','role'=>'role','manager'=>'manager',
+                'auth'=>'auth','role'=>'role','manager'=>'mg',
             );
             $data=array_merge($data,$data2);
         }
