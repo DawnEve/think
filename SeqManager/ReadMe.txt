@@ -375,8 +375,8 @@ substr_count($haystack, $needle [,$offset [,$length]])
 /$haystack表示母字符串，$needl表示要查找的字符
 //$offset表示查找的起点,$length表示查找的长度,均为可选参数
 
-
-
+>>v0.5.8 Oligo页面:del($id)。Recycle/showlist/tb_name/oligo.html 原来第一列是No.编号，现在改为id。
+    
 
 
 

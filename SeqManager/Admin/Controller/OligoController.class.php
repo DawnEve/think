@@ -156,12 +156,24 @@ array(22) {
         $this->display();
     }
     
-    public function upd(){
+    public function upd($id){
         getName();
     }
     
-    public function del(){
-        getName();
+    public function del($id){
+       //放到回收站
+       $md=M('Oligo');
+       //$rs=$mg->delete($mg_id);//彻底删除
+       $rs=$md->save(array(
+            'oligo_id'=>$id,
+            'oligo_mod_time'=>time(),
+            'condition'=>0,//0 进入回收站
+       ));
+       if($rs>0){
+            $this->success('成功放到回收站',U('showlist'));
+       }else{
+            $this->error('失败'.$md->getError(), U('showlist'));
+       }
     }
     
     public function search(){

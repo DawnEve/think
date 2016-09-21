@@ -20,8 +20,11 @@ class RecycleController extends AdminController {
     		      ->where('`condition`=0 and '.$prefix.'_uid='.$user['mg_id'])
     		      ->order($prefix.'_mod_time DESC')
     		      ->select();
-    		$this->assign('data',$data[$tb_name]);
-    		//dump($data['box']);
+    		$info=$data[$tb_name];
+    		$this->assign('data',$info);
+    		$this->assign('nums',count($info));
+    		$this->assign('prefix',$prefix);
+    		//debug($data);
 
             //1.如果具体表格，则使用模板2
     		$this->display(ACTION_NAME . '2');
