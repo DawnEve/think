@@ -37,6 +37,6 @@ class AdminController extends Controller {
     
     function _empty(){
         echo CONTROLLER_NAME.'/'.ACTION_NAME . ' is Invalid! <hr>该功能正在开发中.<br>
-            Please contace JimmyMall@163.com for help.';
+            Please contact JimmyMall@163.com for help.';
     }
 }

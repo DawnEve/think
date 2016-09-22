@@ -26,7 +26,7 @@ class ApiController extends Controller {
     }
     
     //ajax返回数据表数据
-    function cate($tb_name,$xx){
+    function cate(){
     	if(IS_AJAX){//判读是否为post提交过了
 	       $data=array(
 	        'username'=>I('username'),
@@ -36,7 +36,7 @@ class ApiController extends Controller {
 	      $data_send=$data;
     	}
       
-        $this->ajaxReturn(M($tb_name)->select());
+        $this->ajaxReturn(M('cate')->select());
     }
     
     

@@ -408,7 +408,7 @@ id  file_ids
 dev branch 开发零碎功能，凑成一个模块了在commit到master分支上。
 ================================================
 >>dev0.6.2 Oligo/add() 使用自定义Mytag标签库修正。
-
+>>dev0.6.3 Search/index() 怎么搜索呢？无解。。。
 
 
 
