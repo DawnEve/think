@@ -53,8 +53,42 @@
         
         
 ==================================================
+Oligo/upd
 --------------------------------------------------
+<div id="file_list">
+    <span>
+        <input type="file" name="file_ids[]">
+        <a href="javascript:void(0);" onclick="del_file_btn(this)">删除</a>
+        <br>
+    </span>
+    
+    <span>
+        <input type="file" name="file_ids[]">
+        <a href="javascript:void(0);" onclick="del_file_btn(this)">删除</a>
+        <br>
+    </span>
+    
+    <span>
+        <input type="file" name="file_ids[]">
+        <a href="/Public/xxx.pdf" onclick="del_file_btn(this)">删除</a>
+        <br>
+    </span>
+                        
+                        
+</div>
 
+
+$file_links .= '附件'.($i++).': <a href="/Public/'.$file['file_path'].'">'.$file['file_name'].'</a><br>';
+                }
+                
+$file_links .= '附件'.($i++).': <a href="/Public/'.$file['file_path'].'">'.$file['file_name'].'</a><br>';
+                }           
+
+<span>
+附件1: <a href="/Public/Uploads/20160919/57df9f258845a.jpeg">20130717130913_WSUWJ.thumb.700_0.jpeg</a>
+&nbsp;&nbsp;<a href="javascript:void(0);" onclick="del_file_btn(1)">删除</a>
+<br />
+</span>
         
 ==================================================
 --------------------------------------------------

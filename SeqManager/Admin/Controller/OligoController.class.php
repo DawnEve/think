@@ -69,14 +69,12 @@ array(22) {
     public function add(){
         //1.如果有post数据
         if(!empty($_POST)){
-           //获取数据
+           //1.1获取数据
            $user=session('user');
            $oligo_name=I('oligo_name');
            
-           //保存数据
+           //1.2如果同名条目已经存在，则添加失败
            $md=M('Oligo');
-           
-           //如果同名条目已经存在，则添加失败
            $uid=$user['mg_id'];
            $rs_exist = $md->where("oligo_uid = $uid AND oligo_name= '".$oligo_name."'")->select();
            if(!empty($rs_exist)){
@@ -84,8 +82,7 @@ array(22) {
                exit();
            }
            
-           //文件上传
-            //上传文件、保存文件名和地址到数据库、返回文件id
+           //1.3上传文件、保存文件名和地址到数据库、返回文件id
            $file_ids='';
            //判断是否有文件，且文件大小超过0
            //dump($_FILES['file_ids']['size'][0]);die();
@@ -94,11 +91,11 @@ array(22) {
 	           $file_ids=implode(',',$file_ids_arr);//"1,2,3"; 
            }
            
-           //从tag_name字符串到tag_ids
+           //1.4从tag_name字符串到tag_ids
            $str=I('tag_ids');//"protein100,cd47,Good";
            $tag_ids=A('Tag','Logic')->get_tag_ids($str);
            
-           //拼接数据
+           //1.5拼接其他数据
            $data=array(
                 //核心信息
                 'oligo_name'=>$oligo_name,
@@ -123,11 +120,11 @@ array(22) {
                 'oligo_time'=>time(),
                 'oligo_mod_time'=>time(),
            );
-                      
+           //1.6提交数据           
            $w=$md->create($data);
-           
            $rs=$md->add();
-           //判断结果
+           
+           //1.7判断提交是否成功
            if($rs){
                $this->success('成功！',U('showlist'));
            }else{
@@ -149,25 +146,93 @@ array(22) {
         $this->display();
     }
     
-    public function upd($id){
+    public function upd($id=0){
+    	if($id==0){
+    	   echo '错误：请指定id!<br>';
+    	   myBtn_back();
+    	   exit();
+    	}
+    	
     	$oligo_id=$id;
-        //1.如果是post提交，则保存数据
         $user=session('user');
         $uid=$user['mg_id'];
+        $md=M('Oligo');
+        
+        //1.如果是post提交，则保存数据
         if(!empty($_POST)){
-           $md=M('Oligo');
+            //1.1获取数据
+            $oligo_name=I('oligo_name');
+            
+            //1.2如果同名条目已经存在，则添加失败
+           $rs_num = $md->where("oligo_uid = $uid AND oligo_name= '".$oligo_name."'")->count();
+           if($rs_num>1){
+               //$this->error('添加失败！该样品名已经存在.(可能在回收站)', U(''));
+               echo '添加失败！该样品名已经存在.(可能在回收站)';
+               myBtn_back();
+               exit();
+           }
+           //1.3上传文件、保存文件名和地址到数据库、返回文件id【老的文件id不变吗？】
+           $file_ids='';
+           //判断是否有文件，且文件大小超过0
+           //dump($_FILES['file_ids']['size'][0]);die();
+               // debug($_FILES);     
+           if (!empty($_FILES) && isset($_FILES["file_ids"]) && $_FILES["file_ids"]["size"][0]>0){
+               $file_ids_arr=A('File')->upload();
+               $file_ids=implode(',',$file_ids_arr);//"1,2,3"; 
+           }
+                //debug($file_ids);//0
+           //1.3.5 获取以前的文件名字符串
+           $old_file_ids_arr=$md->field('file_ids')->find($id);
+           $old_file_ids=$old_file_ids_arr['file_ids'];
+           //debug($old_file_ids);//19
+           //1.3.6新旧字符串拼接
+           	//debug(strlen($old_file_ids));
+           if(strlen($old_file_ids)>0){
+           	    if(strlen($file_ids)>0){
+	                $file_ids = $old_file_ids.','.$file_ids; //拼接上old_file_ids
+           	    }else{
+           	        $file_ids=$old_file_ids;
+           	    }
+           }
+           //debug($file_ids);
+           //1.4从tag_name字符串到tag_ids
+           $str=I('tag_ids');//"protein100,cd47,Good";
+           $tag_ids=A('Tag','Logic')->get_tag_ids($str);
+           
+           //1.5拼接其他数据
            $data=array(
-                'oligo_id'=>$id,
-                'fr_name'=>I('fr_name'),
-                'fr_place'=>I('fr_place'),
-                'fr_note'=>I('fr_note'),
+                'oligo_id'=>$oligo_id,
+                //核心信息
+                'oligo_name'=>$oligo_name,
+                'oligo_order_no'=>I('oligo_order_no'),
+                'oligo_sequence'=>I('oligo_sequence'),
+                'oligo_en_site'=>I('oligo_en_site'),
+                'oligo_note'=>I('oligo_note'),
+                'file_ids'=>$file_ids,
            
-                'fr_mod_time'=>time(),
+                //类别信息
+                'cate_id'=>I('cate_id'),
+                'tag_ids'=>$tag_ids,
+                
+                //位置信息
+                'fridge_id'=>I('fridge_id'),
+                'box_id'=>I('box_id'),
+                'place'=>I('place'),
+           
+                //其他信息
+                'oligo_uid'=>$user['mg_id'],
+                'condition'=>1,
+                //'oligo_time'=>time(),
+                'oligo_mod_time'=>time(),
            );
-           //dump($data);die();
+
+           //debug($data);
+           //1.6提交数据           
+           $rs =$md->save($data);
            
-           if($md->save($data)){
-               $this->success('成功',U('showlist'));
+           //1.7判断提交是否成功
+           if($rs){
+               $this->success('成功！',U('showlist'));
            }else{
                $this->error('失败！'.$md->getError(), U('showlist'));
            }

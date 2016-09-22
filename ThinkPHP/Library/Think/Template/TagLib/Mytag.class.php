@@ -32,10 +32,12 @@ class Mytag extends TagLib{
         $options    =   $tag['options'];
         $selected   =   $tag['selected'];
         //处理数据
-        $parseStr   =   '<?php echo "<select name=$'.$name.'>"; if(is_array($'.$options.')): foreach($'.$options.' as $k=>$v):';
+        $parseStr   = '<select name="'.$name.'">';
+        $parseStr  .=   '<?php if(is_array($'.$options.')): foreach($'.$options.' as $k=>$v):';
         $parseStr  .=   ' $sel_text="";if($k==$'. $selected .'){ $sel_text=" selected=selected "; }';
         $parseStr  .=   ' echo "<option $sel_text value =$k>$v</option>\n";';
-        $parseStr  .=   ' endforeach; endif; echo "</select>"; ?>';
+        $parseStr  .=   ' endforeach; endif; ?>';
+        $parseStr  .=   '</select>';
         //返回
         if(!empty($parseStr)) {
             return $parseStr;

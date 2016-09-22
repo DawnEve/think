@@ -262,4 +262,17 @@ array(4) {
         
         dump($rs);
     }
+    
+    function str(){
+    	$s="string 'array (
+  'meta_title' => '养生调理',
+  'meta_keywords' => '养生调理',
+  'meta_description' => '养生调理',
+)' (length=120)
+    	";
+    	
+        $w=M('cate')->find(1);
+        echo '<pre>';
+        print_r($s);
+    }
 }

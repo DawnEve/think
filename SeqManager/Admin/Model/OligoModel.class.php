@@ -36,7 +36,7 @@ class OligoModel extends Model {
         //改造tag_ids
         $tag_list=getList('tag');
         //循环改造
-        foreach($info as $k=>$v){
+        foreach($info as $k=>$v){ //dump($info);
             //$cate_id=$data['cate_id'];
             $info[$k]['cate_name']=$cate_list[$v['cate_id']];
             
