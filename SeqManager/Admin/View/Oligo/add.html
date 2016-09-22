@@ -1,4 +1,4 @@
-<taglib name="html" />
+<taglib name="Mytag" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
@@ -111,7 +111,7 @@ function add_file_btn(){
                 <tr>
                     <td>设置分类:</td>
                     <td>
-                        <html:select name='cate_id' options="cate_list" />
+                        <Mytag:html_options name="cate_id" options="cate_list" />
                     </td>
                 </tr>
                 <tr>
@@ -171,13 +171,13 @@ function add_file_btn(){
                 <tr>
                     <td>所在冰箱:</td>
                     <td>
-                        <html:select name='fridge_id' options="fridge_list" />
+                        <Mytag:html_options name="fridge_id" options="fridge_list" />
                     </td>
                 </tr>
                 <tr>
                     <td>所在盒子:</td>
                     <td>
-                        <html:select name='box_id' options="box_list" />
+                        <Mytag:html_options name="box_id" options="box_list" />
                     </td>
                 </tr>
                 <tr>
