@@ -6,7 +6,34 @@ use Think\Controller;
 //class FileController extends AdminController {
 class FileController extends Controller {
     public function showlist(){
-        getName();
+    	$user=session('user');
+    	$uid=$user['mg_id']; 
+        //文件列表
+        $md=M('File');
+        $info=$md
+            ->where('`condition`>0 and file_uid='.$uid)  
+            ->select();
+        $this->assign('info',$info);
+        $this->assign('info_num',count($info));
+    	/*
+array(18) {
+  [0] => array(13) {
+    ["file_id"] => string(1) "9"
+    ["file_name"] => string(7) "vr1.jpg"
+    ["file_note"] => NULL
+    ["file_path"] => string(34) "Uploads/20160919/57dfc32e5807b.jpg"
+    ["size"] => string(6) "140665"
+    ["type"] => string(10) "image/jpeg"
+    ["ext"] => string(3) "jpg"
+    ["file_time"] => string(10) "1474282286"
+    ["file_mod_time"] => string(10) "1474282286"
+    ["cate_id"] => NULL
+    ["tag_ids"] => NULL
+    ["file_uid"] => string(1) "5"
+    ["condition"] => string(1) "1"
+  }
+    	 * */
+        $this->display();
     }
     
     /*
@@ -16,7 +43,7 @@ class FileController extends Controller {
     */
     
     public function add(){
-        getName();
+    	$this->display();
     }
     
     public function upd(){

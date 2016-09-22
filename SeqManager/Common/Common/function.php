@@ -44,6 +44,24 @@ function getList($tb_name, $tb_prefix=null,$uid=0){
 
 
 /**
+ * 
+ */
+function human($str){
+	//dump($b);
+    if($str<1000){
+        return $str . ' B';
+    }elseif($str<1e6){
+        return round($str/1e3,1) . ' KB';
+    }elseif($str<1e9){
+        return round($str/1e6,1) . ' MB';
+    }
+    
+    return $str;
+    
+}
+
+
+/**
  * debug专用
  * 
  */
