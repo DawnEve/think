@@ -56,22 +56,25 @@
         <div style="font-size: 13px; margin: 10px 5px;">
             <table class="table_a" border="1" width="100%">
                 <tbody><tr style="font-weight: bold;">
-                        <td>ID</td>
-                        <td>文件名称</td>
-                        <td>备注</td>
-                        <td>分类</td>
-                        <td>标签</td>
-                        <td><span class=light>(创建时间)</span><br>上次修改时间</td>
-                        <td >大小(size)</td>
-                        <td >类型(type)</td>
-                        <td >后缀(ext)</td>
-                        <td >操作</td>
+                        <th>ID</th>
+                        <th>文件名称</th>
+                        <th>备注</th>
+                        <th>分类</th>
+                        <th>标签</th>
+                        <th><span class=light>(创建时间)</span><br>上次修改时间</th>
+                        <th>大小(size)</th>
+                        <th>类型(type)</th>
+                        <th>后缀(ext)</th>
+                        <th>操作</th>
                     </tr>
                     
                   <foreach name="info" item="vo" >
                      <tr>
                         <td>{$vo.file_id}</td>
-                        <td><a titile="点击显示该文件内的盒子" href="<?php echo '/Public/'.$vo['file_path']; ?>">{$vo.file_name}</a></td>
+                        <td>{$vo.file_name}<br>
+                            (<a title="点击查看详情" href="{:U('detail',array('id'=>$vo['file_id']))}">详情</a> | 
+                            <a title="右击->另存为 即可保存" href="<?php echo '/Public/'.$vo['file_path']; ?>">下载</a>)
+                        </td>
                         <td><a href="{:U('showlist',array('by'=>'cate','id'=>$vo['cate_id']))}">{$vo.cate_name}</a></td>
                         <td>{$vo.tag_name_links}</td>
                         <td>{$vo.file_note}</td>

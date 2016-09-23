@@ -424,8 +424,9 @@ dev branch 开发零碎功能，凑成一个模块了在commit到master分支上
 
 >>dev0.6.9 Oligo/showlist()标准化接口showlist/by/tag/id/xx
 
-
-
+>>dev0.7.0 File/showlist() 文件名点开显示详情，旁边是下载。vr3.jpg (详情 | 下载)
+    (1)添加File/detail权限，用于显示文件信息，给研究生、老板开放该权限。
+    (2)修改View/File/showlist.html相关链接。
 
 
 

@@ -36,11 +36,12 @@ array(18) {
         $this->display();
     }
     
-    /*
-    public function show(){
+    
+    public function detail($id){
         getName();
+        echo $id;
     }
-    */
+    
     
     public function add(){
     	$this->display();
