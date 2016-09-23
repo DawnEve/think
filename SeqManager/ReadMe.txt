@@ -428,8 +428,36 @@ dev branch 开发零碎功能，凑成一个模块了在commit到master分支上
     (1)添加File/detail权限，用于显示文件信息，给研究生、老板开放该权限。
     (2)修改View/File/showlist.html相关链接。
 
+>>dev0.7.1 思考搜索页面怎么实现。Help/about()页面的版权声明。
+比如
+File/search,  Search/index/in/File/by/xx1/wd/xx2
+Seq/search,   Search/index/in/Seq/by/xx1/wd/xx2
+Oligo/search, Search/index/in/Oligo/by/xx1/wd/xx2
+以及Search/index怎么搞。
+怎么搞？
+     (1) 2种分类方式by：cate、tag、keyword，默认是keyword
+     (2) 3种查询结果搜索in：seq/oligo/file，默认是seq
+     (3) 关键词是wd ，难点是怎么分词？
+     
+
+    >>dev0.7.2 File/detail() 仿照 Oligo/detail() 
 
 
+
+
+
+
+    >>dev0.7.0 File/detail($id)
+
+
+
+
+
+==============================================
+todo
+1.搜索结果的显示
+2.登录页面GUI
+3.
 
 
 
