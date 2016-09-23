@@ -147,9 +147,10 @@ class FileModel extends Model {
     
     function getData($by,$id,$uid=0){
     	//uid
-    	$user=session('user');
-        $ss_uid=$user['mg_id'];
-        if($uid==0) $uid=$ss_uid; //debug($id);
+        if($uid==0){
+	    	$user=session('user');
+	        $uid=$user['mg_id'];
+        }
         
         //如果没有by
         if($by=='' or $id==0){

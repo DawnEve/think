@@ -23,7 +23,7 @@
     <body>
        <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
             <tr height=28>
-                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：位置管理->引物列表 
+                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：位置管理-><a href='{:U("showlist")}'>引物列表</a> 
 <?php 
     if(!empty($hint_text)){ echo '->'.$hint_text; }
 ?>              
@@ -61,7 +61,7 @@
                         </td>
                         <td>{$vo.oligo_order_no}</td>
                         <td>
-                            <a href="{:U('Oligo/showlist', array('cate_id'=>$vo['cate_id']))}">
+                            <a href="{:U('Oligo/showlist', array('by'=>'cate','id'=>$vo['cate_id']))}">
                             {$vo.cate_name}</a>
                         </td>
                         <td>{$vo.tag_name_links}</td>

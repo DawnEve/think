@@ -4,33 +4,41 @@ use Think\Model;
 
 class OligoModel extends Model {
 
-    function getData($uid,$cate_id,$tag_id){
-        if($cate_id>0){
-            $info=$this
-               ->where('`condition`>0 and oligo_uid='.$uid.' and cate_id='.$cate_id)
-               ->select(); 
-        }elseif($tag_id>0){
+    //function getData($uid,$cate_id,$tag_id){
+	function getData($by,$id,$uid=0){
+		//uid
+        if($uid==0){
+            $user=session('user');
+            $uid=$user['mg_id'];
+        }
+        
+	    //如果没有by
+        if($by=='' or $id==0){
+            $info = $this
+                ->where('`condition`>0 and oligo_uid='.$uid)  
+                ->select();
+            return $this->id2name($info);
+        }elseif($by=='cate'){ //debug($id);
+            $info = $this
+                ->where('`condition`>0 and oligo_uid='.$uid.' and cate_id='.$id)  
+                ->select();
+            return $this->id2name($info,$id);
+        }elseif($by=='tag'){
         	//tag的bug已经fiexed，求助 http://tieba.baidu.com/p/4790195093
         	//mysql语句，tag_ids要匹配带有5的，不能是55
         	//比如可以是 = 5 =5,6 =2,3,5  =3,4,5,6,7 这几种情况，不能是=3,55,60
-            $info=$this
-//               ->where('`condition`>0 and oligo_uid='.$uid.' and tag_ids = '.$tag_id .' or tag_ids like "%'.$tag_id.'%"')
-               ->where('`condition`>0 and oligo_uid='.$uid.' and tag_ids REGEXP "(^|,)'.$tag_id .'($|,)"')
-               ->select(); 
-        }elseif($cate_id==0 and $tag_id==0){
-            $info=$this
-                ->where('`condition`>0 and oligo_uid='.$uid)
-                ->select(); 
+            $info = $this
+                ->where('`condition`>0 and oligo_uid='.$uid.' and tag_ids REGEXP "(^|,)'.$id.'($|,)"')  
+                ->select();
+                //tag_ids REGEXP '(^|,)5($|,)';
+            return $this->id2name($info,0,$id);
         }
-        
-        //返回结果
-        return $this->id2name($info,$cate_id,$tag_id);
     }
     
     
     
     //把cate_id和tag_ids换成cate名字、tag链接
-    function id2name($info,$cate_id=0,$tag_id=0){
+    function id2name($info,$cate_id=0,$tag_id=0){ 
         //改造cate_id
         $cate_list=getList('cate');
         //改造tag_ids
@@ -49,7 +57,7 @@ class OligoModel extends Model {
                    foreach($current_tag_id_list as $current_tag_id){
                        if(array_key_exists($current_tag_id,$tag_list)){
                            $current_tag_name=$tag_list[$current_tag_id];
-                           $info[$k]['tag_name_links'] .= "<a class=tag href='/admin/Oligo/showlist/tag_id/".$current_tag_id."'>".$current_tag_name."</a>";
+                           $info[$k]['tag_name_links'] .= "<a class=tag href='/Admin/Oligo/showlist/by/tag/id/".$current_tag_id."'>".$current_tag_name."</a>";
                            $info[$k]['tag_names'] .= $current_tag_name . ',';
                        }
                    }

@@ -422,7 +422,7 @@ dev branch 开发零碎功能，凑成一个模块了在commit到master分支上
      
 >>dev0.6.8 File/showlist():显示分类和标签，点击进行筛选。[接口例子]showlist/by/cate/id/xx
 
-
+>>dev0.6.9 Oligo/showlist()标准化接口showlist/by/tag/id/xx
 
 
 

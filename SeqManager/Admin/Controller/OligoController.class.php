@@ -3,20 +3,18 @@ namespace Admin\Controller;
 use Admin\Common\AdminController;
 
 class OligoController extends AdminController {
-    public function showlist($cate_id=0,$tag_id=0){
+    //public function showlist($cate_id=0,$tag_id=0){
+    public function showlist($by='',$id=0){
         $user=session('user');
         $uid=$user['mg_id'];
         $this->assign('uid',$uid);
         
-        $md=D('Oligo');
-        $data_all=$md->getData($uid,$cate_id,$tag_id);
-        $info=$data_all[0];
-//        $info=$md->where('`condition`=1 and oligo_uid=1')->select(); 
-        $this->assign('info',$info);
-        $this->assign('info_num',count($info));
+        $info=D('Oligo')->getData($by,$id); 
+        $this->assign('info',$info[0]);
+        $this->assign('info_num',count($info[0]));
         
         //类别提示语
-        $this->assign('hint_text',$data_all[1]);
+        $this->assign('hint_text',$info[1]);
         
         $this->display();
     }
