@@ -54,19 +54,20 @@ class ApiController extends Controller {
         $this->ajaxReturn(M($tb_name)->select());
     }
     
+    //Oligo/upd()中ajax删除文件
     function file($method,$id){
         if(IS_AJAX){//判读是否为post提交过了
            $data=array(
             'method'=>I('method'),
             'id'=>I('id'),
            );
-          $data_send=$data;
-        }
+          //$data_send=$data;
         
-        //删除文件
-        if($data['method']=='del'){
-	        $rs=D('File')->ajaxDel($id);
-	        $this->ajaxReturn($rs);
+          //删除文件
+          if($data['method']=='del'){
+	         $rs=D('File')->ajaxDel($id);
+	         $this->ajaxReturn($rs);
+          }
         }
     }
     

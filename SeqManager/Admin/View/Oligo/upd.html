@@ -70,7 +70,7 @@ function m$(s){return document.getElementById(s);}
 //文件删除按钮
 function del_file_btn(div,n){
 	if(n>0){
-		if(!confirm('确实要【彻底删除】该文件(id='+n+')吗?')){
+		if(!confirm('确实要把该文件(id='+n+')放到回收站吗?')){
 		    return false;
 		}
 
@@ -84,7 +84,7 @@ function del_file_btn(div,n){
 	        success: function( result ) {
 		       // console.log(result);
 		       if(result[0]==1){
-		    	    alert('成功删掉文件(id='+result[1]+')');
+		    	    alert('文件(id='+result[1]+')已经在回收站了。');
 			   }else{
 		    	    alert('失败:'+result[1]);
 		       }

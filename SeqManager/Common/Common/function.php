@@ -44,6 +44,7 @@ function getList($tb_name, $tb_prefix=null,$uid=0){
 
 
 /**
+ * 把文件大小换算成人类能识别的格式
  * 
  */
 function human($str){
@@ -54,9 +55,11 @@ function human($str){
         return round($str/1e3,1) . ' KB';
     }elseif($str<1e9){
         return round($str/1e6,1) . ' MB';
+    }elseif($str<1e12){
+        return round($str/1e9,1) . ' GB';
     }
     
-    return $str;
+    return $str . ' B';
     
 }
 

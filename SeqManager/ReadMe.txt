@@ -414,7 +414,9 @@ dev branch 开发零碎功能，凑成一个模块了在commit到master分支上
 
 >>dev0.6.5 File/add() 给出两个链接：添加测序结果、添加引物。
 
-
+>>dev0.6.6 Oligo/upd(): 文件删除改为修改file的condition=0，这样可以恢复。File/del()借助FileModel/ajaxDel()完成删除。
+其他3个不做，（1）删除文件（2）删除file中的记录；(3)删除Oligo中的file_ids中的记录id；
+    [TPbug]M('xx')->where("xx=xx")->select($id);//这里面的where会被忽略.
 
 
 

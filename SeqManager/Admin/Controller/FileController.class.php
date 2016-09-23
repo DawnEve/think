@@ -51,8 +51,19 @@ array(18) {
     }
     
     public function del($id){
-        $wjl=D('File')->ajaxDel($id);
-        dump($wjl);
+/*    	
+array(2) {
+  [0] => int(1)
+  [1] => string(1) "9"
+}
+*/
+       $arr=D('File')->ajaxDel($id);
+       $rs=$arr[0];
+       if($rs>0){
+            $this->success('成功放到回收站'.$rs.'个文件(id='.$id.')',U('showlist'));
+       }else{
+            $this->error('失败'.$arr[1], U('showlist'));
+       }
     }
     
     public function search(){

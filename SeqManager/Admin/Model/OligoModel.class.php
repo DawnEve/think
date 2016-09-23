@@ -91,9 +91,17 @@ class OligoModel extends Model {
         $file_links=''; 
         if(!empty($file_ids)){
             $current_file_id_list=explode(',',$file_ids); 
-            $file_data=M('File')->where('`condition`>0 and oligo_uid='.$uid)->select($file_ids); 
-            $i=1;
+            //debug($file_ids);//tring(8) "20,24,26"
+            $arr=explode(',',$file_ids); 
+            $file_ids_str=implode('","',$arr); 
             
+            //debug($file_ids_str);//"20","24","26"
+            
+            $file_data=M('File')->where('`condition`>0 and file_uid='.$uid.' and file_id in ("'.$file_ids_str.'")')->select(); 
+            //$file_data=M('File')->where('`condition`>0 and file_uid='.$uid)->select($file_ids); 
+            //debug($file_data);
+            
+            $i=1;
             foreach($file_data as $file){
 //            	debug($file);
                 if($withDel==true){
