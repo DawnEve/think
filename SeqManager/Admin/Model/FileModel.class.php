@@ -34,7 +34,6 @@ class FileModel extends Model {
         }
     	
         return array(0,'删除文件出错！请刷新重试~~~~~~~~~~~~~~');
-    	
     }
     
     //放到回收站
@@ -54,6 +53,7 @@ class FileModel extends Model {
        }
     }
     
+    
     //文件是否存在
     private function my_file_exists($url,$my_root='./Public/'){
         $file_path_real=$my_root . $url;
@@ -62,6 +62,7 @@ class FileModel extends Model {
         }
         return false;
     }
+    
     
     //获取文件详细信息
     function getDetail($id,$uid=0){
@@ -82,11 +83,12 @@ class FileModel extends Model {
     	
         //3.分类、标签数据
         $data=$this->id2name($data);
+        //die();
+        $data=$data[0];
         //debug($data);
         
     	//4.返回数据表和是否存在的数据
     	return $data[0];
-    	
     }
     
     
@@ -115,7 +117,7 @@ class FileModel extends Model {
                    foreach($current_tag_id_list as $current_tag_id){
                        if(array_key_exists($current_tag_id,$tag_list)){
                            $current_tag_name=$tag_list[$current_tag_id];
-                           $info[$k]['tag_name_links'] .= "<a class=tag href='/admin/Oligo/showlist/tag_id/".$current_tag_id."'>".$current_tag_name."</a>";
+                           $info[$k]['tag_name_links'] .= "<a class=tag href='/Admin/File/showlist/by/tag/id/".$current_tag_id."'>".$current_tag_name."</a>";
                            $info[$k]['tag_names'] .= $current_tag_name . ',';
                        }
                    }
@@ -127,7 +129,45 @@ class FileModel extends Model {
             $info[$k]['tag_names'] =rtrim($info[$k]['tag_names'] , ",");
         }
         
+        //产生类别提示语
+        $hint_text='';
+        if($cate_id>0){
+            $cate_name=$cate_list[$cate_id];
+            $hint_text='分类['.$cate_name.']';
+        }elseif($tag_id>0){
+            $tag_name=$tag_list[$tag_id];
+            $hint_text='标签['.$tag_name.']';
+        }
+        //debug($hint_text);
         //返回结果 数组
-        return $info;
+        //return $info;
+        return array($info,$hint_text);
+    }
+    
+    
+    function getData($by,$id,$uid=0){
+    	//uid
+    	$user=session('user');
+        $ss_uid=$user['mg_id'];
+        if($uid==0) $uid=$ss_uid; //debug($id);
+        
+        //如果没有by
+        if($by=='' or $id==0){
+	        $info = $this
+	            ->where('`condition`>0 and file_uid='.$uid)  
+	            ->select();
+	        return $this->id2name($info);
+        }elseif($by=='cate'){ //debug($id);
+            $info = $this
+                ->where('`condition`>0 and file_uid='.$uid.' and cate_id='.$id)  
+                ->select();
+            return $this->id2name($info,$id);
+        }elseif($by=='tag'){
+            $info = $this
+                ->where('`condition`>0 and file_uid='.$uid.' and tag_ids REGEXP "(^|,)'.$id.'($|,)"')  
+                ->select();
+                //tag_ids REGEXP '(^|,)5($|,)';
+            return $this->id2name($info,0,$id);
+        }
     }
 }

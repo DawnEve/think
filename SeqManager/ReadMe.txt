@@ -418,9 +418,9 @@ dev branch 开发零碎功能，凑成一个模块了在commit到master分支上
 其他3个不做，（1）删除文件（2）删除file中的记录；(3)删除Oligo中的file_ids中的记录id；
     [TPbug]M('xx')->where("xx=xx")->select($id);//这里面的where会被忽略.
 
->>dev0.6.7 File/upd(): 允许同名文件，仅仅靠file_id进行区分。
+>>dev0.6.7 File/upd(): 允许同名文件，仅仅靠file_id进行区分。 删除旧文件，提交新文件。
      
-
+>>dev0.6.8 File/showlist():显示分类和标签，点击进行筛选。[接口例子]showlist/by/cate/id/xx
 
 
 

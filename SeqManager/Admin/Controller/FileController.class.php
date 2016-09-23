@@ -5,16 +5,16 @@ use Think\Controller;
 
 //class FileController extends AdminController {
 class FileController extends Controller {
-    public function showlist(){
+    public function showlist($by='',$id=0){
     	$user=session('user');
     	$uid=$user['mg_id']; 
         //文件列表
-        $md=M('File');
-        $info=$md
-            ->where('`condition`>0 and file_uid='.$uid)  
-            ->select();
-        $this->assign('info',$info);
-        $this->assign('info_num',count($info));
+        //debug($id);
+        $info=D('File')->getData($by,$id); 
+        //debug($info);
+        $this->assign('hint_text',$info[1]);
+        $this->assign('info',$info[0]);
+        $this->assign('info_num',count($info[0]));
     	/*
 array(18) {
   [0] => array(13) {
@@ -95,13 +95,18 @@ array(18) {
            if (!empty($_FILES) && isset($_FILES["file_ids"]) && $_FILES["file_ids"]["size"][0]>0){
                //1.3.5 处理上传文件，覆盖旧文件：只更新文件、不更新表单
                $rs=A('File')->uploadFileTo($old_data['file_path'],$old_data['ext']);
-               if(!$rs){
-                 echo '上传失败';//TODO
+               if(!$rs[0]){
+                 //TODO
+                 echo '上传失败..'.$rs[1];
+                 
                }else{
 	               //1.3.6.执行数据库更新 size type ext 
-	               $data['size']=$rs[0]['size'];
-	               $data['type']=$rs[0]['type'];
-	               $data['ext']=$rs[0]['ext'];
+	               $rs=$rs[1][0];
+	               //debug($rs);
+	               $data['size']=$rs['size'];
+	               $data['type']=$rs['type'];
+	               $data['ext']=$rs['ext'];
+	               $data['file_path']=$rs['savepath'].$rs['savename'];
                
 	               $data['file_renew']=true;
                }
@@ -132,7 +137,7 @@ array(18) {
         $this->assign('info',$info);
         
         $this->assign('cate_id',$info['cate_id']);//cate_id
-        //debug($info);
+        
         
         //2.1获取分类数据
         $this->assign('cate_list',getlist('cate'));
@@ -174,12 +179,24 @@ array(2) {
         //3指定旧文件名
         $dlm='.'.$old_suffix;
         $old_name=rtrim($sub_arr[2],$dlm);
-        $upload->saveName=$old_name;//给上传的文件定义旧的名称
+        //$upload->saveName=$old_name.'pdf';//给上传的文件定义旧的名称
         //4.允许覆盖旧文件
         $upload->replace=true;
         
-        //5.执行上传
-        return $upload->upload();
+        //5 如果有旧文件，则先删掉旧文件
+        $real_path='./Public/'.$path;
+        if(file_exists($real_path)){
+            unlink($real_path);
+        }
+        
+        
+        //6.执行上传
+        $rs= $upload->upload();
+        if(!$rs){
+            return array(0,$upload->getError());
+        }else{
+            return array(1,$rs);
+        }
     }
     
     
@@ -190,9 +207,13 @@ array(2) {
             'savePath'=> 'Uploads/',
             'subName' => array('date', 'Ymd'),
         );
+        
         $upload = new \Think\Upload($config);// 实例化上传类    
-        $upload->maxSize   =     3145728 ;// 设置附件上传大小    
-        $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型    
+        //$upload->maxSize   =   3145728 ;// 设置附件上传大小    
+        $upload->maxSize   =     104857600;// 设置附件上传大小 100M以内   
+        $upload->exts = array('jpg', 'gif', 'png', 'jpeg',
+                'pdf','doc','docx','xls','xlsx','ppt','pptx',
+                'rar','zip');// 设置附件上传类型    
         //$upload->savePath  =      './Public/Uploads/'; // 设置附件上传目录    
         return $upload;
     }
