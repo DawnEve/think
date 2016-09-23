@@ -46,9 +46,103 @@ array(18) {
     	$this->display();
     }
     
-    public function upd(){
-        getName();
+    
+    
+    
+    public function upd($id){
+        if($id==0){
+           echo '错误：请指定id!<br>';
+           myBtn_back();
+           exit();
+        }
+        $file_id=$id;
+        $user=session('user');
+        $uid=$user['mg_id'];
+        $md=M('File');
+        
+        //1.如果是post提交，则保存数据
+        if(!empty($_POST)){
+            //dump($_POST);
+            //dump($_FILES);
+            //1.0 文件名不能重名
+            $file_name=I('file_name');
+            
+            //[文件名允许同名] 1.2如果同名条目已经存在，则添加失败
+/*           $rs_num = $md->where("file_uid = $uid AND file_name= '".$file_name."'")->count();
+           debug($rs_num);
+           if($rs_num>1){
+               //$this->error('添加失败！该样品名已经存在.(可能在回收站)', U(''));
+               echo '添加失败！该文件名已经存在.(可能在回收站)';
+               myBtn_back();
+               exit();
+           }*/
+           
+           
+           //1.3 获取其他数据，处理上传文件：
+           $old_data=M('File')->find($file_id); //debug($old);//14
+           $data=array(
+                'file_id'=>$old_data['file_id'],
+                'file_name'=>I('file_name'),
+                'file_note'=>I('file_note'),
+                'cate_id'=>I('cate_id'),
+           
+           
+                'file_mod_time'=>time(),
+                'file_renew'=>false,
+           );
+           
+           //1.3.5判断是否有文件，且文件大小超过0
+           if (!empty($_FILES) && isset($_FILES["file_ids"]) && $_FILES["file_ids"]["size"][0]>0){
+               //1.3.5 处理上传文件，覆盖旧文件：只更新文件、不更新表单
+               $rs=A('File')->uploadFileTo($old_data['file_path'],$old_data['ext']);
+               if(!$rs){
+                 echo '上传失败';//TODO
+               }else{
+	               //1.3.6.执行数据库更新 size type ext 
+	               $data['size']=$rs[0]['size'];
+	               $data['type']=$rs[0]['type'];
+	               $data['ext']=$rs[0]['ext'];
+               
+	               $data['file_renew']=true;
+               }
+           }
+           
+            
+           //1.4 从tag_name字符串到tag_ids
+           $str=I('tag_ids');//"protein100,cd47,Good";
+           $tag_ids=A('Tag','Logic')->get_tag_ids($str);
+           $data['tag_ids']=$tag_ids;
+           
+           //1.5 执行上传
+           $md->create($data);
+           $result=$md->save();
+           //1.6判断提交是否成功
+           if($result){
+               $this->success('成功！',U('showlist'));
+           }else{
+               $this->error('失败！'.$md->getError(), U('showlist'));
+           }
+            
+           die();
+        }
+    	
+    	//2.展示文件数据
+    	//2.如果没有post数据，则显示表单      
+        $info=D('File')->getDetail($file_id,$uid);
+        $this->assign('info',$info);
+        
+        $this->assign('cate_id',$info['cate_id']);//cate_id
+        //debug($info);
+        
+        //2.1获取分类数据
+        $this->assign('cate_list',getlist('cate'));
+        //2.2获取标签数据
+        $this->assign('tag_list',getlist('tag'));
+        
+        $this->display();
     }
+    
+    
     
     public function del($id){
 /*    	
@@ -70,16 +164,27 @@ array(2) {
         getName();
     }
     
-//上传文件
-    function upload(){
-        //0.如果没有提交，则显示表单
-        if(empty($_FILES)){
-           //$this->display();
-           die('没有可上传文件！');
-        }
+    //上传文件，覆盖掉旧文件
+    function uploadFileTo($path,$old_suffix){
+        //1设置上传参数，实例化上传类
+        $upload=$this->getUploader();
+        //2指定旧文件路径
+        $sub_arr=explode('/',$path);
+        $upload->subName=$sub_arr[1];
+        //3指定旧文件名
+        $dlm='.'.$old_suffix;
+        $old_name=rtrim($sub_arr[2],$dlm);
+        $upload->saveName=$old_name;//给上传的文件定义旧的名称
+        //4.允许覆盖旧文件
+        $upload->replace=true;
         
-        //1.如果有提交，则处理表单
-        //1.1设置上传参数，实例化上传类
+        //5.执行上传
+        return $upload->upload();
+    }
+    
+    
+    //获取上传实例
+    private function getUploader(){
         $config=array(
             'rootPath'=> './Public/',
             'savePath'=> 'Uploads/',
@@ -89,6 +194,20 @@ array(2) {
         $upload->maxSize   =     3145728 ;// 设置附件上传大小    
         $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型    
         //$upload->savePath  =      './Public/Uploads/'; // 设置附件上传目录    
+        return $upload;
+    }
+    
+    //上传文件
+    function upload(){
+        //0.如果没有提交，则显示表单
+        if(empty($_FILES)){
+           //$this->display();
+           die('没有可上传文件！');
+        }
+        
+        //1.如果有提交，则处理表单
+        //1.1设置上传参数，实例化上传类
+        $upload=$this->getUploader();
 
         //1.2.上传文件
         $info   =   $upload->upload();

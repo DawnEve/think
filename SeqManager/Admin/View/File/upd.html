@@ -1,0 +1,382 @@
+<taglib name="Mytag" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <title>修改文件</title>
+        <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet" />
+        <link href="{$Think.const.CSS_URL}/mine.css?time=20160913" type="text/css" rel="stylesheet" />
+        <link href="{$Think.const.CSS_URL}/tags.css?time=20160921" type="text/css" rel="stylesheet" />
+        <script src="{$Think.const.js_URL}/jquery-3.1.0.min.js"></script>
+    </head>
+    <body>
+       <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
+            <tr height=28>
+                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：地址管理->修改文件</td>
+            </tr>
+            <tr>
+                <td bgcolor=#b1ceef height=1></td></tr>
+            <tr height=20>
+                <td background={$Think.const.IMG_URL}/shadow_bg.jpg></td></tr>
+        </table>
+        
+        
+        <div style="font-size: 13px; margin: 10px 5px;">
+        <form action="__SELF__" method="post" enctype="multipart/form-data">
+            <table class="table_a" border="1" width="100%">
+
+
+
+<!-- ------------- -->
+<tr class=title><td colspan="2">核心信息</td></tr> 
+                <tr>
+                    <td>文件名称:</td>
+                    <td><input type=text name='file_name' size=50 value='<?php 
+                    //echo rtrim($info['file_name'],'.'.$info['ext']); 
+                    echo $info['file_name'];
+                    ?>'>.{$info.ext}</td>
+                </tr>
+                <tr>
+                    <td>下载文件:</td>
+                    <td><a target="_blank" href="/Public/{$info.file_path}">下载（右击->另存为）</a></td>
+                </tr>
+
+                <tr>
+                    <td>备注:</td>
+                    <td><textarea type=text name='file_note' rows='3' cols='50'>{$info.file_note}</textarea></td>
+                </tr>
+                
+                <tr>
+                    <td>重新上传文件:</td>
+                    <td>
+                        <input type='file' name='file_ids[]'>
+                        <span class=red>(重新上传则覆盖掉旧文件)</span>
+                    </td>
+                </tr>
+                
+ 
+ 
+ 
+ 
+ 
+<!-- ------------- -->
+<tr class=title><td colspan="2">类别信息</td></tr>     
+                <tr>
+                    <td>设置分类:</td>
+                    <td>
+                        <Mytag:html_options name="cate_id" options="cate_list" selected="cate_id" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>添加标签:</td>
+                    <td>
+                    
+                    
+                    
+                    
+<!-- tag begin -->
+<div id='edit' class='tagBox''>                    
+    <input type="text" style="display:none;width:500px;" name="tag_ids" value="">
+                        
+   <div class="new">
+        <ul class="clearfix"></ul>
+        <div class="tag-input">
+            <input type="text" name="input" value="" maxlength="20" id='tag_input'>
+        </div>
+    </div>
+    
+    <div class="taghint">
+        <a onclick="return false;" hidefocus="true" href="#">
+            <span>[Tip]</span>
+            <span class="noshow">标签是由用户定义的、概括所发布内容的关键词，比目录分类更准确、更具体。经常并合理使用标签，可以更加方便地找到感兴趣的条目。</span>
+        </a>
+        <span class="fc06"><span class=red>请使用空格或回车分隔不同标签, 可添加0-5个标签。</span></span>
+    </div>
+    
+    
+    <div class="old" id='old'>      
+        <div class="fc06">使用过的标签：</div>
+        <div class="ztag">
+            <foreach name="tag_list" item="vo">
+                <span>{$vo}</span>
+            </foreach>
+        </div>
+      
+        <div class="fc06">
+            <p>请使用空格或回车分隔不同标签, 最多可输入5个</p>
+        </div>
+    </div>
+</div>
+<!-- tag end -->                         
+                    </td>
+                </tr>
+
+
+            </table>
+
+
+
+<br />
+<input type='submit' value='提交'>
+<input type='button' onclick="history.back(-1)" value='返回'>
+           </form> 
+
+        </div>
+    </body>
+<script>
+//tools
+function m$(s){return document.getElementById(s);}
+
+//除去空格
+function trim(str){ //删除左右两端的空格
+    return str.replace(/(^\s*)|(\s*$)/g, "");
+}
+function ltrim(str){ //删除左边的空格
+    return str.replace(/(^\s*)/g,"");
+}
+function rtrim(str){ //删除右边的空格
+    return str.replace(/(\s*$)/g,"");
+}
+//获取样式
+/********************************
+*获取非行间样式 ok
+********************************
+*用js的style方法(obj.style.attr)可以获得html标签的样式,但是不能获取非行间样式。
+*那么怎么用js获取css的非行间样式呢?
+*在IE下可以用currentStyle,而在火狐下面我们需要用到getComputed
+*http://miostudio.blog.163.com/blog/static/22076512920142772540838/
+*/
+function getStyle(obj, attr){
+    if(obj.currentStyle){
+        return obj.currentStyle[attr];  //for IE only
+    }else{
+        return getComputedStyle(obj, false)[attr];//for ff/chrome only
+    }
+}
+
+
+
+//===================
+window.onload=function(){
+    //获取待操作的dom元素
+    var oTagBox=document.getElementById('edit');
+    //新标签提交框（应该隐藏）
+    var oTagInFrom=oTagBox.getElementsByTagName('input')[0];
+    //新标签输入框 外div
+    var oNewTag=oTagBox.getElementsByClassName('new')[0];
+    //新标签输入框：内div
+    var oNewTag_div=oNewTag.getElementsByTagName('div')[0];
+    //新标签输入框：内ul
+    var oUl=oNewTag.getElementsByTagName('ul')[0];
+    //新标签输入框：内ul中的li数组
+    var aLi=oUl.getElementsByTagName('li');
+    //初始化时获取焦点
+    var oNewTag_input=oNewTag.getElementsByTagName('input')[0];
+    //oNewTag_input.focus();
+    
+    //----------------------------
+    //事件及其处理函数
+    //----------------------------
+    //鼠标悬停时显示提示
+    var oSwitcher=(oTagBox.getElementsByClassName('taghint')[0]).getElementsByTagName('span')[0];//按钮
+    var oHint=oTagBox.getElementsByClassName('noshow')[0];//提示文字
+    oSwitcher.onmouseover=function(){
+        oHint.style.visibility='visible';
+        //鼠标移出时隐藏提示
+        oSwitcher.onmouseout=function(){
+            oHint.style.visibility='hidden';
+        }
+    }
+    
+    
+     
+    //空格或回车 处理标签
+    oNewTag_input.onkeydown=function(event){
+        //获取事件
+        var e = event || window.event || arguments.callee.caller.arguments[0];
+        if((e && e.keyCode==13) || (e && e.keyCode==32)){ // enter键 或空格
+            //获取输入
+            var tagName=trim(this.value);
+            //添加该标签
+            addNewTag(tagName);
+        }
+    }
+    
+    //旧标签的单击事件
+    var oldTag=oTagBox.getElementsByClassName('old')[0];
+    var aOldTag=oldTag.getElementsByTagName('span');
+    for(var i=0;i<aOldTag.length; i++){
+        //获取该标签
+        aOldTag[i].onclick=function(){
+            var tagName=trim(this.innerHTML);
+            //添加该标签
+            addNewTag(tagName);
+        }
+    }
+    
+
+    //处理输入的新标签
+    function addNewTag(tagName){
+        //=======================合法性检测
+        //去掉2端空格
+        var tagName=trim(tagName);
+        //如果有特殊字符，则过滤掉
+        var reg=/[<>\/\\\.\[\]\{\}\=\+\-]/g;
+        if( reg.test(tagName) ){
+            alert('不能输入 <>/\.[]{}=+- 等特殊字符！');
+            return;
+        }
+        //再过滤一遍特殊字符再使用
+        tagName=tagName.replace(reg,'');
+        
+        //标签长度不能超过15个字符
+        if(tagName.length==0){
+            alert('标签不能为空！');
+            //如果是空，则返回
+            return;
+        }
+        if(tagName.length>=15){
+            alert('标签不能超过15个字符！');
+            //如果太长，则返回
+            return;
+        }
+        
+        //标签是否超过5个？
+        var aTags=[];//bug(1.9),fixed.
+        if(trim(oTagInFrom.value) !=''){
+            aTags=oTagInFrom.value.split(',');
+        }
+        if(aTags.length>4){
+            alert('最多可添加5个标签');
+            oNewTag_input.value="";
+            return;//如果超过5个，则返回
+        }
+        
+        //标签是否和已有标签重复？
+        if(aTags.indexOf(tagName)!=-1){
+            oNewTag_input.value="";
+            return;//如果已经有了，则返回
+        }
+        
+        //=======================添加标签
+        //1.显示到隐藏input中
+        aTags.push(tagName);
+        oTagInFrom.value=aTags.join(',');
+
+        
+        //2.当前input清空
+        oNewTag_input.value="";
+        //3.当前input缩短到很短
+        oNewTag_div.style.width=10 +'px';
+        //4.显示为灰背景标签//插入到ul的最后
+        oUl.appendChild( getDom(tagName) );
+        //5.再次调整input长度
+        oNewTag_div.style.width=( parseInt(getStyle(oNewTag,'width')) -parseInt(getStyle(oUl,'width')) ) +'px';
+        
+        //设置光标焦点
+        oNewTag_input.focus();
+    }
+    
+    //处理单击删除事件
+    for(var i=0;i<aLi.length;i++){
+         oLi=aLi[i];
+         aBtn=oLi.getElementsByTagName('span');
+        
+        aBtn[1].onclick=function(){
+            doDeleteTag(this);
+        }
+    }
+        
+    //删除标签的事件处理函数
+    function doDeleteTag(obj){
+        //获取删除的文本
+        var delTag='';
+        if(obj.previousElementSibling){
+            delTag= obj.previousElementSibling.innerHTML;
+        }else{
+            delTag= obj.previousSibling.innerHTML;
+        }
+        //从form->input中删除该tag
+        var aTags=oTagInFrom.value.split(',');
+        var arr=[];
+        for(var i=0;i<aTags.length;i++){
+            if(aTags[i]==delTag) continue;
+            arr.push(aTags[i]);
+        }
+        oTagInFrom.value=arr.join(',');
+        
+        //删除该dom元素
+        obj.parentElement.remove();
+        //更新输入框的宽度
+        oNewTag_div.style.width=( parseInt(getStyle(oNewTag,'width')) -parseInt(getStyle(oUl,'width')) ) +'px';
+        //设置光标焦点
+        oNewTag_input.focus();
+    }
+    
+    
+    //根据传入的tag名字创造dom并返回
+    function getDom(tagName){
+        //新建 span s1
+        var s1=document.createElement('span');
+        s1.setAttribute('class','tag-btn');
+        s1.innerHTML=tagName;
+        //新建 span s2
+        var s2=document.createElement('span');
+        s2.setAttribute('class','delete-tag-btn');
+        s2.setAttribute('title','删除');
+        s2.innerHTML='x';
+        //添加单击事件
+        s2.onclick=function(){
+            doDeleteTag(this);
+        }
+        
+        //新建 li
+        var li=document.createElement('li');
+        li.appendChild(s1);
+        li.appendChild(s2);
+        //return the new dom
+        return li;
+    }
+
+    //=================================
+    // 展示和隐藏tag提示框
+    //=================================
+    var tag_input=m$('tag_input');
+    m$('old').onmouseover=tag_input.onclick=function(oEvent){
+        //显示该层内容
+        m$('old').style.display='block';
+        //取消冒泡
+        var oEvent = oEvent || window.event;
+        if(document.all){
+            oEvent.cancelBubble = true;
+        }else{
+            oEvent.stopPropagation();
+        }
+        document.onclick = null;
+        
+        // 隐藏tag提示框
+        this.onmouseout=function(){
+            document.onclick = function(){
+                //隐藏层代码
+                if(m$('old').style.display=='block')
+                    m$('old').style.display='none';
+            };
+        }
+    };
+
+    
+    //初始化标签，显示原来添加过的标签
+    var tag_name_string=<?php echo '"'.$info['tag_names'].'"'; ?>;
+    if(tag_name_string.length>0){
+        var init_tags=tag_name_string.split(',');//
+        for(var i=0;i<init_tags.length;i++){
+            var tagName=trim(init_tags[i]);
+            addNewTag(tagName);
+        }
+    }
+    
+
+}
+
+</script>
+</html>

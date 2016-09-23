@@ -37,7 +37,7 @@ class FileModel extends Model {
     	
     }
     
-    //回收站
+    //放到回收站
     function ajaxDel($id,$uid=0){
        //1.把file表的condition改为0；
        //放到回收站
@@ -52,5 +52,82 @@ class FileModel extends Model {
        }else{
             return array(0,'删除file数据表出错！'.$this->getError());
        }
+    }
+    
+    //文件是否存在
+    private function my_file_exists($url,$my_root='./Public/'){
+        $file_path_real=$my_root . $url;
+        if(file_exists($file_path_real)){
+           return true;
+        }
+        return false;
+    }
+    
+    //获取文件详细信息
+    function getDetail($id,$uid=0){
+    	$user=session('user');
+    	$ss_uid=$user['mg_id'];
+    	if($uid==0) $uid=$ss_uid;
+    	
+        //1.获取数据
+        $data=$this->where('`condition`>0 and file_uid='.$uid.' and file_id='.$id)->select();
+        if(count($data)<1){
+        	myBtn_back();
+            echo ('该文件不存在，或者在回收站中。');
+            exit();
+        }
+                
+    	//2.检测该文件是否存在
+    	$data[0]['isExist']=$this->my_file_exists($data[0]['file_path']);
+    	
+        //3.分类、标签数据
+        $data=$this->id2name($data);
+        //debug($data);
+        
+    	//4.返回数据表和是否存在的数据
+    	return $data[0];
+    	
+    }
+    
+    
+    //把cate_id和tag_ids换成cate名字、tag链接
+    private function id2name($info,$cate_id=0,$tag_id=0){
+        //改造cate_id
+        $cate_list=getList('cate'); 
+        //改造tag_ids
+        $tag_list=getList('tag');
+        //循环改造
+        foreach($info as $k=>$v){ //dump($info);
+            //$cate_id=$data['cate_id'];
+        	if(!empty($v['cate_id'])){
+                $info[$k]['cate_name']=$cate_list[$v['cate_id']];
+        	}else{
+	            $info[$k]['cate_name']='';
+	            $info[$k]['cate_id']=0;
+        	}
+            //debug($info);
+            //分裂tag_ids
+            $info[$k]['tag_name_links']='';
+            $info[$k]['tag_names']='';
+            $current_tag_name='';
+            if(!empty($v['tag_ids'])){
+               $current_tag_id_list=explode(',',$v['tag_ids']); //dump($current_tag_id_list);die();
+                   foreach($current_tag_id_list as $current_tag_id){
+                       if(array_key_exists($current_tag_id,$tag_list)){
+                           $current_tag_name=$tag_list[$current_tag_id];
+                           $info[$k]['tag_name_links'] .= "<a class=tag href='/admin/Oligo/showlist/tag_id/".$current_tag_id."'>".$current_tag_name."</a>";
+                           $info[$k]['tag_names'] .= $current_tag_name . ',';
+                       }
+                   }
+               //$info[$k]['tag_name_links']=$tag_list[$v['tag_ids']];
+            }else{
+                $info[$k]['tag_ids'] = '';
+            }
+            
+            $info[$k]['tag_names'] =rtrim($info[$k]['tag_names'] , ",");
+        }
+        
+        //返回结果 数组
+        return $info;
     }
 }
