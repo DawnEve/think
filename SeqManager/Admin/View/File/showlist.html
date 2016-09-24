@@ -63,8 +63,7 @@
                         <th>标签</th>
                         <th><span class=light>(创建时间)</span><br>上次修改时间</th>
                         <th>大小(size)</th>
-                        <th>类型(type)</th>
-                        <th>后缀(ext)</th>
+                        <th><span class=light>类型(type)</span><br>后缀(ext)</th>
                         <th>操作</th>
                     </tr>
                     
@@ -81,8 +80,7 @@
                         <td><span class=light>({$vo.file_time|date="Y-m-d H:i:s",###})</span><br>
                             {$vo.file_mod_time|date="Y-m-d H:i:s",###}</td>
                         <td><?php echo human($vo['size']); ?></td>
-                        <td>{$vo.type}</td>
-                        <td>{$vo.ext}</td>
+                        <td><span class=light>{$vo.type}</span><br>{$vo.ext}</td>
                         <td>
                             <a href='<?php echo U("upd",array('id'=>$vo['file_id'])) ;?>'>修改</a> | 
                             <a href='<?php echo U("del",array('id'=>$vo['file_id'])) ;?>'>删除</a> 

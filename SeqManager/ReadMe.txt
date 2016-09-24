@@ -440,14 +440,13 @@ Oligo/search, Search/index/in/Oligo/by/xx1/wd/xx2
      (3) 关键词是wd ，难点是怎么分词？
      
 
->>dev0.7.2 File/detail() 仿照 Oligo/detail() 
+>>dev0.7.2 File/detail($id) 仿照 Oligo/detail() 。nl2br。
     (1)note都要正常显示，不要显示在textarea内。同时nl2br等。模仿Weibo系统。
+>>dev0.7.3 修改File、Oligo的upd()成功之后跳转到detail()。
+    $this->success('成功！',U('detail',array('id'=>$id)));
 
 
 
-
-
-    >>dev0.7.0 File/detail($id)
 
 
   

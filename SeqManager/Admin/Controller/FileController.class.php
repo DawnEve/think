@@ -158,7 +158,8 @@ array(18) {
            $result=$md->save();
            //1.6判断提交是否成功
            if($result){
-               $this->success('成功！',U('showlist'));
+               //$this->success('成功！',U('showlist'));
+               $this->success('成功！',U('detail',array('id'=>$id)));
            }else{
                $this->error('失败！'.$md->getError(), U('showlist'));
            }

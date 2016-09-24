@@ -230,7 +230,7 @@ array(22) {
            
            //1.7判断提交是否成功
            if($rs){
-               $this->success('成功！',U('showlist'));
+               $this->success('成功！',U('detail',array('id'=>$id)));
            }else{
                $this->error('失败！'.$md->getError(), U('showlist'));
            }
