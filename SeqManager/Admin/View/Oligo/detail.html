@@ -23,7 +23,7 @@
     <body>
        <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
             <tr height=28>
-                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：引物管理->引物列表->引物详情
+                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：引物管理-><a href='{:U("showlist")}'>引物列表</a>->引物详情
                     <span class='right'><a href="{:U('upd',array('id'=>$info['oligo_id']))}">【修改该引物】</a></span>
                 </td>
             </tr>
@@ -54,7 +54,7 @@
                 </tr>
                 <tr>
                     <td>序列:</td>
-                    <td><textarea type=text name='oligo_sequence' rows='5' cols='50'  readonly="readonly">{$info.oligo_sequence}</textarea></td>
+                    <td><div class=code>{$info.oligo_sequence|nl2br}</div></td>
                 </tr>
                 <tr>
                     <td>酶切位点:</td>
@@ -63,7 +63,7 @@
 
                 <tr>
                     <td>备注:</td>
-                    <td><textarea type=text name='oligo_note' rows='3' cols='50'  readonly="readonly">{$info.oligo_note}</textarea></td>
+                    <td>{$info.oligo_note|nl2br}</td>
                 </tr>
                 
                 

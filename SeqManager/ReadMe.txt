@@ -445,7 +445,15 @@ Oligo/search, Search/index/in/Oligo/by/xx1/wd/xx2
 >>dev0.7.3 修改File、Oligo的upd()成功之后跳转到detail()。
     $this->success('成功！',U('detail',array('id'=>$id)));
 
+>>dev0.7.4 View细节修改：为sequence序列的输入.input和输出.code的样式.
+    (1)顶部详情菜单加link;  Oligo/showlist, 
+    (2)detail页面修改为 nl2br的，不用textarea: Oligo/detail,
+    (3)Oligo/upd()失败,原来是调整了参数位置，把uid统一后调了。
+    (4)为sequence序列的输入.input和输出.code的样式。Oligo/add upd, detail.
 
+
+
+    >>dev0.7.3 File/add(); 
 
 
 

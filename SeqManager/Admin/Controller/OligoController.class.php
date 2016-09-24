@@ -144,7 +144,7 @@ array(22) {
         $this->display();
     }
     
-    public function upd($id=0){
+    public function upd($id=0,$uid=0){
     	if($id==0){
     	   echo '错误：请指定id!<br>';
     	   myBtn_back();
@@ -152,17 +152,22 @@ array(22) {
     	}
     	
     	$oligo_id=$id;
-        $user=session('user');
-        $uid=$user['mg_id'];
-        $md=M('Oligo');
         
+	    //uid
+		if($uid==0){
+		    $user=session('user');
+		    $uid=$user['mg_id'];
+		}
+    	
         //1.如果是post提交，则保存数据
+        $md=M('Oligo');
         if(!empty($_POST)){
             //1.1获取数据
             $oligo_name=I('oligo_name');
             
             //1.2如果同名条目已经存在，则添加失败
            $rs_num = $md->where("oligo_uid = $uid AND oligo_name= '".$oligo_name."'")->count();
+           //dump($rs_num);
            if($rs_num>1){
                //$this->error('添加失败！该样品名已经存在.(可能在回收站)', U(''));
                echo '添加失败！该样品名已经存在.(可能在回收站)';
@@ -238,7 +243,7 @@ array(22) {
         }
         
         //2.如果没有post数据，则显示表单      
-        $info=D('Oligo')->getDetail($uid,$oligo_id,true);
+        $info=D('Oligo')->getDetail($oligo_id,$uid,true);
         $this->assign('info',$info);
         //debug($info);
         

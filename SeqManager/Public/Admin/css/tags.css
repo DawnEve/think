@@ -62,3 +62,21 @@
 .tagcloud a{ color: #0096ff;text-decoration: none;}
 .tagcloud a:hover{ text-decoration: underline;}
 
+
+.code{
+    word-break: break-all;
+    /*border: 1px solid #0096ff;*/
+    font-family: Courier,"宋体";
+    font-size: 15px;
+    padding: 10px 5px;
+    line-height: 15px;
+}
+
+.input{
+    font-family: monospace;
+    border-color: rgb(169, 169, 169);
+    width: 600px;
+    height: 260px;
+    float: left;
+    font-size: 12px;
+}
