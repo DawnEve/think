@@ -23,4 +23,9 @@ class IndexController extends Controller {
         dump(session('id'));
         echo '<br><a href="' . U('index') . '">返回权限页</a>';
     }
+    
+    
+    function _empty(){
+       echo CONTROLLER_NAME . '/' . ACTION_NAME . ' is not found!<hr>该功能尚未开发完成(Home/Controller/IndexController).';
+    }
 }

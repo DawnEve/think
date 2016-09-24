@@ -33,7 +33,7 @@ class OligoController extends AdminController {
     	//2.获取oligo数据
     	$user=session('user');
     	$uid=$user['mg_id'];
-    	$info=D('Oligo')->getDetail($uid,$oligo_id);
+    	$info=D('Oligo')->getDetail($oligo_id);
         $this->assign('info',$info);
         /*
 array(22) {

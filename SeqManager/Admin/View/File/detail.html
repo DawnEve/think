@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <title>文件详情</title>
+        <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet" />
+        <link href="{$Think.const.CSS_URL}/mine.css?time=20160913" type="text/css" rel="stylesheet" />
+        <link href="{$Think.const.CSS_URL}/tags.css?time=20160923" type="text/css" rel="stylesheet" />
+<style>
+.tag{
+        color: #1E50A2;
+    margin: 0 5px 0 0;
+    cursor: pointer;
+    background: aliceblue;
+    border-radius: 10px;
+    padding: 0px 5px;
+}
+.tag:hover{
+    background:#9ACCFF;
+}
+</style>
+    </head>
+    <body>
+       <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
+            <tr height=28>
+                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：文件管理-><a href='{:U("showlist")}'>文件列表</a>->文件详情
+                    <span class='right'><a href="{:U('upd',array('id'=>$info['file_id']))}">【修改该文件】</a></span>
+                </td>
+            </tr>
+            <tr>
+                <td bgcolor=#b1ceef height=1></td></tr>
+            <tr height=20>
+                <td background={$Think.const.IMG_URL}/shadow_bg.jpg></td></tr>
+        </table>
+        
+        
+        <div style="font-size: 13px; margin: 10px 5px;">
+            <table class="table_a" border="1" width="100%">
+
+
+<!-- ------------- -->
+<tr class=title><td colspan="2">核心信息</td></tr> 
+                <tr>
+                    <td>id:</td>
+                    <td>{$info.file_id}</td>
+                </tr>
+                <tr>
+                    <td>文件名称:</td>
+                    <td>{$info.file_name}
+                        <a title="右击->另存为 即可保存" href="<?php echo '/Public/'.$info['file_path']; ?>">[下载]</a>
+                    <span class=red>(右击->另存为 即可保存)</span>
+                    
+                    <?php if(!$info['isExist']){ ?>
+                        [系统提示:由于未知原因，该文件可能已经不存在]
+                    <?php }?>
+                    
+                    </td>
+                </tr>
+                <tr>
+                    <td>文件大小:</td>
+                    <td><?php echo human($info['size']); ?></td>
+                </tr>
+                <tr>
+                    <td>文件类型:</td>
+                    <td>{$info.type}</td>
+                </tr>
+                <tr>
+                    <td>文件后缀名:</td>
+                    <td>{$info.ext}</td>
+                </tr>
+
+                <tr>
+                    <td>备注:</td>
+                    <td>{$info.file_note|nl2br}</td>
+                </tr>
+                
+ 
+<!-- ------------- -->
+<tr class=title><td colspan="2">类别信息</td></tr>     
+                <tr>
+                    <td>分类:</td>
+                    <td><a href="{:U('showlist', array('by'=>'cate','id'=>$info['cate_id']))}">
+                            {$info.cate_name}</a></td>
+                </tr>
+                <tr>
+                    <td>标签:</td>
+                    <td>{$info.tag_name_links}</td>
+                </tr>
+ 
+    
+                <tr>
+                    <td></td>
+                    <td>
+                      <a href="{:U('upd',array('id'=>$info['file_id']))}"><input type='button' value='修改该文件'></a>
+                      <input type='button' onclick="history.back(-1)" value='返回'>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </body>
+</html>

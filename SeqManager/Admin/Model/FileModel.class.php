@@ -66,9 +66,11 @@ class FileModel extends Model {
     
     //获取文件详细信息
     function getDetail($id,$uid=0){
-    	$user=session('user');
-    	$ss_uid=$user['mg_id'];
-    	if($uid==0) $uid=$ss_uid;
+    	//获取$uid
+        if($uid==0){
+            $user=session('user');
+            $uid=$user['mg_id'];
+        }
     	
         //1.获取数据
         $data=$this->where('`condition`>0 and file_uid='.$uid.' and file_id='.$id)->select();

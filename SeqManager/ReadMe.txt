@@ -440,8 +440,8 @@ Oligo/search, Search/index/in/Oligo/by/xx1/wd/xx2
      (3) 关键词是wd ，难点是怎么分词？
      
 
-    >>dev0.7.2 File/detail() 仿照 Oligo/detail() 
-
+>>dev0.7.2 File/detail() 仿照 Oligo/detail() 
+    (1)note都要正常显示，不要显示在textarea内。同时nl2br等。模仿Weibo系统。
 
 
 
@@ -450,14 +450,14 @@ Oligo/search, Search/index/in/Oligo/by/xx1/wd/xx2
     >>dev0.7.0 File/detail($id)
 
 
-
+  
 
 
 ==============================================
 todo
 1.搜索结果的显示
 2.登录页面GUI
-3.
+3.实时新建分类。
 
 
 

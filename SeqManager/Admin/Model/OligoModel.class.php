@@ -84,7 +84,11 @@ class OligoModel extends Model {
     
     
     //获取某id的完整数据
-    function getDetail($uid,$oligo_id,$withDel=false){
+    function getDetail($oligo_id,$uid=0,$withDel=false){
+        if($uid==0){
+            $user=session('user');
+            $uid=$user['mg_id'];
+        }
             //debug($withDel);
     	//获得某oligo详细数据，1.cate和2.tag标准化
         $info_raw = $this->where('`condition`>0 and oligo_uid='.$uid)->select($oligo_id);

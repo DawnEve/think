@@ -38,8 +38,42 @@ array(18) {
     
     
     public function detail($id){
-        getName();
-        echo $id;
+        $file_id=$id;
+        //1.如果没有指定id，则返回showlist页面
+        if(empty($file_id)){
+           $this->error('Error:请指定条目id',U('showlist'));
+           die();
+        }
+        
+        //2.获取File数据
+        $user=session('user');
+        $uid=$user['mg_id'];
+        $info=D('File')->getDetail($file_id,$uid);
+        $this->assign('info',$info);
+/*
+ array(17) {
+  ["file_id"] => string(2) "14"
+  ["file_name"] => string(13) "电专仪.pdf"
+  ["file_note"] => string(19) "这里是备注2。"
+  ["file_path"] => string(34) "Uploads/20160922/57e4f78631969.pdf"
+  ["size"] => string(6) "982413"
+  ["type"] => string(15) "application/pdf"
+  ["ext"] => string(3) "pdf"
+  ["file_time"] => string(10) "1474514503"
+  ["file_mod_time"] => string(10) "1474623508"
+  ["cate_id"] => string(1) "4"
+  ["tag_ids"] => string(5) "3,4,5"
+  ["file_uid"] => string(1) "5"
+  ["condition"] => string(1) "1"
+  ["isExist"] => bool(true)
+  ["cate_name"] => string(3) "cd8"
+  ["tag_name_links"] => string(189) "<a class=tag href='/Admin/File/showlist/by/tag/id/3'>protein100</a><a class=tag href='/Admin/File/showlist/by/tag/id/4'>cd47</a><a class=tag href='/Admin/File/showlist/by/tag/id/5'>Good</a>"
+  ["tag_names"] => string(20) "protein100,cd47,Good"
+}
+ * */ 
+        //debug($info);
+        
+        $this->display();
     }
     
     
