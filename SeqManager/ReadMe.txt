@@ -467,13 +467,22 @@ Oligo/search, Search/index/in/Oligo/by/xx1/wd/xx2
     }
     //使用 {$vo.file_note|my_mb_substr}
   
+>>dev0.7.7 复制Oligo到Seq中，包括控制器和视图。
+    替换 引物 为 测序。
 
+==============================================
+>>commit到master。
+
+>>dev0.7.8 修复Seq/add();
+
+
+ 
 
 ==============================================
 todo
 1.搜索结果的显示
 2.登录页面GUI
 3.实时新建分类。
-
+4.合并File/id2name()和Oligo/id2name();
 
 
