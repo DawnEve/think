@@ -42,7 +42,9 @@
 <tr class=title><td colspan="2">核心信息</td></tr> 
                 <tr>
                     <td>id:</td>
-                    <td>{$info.file_id}</td>
+                    <td>{$info.file_id}
+<?php if(0==$info['isattach']){ $text='非附件'; }else{ $text='附件'; } echo '<br><span class=light>['.$text.']</span>'; ?>
+                    </td>
                 </tr>
                 <tr>
                     <td>文件名称:</td>
@@ -92,7 +94,7 @@
                     <td></td>
                     <td>
                       <a href="{:U('upd',array('id'=>$info['file_id']))}"><input type='button' value='修改该文件'></a>
-                      <input type='button' onclick="history.back(-1)" value='返回'>
+                      <a href="{:U('showlist')}"><input type='button' value='返回列表'></a>
                     </td>
                 </tr>
             </table>

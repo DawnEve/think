@@ -6,7 +6,6 @@
         <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet" />
         <link href="{$Think.const.CSS_URL}/mine.css?time=20160914" type="text/css" rel="stylesheet" />
 <style>
-.light{ color:#ccc; }
 .tag{
         color: #1E50A2;
     margin: 0 5px 0 0;
@@ -69,7 +68,9 @@
                     
                   <foreach name="info" item="vo" >
                      <tr>
-                        <td>{$vo.file_id}</td>
+                        <td>{$vo.file_id}
+<?php if(0==$vo['isattach']){ $text='非附件'; }else{ $text='附件'; } echo '<br><span class=light>['.$text.']</span>'; ?>
+                        </td>
                         <td>{$vo.file_name}<br>
                             (<a title="点击查看详情" href="{:U('detail',array('id'=>$vo['file_id']))}">详情</a> | 
                             <a title="右击->另存为 即可保存" href="<?php echo '/Public/'.$vo['file_path']; ?>">下载</a>)

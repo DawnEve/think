@@ -451,10 +451,9 @@ Oligo/search, Search/index/in/Oligo/by/xx1/wd/xx2
     (3)Oligo/upd()失败,原来是调整了参数位置，把uid统一后调了。
     (4)为sequence序列的输入.input和输出.code的样式。Oligo/add upd, detail.
 
-
-
-    >>dev0.7.3 File/add(); 
-
+>>dev0.7.5 File/add(); 添加文件页面和功能。
+    为独立上传的文件加一个数据库标示符号 isAttach(0非附件，1附件(默认))
+    为showlist和detail显示是否为附件。
 
 
   

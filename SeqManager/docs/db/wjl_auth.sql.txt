@@ -23,10 +23,10 @@
 21  删除引物信息  17  Oligo   del 2-17-21 2
 22  搜索引物信息  2   Oligo   search  2-22    1
 23  文件列表    3   File    showlist    3-23    1
-24  添加文件信息  3   File    add 3-24    1
-25  更新文件信息  23  File    upd 3-23-25 2
-26  删除文件信息  23  File    del 3-23-26 2
-27  搜索文件信息  3   File    search  3-27    1
+24  添加文件  3   File    add 3-24    1
+25  更新文件  23  File    upd 3-23-25 2
+26  删除文件  23  File    del 3-23-26 2
+27  搜索文件  3   File    search  3-27    1
 28  分类列表    4   Cate    showlist    4-28    1
 29  添加分类    4   Cate    add 4-29    1
 30  更新分类    28  Cate    upd 4-28-30 2

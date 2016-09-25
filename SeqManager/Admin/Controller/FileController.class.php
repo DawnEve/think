@@ -78,7 +78,115 @@ array(18) {
     
     
     public function add(){
-    	$this->display();
+        //1.如果有post数据
+        if(!empty($_POST)){
+           //1.1获取数据
+           $user=session('user');
+           $uid=$user['mg_id'];
+           
+           //1.2如果同名条目已经存在，则添加失败
+          $md=M('File');
+           /* $uid=$user['mg_id'];
+           $rs_exist = $md->where("file_uid = $uid AND file_name= '".$file_name."'")->select();
+           if(!empty($rs_exist)){
+               $this->error('添加失败！该样品名已经存在.(可能在回收站)', U());
+               exit();
+           }*/
+           
+           //1.3上传文件、保存文件名和地址到数据库、返回文件id
+           $file_info=array();
+           //判断是否有文件，且文件大小超过0
+           if (!empty($_FILES) && isset($_FILES["file_ids"]) && $_FILES["file_ids"]["size"][0]>0){
+               $file_upload_result=$this->uploadFileTo();
+               if($file_upload_result[0]==1){
+                    $file_info=$file_upload_result[1][0];
+               }else{
+                    $this->error($file_upload_result[1],U('showlist'));
+               }
+           }
+/*
+ * $file_info
+array(9) {
+  ["key"] => string(8) "file_ids"
+  ["name"] => string(8) "DPBS.jpg"
+  ["type"] => string(10) "image/jpeg"
+  ["size"] => int(32328)
+  ["ext"] => string(3) "jpg"
+  ["md5"] => string(32) "a4f53f0904dca6110e58f279a979c1a5"
+  ["sha1"] => string(40) "b82907ebe5e554f9d580c956456d3d6598e145ac"
+  ["savename"] => string(17) "57e68c0ce2e79.jpg"
+  ["savepath"] => string(17) "Uploads/20160924/"
+}
+ * */ 
+           //debug($file_info);
+           
+           //1.3.1获取文件名
+           $file_name=I('file_name');
+           if(''==$file_name){
+                $file_name=$file_info['name'];
+           }
+           
+           $file_name_arr=explode('.',$file_name);
+           
+           //1.3.2如果没有后缀名，则自动添加。
+           $n=count($file_name_arr);  //array(2) {  "DPBS", "jpg" }
+           //1.3.3如果后缀名不正确，则自动添加后缀名
+           if($n<2 or $file_name_arr[1]!=$file_info['ext']){
+                $file_name=$file_name.'.'.$file_info['ext'];
+           }
+           
+           
+           //1.4从tag_name字符串到tag_ids
+           $str=I('tag_ids');//"protein100,cd47,Good";
+           $tag_ids=A('Tag','Logic')->get_tag_ids($str);
+           
+           //1.5拼接其他数据
+           $data=array(
+                //核心信息
+                'file_name'=>$file_name,
+                'file_note'=>I('file_note'),
+           
+                //类别信息
+                'cate_id'=>I('cate_id'),
+                'tag_ids'=>$tag_ids,
+           
+                //其他信息
+                'file_uid'=>$uid,
+                'condition'=>1,
+                'isAttach'=>0,
+                'file_time'=>time(),
+                'file_mod_time'=>time(),
+           
+                //上传数据
+                'size'=>$file_info['size'],
+                'type'=>$file_info['type'],
+                'ext'=>$file_info['ext'],
+                'file_path'=>$file_info['savepath'].$file_info['savename'],
+               
+                //$data['file_renew']=true;
+           );
+           //1.6提交数据           
+           $md->create($data);
+           $rs=$md->add();
+           
+           //1.7判断提交是否成功
+           if($rs){
+               $this->success('成功！',U('showlist'));
+           }else{
+               $this->error('失败！'.$md->getError(), U('showlist'));
+           }
+           die();
+        }
+        
+        
+        
+        //2.如果没有post数据，则显示表单
+        //2.1获取分类数据
+        $this->assign('cate_list',getlist('cate'));
+        //2.2获取标签数据 
+        $this->assign('tag_list',getlist('tag'));
+        
+        $this->display();
     }
     
     
@@ -206,24 +314,28 @@ array(2) {
     }
     
     //上传文件，覆盖掉旧文件
-    function uploadFileTo($path,$old_suffix){
+    //如果没有参数，则表示上传新文件
+    function uploadFileTo($path='',$old_suffix=''){
         //1设置上传参数，实例化上传类
         $upload=$this->getUploader();
-        //2指定旧文件路径
-        $sub_arr=explode('/',$path);
-        $upload->subName=$sub_arr[1];
-        //3指定旧文件名
-        $dlm='.'.$old_suffix;
-        $old_name=rtrim($sub_arr[2],$dlm);
-        //$upload->saveName=$old_name.'pdf';//给上传的文件定义旧的名称
-        //4.允许覆盖旧文件
-        $upload->replace=true;
         
-        //5 如果有旧文件，则先删掉旧文件
-        $real_path='./Public/'.$path;
-        if(file_exists($real_path)){
-            unlink($real_path);
-        }
+    	if($path!=''){
+	        //2指定旧文件路径
+	        $sub_arr=explode('/',$path);
+	        $upload->subName=$sub_arr[1];
+	        //3指定旧文件名
+	        $dlm='.'.$old_suffix;
+	        $old_name=rtrim($sub_arr[2],$dlm);
+	        //$upload->saveName=$old_name.'pdf';//给上传的文件定义旧的名称
+	        //4.允许覆盖旧文件
+	        $upload->replace=true;
+	        
+	        //5 如果有旧文件，则先删掉旧文件
+	        $real_path='./Public/'.$path;
+	        if(file_exists($real_path)){
+	            unlink($real_path);
+	        }
+    	}
         
         
         //6.执行上传
@@ -247,9 +359,13 @@ array(2) {
         $upload = new \Think\Upload($config);// 实例化上传类    
         //$upload->maxSize   =   3145728 ;// 设置附件上传大小    
         $upload->maxSize   =     104857600;// 设置附件上传大小 100M以内   
-        $upload->exts = array('jpg', 'gif', 'png', 'jpeg',
+        $upload->exts = array('jpg', 'gif', 'png', 'jpeg','bmp',
                 'pdf','doc','docx','xls','xlsx','ppt','pptx',
-                'rar','zip');// 设置附件上传类型    
+                'rar','zip',
+                
+                'fasta','fastq','seq',  //测序文本   
+                'ab1',  //峰图
+        );        // 设置附件上传类型    
         //$upload->savePath  =      './Public/Uploads/'; // 设置附件上传目录    
         return $upload;
     }
