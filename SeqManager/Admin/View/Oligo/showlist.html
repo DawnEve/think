@@ -67,7 +67,7 @@
                         <td>{$vo.tag_name_links}</td>
                         
                         
-                        <td>{$vo.oligo_note}</td>
+                        <td>{$vo.oligo_note|my_mb_substr}</td>
                         <td>
 <?php 
 if($vo['file_ids']==''){ echo 0;}

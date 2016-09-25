@@ -74,3 +74,15 @@ function debug($para,$die=true){
 }
 
 
+//显示备注的前5个字节
+function my_mb_substr($note,$len=5){
+	//$note=$vo['file_note'];
+	if(mb_strlen($note)>$len){
+	    echo mb_substr($note,0,$len,'utf-8').'...'; 
+	}elseif(mb_strlen($note)>0){
+	    echo $note;
+	}
+}
+//使用 {$vo.file_note|my_mb_substr}
+
+

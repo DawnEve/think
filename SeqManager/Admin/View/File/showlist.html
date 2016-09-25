@@ -75,9 +75,9 @@
                             (<a title="点击查看详情" href="{:U('detail',array('id'=>$vo['file_id']))}">详情</a> | 
                             <a title="右击->另存为 即可保存" href="<?php echo '/Public/'.$vo['file_path']; ?>">下载</a>)
                         </td>
+                        <td>{$vo.file_note|my_mb_substr}</td>
                         <td><a href="{:U('showlist',array('by'=>'cate','id'=>$vo['cate_id']))}">{$vo.cate_name}</a></td>
                         <td>{$vo.tag_name_links}</td>
-                        <td>{$vo.file_note}</td>
                         <td><span class=light>({$vo.file_time|date="Y-m-d H:i:s",###})</span><br>
                             {$vo.file_mod_time|date="Y-m-d H:i:s",###}</td>
                         <td><?php echo human($vo['size']); ?></td>

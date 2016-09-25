@@ -455,7 +455,17 @@ Oligo/search, Search/index/in/Oligo/by/xx1/wd/xx2
     为独立上传的文件加一个数据库标示符号 isAttach(0非附件，1附件(默认))
     为showlist和detail显示是否为附件。
 
-
+>>dev0.7.6 微调视图：File/showlist, my_mb_substr只显示前面的部分。
+  //显示备注的前5个字节
+    function my_mb_substr($note,$len=5){
+        //$note=$vo['file_note'];
+        if(mb_strlen($note)>$len){
+            echo mb_substr($note,0,$len,'utf-8').'...'; 
+        }elseif(mb_strlen($note)>0){
+            echo $note;
+        }
+    }
+    //使用 {$vo.file_note|my_mb_substr}
   
 
 
