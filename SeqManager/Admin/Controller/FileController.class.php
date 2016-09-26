@@ -359,9 +359,10 @@ array(2) {
         $upload = new \Think\Upload($config);// 实例化上传类    
         //$upload->maxSize   =   3145728 ;// 设置附件上传大小    
         $upload->maxSize   =     104857600;// 设置附件上传大小 100M以内   
-        $upload->exts = array('jpg', 'gif', 'png', 'jpeg','bmp',
-                'pdf','doc','docx','xls','xlsx','ppt','pptx',
-                'rar','zip',
+        $upload->exts = array(
+                'jpg', 'gif', 'png', 'jpeg','bmp','tif','tiff',//图片文件
+                'txt','pdf','doc','docx','xls','xlsx','ppt','pptx','html',//文档文件
+                'rar','zip',//压缩文件
                 
                 'fasta','fastq','seq',  //测序文本   
                 'ab1',  //峰图

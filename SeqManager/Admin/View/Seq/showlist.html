@@ -23,7 +23,7 @@
     <body>
        <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
             <tr height=28>
-                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：位置管理-><a href='{:U("showlist")}'>测序列表</a> 
+                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：测序管理-><a href='{:U("showlist")}'>测序列表</a> 
 <?php 
     if(!empty($hint_text)){ echo '->'.$hint_text; }
 ?>              
@@ -55,30 +55,30 @@
                     
                   <foreach name="info" item="vo" >
                      <tr>
-                        <td>{$vo.oligo_id}</td>
+                        <td>{$vo.seq_id}</td>
                         <td>
-                            <a href="{:U('detail', array('id'=>$vo['oligo_id']))}">{$vo.oligo_name}</a>
+                            <a href="{:U('detail', array('id'=>$vo['seq_id']))}">{$vo.seq_name}</a>
                         </td>
-                        <td>{$vo.oligo_order_no}</td>
+                        <td>{$vo.seq_order_no}</td>
                         <td>
-                            <a href="{:U('Oligo/showlist', array('by'=>'cate','id'=>$vo['cate_id']))}">
+                            <a href="{:U('Seq/showlist', array('by'=>'cate','id'=>$vo['cate_id']))}">
                             {$vo.cate_name}</a>
                         </td>
                         <td>{$vo.tag_name_links}</td>
                         
                         
-                        <td>{$vo.oligo_note|my_mb_substr}</td>
+                        <td>{$vo.seq_note|my_mb_substr}</td>
                         <td>
 <?php 
 if($vo['file_ids']==''){ echo 0;}
 else{echo (substr_count($vo['file_ids'],',')+1);}
 ?>
                         </td>
-                        <td>{$vo.oligo_time|date="Y-m-d H:i:s",###}</td>
-                        <td>{$vo.oligo_mod_time|date="Y-m-d H:i:s",###}</td>
+                        <td>{$vo.seq_time|date="Y-m-d H:i:s",###}</td>
+                        <td>{$vo.seq_mod_time|date="Y-m-d H:i:s",###}</td>
                         <td>
-                            <a href='<?php echo U("upd",array('id'=>$vo['oligo_id'])) ;?>'>修改</a> | 
-                            <a href='<?php echo U("del",array('id'=>$vo['oligo_id'])) ;?>'>删除</a> 
+                            <a href='<?php echo U("upd",array('id'=>$vo['seq_id'])) ;?>'>修改</a> | 
+                            <a href='<?php echo U("del",array('id'=>$vo['seq_id'])) ;?>'>删除</a> 
                         </td>
                       </tr>
                    </foreach>

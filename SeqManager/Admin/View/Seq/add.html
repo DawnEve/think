@@ -7,6 +7,7 @@
         <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet" />
         <link href="{$Think.const.CSS_URL}/mine.css?time=20160913" type="text/css" rel="stylesheet" />
         <link href="{$Think.const.CSS_URL}/tags.css?time=20160921" type="text/css" rel="stylesheet" />
+        <script src="{$Think.const.JS_URL}/jquery-3.1.0.min.js?time=2016"></script>
     </head>
     <body>
        <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
@@ -30,24 +31,24 @@
 <tr class=title><td colspan="2">核心信息</td></tr> 
                 <tr>
                     <td>测序名称:</td>
-                    <td><input type=text name='oligo_name' size=50></td>
+                    <td><input type=text name='seq_name' size=50></td>
                 </tr>
                 <tr>
                     <td>订单号:</td>
-                    <td><input type=text name='oligo_order_no' size=50></td>
+                    <td><input type=text name='seq_order_no' size=50></td>
                 </tr>
                 <tr>
                     <td>序列:</td>
-                    <td><textarea type=text name='oligo_sequence' class=input></textarea></td>
+                    <td><textarea type=text name='seq_sequence' class=input></textarea></td>
                 </tr>
                 <tr>
                     <td>酶切位点:</td>
-                    <td><input type=text name='oligo_en_site' size=50></td>
+                    <td><input type=text name='seq_en_site' size=50></td>
                 </tr>
 
                 <tr>
                     <td>备注:</td>
-                    <td><textarea type=text name='oligo_note' rows='3' cols='50'></textarea></td>
+                    <td><textarea type=text name='seq_note' rows='3' cols='50'></textarea></td>
                 </tr>
                 
                 <tr>
@@ -63,7 +64,7 @@
 	                    <a href='javascript:add_file_btn()'>添加</a>
 <script>
 //tools
-function $(s){return document.getElementById(s);}
+function m$(s){return document.getElementById(s);}
 
 //文件删除按钮
 function del_file_btn(div){
@@ -101,9 +102,82 @@ function add_file_btn(){
                     </td>
                 </tr>
                 
- 
- 
- 
+
+                <tr>
+                    <td>测序引物:</td>
+                    <td>
+                        <Mytag:html_options id="oligo_id" name="seq_oligo_ids" options="oligo_list" onchange="showOligo()" />
+                        <div id='oligo_info'>
+                            <div class=code>
+	                            &gt;my name<a target="_blank" href='/Admin/Oligo/detail/id/2'>[查看该引物]</a><br>
+	                            aaatttgggccc
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+<script>
+function n(s){
+    console.log(s);
+}
+	
+//var myAjax=$.ajax;
+function showOligo(){
+    var id=m$('oligo_id').value;
+    $.ajax({
+        url: "/Admin/Api/oligo",
+        data: {
+          method: 'get',
+          id:id,
+        },
+        success: function( result ) {
+          //$( "#weather-temp" ).html( "<strong>" + result + "</strong> degrees" );
+           if(result[0]==1){
+        	    //获取数据
+        	    var o=result[1];
+        	    var oligo_id=o.oligo_id;
+        	    var oligo_name=o.oligo_name;
+        	    var oligo_sequence=o.oligo_sequence;
+        	    //var oligo_sequence=$.html(o.oligo_sequence);
+        	    //拼接标签
+        	    //内容
+        	    var oText1=document.createTextNode('>'+oligo_name);
+        	    var oA=document.createElement('a');
+        	    oA.setAttribute('target','_blank');
+        	    oA.setAttribute('href','/admin/Oligo/detail/id/'+oligo_id);
+        	    oA.innerHTML='[查看该引物]';
+        	    var oBr=document.createElement('br');
+        	    //var oText2=document.createTextNode(oligo_sequence);
+        	    
+        	    if(oligo_sequence.length==0){
+        	    	oligo_sequence='[没有设置序列]';
+            	}
+        	    
+        	    var oText2=document.createTextNode(oligo_sequence);
+        	    //外边框div
+        	    var oDiv=document.createElement('div');
+        	    oDiv.setAttribute('class','code');
+        	    //塞入内容
+        	    oDiv.appendChild(oText1);
+        	    oDiv.appendChild(oA);
+        	    oDiv.appendChild(oBr);
+        	    oDiv.appendChild(oText2);
+        	    //插入文档数
+        	    var oParent=m$('oligo_info');
+        	    oParent.innerHTML='';//清空
+        	    oParent.appendChild(oDiv);
+           }else{
+               alert('失败：'+result[1]);
+           }
+        }
+    });
+}
+
+</script>
+
+
+
+
  
  
 <!-- ------------- -->
@@ -413,10 +487,10 @@ window.onload=function(){
     //=================================
     // 展示和隐藏tag提示框
     //=================================
-    var tag_input=$('tag_input');
-    $('old').onmouseover=tag_input.onclick=function(oEvent){
+    var tag_input=m$('tag_input');
+    m$('old').onmouseover=tag_input.onclick=function(oEvent){
     	//显示该层内容
-    	$('old').style.display='block';
+    	m$('old').style.display='block';
     	//取消冒泡
         var oEvent = oEvent || window.event;
         if(document.all){
@@ -430,12 +504,15 @@ window.onload=function(){
         this.onmouseout=function(){
 		    document.onclick = function(){
 		        //隐藏层代码
-		    	if($('old').style.display=='block')
-		            $('old').style.display='none';
+		    	if(m$('old').style.display=='block')
+		            m$('old').style.display='none';
 		    };
         }
     };
 
+
+    //初始化引物
+    showOligo();
 
 }
 

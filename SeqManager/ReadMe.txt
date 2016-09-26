@@ -185,7 +185,7 @@ _______________________________________________
 
 >>v0.4.5 Help/about(), 点击冰箱显示盒子列表。
 >>v0.4.6 搜索页面的按钮。
->>v0.4.7 ajax() 
+>>v0.4.7 ajax()  jquery-3.1.0.min.js
 ===========================================
     //http://jquery.com/ jq3.1
     //http://www.tuicool.com/articles/Y7fyUv
@@ -473,7 +473,36 @@ Oligo/search, Search/index/in/Oligo/by/xx1/wd/xx2
 ==============================================
 >>commit到master。
 
->>dev0.7.8 修复Seq/add();
+>>dev0.7.8 修复Seq/add();   Seq/showlist();列表显示结果。
+
+每个测序结果只有一个引物，显示name、链接、序列。
+    下拉窗口显示自定义的引物。js触发函数。修改Mytag.class.php增加onchange事件、id属性。
+    
+    
+<div class=code>
+    &gt;my name<a target="_blank" href='/admin/Oligo/detail/id/2'>[查看该引物]</a><br>
+    aaaatttttgggcc
+</div>
+
+https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode
+//内容
+var oText1=document.createTextNode('&gt;'+oligo_name);
+var oA=document.createElement('a');
+oA.setAttribute('target','_blank');
+oA.setAttribute('href','/admin/Oligo/detail/id/'+oligo_id);
+var oBr=document.createElement('br');
+var oText2=document.createTextNode(oligo_sequence);
+//外边框div
+var oDiv=document.createElement('div');
+oDiv.setAttribute('class','code');
+//塞入内容
+oDiv.appendChild(oText1);
+oDiv.appendChild(oA);
+oDiv.appendChild(oBr);
+oDiv.appendChild(oText2);
+//插入文档数
+m$('oligo_info').appendChild(oDiv);
+
 
 
  
@@ -485,4 +514,4 @@ todo
 3.实时新建分类。
 4.合并File/id2name()和Oligo/id2name();
 
-
+5.当前位置：引物管理->引物列表->引物详情 多个附件bug仅保存一个。冰箱无法保存。

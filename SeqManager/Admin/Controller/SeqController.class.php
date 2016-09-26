@@ -9,7 +9,7 @@ class SeqController extends AdminController {
         $uid=$user['mg_id'];
         $this->assign('uid',$uid);
         
-        $info=D('Oligo')->getData($by,$id); 
+        $info=D('Seq')->getData($by,$id); 
         $this->assign('info',$info[0]);
         $this->assign('info_num',count($info[0]));
         
@@ -69,12 +69,12 @@ array(22) {
         if(!empty($_POST)){
            //1.1获取数据
            $user=session('user');
-           $oligo_name=I('oligo_name');
+           $uid=$user['mg_id'];
+           $seq_name=I('seq_name');
            
            //1.2如果同名条目已经存在，则添加失败
-           $md=M('Oligo');
-           $uid=$user['mg_id'];
-           $rs_exist = $md->where("oligo_uid = $uid AND oligo_name= '".$oligo_name."'")->select();
+           $md=M('Seq');
+           $rs_exist = $md->where("seq_uid = $uid AND seq_name= '".$seq_name."'")->select();
            if(!empty($rs_exist)){
                $this->error('添加失败！该样品名已经存在.(可能在回收站)', U());
                exit();
@@ -96,12 +96,13 @@ array(22) {
            //1.5拼接其他数据
            $data=array(
                 //核心信息
-                'oligo_name'=>$oligo_name,
-                'oligo_order_no'=>I('oligo_order_no'),
-                'oligo_sequence'=>I('oligo_sequence'),
-                'oligo_en_site'=>I('oligo_en_site'),
-                'oligo_note'=>I('oligo_note'),
+                'seq_name'=>$seq_name,
+                'seq_order_no'=>I('seq_order_no'),
+                'seq_sequence'=>I('seq_sequence'),
+                'seq_en_site'=>I('seq_en_site'),
+                'seq_note'=>I('seq_note'),
                 'file_ids'=>$file_ids,
+                'seq_oligo_ids'=>I('seq_oligo_ids'),
            
                 //类别信息
                 'cate_id'=>I('cate_id'),
@@ -113,10 +114,10 @@ array(22) {
                 'place'=>I('place'),
            
                 //其他信息
-                'oligo_uid'=>$user['mg_id'],
+                'seq_uid'=>$user['mg_id'],
                 'condition'=>1,
-                'oligo_time'=>time(),
-                'oligo_mod_time'=>time(),
+                'seq_time'=>time(),
+                'seq_mod_time'=>time(),
            );
            //1.6提交数据           
            $w=$md->create($data);
@@ -131,6 +132,7 @@ array(22) {
            die();
         }
         
+        
         //2.如果没有post数据，则显示表单
         //2.1获取分类数据
         $this->assign('cate_list',getlist('cate'));
@@ -140,6 +142,8 @@ array(22) {
         $this->assign('fridge_list',getlist('fridge','fr',1));
         //2.4获取盒子数据
         $this->assign('box_list',getlist('box'));
+        //2.5获取引物数据
+        $this->assign('oligo_list',getlist('oligo'));
         
         $this->display();
     }
