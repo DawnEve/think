@@ -32,7 +32,7 @@ class ApiController extends Controller {
 	        $data_send=array(
 	          'by'=>I('by'),
 	          'in'=>I('in'),
-	          'wd'=>I('wd'),
+	          'wd'=>trim(I('wd')),
 	        );
 	        //防止没有关键词
 	        if($data_send['wd']==''){

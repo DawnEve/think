@@ -11,13 +11,13 @@
 9   搜索  0           9   0
 10  帮助  0           10  0
 11  测序列表    1   Seq showlist    1-11    1
-12  显示测序信息  11  Seq show    1-11-12 2
+12  显示测序信息  11  Seq detail    1-11-12 2
 13  添加测序信息  1   Seq add 1-13    1
 14  更新测序信息  11  Seq upd 1-11-14 2
 15  删除测序信息  11  Seq del 1-11-15 2
 16  搜索测序信息  1   Seq search  1-16    1
 17  引物列表    2   Oligo   showlist    2-17    1
-18  显示引物信息  17  Oligo   show    2-17-18 2
+18  显示引物信息  17  Oligo   detail    2-17-18 2
 19  添加引物信息  2   Oligo   add 2-19    1
 20  更新引物信息  17  Oligo   upd 2-17-20 2
 21  删除引物信息  17  Oligo   del 2-17-21 2
@@ -60,13 +60,16 @@
 58  还原条目    57  Recycle restore 8-57-58 2
 59  彻底删除    57  Recycle delete  8-57-59 2
 60  我的搜索    9   Search  index   9-60    1
-61  全局搜索    9   Search  advSearch   9-61    1
 62  快速入门    10  Help    index   10-62   1
 63  用户手册    10  Help    article 10-63   1
 64  关于本系统   10  Help    about   10-64   1
 
+新增
 66  重置密码   44  Manager    resetPwd   6-44-66   2
 67  重置我的密码   44  Manager    resetMyPwd   6-44-67   2
+
+删除
+61  全局搜索    9   Search  advSearch   9-61    1
 
 
 2.auth表sql数据如下
@@ -82,13 +85,13 @@ INSERT INTO `wjl_auth` VALUES (8, '回收站', 0, '', '', '8', 0, 1473822830, 14
 INSERT INTO `wjl_auth` VALUES (9, '搜索', 0, '', '', '9', 0, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (10, '帮助', 0, '', '', '10', 0, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (11, '测序列表', 1, 'Seq', 'showlist', '1-11', 1, 1473822830, 1473822831, 1);
-INSERT INTO `wjl_auth` VALUES (12, '显示测序信息', 11, 'Seq', 'show', '1-11-12', 2, 1473822830, 1473822831, 1);
+INSERT INTO `wjl_auth` VALUES (12, '显示测序信息', 11, 'Seq', 'detail', '1-11-12', 2, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (13, '添加测序信息', 1, 'Seq', 'add', '1-13', 1, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (14, '更新测序信息', 11, 'Seq', 'upd', '1-11-14', 2, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (15, '删除测序信息', 11, 'Seq', 'del', '1-11-15', 2, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (16, '搜索测序信息', 1, 'Seq', 'search', '1-16', 1, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (17, '引物列表', 2, 'Oligo', 'showlist', '2-17', 1, 1473822830, 1473822831, 1);
-INSERT INTO `wjl_auth` VALUES (18, '显示引物信息', 17, 'Oligo', 'show', '2-17-18', 2, 1473822830, 1473822831, 1);
+INSERT INTO `wjl_auth` VALUES (18, '显示引物信息', 17, 'Oligo', 'detail', '2-17-18', 2, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (19, '添加引物信息', 2, 'Oligo', 'add', '2-19', 1, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (20, '更新引物信息', 17, 'Oligo', 'upd', '2-17-20', 2, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (21, '删除引物信息', 17, 'Oligo', 'del', '2-17-21', 2, 1473822830, 1473822831, 1);

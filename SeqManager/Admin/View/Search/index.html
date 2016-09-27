@@ -139,9 +139,17 @@ $('#search').on('click',function(){
 		in:f.in.value,
 		wd: f.wd.value,
       },
-      success: function(result) {
+      success: function(results) {
+          var result=results[1];
           //console.log(result); return;
+          //1.如果没有匹配数据，则提示没有匹配
+          if(0==results[0]){
+        	  str = "<p>共搜索到0条记录。</p>";
+        	  m$( "search_list" ).innerHTML=str + '<p>'+result+'</p>';
+        	  return;
+          }
           
+          //2.如果匹配成功，则显示匹配结果 
           //组装结果
           var str='<table class="table_a" border="1" width="100%">';
           str += "<tr><th>id</th><th>名字</th><th>备注</th><th>创建时间</th><th>上次修改时间</th></tr>";

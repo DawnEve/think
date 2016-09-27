@@ -50,6 +50,10 @@ class SearchLogic extends Controller{
                 //
                 ->where('`condition`>0 and tag_uid='.$uid.' and tag_name like "%'.$wd.'%"')
                 ->select();
+           if(count($tag_list)==0){
+                return array(0,'没有匹配数据-.-');
+           }
+           
            //拼接sql语句
            $sql_str='';
            foreach($tag_list as $k=>$v){
@@ -61,7 +65,7 @@ class SearchLogic extends Controller{
            
            //2.2用tag_id(s)从seq/oligo/file中搜索tag_id=该值的条目，并返回
     	   $data=$md->query($sql);
-    		
+    	   
     		
     	}elseif($by=='keyword'){
     	   //3.0从seq/oligo/file中搜索name或note匹配keyword的条目，并返回。
@@ -76,13 +80,11 @@ class SearchLogic extends Controller{
 	    	       ->select();
     		}
     	}else{
-    	   $data=array(
-    	       '没有数据'
-    	   );
+    	   return array(0,'没有匹配数据-.-');
     	}
     	
     	//$data
-        return $data;
+        return array(1,$data);
     }
     
 }
