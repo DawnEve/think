@@ -12,7 +12,7 @@ class SeqController extends AdminController {
         $info=D('Seq')->getData($by,$id); 
         $this->assign('info',$info[0]);
         $this->assign('info_num',count($info[0]));
-        
+        //debug($info);
         //类别提示语
         $this->assign('hint_text',$info[1]);
         
@@ -22,43 +22,46 @@ class SeqController extends AdminController {
     
     //显示具体要求
     public function detail($id=''){
-        $oligo_id=$id;
+        $seq_id=$id;
         //1.如果没有指定id，则返回showlist页面
-        if(empty($oligo_id)){
+        if(empty($seq_id)){
            $this->error('Error:请指定条目id',U('showlist'));
            die();
         }
         
         
-        //2.获取oligo数据
+        //2.获取seq数据
         $user=session('user');
         $uid=$user['mg_id'];
-        $info=D('Oligo')->getDetail($oligo_id);
+        $info=D('Seq')->getDetail($seq_id);
         $this->assign('info',$info);
+        //debug($info);
         /*
-array(22) {
-  ["oligo_id"] => string(1) "6"
-  ["oligo_name"] => string(10) "5个文件"
-  ["oligo_order_no"] => string(4) "xx02"
-  ["oligo_sequence"] => string(6) "aaattt"
-  ["oligo_en_site"] => string(5) "BamHI"
-  ["oligo_note"] => string(10) "5个文件"
-  ["file_ids"] => string(9) "1,2,3,4,5"
-  ["oligo_time"] => string(10) "1474273061"
-  ["oligo_mod_time"] => string(10) "1474273061"
+array(24) {
+  ["seq_id"] => string(1) "1"
+  ["seq_name"] => string(0) ""
+  ["seq_order_no"] => string(0) ""
+  ["seq_sequence"] => string(0) ""
+  ["seq_en_site"] => string(0) ""
+  ["seq_note"] => string(0) ""
+  ["file_ids"] => string(2) "32"
+  ["seq_time"] => string(10) "1474891740"
+  ["seq_mod_time"] => string(10) "1474892924"
   ["cate_id"] => string(1) "2"
-  ["tag_ids"] => string(2) "15"
-  ["box_id"] => string(1) "1"
-  ["place"] => string(6) " (1,8)"
+  ["tag_ids"] => string(4) "4,18"
+  ["box_id"] => string(1) "3"
+  ["palce"] => NULL
   ["condition"] => string(1) "1"
-  ["oligo_uid"] => string(1) "5"
+  ["seq_oligo_ids"] => string(1) "2"
+  ["seq_uid"] => string(1) "5"
   ["cate_name"] => string(5) "phage"
-  ["tag_name_links"] => string(59) "<a class=tag href='/admin/Oligo/showlist/tag_id/15'>cd8</a>"
-  ["file_links"] => string(423) "附件1: <a href="/Public/Uploads/20160919/57df9f258845a.jpeg">20130717130913_WSUWJ.thumb.700_0.jpeg</a><br>附件2: <a href="/Public/Uploads/20160919/57df9f2588842.jpg">island.jpg</a><br>附件3: <a href="/Public/Uploads/20160919/57df9f2589207.jpg">jeff1.jpg</a><br>附件4: <a href="/Public/Uploads/20160919/57df9f2589bcb.jpg">jeff2.jpg</a><br>附件5: <a href="/Public/Uploads/20160919/57df9f258a58f.jpg">vr2.jpg</a><br>"
-  ["box_name"] => string(17) "phage保存菌种"
+  ["tag_name_links"] => string(126) "<a class=tag href='/Admin/Seq/showlist/by/tag/id/4'>cd47</a><a class=tag href='/Admin/Seq/showlist/by/tag/id/18'>吕小翠</a>"
+  ["tag_names"] => string(14) "cd47,吕小翠"
+  ["file_links"] => string(80) "附件1: <a href="/Public/Uploads/20160926/57e90fdc16644.txt">backup.txt</a><br>"
+  ["box_name"] => string(12) "蛋白表达"
   ["box_place"] => string(58) "第2层左起第1个抽屉第3层从外向内第1个位置"
-  ["fr_id"] => string(1) "1"
-  ["fr_name"] => string(8) "4冰箱1"
+  ["fr_id"] => string(1) "2"
+  ["fr_name"] => string(10) "-20冰箱2"
 }
          * */
         $this->display();
@@ -155,7 +158,7 @@ array(22) {
            exit();
         }
         
-        $oligo_id=$id;
+        $seq_id=$id;
         
         //uid
         if($uid==0){
@@ -164,13 +167,13 @@ array(22) {
         }
         
         //1.如果是post提交，则保存数据
-        $md=M('Oligo');
+        $md=M('Seq');
         if(!empty($_POST)){
             //1.1获取数据
-            $oligo_name=I('oligo_name');
+            $seq_name=I('seq_name');
             
             //1.2如果同名条目已经存在，则添加失败
-           $rs_num = $md->where("oligo_uid = $uid AND oligo_name= '".$oligo_name."'")->count();
+           $rs_num = $md->where("seq_uid = $uid AND seq_name= '".$seq_name."'")->count();
            //dump($rs_num);
            if($rs_num>1){
                //$this->error('添加失败！该样品名已经存在.(可能在回收站)', U(''));
@@ -208,13 +211,13 @@ array(22) {
            
            //1.5拼接其他数据
            $data=array(
-                'oligo_id'=>$oligo_id,
+                'seq_id'=>$seq_id,
                 //核心信息
-                'oligo_name'=>$oligo_name,
-                'oligo_order_no'=>I('oligo_order_no'),
-                'oligo_sequence'=>I('oligo_sequence'),
-                'oligo_en_site'=>I('oligo_en_site'),
-                'oligo_note'=>I('oligo_note'),
+                'seq_name'=>$seq_name,
+                'seq_order_no'=>I('seq_order_no'),
+                'seq_sequence'=>I('seq_sequence'),
+                'seq_en_site'=>I('seq_en_site'),
+                'seq_note'=>I('seq_note'),
                 'file_ids'=>$file_ids,
            
                 //类别信息
@@ -222,19 +225,19 @@ array(22) {
                 'tag_ids'=>$tag_ids,
                 
                 //位置信息
-                'fridge_id'=>I('fridge_id'),
+                //'fridge_id'=>I('fridge_id'),
                 'box_id'=>I('box_id'),
                 'place'=>I('place'),
            
                 //其他信息
-                'oligo_uid'=>$user['mg_id'],
+                'seq_uid'=>$uid,
                 'condition'=>1,
-                //'oligo_time'=>time(),
-                'oligo_mod_time'=>time(),
+                'seq_mod_time'=>time(),
            );
 
            //debug($data);
-           //1.6提交数据           
+           //1.6提交数据   
+           //debug($data);        
            $rs =$md->save($data);
            
            //1.7判断提交是否成功
@@ -247,7 +250,7 @@ array(22) {
         }
         
         //2.如果没有post数据，则显示表单      
-        $info=D('Oligo')->getDetail($oligo_id,$uid,true);
+        $info=D('Seq')->getDetail($seq_id,$uid,true);
         $this->assign('info',$info);
         //debug($info);
         
@@ -271,11 +274,11 @@ array(22) {
     
     public function del($id){
        //放到回收站
-       $md=M('Oligo');
+       $md=M('Seq');
        //$rs=$mg->delete($mg_id);//彻底删除
        $rs=$md->save(array(
-            'oligo_id'=>$id,
-            'oligo_mod_time'=>time(),
+            'seq_id'=>$id,
+            'seq_mod_time'=>time(),
             'condition'=>0,//0 进入回收站
        ));
        if($rs>0){

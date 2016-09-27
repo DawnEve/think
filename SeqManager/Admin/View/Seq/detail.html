@@ -24,7 +24,7 @@
        <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
             <tr height=28>
                 <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：测序管理-><a href='{:U("showlist")}'>测序列表</a>->测序详情
-                    <span class='right'><a href="{:U('upd',array('id'=>$info['oligo_id']))}">【修改该测序】</a></span>
+                    <span class='right'><a href="{:U('upd',array('id'=>$info['seq_id']))}">【修改该测序】</a></span>
                 </td>
             </tr>
             <tr>
@@ -42,28 +42,28 @@
 <tr class=title><td colspan="2">核心信息</td></tr> 
                 <tr>
                     <td>id:</td>
-                    <td>{$info.oligo_id}</td>
+                    <td>{$info.seq_id}</td>
                 </tr>
                 <tr>
                     <td>测序名称:</td>
-                    <td>{$info.oligo_name}</td>
+                    <td>{$info.seq_name}</td>
                 </tr>
                 <tr>
                     <td>订单号:</td>
-                    <td>{$info.oligo_order_no}</td>
+                    <td>{$info.seq_order_no}</td>
                 </tr>
                 <tr>
                     <td>序列:</td>
-                    <td><div class=code>{$info.oligo_sequence|nl2br}</div></td>
+                    <td><div class=code>{$info.seq_sequence|nl2br}</div></td>
                 </tr>
                 <tr>
                     <td>酶切位点:</td>
-                    <td>{$info.oligo_en_site}</td>
+                    <td>{$info.seq_en_site}</td>
                 </tr>
 
                 <tr>
                     <td>备注:</td>
-                    <td>{$info.oligo_note|nl2br}</td>
+                    <td>{$info.seq_note|nl2br}</td>
                 </tr>
                 
                 
@@ -76,6 +76,18 @@
                 
  
  
+ 
+                <tr>
+                    <td>测序引物:</td>
+                    <td>
+                        <div id='oligo_info'>
+                            <div class=code>
+                                &gt;my name<a target="_blank" href='/Admin/Oligo/detail/id/{$info.seq_oligo_ids}'>[查看该引物]</a><br>
+                                {$info.seq_oligo_sequence}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
  
  
  
@@ -123,7 +135,7 @@
                 <tr>
                     <td></td>
                     <td>
-                      <a href="{:U('upd',array('id'=>$info['oligo_id']))}"><input type='button' value='修改该测序'></a>
+                      <a href="{:U('upd',array('id'=>$info['seq_id']))}"><input type='button' value='修改该测序'></a>
                       <input type='button' onclick="history.back(-1)" value='返回'>
                     </td>
                 </tr>

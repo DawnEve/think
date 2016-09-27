@@ -37,8 +37,8 @@ class SeqModel extends Model {
     
     
     
-    //把cate_id和tag_ids换成cate名字、tag链接
-    function id2name($info,$cate_id=0,$tag_id=0){ 
+    //把cate_id和tag_ids换成cate名字、tag链接, oligo_id到oligo_name
+    function id2name($info,$cate_id=0,$tag_id=0){
         //改造cate_id
         $cate_list=getList('cate');
         //改造tag_ids
@@ -65,7 +65,21 @@ class SeqModel extends Model {
             }
             
             $info[$k]['tag_names'] =rtrim($info[$k]['tag_names'] , ",");
+            
+	        //5从seq_oligo_ids推测出seq_oligo_sequence
+	        $seq_oligo_ids=$v['seq_oligo_ids'];
+	        $info[$k]['seq_oligo_sequence'] = '';
+	        if(!empty($seq_oligo_ids)){
+	            $oligo_info=M('Oligo')->field('oligo_name,oligo_sequence')->find($seq_oligo_ids);
+	            $info[$k]['seq_oligo_name'] = $oligo_info['oligo_name'];
+	            $info[$k]['seq_oligo_sequence'] = $oligo_info['oligo_sequence'];
+	        }
+	        
+	        
         }
+        
+        
+        
         
         //产生类别提示语
         $hint_text='';
@@ -84,14 +98,14 @@ class SeqModel extends Model {
     
     
     //获取某id的完整数据
-    function getDetail($oligo_id,$uid=0,$withDel=false){
+    function getDetail($seq_id,$uid=0,$withDel=false){
         if($uid==0){
             $user=session('user');
             $uid=$user['mg_id'];
         }
             //debug($withDel);
     	//获得某oligo详细数据，1.cate和2.tag标准化
-        $info_raw = $this->where('`condition`>0 and oligo_uid='.$uid)->select($oligo_id);
+        $info_raw = $this->where('`condition`>0 and seq_uid='.$uid)->select($seq_id);
         $arr_all = $this->id2name($info_raw);
         $info = $arr_all[0][0];//一维数组
         
@@ -148,5 +162,8 @@ class SeqModel extends Model {
         //debug($info);
         return $info;
     }
+    
+    
+
 
 }

@@ -12,7 +12,7 @@
     <body>
        <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
             <tr height=28>
-                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：地址管理->修改测序</td>
+                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：测序管理->修改测序</td>
             </tr>
             <tr>
                 <td bgcolor=#b1ceef height=1></td></tr>
@@ -31,24 +31,24 @@
 <tr class=title><td colspan="2">核心信息</td></tr> 
                 <tr>
                     <td>测序名称:</td>
-                    <td><input type=text name='oligo_name' size=50 value='{$info.oligo_name}'></td>
+                    <td><input type=text name='seq_name' size=50 value='{$info.seq_name}'></td>
                 </tr>
                 <tr>
                     <td>订单号:</td>
-                    <td><input type=text name='oligo_order_no' size=50 value='{$info.oligo_order_no}'></td>
+                    <td><input type=text name='seq_order_no' size=50 value='{$info.seq_order_no}'></td>
                 </tr>
                 <tr>
                     <td>序列:</td>
-                    <td><textarea type=text name='oligo_sequence' class=input>{$info.oligo_sequence}</textarea></td>
+                    <td><textarea type=text name='seq_sequence' class=input>{$info.seq_sequence}</textarea></td>
                 </tr>
                 <tr>
                     <td>酶切位点:</td>
-                    <td><input type=text name='oligo_en_site' size=50 value='{$info.oligo_en_site}'></td>
+                    <td><input type=text name='seq_en_site' size=50 value='{$info.seq_en_site}'></td>
                 </tr>
 
                 <tr>
                     <td>备注:</td>
-                    <td><textarea type=text name='oligo_note' rows='3' cols='50'>{$info.oligo_note}</textarea></td>
+                    <td><textarea type=text name='seq_note' rows='3' cols='50'>{$info.seq_note}</textarea></td>
                 </tr>
                 
                 <tr>

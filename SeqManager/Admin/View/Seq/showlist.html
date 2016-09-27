@@ -44,6 +44,7 @@
                         <td>ID</td>
                         <td>测序名称</td>
                         <td>订单编号</td>
+                        <td>测序引物<br><span class=light>(鼠标悬停显示序列)</span></td>
                         <td>分类</td>
                         <td>标签</td>
                         <td>备注</td>
@@ -60,6 +61,11 @@
                             <a href="{:U('detail', array('id'=>$vo['seq_id']))}">{$vo.seq_name}</a>
                         </td>
                         <td>{$vo.seq_order_no}</td>
+                        <td>
+                            <a title='{$vo.seq_oligo_sequence}' href="{:U('Oligo/detail', array('id'=>$vo['seq_oligo_ids']))}">
+                            {$vo.seq_oligo_name}</a>
+                        </td>
+                        
                         <td>
                             <a href="{:U('Seq/showlist', array('by'=>'cate','id'=>$vo['cate_id']))}">
                             {$vo.cate_name}</a>

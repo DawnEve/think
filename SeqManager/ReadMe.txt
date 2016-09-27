@@ -504,14 +504,33 @@ oDiv.appendChild(oText2);
 m$('oligo_info').appendChild(oDiv);
 
 
+>>dev0.7.9 修复Seq/del($id);  showlist中增加seq_name和链接。
+<td>测序引物<br>(鼠标悬停显示序列)</td>
 
- 
+
+>>dev0.8.0 
+Seq/detail($id); 
+
+
+Seq/upd($id); 
+
+
+      ["seq_oligo_ids"] => string(1) "2"
+      ["seq_uid"] => string(1) "5"
+      ["cate_name"] => string(5) "phage"
+      ["tag_name_links"] => string(126) "<a class=tag href='/Admin/Seq/showlist/by/tag/id/4'>cd47</a><a class=tag href='/Admin/Seq/showlist/by/tag/id/18'>吕小翠</a>"
+      ["tag_names"] => string(14) "cd47,吕小翠"
+      ["seq_oligo_sequence"] => string(16) "aaaaaaaaaaaaaaaa"
+      
+      
+
 
 ==============================================
 todo
 1.搜索结果的显示
 2.登录页面GUI
 3.实时新建分类。
-4.合并File/id2name()和Oligo/id2name();
+[不可能了]4.合并Model中的File/id2name()和Oligo/id2name(); 无法合并了，又多出来一个Seq/id2name();
 
 5.当前位置：引物管理->引物列表->引物详情 多个附件bug仅保存一个。冰箱无法保存。
+6.冰箱决定盒子。
