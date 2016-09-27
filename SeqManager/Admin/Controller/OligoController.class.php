@@ -284,6 +284,6 @@ array(22) {
     
     
     public function search(){
-        getName();
+        $this->redirect('Search/index',array('in'=>'oligo'));
     }
 }

@@ -298,6 +298,6 @@ array(26) {
     
     
     public function search(){
-        getName();
+        $this->redirect('Search/index',array('in'=>'seq'));
     }
 }

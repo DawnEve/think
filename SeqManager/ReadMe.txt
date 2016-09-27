@@ -529,11 +529,31 @@ m$('oligo_info').appendChild(oDiv);
 ==============================================
 >>commit到master。Seq模块基本完工。
 
+开始做搜索代码。
 
 
->>dev0.8.2 
+>>dev0.8.2 搜索的界面Search/index.html，响应点击。
+http://seq.dawneve.cc/Admin/Search/index/
 
+默认是
+http://seq.dawneve.cc/Admin/Search/index/by/keyword/in/seq/
 
+1.搜索方式
+/by/cate
+/by/tag
+/by/keyword
+
+2.搜素内容
+/in/seq
+/in/oligo
+/in/file
+
+3.关键词
+/wd/xxx
+
+seq/oligo/file的search()中，使用如下语句。
+
+$this->redirect('Search/index',array('in'=>'file'));
 
 
 

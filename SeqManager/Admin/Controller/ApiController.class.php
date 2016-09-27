@@ -26,17 +26,24 @@ class ApiController extends Controller {
     }
     
     //ajax返回数据表数据
-    function cate(){
+    function search(){
     	if(IS_AJAX){//判读是否为post提交过了
-	       $data=array(
-	        'username'=>I('username'),
-	        'content'=>I('content'),
-	        'time'=>time()  
-	       );
-	      $data_send=$data;
+    		//获取数据
+	        $data_send=array(
+	          'by'=>I('by'),
+	          'in'=>I('in'),
+	          'wd'=>I('wd'),
+	        );
+	        
+	        //获取数据
+	        $data=A('Search','Logic')->getData($data_send);
+	        //$data=$data_send;
+	        
+	        //返回结果
+	        $this->ajaxReturn($data);
     	}
       
-        $this->ajaxReturn(M('cate')->select());
+//        $this->ajaxReturn(M('cate')->select());
     }
 
     
