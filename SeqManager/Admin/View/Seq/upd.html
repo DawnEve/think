@@ -124,8 +124,80 @@ function add_file_btn(){
 </script>
                     </td>
                 </tr>
+                    
+                    
+                    
+              <tr>
+                    <td>测序引物:</td>
+                    <td>
+                        <Mytag:html_options id="oligo_id" name="seq_oligo_ids" options="oligo_list" onchange="showOligo()" selected="oligo_id" />
+                        <div id='oligo_info'>
+                            <div class=code>
+                                &gt;my name<a target="_blank" href='/Admin/Oligo/detail/id/2'>[查看该引物]</a><br>
+                                aaatttgggccc
+                            </div>
+                        </div>
+                    </td>
+                </tr>
                 
- 
+<script>
+function n(s){
+    console.log(s);
+}
+    
+//var myAjax=$.ajax;
+function showOligo(){
+    var id=m$('oligo_id').value;
+    $.ajax({
+        url: "/Admin/Api/oligo",
+        data: {
+          method: 'get',
+          id:id,
+        },
+        success: function( result ) {
+          //$( "#weather-temp" ).html( "<strong>" + result + "</strong> degrees" );
+           if(result[0]==1){
+                //获取数据
+                var o=result[1];
+                var oligo_id=o.oligo_id;
+                var oligo_name=o.oligo_name;
+                var oligo_sequence=o.oligo_sequence;
+                //var oligo_sequence=$.html(o.oligo_sequence);
+                //拼接标签
+                //内容
+                var oText1=document.createTextNode('>'+oligo_name);
+                var oA=document.createElement('a');
+                oA.setAttribute('target','_blank');
+                oA.setAttribute('href','/admin/Oligo/detail/id/'+oligo_id);
+                oA.innerHTML='[查看该引物]';
+                var oBr=document.createElement('br');
+                //var oText2=document.createTextNode(oligo_sequence);
+                
+                if(oligo_sequence.length==0){
+                    oligo_sequence='[没有设置序列]';
+                }
+                
+                var oText2=document.createTextNode(oligo_sequence);
+                //外边框div
+                var oDiv=document.createElement('div');
+                oDiv.setAttribute('class','code');
+                //塞入内容
+                oDiv.appendChild(oText1);
+                oDiv.appendChild(oA);
+                oDiv.appendChild(oBr);
+                oDiv.appendChild(oText2);
+                //插入文档数
+                var oParent=m$('oligo_info');
+                oParent.innerHTML='';//清空
+                oParent.appendChild(oDiv);
+           }else{
+               alert('失败：'+result[1]);
+           }
+        }
+    });
+}
+
+</script> 
  
  
  
@@ -470,7 +542,10 @@ window.onload=function(){
 	        addNewTag(tagName);
 	    }
     }
-    
+
+
+    //初始化引物
+    showOligo();
 
 }
 

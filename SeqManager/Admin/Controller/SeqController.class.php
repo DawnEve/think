@@ -222,6 +222,7 @@ array(26) {
                 'seq_en_site'=>I('seq_en_site'),
                 'seq_note'=>I('seq_note'),
                 'file_ids'=>$file_ids,
+                'seq_oligo_ids'=>I('seq_oligo_ids'),
            
                 //类别信息
                 'cate_id'=>I('cate_id'),
@@ -260,6 +261,7 @@ array(26) {
         $this->assign('cate_id',$info['cate_id']);//cate_id
         $this->assign('fr_id',$info['fr_id']);//fr_id
         $this->assign('box_id',$info['box_id']);//box_id
+        $this->assign('oligo_id',$info['seq_oligo_ids']);//oligo_id
         
         //2.1获取分类数据
         $this->assign('cate_list',getlist('cate'));
@@ -269,6 +271,8 @@ array(26) {
         $this->assign('fridge_list',getlist('fridge','fr',1));
         //2.4获取盒子数据
         $this->assign('box_list',getlist('box'));
+        //2.5获取引物数据
+        $this->assign('oligo_list',getlist('oligo'));
         
         $this->display();
     }

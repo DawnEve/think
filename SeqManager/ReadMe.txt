@@ -509,18 +509,37 @@ m$('oligo_info').appendChild(oDiv);
 
 
 >>dev0.8.0 修复Seq/detail($id); 
+  ["seq_oligo_ids"] => string(1) "2"
+  ["seq_oligo_sequence"] => string(16) "aaaaaaaaaaaaaaaa"
+  ["seq_oligo_name"] => string(6) "cd47Up"
+  ["file_links"] => string(80) "附件1: <a href="/Public/Uploads/20160926/57e90fdc16644.txt">backup.txt</a><br>"
 
-
-Seq/upd($id); 
-
-
-      ["seq_oligo_ids"] => string(1) "2"
-      ["seq_uid"] => string(1) "5"
-      ["cate_name"] => string(5) "phage"
-      ["tag_name_links"] => string(126) "<a class=tag href='/Admin/Seq/showlist/by/tag/id/4'>cd47</a><a class=tag href='/Admin/Seq/showlist/by/tag/id/18'>吕小翠</a>"
-      ["tag_names"] => string(14) "cd47,吕小翠"
-      ["seq_oligo_sequence"] => string(16) "aaaaaaaaaaaaaaaa"
       
+
+>>dev0.8.1 修复Seq/upd($id); 大文件上传失败，但是不报错：修改最大上传5M（php默认是2M）。
+    1.修改配置文件 php.ini 
+    ; Maximum allowed size for uploaded files.
+    ; http://php.net/upload-max-filesize
+    upload_max_filesize=7M
+    2.重启apache，可以上传2M多的文件了。
+
+[bug]页面出现错位，不知道什么原因。退出重新登录可以了。
+
+
+==============================================
+>>commit到master。Seq模块基本完工。
+
+
+
+>>dev0.8.2 
+
+
+
+
+
+
+
+
       
 
 

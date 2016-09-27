@@ -386,6 +386,7 @@ array(2) {
         //1.2.上传文件
         $info   =   $upload->upload();
         
+        //debug($upload);
         //1.3上传失败，则提示上传错误信息
         if(!$info) {
             $this->error($upload->getError(),U());
