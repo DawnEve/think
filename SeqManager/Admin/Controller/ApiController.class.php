@@ -34,6 +34,10 @@ class ApiController extends Controller {
 	          'in'=>I('in'),
 	          'wd'=>I('wd'),
 	        );
+	        //防止没有关键词
+	        if($data_send['wd']==''){
+	           $this->ajaxReturn(array(0,"请填写关键词！"));
+	        }
 	        
 	        //获取数据
 	        $data=A('Search','Logic')->getData($data_send);

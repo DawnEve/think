@@ -34,25 +34,20 @@
 		    
 	        <input type='hidden' name='by' value='{$by}' id='by_input' />
 	        
-	        <input type='text' name='wd' id='kw' />
+	        <input type='text' name='wd' id='kw' placeholder='请输入尽量短的关键词，目前仅支持单一关键词' />
 	        <input class='search' type='button' id='search' value='搜索'>
 	        <br />
 	        <br />
 	        
-		    <span class='radio'><input type='radio' name='in' value='Seq' <?php if($in=='seq') echo ' checked';?>>序列</input></span>
-		    <span class='radio'><input type='radio' name='in' value='Oligo' <?php if($in=='oligo') echo ' checked';?>>引物</input></span>
-		    <span class='radio'><input type='radio' name='in' value='File' <?php if($in=='file') echo ' checked';?>>文件</input></span>
+		    <span class='radio'><input type='radio' name='in' value='seq' <?php if($in=='seq') echo ' checked';?>>序列</input></span>
+		    <span class='radio'><input type='radio' name='in' value='oligo' <?php if($in=='oligo') echo ' checked';?>>引物</input></span>
+		    <span class='radio'><input type='radio' name='in' value='file' <?php if($in=='file') echo ' checked';?>>文件</input></span>
         </form>
 		 
 		 <pre>
 		      <div id=search_list></div>
 		 </pre>       
     </div>
-        
-        
-
-        
-            
 
 </div>
     </body>
@@ -83,8 +78,6 @@ function UnixToDate(unixTime, isFull, timeZone){
 
 
 
-var obj={};
-
 
 window.onload=function(){
     //确定查找方式by
@@ -98,10 +91,6 @@ window.onload=function(){
             m$('by_input').value=$(this).attr('title');
         };
     }
-	
-
-	//初始化工作 ???
-
 
 }
 
@@ -110,6 +99,13 @@ window.onload=function(){
 $('#search').on('click',function(){
 	var f=document.forms[0];
 	var prefix=f.in.value;//'cate';
+	var wd=f.wd.value;
+	if(wd.length<1){
+		alert('请输入关键词!');
+		m$('kw').focus();
+	    return;
+	}
+	
 	$.ajax({
       url: "/Admin/Api/search",
       data: {

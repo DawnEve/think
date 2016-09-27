@@ -556,7 +556,7 @@ seq/oligo/file的search()中，使用如下语句。
 $this->redirect('Search/index',array('in'=>'file'));
 
 
-
+>>dev0.8.2 搜索的结果SearchLogic/getData()，产生数据。    按照关键词、分类搜索。
 
 
 
