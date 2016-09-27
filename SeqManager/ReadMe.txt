@@ -559,8 +559,37 @@ $this->redirect('Search/index',array('in'=>'file'));
 >>dev0.8.2 搜索的结果SearchLogic/getData()，产生数据。    按照关键词、分类搜索。
 
 
+>>dev0.8.3 搜索的结果SearchLogic/getData()，产生数据。    按照标签搜索。
+1.求一个sql语句，需要tag_ids中包含有 "3","5","6","8" 任何一项的记录，其中tag_ids如下
+tag_ids
+3,5,7
+3,5
+5,6
+3,5,7
+15
+5,15
+6
+3,15
+5
+6
+7,8
+3,5,6
+3,5,7,8
+9,10
+15,6
+3,6,18
 
-      
+select tag_ids from wjl_file
+where tag_ids REGEXP '(^|,)3($|,)'  
+    or tag_ids REGEXP '(^|,)5($|,)'  
+    or tag_ids REGEXP '(^|,)6($|,)'  
+    or tag_ids REGEXP '(^|,)8($|,)'  
+-
+
+
+
+
+
 
 
 ==============================================

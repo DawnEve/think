@@ -46,10 +46,21 @@ class SearchLogic extends Controller{
                ->select();
     	}elseif($by=='tag'){
     	   //2.1从tag表tag_name字段中搜索该关键词对应的tag_id(s)[condition uid]
-           $tag_list=M('tag')->field('tag_id,tag_name')->select();
-            
+           $tag_list=M('tag')->field('tag_id,tag_name')
+                //
+                ->where('`condition`>0 and tag_uid='.$uid.' and tag_name like "%'.$wd.'%"')
+                ->select();
+           //拼接sql语句
+           $sql_str='';
+           foreach($tag_list as $k=>$v){
+                $sql_str .= " or tag_ids REGEXP '(^|,)".$v['tag_id']."($|,)'";
+           }
+           $sql_str=ltrim($sql_str,' or');
+           $sql = 'select * from wjl_'.$in.' where `condition`>0 AND '.$prefix.'_uid='.$uid;
+           $sql .= ' and ('.$sql_str .')';
+           
            //2.2用tag_id(s)从seq/oligo/file中搜索tag_id=该值的条目，并返回
-    	   
+    	   $data=$md->query($sql);
     		
     		
     	}elseif($by=='keyword'){
