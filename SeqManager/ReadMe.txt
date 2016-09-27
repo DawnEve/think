@@ -585,7 +585,7 @@ where tag_ids REGEXP '(^|,)3($|,)'
     or tag_ids REGEXP '(^|,)6($|,)'  
     or tag_ids REGEXP '(^|,)8($|,)'  
 -
-
+>>dev0.8.4 搜索结果的js展示。
 
 
 

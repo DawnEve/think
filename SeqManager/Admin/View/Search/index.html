@@ -6,6 +6,22 @@
         <link href="{$Think.const.CSS_URL}/admin.css?time={:time();}" type="text/css" rel="stylesheet" />
         <link href="{$Think.const.CSS_URL}/mine.css?time=201609184" type="text/css" rel="stylesheet" />
         <script src="{$Think.const.js_URL}/jquery-3.1.0.min.js"></script>
+<style>
+.footer{
+    background: #f5f6f5;
+    /*border-top: 1px solid #ebebeb;
+    text-align: left;
+    height: 42px;*/
+    line-height: 42px; font-size: 12px;     font-family: arial;
+    margin-top: 20px;
+    color: #77c;
+    position:relative;
+    bottom:0px;
+    
+    position: relative;
+    z-index: 104;
+}
+</style>
     </head>
     
     <body>
@@ -49,6 +65,11 @@
 		 </pre>       
     </div>
 
+<div class='footer'>
+    <div class='center'>
+        &copy;2016 JimmyMall@163.com, 基于web的测序结果管理系统
+    </div>
+</div>
 </div>
     </body>
     
@@ -114,18 +135,20 @@ $('#search').on('click',function(){
 		wd: f.wd.value,
       },
       success: function(result) {
-          console.log(result); return;
+          //console.log(result); return;
           
           //组装结果
           var str='<table class="table_a" border="1" width="100%">';
-          str += "<tr><th>id</th><th>名字</th><th>创建时间</th><th>上次修改时间</th></tr>";
+          str += "<tr><th>id</th><th>名字</th><th>备注</th><th>创建时间</th><th>上次修改时间</th></tr>";
           var L=result.length;
+          str += "<p>共搜索到"+L+"条记录。</p>";
           if(L>0){
 	          for(var i=0;i<L; i++){
 	             var dt=result[i];
 	             //拼接id和name（带链接）
 	        	 str += "<tr><td>"+dt[prefix+'_id']+"</td>";
-	        	 str +="<td><a href='{:U("Cate/showlist")}?id="+i+"'>"+dt[prefix+'_name']+"</a></td>";
+	        	 str +="<td><a href='/Admin/"+ f.in.value +"/detail/id/"+dt[prefix+'_id']+"'>"+dt[prefix+'_name']+"</a></td>";
+	        	 str += "<td>"+dt[prefix+'_note']+"</td>";
 
 	        	 //拼接日期
 	             var time=UnixToDate( dt[prefix+'_time'], true);
@@ -134,7 +157,6 @@ $('#search').on('click',function(){
 	          }
           }
           str += "</table>";
-          str += "<p>共搜索到"+L+"条记录。</p>";
         m$( "search_list" ).innerHTML=str;
       }
     });
