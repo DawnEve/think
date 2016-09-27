@@ -37,26 +37,29 @@ class SeqController extends AdminController {
         $this->assign('info',$info);
         //debug($info);
         /*
-array(24) {
+array(26) {
   ["seq_id"] => string(1) "1"
-  ["seq_name"] => string(0) ""
-  ["seq_order_no"] => string(0) ""
-  ["seq_sequence"] => string(0) ""
-  ["seq_en_site"] => string(0) ""
-  ["seq_note"] => string(0) ""
+  ["seq_name"] => string(3) "001"
+  ["seq_order_no"] => string(3) "002"
+  ["seq_sequence"] => string(7) "aaaaaaa"
+  ["seq_en_site"] => string(2) "xx"
+  ["seq_note"] => string(23) "第二个，
+第二行"
   ["file_ids"] => string(2) "32"
   ["seq_time"] => string(10) "1474891740"
-  ["seq_mod_time"] => string(10) "1474892924"
+  ["seq_mod_time"] => string(10) "1474940530"
   ["cate_id"] => string(1) "2"
-  ["tag_ids"] => string(4) "4,18"
+  ["tag_ids"] => string(6) "4,18,5"
   ["box_id"] => string(1) "3"
   ["palce"] => NULL
   ["condition"] => string(1) "1"
   ["seq_oligo_ids"] => string(1) "2"
   ["seq_uid"] => string(1) "5"
   ["cate_name"] => string(5) "phage"
-  ["tag_name_links"] => string(126) "<a class=tag href='/Admin/Seq/showlist/by/tag/id/4'>cd47</a><a class=tag href='/Admin/Seq/showlist/by/tag/id/18'>吕小翠</a>"
-  ["tag_names"] => string(14) "cd47,吕小翠"
+  ["tag_name_links"] => string(186) "<a class=tag href='/Admin/Seq/showlist/by/tag/id/4'>cd47</a><a class=tag href='/Admin/Seq/showlist/by/tag/id/18'>吕小翠</a><a class=tag href='/Admin/Seq/showlist/by/tag/id/5'>Good</a>"
+  ["tag_names"] => string(19) "cd47,吕小翠,Good"
+  ["seq_oligo_sequence"] => string(16) "aaaaaaaaaaaaaaaa"
+  ["seq_oligo_name"] => string(6) "cd47Up"
   ["file_links"] => string(80) "附件1: <a href="/Public/Uploads/20160926/57e90fdc16644.txt">backup.txt</a><br>"
   ["box_name"] => string(12) "蛋白表达"
   ["box_place"] => string(58) "第2层左起第1个抽屉第3层从外向内第1个位置"
