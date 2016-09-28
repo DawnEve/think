@@ -280,4 +280,9 @@ array(4) {
         $rs=D('manager')->init(16);
         dump($rs);
     }
+    
+    function filter2($id=23){
+    	$data=M('oligo')->find($id)['oligo_sequence'];
+        dump(dna_filter($data));
+    }
 }

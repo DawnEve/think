@@ -98,6 +98,7 @@ array(22) {
                 'oligo_name'=>$oligo_name,
                 'oligo_order_no'=>I('oligo_order_no'),
                 'oligo_sequence'=>I('oligo_sequence'),
+                'oligo_sequence_only'=>dna_filter(I('oligo_sequence')),//过滤后的序列
                 'oligo_en_site'=>I('oligo_en_site'),
                 'oligo_note'=>I('oligo_note'),
                 'file_ids'=>$file_ids,
@@ -210,6 +211,7 @@ array(22) {
                 'oligo_name'=>$oligo_name,
                 'oligo_order_no'=>I('oligo_order_no'),
                 'oligo_sequence'=>I('oligo_sequence'),
+                'oligo_sequence_only'=>dna_filter(I('oligo_sequence')),//过滤后的序列
                 'oligo_en_site'=>I('oligo_en_site'),
                 'oligo_note'=>I('oligo_note'),
                 'file_ids'=>$file_ids,

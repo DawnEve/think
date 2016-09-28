@@ -99,12 +99,14 @@ array(26) {
            $str=I('tag_ids');//"protein100,cd47,Good";
            $tag_ids=A('Tag','Logic')->get_tag_ids($str);
            
+           
            //1.5拼接其他数据
            $data=array(
                 //核心信息
                 'seq_name'=>$seq_name,
                 'seq_order_no'=>I('seq_order_no'),
                 'seq_sequence'=>I('seq_sequence'),
+                'seq_sequence_only'=>dna_filter(I('seq_sequence')),//过滤后的序列
                 'seq_en_site'=>I('seq_en_site'),
                 'seq_note'=>I('seq_note'),
                 'file_ids'=>$file_ids,
@@ -225,6 +227,7 @@ array(26) {
                 'seq_name'=>$seq_name,
                 'seq_order_no'=>I('seq_order_no'),
                 'seq_sequence'=>I('seq_sequence'),
+                'seq_sequence_only'=>dna_filter(I('seq_sequence')),//过滤后的序列
                 'seq_en_site'=>I('seq_en_site'),
                 'seq_note'=>I('seq_note'),
                 'file_ids'=>$file_ids,

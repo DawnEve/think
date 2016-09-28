@@ -704,8 +704,21 @@ SELECT `fr_id`,`fr_name`,`fr_place`,`fr_note`,`fr_time`,`fr_mod_time` FROM wjl_f
 >>dev0.9.2-5 用户体验的改为一致:seq/showlist中单击其他都是分类筛选，而单击引物是显示引物信息。
     td改为th。
     
->>dev0.9.2-6 按照序列搜索 sequence,前台js编写完成。    
-
+>>dev0.9.2-6 按序列搜索 sequence,前台js编写完成。    
+>>dev0.9.2-7 按序列搜索 sequence, 后台数据返回 
+    (1)seq数据保存的时候要产生一个新列_sequence_only，
+    去掉html标签，去掉非字母符号(包括空格、数字)，转化成大写。
+    1)修改seq和oligo的数据表，和upd和add方法。
+    alter table wjl_seq add `oligo_sequence_only` text default '' after `oligo_sequence`;
+    alter table wjl_seq add `seq_sequence_only` text default '' after `seq_sequence`;
+    
+    2)function dna_filter($str){}
+    3)add,upd方法
+    'oligo_sequence_only'=>dna_filter(I('oligo_sequence')),//过滤后的序列
+    
+    
+    
+    
 
 
 

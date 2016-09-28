@@ -80,6 +80,8 @@ class SearchLogic extends Controller{
 	    	       ->select();
     		}
     	}elseif($by=='sequence'){
+    		//4.0从seq/oligo中的sequence字段按照dna序列匹配关键词wd，并返回。
+    		//4.1
     		$data=$md 
     		      //->where()
     		      ->select();

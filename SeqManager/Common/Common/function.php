@@ -85,4 +85,22 @@ function my_mb_substr($note,$len=5){
 }
 //使用 {$vo.file_note|my_mb_substr}
 
-
+/**
+ * 过滤掉序列中
+ * html标签，非字母符号(包括空格、数字)，
+ * 并转化成大写
+ * @param $str
+ */
+function dna_filter($str){
+    //1.过滤html标签
+    $str1=strip_tags($str);
+    //2.过滤掉字母之外的序列
+    $str2=preg_replace("/\s/","",$str1);//去掉所有空格
+    $str3=preg_replace("/\r/","",$str2);//去掉换行
+    $str3=preg_replace("/\n/","",$str3);//去掉换行
+    $str3=preg_replace("/\d/","",$str3);//去掉数字
+    //3.扎化为大写
+    $str4=strtoupper($str3);
+    //4.返回结果
+    return $str4;
+}
