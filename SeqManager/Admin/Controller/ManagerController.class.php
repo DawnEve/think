@@ -149,32 +149,37 @@ array(4) {
         $this->display();
     }
     
-    //修改用户的角色信息等
+    //修改管理员信息
     function upd($mg_id){
     	//1.如果是post提交，则在模型中保存数据
     	if(!empty($_POST)){
-    	   $rs=D('Manager')->upd($mg_id);
-    	   if(true === $rs){
+    	   //获取数据
+    	   $mg_name=I('mg_name');
+    		
+	       //如果有重复，则提示错误！
+    	   $mg=D('Manager');
+	       $rs=$mg->getBymg_name($mg_name);
+	       if($rs!=null){
+	           $this->error('该用户名已经存在，请换一个用户名再试试吧-.-',U());
+	           die();
+	       }
+	       
+	       //否则，提交数据
+	       $_POST['mg_id']=$mg_id;
+	       $_POST['mg_mod_time']=time();//修改时间
+	       $mg->create();
+    	   $rs=$mg->save();
+
+    	   if($rs){
     	       $this->success('成功',U('showlist'));
     	   }else{
-    	       $this->error('失败！'.$rs,U('showlist'));
+    	       $this->error('失败！'.$mg->getError(),U('showlist'));
     	   }
     	   die();
     	}
     	
-    	
-    	
     	//2.获取该管理员信息
         $mg_info=M('Manager')->find($mg_id);
-        /*
-         array(5) {
-  ["mg_id"] => string(1) "2"
-  ["mg_name"] => string(3) "tom"
-  ["mg_pwd"] => string(32) "e10adc3949ba59abbe56e057f20f883e"
-  ["mg_time"] => string(10) "1473500231"
-  ["mg_role_id"] => string(1) "2"
-}
-         * */
         $this->assign('mg_info',$mg_info);
         
         //3.查询全部角色信息
@@ -189,13 +194,36 @@ array(4) {
     function add(){
         //1.如果是post提交，则在模型中插入数据
         if(!empty($_POST)){
-            $rs=D('Manager')->addManager();
-           
-           if($rs>0){
-               $this->success('成功',U('showlist'));
-           }else{
-               $this->error('失败！'.$mg->getError() ,U('showlist'));
-           }
+           $md=D('Manager');
+           //1.1检查是否重名
+	       $mg_name=I('mg_name');
+	       $rs=$md->getBymg_name($mg_name);
+	       if($rs!=null){
+	          $this->error('该用户名已经存在，请换一个用户名再试试吧-.-',U());
+              die();
+	       }
+	                
+	       //1.2如果没有重名，则插入
+	       $_POST['mg_time']=time();
+	       $_POST['mg_mod_time']=time();
+	       $_POST['mg_pwd']=md5($_POST['mg_pwd']);
+	       $md->create();
+	       
+	       //1.3判断结果
+	       $info='';
+	       if($id=$md->add()){
+	       	   $info .= '添加用户成功!';
+	       	   //1.4初始化用户数据
+    	       $rs=$md->init($id); 
+	           if($rs[0]){
+	               $this->success($info.$rs[1],U('showlist'));
+	           }else{
+	               $this->error($info.$rs[1] ,U('showlist'));
+	           }
+	       }else{
+	           $this->error('添加用户失败！'.$md->getError() ,U('showlist'));
+	       }
+	       
            die();
         }
         

@@ -275,4 +275,9 @@ array(4) {
         echo '<pre>';
         print_r($s);
     }
+    
+    function init(){
+        $rs=D('manager')->init(16);
+        dump($rs);
+    }
 }
