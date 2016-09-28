@@ -623,9 +623,8 @@ where tag_ids REGEXP '(^|,)3($|,)'
 
 >>dev0.8.6-2 删除顶部暂时无用的搜索框，现在没时间实现了。
 
-
-
-
+>>dev0.8.6-3 右上角图片改写。公司名称改为  MIO WEB SERVICE SYSTEMS 
+manager/right.html, search/index.html, Help/about.html底部修改logo text为： MIO WEB SERVICE SYSTEMS 
 
 
 
