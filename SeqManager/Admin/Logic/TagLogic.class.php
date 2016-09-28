@@ -14,6 +14,12 @@ class TagLogic extends Controller{
 	 * 
 	 */
     function get_tag_ids($tags_list=''){
+    	//如果是空的，则直接返回空
+    	if(''==trim($tags_list)){
+    	   return '';
+    	}
+    	
+    	//如果不为空，则继续
     	//获取用户
     	$user=session('user');
         //分割标签

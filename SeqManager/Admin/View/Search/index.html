@@ -3,9 +3,29 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <title>我的搜索</title>
-        <link href="{$Think.const.CSS_URL}/admin.css?time={:time();}" type="text/css" rel="stylesheet" />
-        <link href="{$Think.const.CSS_URL}/mine.css?time=201609184" type="text/css" rel="stylesheet" />
+        <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet" />
+        <link href="{$Think.const.CSS_URL}/mine.css" type="text/css" rel="stylesheet" />
         <script src="{$Think.const.js_URL}/jquery-3.1.0.min.js"></script>
+<style>
+.footer{
+    background: #f5f6f5;
+    /*border-top: 1px solid #ebebeb;
+    text-align: left;
+    height: 42px;
+    line-height: 42px;
+    margin-top: 10px;
+    */
+    
+    font-size: 12px;     font-family:'微软雅黑',arial;
+    color: #77c;
+    
+    margin:0;
+    padding:5px 0;
+    
+    width:100%;
+    bottom:0; left:0; position:absolute;
+}
+</style>
     </head>
     
     <body>
@@ -26,35 +46,39 @@
     <div class='center'>
         <form action="__SELF__" method="get">
             <div id='by_btn'>
-                <a class='btn' href="javascript:void(0);" title='cate'>按照类别索引</a>
-                <a class='btn' href="javascript:void(0);" title='tag'>按照标签索引</a>
-                <a class='btn blue' href="javascript:void(0);" title='keyword'>按照关键词搜索</a>
+                <a class='btn<?php if($by=='cate') echo ' blue';?>' href="javascript:void(0);" title='cate'>按照分类索引</a>
+                <a class='btn<?php if($by=='tag') echo ' blue';?>' href="javascript:void(0);" title='tag'>按照标签索引</a>
+                <a class='btn<?php if($by=='keyword') echo ' blue';?>' href="javascript:void(0);" title='keyword'>按照关键词搜索</a>
 		    </div>
 		    <br />
 		    
-	        <input type='hidden' name='by_input' value='keyword' id='by_input' />
-	        <input type='text' name='keyword' id='kw' />
+	        <input type='hidden' name='by' value='{$by}' id='by_input' />
+	        
+	        <input type='text' name='wd' id='kw' placeholder='请输入尽量短的关键词,目前仅支持单关键词' />
 	        <input class='search' type='button' id='search' value='搜索'>
 	        <br />
 	        <br />
 	        
-		    <span class='radio'><input type='radio' name='info_type' value='Seq' checked>序列</input></span>
-		    <span class='radio'><input type='radio' name='info_type' value='Oligo'>引物</input></span>
-		    <span class='radio'><input type='radio' name='info_type' value='File'>文件</input></span>
+		    <span class='radio'><input type='radio' name='in' value='seq' <?php if($in=='seq') echo ' checked';?>>序列</input></span>
+		    <span class='radio'><input type='radio' name='in' value='oligo' <?php if($in=='oligo') echo ' checked';?>>引物</input></span>
+		    <span class='radio'><input type='radio' name='in' value='file' <?php if($in=='file') echo ' checked';?>>文件</input></span>
         </form>
 		 
 		 <pre>
 		      <div id=search_list></div>
 		 </pre>       
     </div>
-        
-        
 
-        
-            
+<div class='footer'>
+    <div class='center'>
+        &copy;2016 MIO WEB SERVICE SYSTEMS |《基于web的测序结果管理系统》v1.0 <br>
+                电话: 158-9014-9335 | 邮箱: JimmyMall@163.com | 地址: 郑州市科学大道100号<br>
 
+    </div>
+</div>
 </div>
     </body>
+    
 <script>
 //tools
 function n(s){console.log(s);}
@@ -80,45 +104,65 @@ function UnixToDate(unixTime, isFull, timeZone){
 }
 
 
-window.onload=function(){
-	//点击显示查找方式
-	var aA=$('#by_btn a');
-	for(var i=0,l=aA.length;i<l;i++){
-	    aA[i].onclick=function(){
-		    //改样式
-	    	$('#by_btn a').attr('class','btn');
-	    	$(this).attr('class','btn blue');
-	    	//改值
-	    	m$('by_input').value=$(this).attr('title');
-		};
-	}
 
+
+window.onload=function(){
+    //确定查找方式by
+    var aA=$('#by_btn a');
+    for(var i=0,l=aA.length;i<l;i++){
+        aA[i].onclick=function(){
+            //改样式
+            $('#by_btn a').attr('class','btn');
+            $(this).attr('class','btn blue');
+            //改值
+            m$('by_input').value=$(this).attr('title');
+        };
+    }
 
 }
 
-var prefix='cate';
 
 //搜索按钮
 $('#search').on('click',function(){
 	var f=document.forms[0];
+	var prefix=f.in.value;//'cate';
+	var wd=f.wd.value;
+	if(wd.length<1){
+		alert('请输入关键词!');
+		m$('kw').focus();
+	    return;
+	}
+	
 	$.ajax({
-      url: "/Admin/Api/cate",
+      url: "/Admin/Api/search",
       data: {
-		keyword: f.keyword.value,
-		by_input:f.by_input.value,
-		info_type:f.info_type.value,
+		by:f.by.value,
+		in:f.in.value,
+		wd: f.wd.value,
       },
-      success: function(result) {
+      success: function(results) {
+          var result=results[1];
+          //console.log(result); return;
+          //1.如果没有匹配数据，则提示没有匹配
+          if(0==results[0]){
+        	  str = "<p>共搜索到0条记录。</p>";
+        	  m$( "search_list" ).innerHTML=str + '<p>'+result+'</p>';
+        	  return;
+          }
+          
+          //2.如果匹配成功，则显示匹配结果 
           //组装结果
           var str='<table class="table_a" border="1" width="100%">';
-          str += "<tr><th>id</th><th>名字</th><th>创建时间</th><th>上次修改时间</th></tr>";
+          str += "<tr><th>id</th><th>名字</th><th>备注</th><th>创建时间</th><th>上次修改时间</th></tr>";
           var L=result.length;
+          str += "<p>共搜索到"+L+"条记录。</p>";
           if(L>0){
 	          for(var i=0;i<L; i++){
 	             var dt=result[i];
 	             //拼接id和name（带链接）
 	        	 str += "<tr><td>"+dt[prefix+'_id']+"</td>";
-	        	 str +="<td><a href='{:U("Cate/showlist")}?id="+i+"'>"+dt[prefix+'_name']+"</a></td>";
+	        	 str +="<td><a href='/Admin/"+ f.in.value +"/detail/id/"+dt[prefix+'_id']+"'>"+dt[prefix+'_name']+"</a></td>";
+	        	 str += "<td>"+dt[prefix+'_note']+"</td>";
 
 	        	 //拼接日期
 	             var time=UnixToDate( dt[prefix+'_time'], true);
@@ -127,7 +171,6 @@ $('#search').on('click',function(){
 	          }
           }
           str += "</table>";
-          str += "<p>共搜索到"+L+"条记录。</p>";
         m$( "search_list" ).innerHTML=str;
       }
     });

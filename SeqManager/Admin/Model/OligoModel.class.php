@@ -46,7 +46,12 @@ class OligoModel extends Model {
         //循环改造
         foreach($info as $k=>$v){ //dump($info);
             //$cate_id=$data['cate_id'];
-            $info[$k]['cate_name']=$cate_list[$v['cate_id']];
+            if(!empty($v['cate_id'])){
+                $info[$k]['cate_name']=$cate_list[$v['cate_id']];
+            }else{
+                $info[$k]['cate_name']='';
+                $info[$k]['cate_id']=0;
+            }
             
             //分裂tag_ids
             $info[$k]['tag_name_links']='';

@@ -310,7 +310,7 @@ array(2) {
     }
     
     public function search(){
-        getName();
+        $this->redirect('Search/index',array('in'=>'file'));
     }
     
     //上传文件，覆盖掉旧文件

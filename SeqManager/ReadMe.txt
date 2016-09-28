@@ -529,18 +529,114 @@ m$('oligo_info').appendChild(oDiv);
 ==============================================
 >>commit到master。Seq模块基本完工。
 
+开始做搜索代码。
 
 
->>dev0.8.2 
+>>dev0.8.2 搜索的界面Search/index.html，响应点击。
+http://seq.dawneve.cc/Admin/Search/index/
+
+默认是
+http://seq.dawneve.cc/Admin/Search/index/by/keyword/in/seq/
+
+1.搜索方式
+/by/cate
+/by/tag
+/by/keyword
+
+2.搜素内容
+/in/seq
+/in/oligo
+/in/file
+
+3.关键词
+/wd/xxx
+
+seq/oligo/file的search()中，使用如下语句。
+
+$this->redirect('Search/index',array('in'=>'file'));
+
+
+>>dev0.8.2 搜索的结果SearchLogic/getData()，产生数据。    按照关键词、分类搜索。
+
+
+>>dev0.8.3 搜索的结果SearchLogic/getData()，产生数据。    按照标签搜索。
+1.求一个sql语句，需要tag_ids中包含有 "3","5","6","8" 任何一项的记录，其中tag_ids如下
+tag_ids
+3,5,7
+3,5
+5,6
+3,5,7
+15
+5,15
+6
+3,15
+5
+6
+7,8
+3,5,6
+3,5,7,8
+9,10
+15,6
+3,6,18
+
+select tag_ids from wjl_file
+where tag_ids REGEXP '(^|,)3($|,)'  
+    or tag_ids REGEXP '(^|,)5($|,)'  
+    or tag_ids REGEXP '(^|,)6($|,)'  
+    or tag_ids REGEXP '(^|,)8($|,)'  
+-
+>>dev0.8.4 搜索结果的js展示。
+
+>>dev0.8.5 修改界面。首页的变形是怎么回事？[bug]fixed.
+    (1)删掉css?time=20160910等时间。
+
+    (2)删除auth表中的 全局搜索 字段：
+    61  全局搜索    9   Search  advSearch   9-61    1   1473822830  1473822831  1   1
+    (3)替换左上角图标
+
+[bug]ow 搜索会报控制台错误 ！
+[fixed]
+
+
+>>dev0.8.6 修改2个bug。
+[bug]seq/showlist()中tag为空时显示不正常。
+锁定问题：
+(1)file/showlist()正常，而seq和oligo的showlist不正常。
+(2)发现时oligo/add的时候如果没有tag则会添加一个空tag。
+修复：对TagLogic.class.php进行修改。
+    //如果是空的，则直接返回空
+    if(''==trim($tags_list)){
+       return '';
+    }
+
+
+[bug] tag/upd()如果name和uid相同，则出错！
+1062:Duplicate entry 'xxxx-5' for key 'uc_code' [ SQL语句 ] : UPDATE `wjl_tag` SET `tag_name`='xxxx',`tag_uid`='5',`tag_mod_time`='1474987406' WHERE `tag_id` = 17
+   //1.2如果同名条目已经存在，则添加失败
+   $rs_num = $md->where("tag_uid = $uid AND tag_name= '".I('tag_name')."'")->count();
+   if($rs_num>0){
+       //$this->error('添加失败！该样品名已经存在.(可能在回收站)', U(''));
+       echo '添加失败！该样品名已经存在.(可能在回收站)<br />';
+       myBtn_back();
+       exit();
+   }
+
+>>dev0.8.6-2 删除顶部暂时无用的搜索框，现在没时间实现了。
+
+>>dev0.8.6-3 右上角图片改写。公司名称改为  MIO WEB SERVICE SYSTEMS 
+manager/right.html, search/index.html, Help/about.html底部修改logo text为： MIO WEB SERVICE SYSTEMS 
+
+==============================================
+>>commit到master。搜索模块基本完工。
+
+
+    >>dev0.8.6-4 添加 Manager/resetPwd
 
 
 
 
 
-
-
-
-      
+ 
 
 
 ==============================================
@@ -552,5 +648,5 @@ todo
 
 [不可能了]5.当前位置：引物管理->引物列表->引物详情 多个附件bug仅保存一个。冰箱无法保存。因为 冰箱决定盒子。
 6.冰箱决定盒子。也就是两级联动。
-
+7.Manager/resetPwd 正在开发中.1 重置密码。
 
