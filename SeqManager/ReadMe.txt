@@ -646,10 +646,7 @@ manager/right.html, search/index.html, Help/about.html底部修改logo text为�
 >>dev0.9.0 冰箱-盒子两级联动。 oligo/add,  oligo/upd,
     oligo/upd()如果没有盒子，则oligo/detail/id/23不显示该冰箱？
     
-    
-
-
-    seq/add,  seq/upd,
+>>dev0.9.0-2 冰箱-盒子两级联动。  seq/add,  seq/upd,
 
 
 
