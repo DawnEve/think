@@ -62,8 +62,21 @@ class CateController extends AdminController {
     public function upd($id){
         //1.如果是post提交，则保存数据
         $user=session('user');
+        $uid=$user['mg_id'];
+        
         if(!empty($_POST)){
            $md=M('Cate');
+           
+           //1.2如果同名条目已经存在，则添加失败
+           $rs_num = $md->where("cate_uid = $uid AND cate_name= '".I('cate_name')."'")->count();
+           if($rs_num>0){
+               //$this->error('添加失败！该样品名已经存在.(可能在回收站)', U(''));
+               echo '添加失败！该样品名已经存在.(可能在回收站)<br />';
+               myBtn_back();
+               exit();
+           }
+           
+           //2.提交数据
            $data=array(
                 'cate_id'=>$id,
                 'cate_name'=>I('cate_name'),

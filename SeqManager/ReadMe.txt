@@ -595,8 +595,40 @@ where tag_ids REGEXP '(^|,)3($|,)'
     (3)替换左上角图标
 
 [bug]ow 搜索会报控制台错误 ！
+[fixed]
 
 
+>>dev0.8.6 修改2个bug。
+[bug]seq/showlist()中tag为空时显示不正常。
+锁定问题：
+(1)file/showlist()正常，而seq和oligo的showlist不正常。
+(2)发现时oligo/add的时候如果没有tag则会添加一个空tag。
+修复：对TagLogic.class.php进行修改。
+    //如果是空的，则直接返回空
+    if(''==trim($tags_list)){
+       return '';
+    }
+
+
+[bug] tag/upd()如果name和uid相同，则出错！
+1062:Duplicate entry 'xxxx-5' for key 'uc_code' [ SQL语句 ] : UPDATE `wjl_tag` SET `tag_name`='xxxx',`tag_uid`='5',`tag_mod_time`='1474987406' WHERE `tag_id` = 17
+   //1.2如果同名条目已经存在，则添加失败
+   $rs_num = $md->where("tag_uid = $uid AND tag_name= '".I('tag_name')."'")->count();
+   if($rs_num>0){
+       //$this->error('添加失败！该样品名已经存在.(可能在回收站)', U(''));
+       echo '添加失败！该样品名已经存在.(可能在回收站)<br />';
+       myBtn_back();
+       exit();
+   }
+
+
+
+
+
+
+
+
+ 
 
 
 ==============================================
