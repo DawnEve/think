@@ -143,17 +143,9 @@ array(4) {
         $this->assign('role_arr',$role_arr);
         //dump($role_arr[1]);
         
+        $user=session('user');
+        $this->assign('user',$user); //debug($user);
         $this->assign('mg_info_num',count($mg_info));
-       /*
-        array(3) {
-  [0] => array(5) {
-    ["mg_id"] => string(1) "1"
-    ["mg_name"] => string(5) "admin"
-    ["mg_pwd"] => string(32) "e10adc3949ba59abbe56e057f20f883e"
-    ["mg_time"] => string(10) "1473501831"
-    ["mg_role_id"] => string(1) "1"
-  }
-        * */
         $this->display();
     }
     
