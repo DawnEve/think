@@ -17,6 +17,9 @@
 .tag:hover{
     background:#9ACCFF;
 }
+a.smaller{
+    font-size:smaller;
+}
 </style>
     </head>
     
@@ -41,17 +44,17 @@
         <div style="font-size: 13px; margin: 10px 5px;">
             <table class="table_a" border="1" width="100%">
                 <tbody><tr style="font-weight: bold;">
-                        <td>ID</td>
-                        <td>测序名称</td>
-                        <td>订单编号</td>
-                        <td>测序引物<br><span class=light>(鼠标悬停显示序列)</span></td>
-                        <td>分类</td>
-                        <td>标签</td>
-                        <td>备注</td>
-                        <td>附件数</td>
-                        <td>创建时间</td>
-                        <td>上次修改时间</td>
-                        <td >操作</td>
+                        <th>ID</th>
+                        <th>测序名称</th>
+                        <th>订单编号</th>
+                        <th>测序引物<br><span class=light>(鼠标悬停显示序列)</span></th>
+                        <th>分类</th>
+                        <th>标签</th>
+                        <th>备注</th>
+                        <th>附件数</th>
+                        <th>创建时间</th>
+                        <th>上次修改时间</th>
+                        <th >操作</th>
                     </tr>
                     
                   <foreach name="info" item="vo" >
@@ -61,9 +64,9 @@
                             <a href="{:U('detail', array('id'=>$vo['seq_id']))}">{$vo.seq_name}</a>
                         </td>
                         <td>{$vo.seq_order_no}</td>
-                        <td>
+                        <td>{$vo.seq_oligo_name}
                             <a title='{$vo.seq_oligo_sequence}' href="{:U('Oligo/detail', array('id'=>$vo['seq_oligo_ids']))}">
-                            {$vo.seq_oligo_name}</a>
+                            <span class=smaller>(查看>>)</span></a>
                         </td>
                         
                         <td>

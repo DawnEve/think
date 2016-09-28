@@ -667,8 +667,11 @@ manager/right.html, search/index.html, Help/about.html底部修改logo text为�
 	教授
 	研究生
 	本科生
+	
+3.5    新用户如果没有冰箱，则用当前账户创建个默认冰箱。
 
-4.教授新建冰箱。
+4.教授新建冰箱。 
+
 5.可以登录系统，添加用户、角色了。
 
 [bug]
@@ -698,19 +701,10 @@ SELECT `fr_id`,`fr_name`,`fr_place`,`fr_note`,`fr_time`,`fr_mod_time` FROM wjl_f
     
     (6)oligo和seq/detail中cate分类link错误。已经修改。
     
+>>dev0.9.2-5 用户体验的改为一致:seq/showlist中单击其他都是分类筛选，而单击引物是显示引物信息。
+    td改为th。
     
     
-
-todo
-    新用户如果没有冰箱，则用当前账户创建个默认冰箱。
-
-
-
-
-
-
-
-
 
 
 
