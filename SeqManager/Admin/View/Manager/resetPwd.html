@@ -9,7 +9,7 @@
     <body>
        <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
             <tr height=28>
-                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：用户管理->修改我的密码</td>
+                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：用户管理->重置密码</td>
             </tr>
             <tr>
                 <td bgcolor=#b1ceef height=1></td></tr>
@@ -23,12 +23,16 @@
             <table class="table_a" border="1" width="100%">
                 
                 <tr>
-                    <td>旧密码:</td>
+                    <td>待修改用户名:</td>
+                    <td>{$mg_info.mg_name}(id={$mg_info.mg_id})</td>
+                </tr>
+                <tr>
+                    <td>请输入超级管理员密码:</td>
                     <td><input type=password name='old_mg_pwd' size=50 ></td>
                 </tr>
                 
                   <tr>
-                    <td>新密码:</td>
+                    <td>为[{$mg_info.mg_name}]重置新密码:</td>
                     <td><input type=password name='mg_pwd' size=50 ></td>
                 </tr>
                 

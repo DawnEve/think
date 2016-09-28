@@ -237,8 +237,57 @@ array(4) {
     
     //重置密码
     function resetPwd($mg_id){
-        getName();
-        echo $mg_id;
+        $user=session('user');
+        $uid=$user['mg_id'];
+        
+        if(empty($user['mg_id'])){
+           $this->error('请登录后操作！',U('login'));
+           die();
+        }
+        
+        if($uid!=1){
+           $this->error('只有超级管理员才能进行该操作！',U());
+           die();
+        }
+        
+        //0.1如果是post提交，
+        if(!empty($_POST)){
+            $mg=M('Manager');
+            $pwd_in_db=$mg->where('mg_id='.$uid)->getField('mg_pwd');
+            $old_mg_pwd=md5(I('old_mg_pwd'));//管理员密码
+            $mg_pwd=md5(I('mg_pwd'));//新密码
+            
+            if($user['mg_role_id']>1){
+                $this->error('您没有权限重置密码！',U('showlist'));
+            }
+            
+            //1.验证老板密码正确
+            if($old_mg_pwd == $pwd_in_db){
+              //2.更新新密码 
+               $_POST['mg_id']=$mg_id;
+               $_POST['mg_pwd']=$mg_pwd;
+               $_POST['mg_mod_time']=time();
+               
+               $mg->create();
+               if($mg->save()){
+                   $this->success('密码修改成功！',U('showlist'));
+               }else{
+                   $this->error('密码修改失败-.-'.$mg->getError(),U('showlist'));
+               }
+               die();
+            }else{
+               $this->error('输入的旧密码不正确！请重试。',U());
+            }
+            die();
+        }else{
+        	//测试结果
+        	//2.获取该管理员信息
+	        $mg_info=M('Manager')->find($mg_id);
+	        $this->assign('mg_info',$mg_info);
+	        
+	        //debug($mg_info);
+            $this->display();
+        }
     }
     
     /**
@@ -278,24 +327,5 @@ array(4) {
     	}else{
     	   $this->display();
     	}
-    	
-    	
-        
-        /*
-         array(1) {
-  ["user"] => array(6) {
-    ["mg_id"] => string(1) "5"
-    ["mg_name"] => string(9) "王军亮"
-    ["mg_role_id"] => string(1) "2"
-    ["mg_time"] => string(10) "1473822134"
-    ["mg_mod_time"] => string(10) "1474010238"
-    ["condition"] => string(1) "1"
-  }
-}
-         * */
-
-        
-
-        
     }
 }
