@@ -650,8 +650,12 @@ manager/right.html, search/index.html, Help/about.html底部修改logo text为�
 
 >>dev0.9.0-3 增加admin.css中增加tr:hover
 
+>>dev0.9.1 Help/index 正在开发中. 快速入门。Help/article(),Help/index();
 
 
+
+
+  [bug]教授不能修改用户密码。
 
 
 
