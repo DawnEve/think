@@ -149,7 +149,11 @@ array(26) {
         //2.4获取盒子数据
         $this->assign('box_list',getlist('box'));
         //2.5获取引物数据
-        $this->assign('oligo_list',getlist('oligo'));
+        $oligo_list=getlist('oligo');
+        if(count($oligo_list)<1){
+            $this->error('请先添加引物！之后才能添加测序结果.',U('Oligo/add'));
+        }
+        $this->assign('oligo_list',$oligo_list);
         
         $this->display();
     }
