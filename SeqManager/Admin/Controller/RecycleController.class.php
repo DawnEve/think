@@ -119,6 +119,10 @@ class RecycleController extends AdminController {
             );
             $data=array_merge($data,$data2);
         }
+        //如果是教授，显示冰箱
+        if($user['mg_role_id']==1){
+            $data['fridge']='fr';
+        }
         return $data;
     }
     

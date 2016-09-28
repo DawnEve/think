@@ -43,7 +43,7 @@
                         <td>{$vo.fr_note}</td>
                         <td>{$vo.fr_time|date="Y-m-d H:i:s",###}</td>
                         <td>{$vo.fr_mod_time|date="Y-m-d H:i:s",###}</td>
-                        <if condition="$uid eq 1">
+                        <if condition="$role_id lt 2">
                         <td>
                             <a href='<?php echo U("upd",array('id'=>$vo['fr_id'])) ;?>'>修改</a> | 
                             <a href='<?php echo U("del",array('id'=>$vo['fr_id'])) ;?>'>删除</a> 

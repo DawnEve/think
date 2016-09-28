@@ -4,12 +4,19 @@ use Admin\Common\AdminController;
 
 class FridgeController extends AdminController {
     public function showlist(){
-        $user=session('user');
-        $this->assign('uid',$user['mg_id']);
+        $user=session('user'); 
+        //查询当前用户的role_id
+        $this->assign('role_id',$user['mg_role_id']);
         
         $md=M('Fridge');
 //        $info=$md->where('`condition`=1 and fr_uid='.$user['mg_id'])->select(); 
-        $info=$md->where('`condition`=1 and fr_uid=1')->select(); 
+        //$info=$md->where('`condition`=1 and fr_uid=1')->select(); 
+        $info=$md
+            ->field('fr_id,fr_name,fr_place,fr_note,fr_time,fr_mod_time')
+            ->table('wjl_fridge as a, wjl_manager as b')
+            ->where('a.`condition`>0 and b.`condition`>0 and a.fr_uid=b.mg_id and b.mg_role_id in (0,1)')
+            ->select();
+        
         $this->assign('info',$info);
         $this->assign('info_num',count($info));
         $this->display();

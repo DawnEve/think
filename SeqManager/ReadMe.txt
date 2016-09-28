@@ -685,14 +685,24 @@ manager/upd()不改名字则出错。
   
 >>dev0.9.2-3 [bug][fixed]顶部鼠标悬停出样式冲突变丑。
   
->>dev0.9.2-4 [bug]只有mg_id为1才能新建冰箱？改为只有role_id为1才能新建冰箱。
-	如果role_id为1，显示 新建冰箱，但是新建后showlist不显示。
+>>dev0.9.2-4 [bug][fixed]只有mg_id为1才能新建冰箱？改为只有role_id为0或1才能新建冰箱。
+	(1)如果role_id为0或1，显示 新建冰箱，但是新建后showlist不显示。
+SELECT `fr_id`,`fr_name`,`fr_place`,`fr_note`,`fr_time`,`fr_mod_time` FROM wjl_fridge as a,wjl_manager as b WHERE ( a.`condition`>0 and b.`condition`>0 and a.fr_uid=b.mg_id and b.mg_role_id in (0,1) ) [ RunTime:0.0000s ]
+    (2)教授可以添加、编辑、删除冰箱
+    (4)对于教授，回收站显示冰箱。
+    
+    
+    (5)添加box/oligo/seq的add和upd中，显示所有冰箱。
+    $this->assign('fridge_list',A('Fridge','Logic')->getList());
+    box/add,box/upd,    oligo/add,oligo/upd,    seq/add,seq/upd,
+    
+    (6)oligo和seq/detail中cate分类link错误。已经修改。
+    
+    
+    
 
-
-
-
-
-
+todo
+    新用户如果没有冰箱，则用当前账户创建个默认冰箱。
 
 
 
@@ -713,8 +723,23 @@ todo list:
 [不可能了]4.合并Model中的File/id2name()和Oligo/id2name(); 无法合并了，又多出来一个Seq/id2name();
 
 [不可能了]5.当前位置：引物管理->引物列表->引物详情 多个附件bug仅保存一个。冰箱无法保存。因为 冰箱决定盒子。
- 6.冰箱决定盒子。也就是两级联动。
+    6.冰箱决定盒子。也就是两级联动。>>dev0.9.0
     7.Manager/resetPwd 正在开发中.1 重置密码。>>dev0.8.7
     8.管理员列表不能修改admin！ >>dev0.8.8
 
     【没时间了，下次再写这个功能】9.添加序列搜索。
+
+9.RESTFull API供前端显示UI调用。
+    https://www.web-tinker.com/article/21099.html
+    
+-
+
+
+
+
+
+
+
+
+
+

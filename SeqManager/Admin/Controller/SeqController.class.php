@@ -145,7 +145,9 @@ array(26) {
         //2.2获取标签数据
         $this->assign('tag_list',getlist('tag'));
         //2.3获取冰箱数据
-        $this->assign('fridge_list',getlist('fridge','fr',1));
+        //$this->assign('fridge_list',getlist('fridge','fr',1));
+        $this->assign('fridge_list',A('Fridge','Logic')->getList());
+        
         //2.4获取盒子数据
         $this->assign('box_list',getlist('box'));
         //2.5获取引物数据
@@ -272,7 +274,9 @@ array(26) {
         //2.2获取标签数据
         $this->assign('tag_list',getlist('tag'));
         //2.3获取冰箱数据
-        $this->assign('fridge_list',getlist('fridge','fr',1));
+        //$this->assign('fridge_list',getlist('fridge','fr',1));
+        $this->assign('fridge_list',A('Fridge','Logic')->getList());
+        
         //2.4获取盒子数据
         $this->assign('box_list',getlist('box'));
         //2.5获取引物数据
