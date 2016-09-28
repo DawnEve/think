@@ -139,16 +139,33 @@ class OligoModel extends Model {
         
         //4.palce:
         //4.1盒子信息
-        $box_info=M('Box')->where('`condition`>0 and box_uid='.$uid)->find($info['box_id']);
-        $info['box_id']=$box_info['box_id'];
-        $info['box_name']=$box_info['box_name'];
-        $info['box_place']=$box_info['box_place'];
+        //debug($info['box_id']);//string(1) "0"
+        if(empty($info['box_id']) or $info['box_id']<1){
+	        $info['box_name']='';
+	        $info['box_place']='';
+	        
+	        $info['fr_id']='';
+            $info['fr_name']='';
+        }else{
+	        $box_info=M('Box')->where('`condition`>0 and box_uid='.$uid)->find($info['box_id']);
+	        //$info['box_id']=$box_info['box_id'];
+	        $info['box_name']=$box_info['box_name'];
+	        $info['box_place']=$box_info['box_place'];
+	        
+	        //4.2从box查询fridge
+	        $box_fr_id=$box_info['box_fr_id'];
+	        if(empty($box_fr_id) or $box_fr_id<1){
+	            $info['fr_id']='';
+                $info['fr_name']='';
+	        }else{
+		        $fr_info=M('Fridge')->where('`condition`>0')->find($box_fr_id);
+		        $info['fr_id']=$fr_info['fr_id'];
+		        $info['fr_name']=$fr_info['fr_name'];
+	        }
+        }
         
-        //4.2从box查询fridge
-        $box_fr_id=$box_info['box_fr_id'];
-        $fr_info=M('Fridge')->where('`condition`>0')->find($box_fr_id);
-        $info['fr_id']=$fr_info['fr_id'];
-        $info['fr_name']=$fr_info['fr_name'];
+        
+        //debug($info);
         
         //debug($info);
         return $info;

@@ -107,16 +107,42 @@ class ApiController extends Controller {
     
     //ajax返回数据表数据
     function __call($tb_name,$xx){
-        if(IS_AJAX){//判读是否为post提交过了
-           $data=array(
-            'username'=>I('username'),
-            'content'=>I('content'),
-            'time'=>time()  
+         if(IS_AJAX){//判读是否为post提交过了
+            $data=array(
+             'username'=>I('username'),
+             'content'=>I('content'),
+             'time'=>time()  
            );
           $data_send=$data;
           
-           $this->ajaxReturn(M($tb_name)->select());
+          $this->ajaxReturn(M($tb_name)->select());
         }
-      
     }
+    
+    
+    //从Seq/add等中由fr_id获取该用户的盒子信息
+    function box($uid=0){
+        if($uid==0){ $user=session('user'); $uid=$user['mg_id']; }
+        if(IS_AJAX){//判读是否为post提交过了
+        	//
+/*          $data=array(
+                'username'=>I('username'),
+                'content'=>I('content'),
+                'time'=>time()  
+            );
+            $data_send=$data;*/
+        	$fr_id=I('fr_id');
+        	
+        	$md=D('Box');
+             $data=$md
+                ->field('box_id, box_name')
+                ->where('`condition`>0 and box_uid='.$uid.' and box_fr_id='.$fr_id)
+                ->select();
+    
+            $this->ajaxReturn($data);
+        }
+    }
+    
+    
+    
 }
