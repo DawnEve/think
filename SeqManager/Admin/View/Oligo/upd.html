@@ -195,15 +195,59 @@ function add_file_btn(){
                 <tr>
                     <td>所在冰箱:</td>
                     <td>
-                        <Mytag:html_options name="fr_id" options="fridge_list" selected="fr_id" />
+                        <Mytag:html_options id="fridge_id"  name="fr_id" options="fridge_list" selected="fr_id" />
                     </td>
                 </tr>
                 <tr>
                     <td>所在盒子:</td>
                     <td>
-                        <Mytag:html_options name="box_id" options="box_list" selected="box_id" />
+                        <Mytag:html_options id="box_id"  name="box_id" options="box_list" selected="box_id" />
                     </td>
                 </tr>
+                
+<script>
+//进行script验证
+
+function n(s){
+    console.log(s);
+}
+
+
+function flush_box(){
+    //获取冰箱id
+    var fr_id=m$('fridge_id').value;//1
+
+    //ajax获取盒子信息
+    $.ajax({
+      url: "/Admin/api/box",
+      data: {
+        'fr_id': fr_id,
+      },
+      success: function( result ) {
+          //n(result);
+
+          var box_id=m$('box_id');
+          box_id.innerHTML='';
+          if(result.length<1){
+              result=[{'box_id':'', 'box_name':'暂无盒子'}];
+          }
+          for(var i=0; i<result.length;i++){
+              var rs=result[i]; 
+              var oOption=document.createElement('option');
+              oOption.setAttribute('value',rs.box_id);
+              oOption.innerHTML=rs.box_name;
+              box_id.appendChild(oOption);
+          }
+      }
+    });
+}
+</script>
+
+
+
+                
+                
+                
                 <tr>
                     <td>在盒子内的行列坐标:</td>
                     <td><input type=text name='place' size=50 value='{$info.place}'>

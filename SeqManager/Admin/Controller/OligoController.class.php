@@ -28,7 +28,6 @@ class OligoController extends AdminController {
     	   $this->error('Error:请指定条目id',U('showlist'));
     	   die();
     	}
-        
     	
     	//2.获取oligo数据
     	$user=session('user');

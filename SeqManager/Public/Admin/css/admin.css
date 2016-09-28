@@ -95,3 +95,6 @@ TD.editFooterTd {
 
 
 .light{ color:#ccc; }
+tr:hover{
+    background:#ebf4fd;
+}

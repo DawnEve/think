@@ -4,13 +4,12 @@ use Admin\Common\AdminController;
 
 class HelpController extends AdminController {
     public function index(){
-        getName();
+        $this->display();
     }
     
     //TODO
     public function article($id=0){
-        getName();
-        echo '/'.$id;
+        $this->display();
     }
     
     //关于

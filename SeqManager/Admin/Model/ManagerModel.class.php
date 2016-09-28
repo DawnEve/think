@@ -19,35 +19,57 @@ class ManagerModel extends Model {
 	   return ;
 	}
 	
-	//修改管理员信息
-	function upd($mg_id){
-	   $_POST['mg_id']=$mg_id;
-	   $_POST['mg_mod_time']=time();//修改时间
-	   $this->create();
-	   if($this->save()){
-	       return true;
+	
+	//初始化用户:添加 冰箱、盒子、分类、标签
+	function init($uid){
+	   $error='';
+	   $time=time();
+	   //1.添加盒子
+	   $fr_info=M('fridge')->find();
+	   $fr_id=$fr_info['fr_id'];
+	   $box=array(
+	       'box_name'=>'默认盒子',
+	       'condition'=>$fr_id,
+	       'box_fr_id'=>$fr_id,
+	       'box_uid'=>$uid,
+	       'box_time'=>$time,
+	       'box_mod_time'=>$time,
+	   );
+	   if(!M('box')->add($box)){
+	       $error .= '创建默认盒子失败!';
+	   }
+		
+	   //2.添加分类
+	   $cate=array(
+	       'cate_name'=>'默认分类',
+	       'cate_uid'=>$uid,
+	       'condition'=>1,
+	       'cate_time'=>$time,
+	       'cate_mod_time'=>$time,
+	   );
+	   if(!M('cate')->add($cate)){
+           $error .= '创建默认分类失败!';
+       }
+	   
+	   
+	   //3.添加标签
+	   $tag=array(
+           'tag_name'=>'默认标签',
+           'tag_uid'=>$uid,
+           'condition'=>1,
+           'tag_time'=>$time,
+           'tag_mod_time'=>$time,
+       );
+       if(!M('tag')->add($tag)){
+           $error .= '创建默认标签失败!';
+       }
+	   
+	   //返回结果
+	   if(strlen($error)==0){
+		   return array(1,'初始化成功！');
 	   }else{
-	       return $this->getError();
+		   return array(0,$error);
 	   }
 	}
-
-	//插入数据
-	function addManager(){
-        //检查是否重名
-        $mg_name=I('mg_name');
-        $rs=$this->getBymg_name($mg_name);
-        if($rs!=null){
-            echo '该用户名已经存在，请换一个用户名再试试吧-.-<br>';
-            myBtn_back();
-        }
-        		
-		//如果没有重名，则插入
-        $_POST['mg_time']=time();
-        $_POST['mg_mod_time']=time();
-        $_POST['mg_pwd']=md5($_POST['mg_pwd']);
-        $this->create();
-        return $this->add();
-	}
-	
 
 }

@@ -7,6 +7,7 @@
         <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet" />
         <link href="{$Think.const.CSS_URL}/mine.css" type="text/css" rel="stylesheet" />
         <link href="{$Think.const.CSS_URL}/tags.css" type="text/css" rel="stylesheet" />
+        <script src="{$Think.const.JS_URL}/jquery-3.1.0.min.js"></script>
     </head>
     <body>
        <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
@@ -63,7 +64,7 @@
 	                    <a href='javascript:add_file_btn()'>添加</a>
 <script>
 //tools
-function $(s){return document.getElementById(s);}
+function m$(s){return document.getElementById(s);}
 
 //文件删除按钮
 function del_file_btn(div){
@@ -171,15 +172,63 @@ function add_file_btn(){
                 <tr>
                     <td>所在冰箱:</td>
                     <td>
-                        <Mytag:html_options name="fridge_id" options="fridge_list" />
+                        <Mytag:html_options id="fridge_id" name="fridge_id" options="fridge_list" onchange="flush_box()" />
                     </td>
                 </tr>
                 <tr>
                     <td>所在盒子:</td>
                     <td>
-                        <Mytag:html_options name="box_id" options="box_list" />
+                        <Mytag:html_options id="box_id"  name="box_id" options="box_list" />
                     </td>
                 </tr>
+<script>
+//进行script验证
+
+function n(s){
+	console.log(s);
+}
+
+
+function flush_box(){
+    //获取冰箱id
+    var fr_id=m$('fridge_id').value;//1
+
+    //ajax获取盒子信息
+    $.ajax({
+      url: "/Admin/api/box",
+      data: {
+        'fr_id': fr_id,
+      },
+      success: function( result ) {
+          //n(result);
+
+          var box_id=m$('box_id');
+          box_id.innerHTML='';
+          if(result.length<1){
+        	  result=[{'box_id':'', 'box_name':'暂无盒子'}];
+          }
+          for(var i=0; i<result.length;i++){
+              var rs=result[i]; 
+	          var oOption=document.createElement('option');
+	          oOption.setAttribute('value',rs.box_id);
+	          oOption.innerHTML=rs.box_name;
+	          box_id.appendChild(oOption);
+          }
+      }
+    });
+}
+</script>
+
+
+
+
+                
+                
+                
+                
+                
+                
+                
                 <tr>
                     <td>在盒子内的行列坐标:</td>
                     <td><input type=text name='place' size=50>
@@ -413,10 +462,10 @@ window.onload=function(){
     //=================================
     // 展示和隐藏tag提示框
     //=================================
-    var tag_input=$('tag_input');
-    $('old').onmouseover=tag_input.onclick=function(oEvent){
+    var tag_input=m$('tag_input');
+    m$('old').onmouseover=tag_input.onclick=function(oEvent){
     	//显示该层内容
-    	$('old').style.display='block';
+    	m$('old').style.display='block';
     	//取消冒泡
         var oEvent = oEvent || window.event;
         if(document.all){
@@ -430,8 +479,8 @@ window.onload=function(){
         this.onmouseout=function(){
 		    document.onclick = function(){
 		        //隐藏层代码
-		    	if($('old').style.display=='block')
-		            $('old').style.display='none';
+		    	if(m$('old').style.display=='block')
+		            m$('old').style.display='none';
 		    };
         }
     };

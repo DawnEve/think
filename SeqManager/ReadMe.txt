@@ -629,24 +629,53 @@ manager/right.html, search/index.html, Help/about.html底部修改logo text为�
 ==============================================
 >>commit到master。搜索模块基本完工。
 
-
-    >>dev0.8.6-4 添加 Manager/resetPwd
-
+整理系统管理员里列表
 
 
+>>dev0.8.7 添加 Manager/resetPwd(),密码使用password类型。
+
+>>dev0.8.8 管理员列表不能修改admin！
+
+>>dev0.8.9 如果没有依赖的条件，则提示！创建用户时，自动创建默认盒子、默认分类、默认标签。
+    1.测序管理：依赖测序冰箱、盒子、分类、标签。这些在添加用户的时候默认添加！
+    
+>>dev0.8.9-2 如果没有引物，则提示添加引物。
+    请先添加引物！之后才能添加测序结果.
 
 
- 
+>>dev0.9.0 冰箱-盒子两级联动。 oligo/add,  oligo/upd,
+    oligo/upd()如果没有盒子，则oligo/detail/id/23不显示该冰箱？
+    
+>>dev0.9.0-2 冰箱-盒子两级联动。  seq/add,  seq/upd,
+
+>>dev0.9.0-3 增加admin.css中增加tr:hover
+
+>>dev0.9.1 Help/index 正在开发中. 快速入门。Help/article(),Help/index();
+
+
+
+
+  [bug]教授不能修改用户密码。
+
+
+
+
+
+
+
+
 
 
 ==============================================
-todo
-1.搜索结果的显示
+todo list:
+    1.搜索结果的显示 >>dev0.8.2
 2.登录页面GUI
 3.实时新建分类。
 [不可能了]4.合并Model中的File/id2name()和Oligo/id2name(); 无法合并了，又多出来一个Seq/id2name();
 
 [不可能了]5.当前位置：引物管理->引物列表->引物详情 多个附件bug仅保存一个。冰箱无法保存。因为 冰箱决定盒子。
-6.冰箱决定盒子。也就是两级联动。
-7.Manager/resetPwd 正在开发中.1 重置密码。
+ 6.冰箱决定盒子。也就是两级联动。
+    7.Manager/resetPwd 正在开发中.1 重置密码。>>dev0.8.7
+    8.管理员列表不能修改admin！ >>dev0.8.8
 
+    【没时间了，下次再写这个功能】9.添加序列搜索。
