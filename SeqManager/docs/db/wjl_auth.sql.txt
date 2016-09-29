@@ -73,6 +73,7 @@
 
 
 2.auth表sql数据如下
+(auth_id,auth_name,auth_pid,auth_c,auth_a,auth_path,auth_level,auth_time,auth_mod_time,auth_uid,condition)
 
 INSERT INTO `wjl_auth` VALUES (1, '测序管理', 0, '', '', '1', 0, 1473822830, 1473822831, 1);
 INSERT INTO `wjl_auth` VALUES (2, '引物管理', 0, '', '', '2', 0, 1473822830, 1473822831, 1);

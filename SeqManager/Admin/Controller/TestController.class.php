@@ -229,9 +229,9 @@ array(4) {
     }
     
     function test(){
-        //echo md5('admin');
+        echo md5('admin');
         //echo time();
-        echo get_client_ip();//202.196.120.202
+        //echo get_client_ip();//202.196.120.202
     }
     
     

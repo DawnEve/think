@@ -654,16 +654,37 @@ manager/right.html, search/index.html, Help/about.html底部修改logo text为�
 
 
 
+>>dev0.9.2 换个电脑安装该系统。
+重建数据表：
+1.admin
+	21232f297a57a5a743894a0e4a801fc3
+	MariaDB [think]> insert into wjl_manager(mg_name,mg_pwd) values('admin','21232f297a57a5a743894a0e4a801fc3');
+	Query OK, 1 row affected (0.04 sec)
+
+2.auth表
+3.role表
+4.新建冰箱。
+5.可以登录系统，添加用户、角色了。
+
+[bug]
+1048:Column 'condition' cannot be null [ SQL语句 ] : INSERT INTO `wjl_box` (`box_name`,`condition`,`box_fr_id`,`box_uid`,`box_time`,`box_mod_time`) VALUES ('默认盒子',NULL,NULL,'2','1475126263','1475126263')
+[fixed] 'condition'=>1,
+
+
+[bug]
+manager/upd()不改名字则出错。
+[fixed]
+
+
+
+
+
+
+
 
   [bug]教授不能修改用户密码。
-
-
-
-
-
-
-
-
+  
+  
 
 
 ==============================================

@@ -158,9 +158,10 @@ array(4) {
     		
 	       //如果有重复，则提示错误！
     	   $mg=D('Manager');
-	       $rs=$mg->getBymg_name($mg_name);
-	       if($rs!=null){
-	           $this->error('该用户名已经存在，请换一个用户名再试试吧-.-',U());
+	       $rs=$mg->where('mg_id!='.$mg_id)->getBymg_name($mg_name);//debug($rs);
+	       
+	       if(count($rs)>1){
+	           $this->error('该用户名已经存在，请换一个用户名再试试吧-.-',U('showlist'));
 	           die();
 	       }
 	       
@@ -264,6 +265,7 @@ array(4) {
            $this->error('请登录后操作！',U('login'));
            die();
         }
+        debug($user);
         
         if($uid!=1){
            $this->error('只有超级管理员才能进行该操作！',U());

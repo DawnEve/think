@@ -29,7 +29,7 @@ class ManagerModel extends Model {
 	   $fr_id=$fr_info['fr_id'];
 	   $box=array(
 	       'box_name'=>'默认盒子',
-	       'condition'=>$fr_id,
+	       'condition'=>1,
 	       'box_fr_id'=>$fr_id,
 	       'box_uid'=>$uid,
 	       'box_time'=>$time,
