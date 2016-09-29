@@ -95,6 +95,6 @@ TD.editFooterTd {
 
 
 .light{ color:#ccc; }
-tr:hover{
+.table_a tr:hover{
     background:#ebf4fd;
 }

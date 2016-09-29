@@ -662,8 +662,13 @@ manager/right.html, search/index.html, Help/about.html底部修改logo text为�
 	Query OK, 1 row affected (0.04 sec)
 
 2.auth表
+
 3.role表
-4.新建冰箱。
+	教授
+	研究生
+	本科生
+
+4.教授新建冰箱。
 5.可以登录系统，添加用户、角色了。
 
 [bug]
@@ -678,8 +683,11 @@ manager/upd()不改名字则出错。
 
 >>dev0.9.2-2 [bug][fixed]教授不能修改用户密码。
   
+>>dev0.9.2-3 [bug][fixed]顶部鼠标悬停出样式冲突变丑。
   
-  [bug]顶部鼠标悬停出样式冲突变丑。
+  
+  [bug]只有mg_id为1才能新建冰箱？改为只有role_id为1才能新建冰箱。
+  
   
   
   
