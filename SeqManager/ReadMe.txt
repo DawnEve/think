@@ -704,7 +704,7 @@ SELECT `fr_id`,`fr_name`,`fr_place`,`fr_note`,`fr_time`,`fr_mod_time` FROM wjl_f
 >>dev0.9.2-5 用户体验的改为一致:seq/showlist中单击其他都是分类筛选，而单击引物是显示引物信息。
     td改为th。
     
-    
+>>dev0.9.2-6 按照序列搜索 sequence,前台js编写完成。    
 
 
 

@@ -79,6 +79,11 @@ class SearchLogic extends Controller{
 	    	          ' and ('.$prefix.'_name like "%'.$wd.'%" or '.$prefix.'_note like "%'.$wd.'%")')
 	    	       ->select();
     		}
+    	}elseif($by=='sequence'){
+    		$data=$md 
+    		      //->where()
+    		      ->select();
+    		
     	}else{
     	   return array(0,'没有匹配数据-.-');
     	}

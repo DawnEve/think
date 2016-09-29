@@ -23,7 +23,7 @@
     padding:5px 0;
     
     width:100%;
-    bottom:0; left:0; position:absolute;
+    bottom:0; left:0; position:relative;
 }
 </style>
     </head>
@@ -46,9 +46,10 @@
     <div class='center'>
         <form action="__SELF__" method="get">
             <div id='by_btn'>
-                <a class='btn<?php if($by=='cate') echo ' blue';?>' href="javascript:void(0);" title='cate'>按照分类索引</a>
-                <a class='btn<?php if($by=='tag') echo ' blue';?>' href="javascript:void(0);" title='tag'>按照标签索引</a>
-                <a class='btn<?php if($by=='keyword') echo ' blue';?>' href="javascript:void(0);" title='keyword'>按照关键词搜索</a>
+                <a class='btn<?php if($by=='cate') echo ' blue';?>' href="javascript:void(0);" title='cate'>按分类索引</a>
+                <a class='btn<?php if($by=='tag') echo ' blue';?>' href="javascript:void(0);" title='tag'>按标签索引</a>
+                <a class='btn<?php if($by=='keyword') echo ' blue';?>' href="javascript:void(0);" title='keyword'>按关键词搜索</a>
+                <a class='btn<?php if($by=='sequence') echo ' blue';?>' href="javascript:void(0);" title='sequence'>按序列搜索</a>
 		    </div>
 		    <br />
 		    
@@ -59,7 +60,7 @@
 	        <br />
 	        <br />
 	        
-		    <span class='radio'><input type='radio' name='in' value='seq' <?php if($in=='seq') echo ' checked';?>>序列</input></span>
+		    <span class='radio'><input type='radio' name='in' value='seq' <?php if($in=='seq') echo ' checked';?>>测序</input></span>
 		    <span class='radio'><input type='radio' name='in' value='oligo' <?php if($in=='oligo') echo ' checked';?>>引物</input></span>
 		    <span class='radio'><input type='radio' name='in' value='file' <?php if($in=='file') echo ' checked';?>>文件</input></span>
         </form>
@@ -116,6 +117,26 @@ window.onload=function(){
             $(this).attr('class','btn blue');
             //改值
             m$('by_input').value=$(this).attr('title');
+            if(m$('by_input').value=='sequence'){
+                //则只能搜索测序或引物
+                var f=document.forms[0];
+                var radio1=(f.in)[0];
+                var radio3=(f.in)[2];
+                //如果已经选中file，则改为选择seq
+                if(radio3.checked){ wjl=radio3;
+                	radio3.checked='false';//file变为不选中
+                	radio3.removeAttribute('checked');
+                	radio1.checked=true;
+                }
+                radio3.setAttribute('disabled','disabled');//file变为不可用
+            }else{
+            	var f=document.forms[0];
+                var radio3=(f.in)[2];
+                if(radio3.disabled==true){
+                	radio3.disabled=false;
+                	radio3.removeAttribute('disabled');
+                }
+            }
         };
     }
 
@@ -141,8 +162,8 @@ $('#search').on('click',function(){
 		wd: f.wd.value,
       },
       success: function(results) {
+          //console.log(results); return;
           var result=results[1];
-          //console.log(result); return;
           //1.如果没有匹配数据，则提示没有匹配
           if(0==results[0]){
         	  str = "<p>共搜索到0条记录。</p>";

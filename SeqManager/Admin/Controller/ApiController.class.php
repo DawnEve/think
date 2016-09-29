@@ -45,6 +45,7 @@ class ApiController extends Controller {
 	        
 	        //返回结果
 	        $this->ajaxReturn($data);
+	        //$this->ajaxReturn($data_send);
     	}
       
 //        $this->ajaxReturn(M('cate')->select());
