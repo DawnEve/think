@@ -265,12 +265,24 @@ array(4) {
            $this->error('请登录后操作！',U('login'));
            die();
         }
-        debug($user);
+        //debug($user);
         
-        if($uid!=1){
-           $this->error('只有超级管理员才能进行该操作！',U());
+        /*
+array(7) {
+  ["mg_id"] => string(1) "1"
+  ["mg_name"] => string(5) "admin"
+  ["mg_role_id"] => string(1) "0"
+  ["mg_time"] => NULL
+  ["mg_mod_time"] => NULL
+  ["mg_uid"] => string(1) "1"
+  ["condition"] => string(1) "1"
+}
+         * */
+              
+        if($user['mg_role_id']>1){
+           $this->error('只有超级管理员或者教授才能进行该操作！',U('resetPwd',array('mg_id'=>$mg_id)));
            die();
-        }
+        } 
         
         //0.1如果是post提交，
         if(!empty($_POST)){
@@ -292,13 +304,13 @@ array(4) {
                
                $mg->create();
                if($mg->save()){
-                   $this->success('密码修改成功！',U('showlist'));
+                   $this->success('密码重置成功！',U('showlist'));
                }else{
-                   $this->error('密码修改失败-.-'.$mg->getError(),U('showlist'));
+                   $this->error('密码重置失败-.-'.$mg->getError(),U('showlist'));
                }
                die();
             }else{
-               $this->error('输入的旧密码不正确！请重试。',U());
+               $this->error('输入的旧密码不正确！请重试。',U('resetPwd',array('mg_id'=>$mg_id)));
             }
             die();
         }else{

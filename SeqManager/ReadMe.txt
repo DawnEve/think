@@ -658,7 +658,7 @@ manager/right.html, search/index.html, Help/about.html底部修改logo text为�
 重建数据表：
 1.admin
 	21232f297a57a5a743894a0e4a801fc3
-	MariaDB [think]> insert into wjl_manager(mg_name,mg_pwd) values('admin','21232f297a57a5a743894a0e4a801fc3');
+	MariaDB [think]> insert into wjl_manager(mg_name,mg_pwd,mg_role_id) values('admin','21232f297a57a5a743894a0e4a801fc3',0);
 	Query OK, 1 row affected (0.04 sec)
 
 2.auth表
@@ -676,13 +676,11 @@ manager/upd()不改名字则出错。
 [fixed]
 
 
-
-
-
-
-
-
-  [bug]教授不能修改用户密码。
+>>dev0.9.2-2 [bug][fixed]教授不能修改用户密码。
+  
+  
+  [bug]顶部鼠标悬停出样式冲突变丑。
+  
   
   
 
