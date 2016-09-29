@@ -658,12 +658,17 @@ manager/right.html, search/index.html, Help/about.html底部修改logo text为�
 重建数据表：
 1.admin
 	21232f297a57a5a743894a0e4a801fc3
-	MariaDB [think]> insert into wjl_manager(mg_name,mg_pwd) values('admin','21232f297a57a5a743894a0e4a801fc3');
+	MariaDB [think]> insert into wjl_manager(mg_name,mg_pwd,mg_role_id) values('admin','21232f297a57a5a743894a0e4a801fc3',0);
 	Query OK, 1 row affected (0.04 sec)
 
 2.auth表
+
 3.role表
-4.新建冰箱。
+	教授
+	研究生
+	本科生
+
+4.教授新建冰箱。
 5.可以登录系统，添加用户、角色了。
 
 [bug]
@@ -676,15 +681,28 @@ manager/upd()不改名字则出错。
 [fixed]
 
 
-
-
-
-
-
-
-  [bug]教授不能修改用户密码。
+>>dev0.9.2-2 [bug][fixed]教授不能修改用户密码。
   
+>>dev0.9.2-3 [bug][fixed]顶部鼠标悬停出样式冲突变丑。
   
+>>dev0.9.2-4 [bug]只有mg_id为1才能新建冰箱？改为只有role_id为1才能新建冰箱。
+	如果role_id为1，显示 新建冰箱，但是新建后showlist不显示。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ==============================================
