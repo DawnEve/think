@@ -142,6 +142,27 @@ window.onload=function(){
 
 }
 
+/**
+ * 预览序列前若干个字符
+ */
+function seq_preview(str,l){
+	var l=l||50;
+	if(str.length<l){
+	    return str;
+	}
+    return str.substring(0,l)+'...';
+}
+
+
+/**
+ * 过滤掉null结果为空
+ */
+function null_filter(str){
+    if(str==null){ 
+        return '';
+    }
+    return str;
+}
 
 //搜索按钮
 $('#search').on('click',function(){
@@ -174,16 +195,32 @@ $('#search').on('click',function(){
           //2.如果匹配成功，则显示匹配结果 
           //组装结果
           var str='<table class="table_a" border="1" width="100%">';
-          str += "<tr><th>id</th><th>名字</th><th>备注</th><th>创建时间</th><th>上次修改时间</th></tr>";
+          if(f.in.value=='file'){
+	          str += "<tr><th>id</th><th>名字</th><th>备注</th><th>创建时间</th><th>上次修改时间</th></tr>";
+          }else{
+	          str += "<tr><th>id</th><th>名字</th><th>序列</th><th>备注</th><th>创建时间</th><th>上次修改时间</th></tr>";
+          }
+
+          item_name='结果';
           var L=result.length;
-          str += "<p>共搜索到"+L+"条记录。</p>";
+          switch(f.in.value){
+              case 'seq': item_name='测序结果'; break;  
+              case 'oligo': item_name='引物结果'; break;  
+              case 'file': item_name='文件结果'; break;  
+          }
+          
+          str += "<p>共搜索到"+L+"条<b>" + item_name + "</b>。</p>";
           if(L>0){
 	          for(var i=0;i<L; i++){
 	             var dt=result[i];
 	             //拼接id和name（带链接）
 	        	 str += "<tr><td>"+dt[prefix+'_id']+"</td>";
 	        	 str +="<td><a href='/Admin/"+ f.in.value +"/detail/id/"+dt[prefix+'_id']+"'>"+dt[prefix+'_name']+"</a></td>";
-	        	 str += "<td>"+dt[prefix+'_note']+"</td>";
+	        	 if(f.in.value!='file'){
+	        		 str += "<td>"+ seq_preview( dt[prefix+'_sequence'])+"</td>";
+		         }
+
+	        	 str += "<td>"+null_filter(dt[prefix+'_note'])+"</td>";
 
 	        	 //拼接日期
 	             var time=UnixToDate( dt[prefix+'_time'], true);

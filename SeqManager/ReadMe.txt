@@ -716,8 +716,8 @@ SELECT `fr_id`,`fr_name`,`fr_place`,`fr_note`,`fr_time`,`fr_mod_time` FROM wjl_f
     3)add,upd方法
     'oligo_sequence_only'=>dna_filter(I('oligo_sequence')),//过滤后的序列
     
-    
-    
+>>dev0.9.2-8 按序列搜索 sequence, 后台数据返回    
+    4)如果是测序、引物，则显示序列。
     
 
 
