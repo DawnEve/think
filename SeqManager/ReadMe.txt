@@ -667,8 +667,11 @@ manager/right.html, search/index.html, Help/about.html底部修改logo text为�
 	教授
 	研究生
 	本科生
+	
+3.5    新用户如果没有冰箱，则用当前账户创建个默认冰箱。
 
-4.教授新建冰箱。
+4.教授新建冰箱。 
+
 5.可以登录系统，添加用户、角色了。
 
 [bug]
@@ -685,15 +688,54 @@ manager/upd()不改名字则出错。
   
 >>dev0.9.2-3 [bug][fixed]顶部鼠标悬停出样式冲突变丑。
   
->>dev0.9.2-4 [bug]只有mg_id为1才能新建冰箱？改为只有role_id为1才能新建冰箱。
-	如果role_id为1，显示 新建冰箱，但是新建后showlist不显示。
+>>dev0.9.2-4 [bug][fixed]只有mg_id为1才能新建冰箱？改为只有role_id为0或1才能新建冰箱。
+	(1)如果role_id为0或1，显示 新建冰箱，但是新建后showlist不显示。
+SELECT `fr_id`,`fr_name`,`fr_place`,`fr_note`,`fr_time`,`fr_mod_time` FROM wjl_fridge as a,wjl_manager as b WHERE ( a.`condition`>0 and b.`condition`>0 and a.fr_uid=b.mg_id and b.mg_role_id in (0,1) ) [ RunTime:0.0000s ]
+    (2)教授可以添加、编辑、删除冰箱
+    (4)对于教授，回收站显示冰箱。
+    
+    
+    (5)添加box/oligo/seq的add和upd中，显示所有冰箱。
+    $this->assign('fridge_list',A('Fridge','Logic')->getList());
+    box/add,box/upd,    oligo/add,oligo/upd,    seq/add,seq/upd,
+    
+    (6)oligo和seq/detail中cate分类link错误。已经修改。
+    
+>>dev0.9.2-5 用户体验的改为一致:seq/showlist中单击其他都是分类筛选，而单击引物是显示引物信息。
+    td改为th。
+    
+>>dev0.9.2-6 按序列搜索 sequence,前台js编写完成。    
+>>dev0.9.2-7 按序列搜索 sequence, 后台数据返回 
+    (1)seq数据保存的时候要产生一个新列_sequence_only，
+    去掉html标签，去掉非字母符号(包括空格、数字)，转化成大写。
+    1)修改seq和oligo的数据表，和upd和add方法。
+    alter table wjl_seq add `oligo_sequence_only` text default '' after `oligo_sequence`;
+    alter table wjl_seq add `seq_sequence_only` text default '' after `seq_sequence`;
+    
+    2)function dna_filter($str){}
+    3)add,upd方法
+    'oligo_sequence_only'=>dna_filter(I('oligo_sequence')),//过滤后的序列
+    
+>>dev0.9.2-8 按序列搜索 sequence, 后台数据返回    
+    4)如果是测序、引物，则显示序列。
+    
+
+>>dev0.9.3 登录页面GUI，找一个绚丽的页面。
 
 
 
+    >>dev0.9.4 统计一个文件夹下多少行代码。
+http://www.oschina.net/question/2611579_2148704
+
+find . -type f -name "*.rb" -exec cat {} \; | grep -v '^$' | wc -l
 
 
-
-
+find . -type f -name "*.php" -exec cat {} \; | grep -v '^$' | wc -l     8985    80929
+find . -type f -name "*.html" -exec cat {} \; | grep -v '^$' | wc -l        5253
+find . -type f -name "*.class.php" -exec cat {} \; | grep -v '^$' | wc -l   3645    36519
+find . -type f -name "*.txt" -exec cat {} \; | grep -v '^$' | wc -l   1494    
+find . -type f -name "*.css" -exec cat {} \; | grep -v '^$' | wc -l   314    
+find . -type f -name "*.js" -exec cat {} \; | grep -v '^$' | wc -l   314    
 
 
 
@@ -713,8 +755,11 @@ todo list:
 [不可能了]4.合并Model中的File/id2name()和Oligo/id2name(); 无法合并了，又多出来一个Seq/id2name();
 
 [不可能了]5.当前位置：引物管理->引物列表->引物详情 多个附件bug仅保存一个。冰箱无法保存。因为 冰箱决定盒子。
- 6.冰箱决定盒子。也就是两级联动。
+    6.冰箱决定盒子。也就是两级联动。>>dev0.9.0
     7.Manager/resetPwd 正在开发中.1 重置密码。>>dev0.8.7
     8.管理员列表不能修改admin！ >>dev0.8.8
 
     【没时间了，下次再写这个功能】9.添加序列搜索。
+
+9.RESTFull API供前端显示UI调用。
+    https://www.web-tinker.com/article/21099.html

@@ -11,9 +11,10 @@ class SearchController extends AdminController {
     	$by=I('by');
     	$in=I('in');
     	$wd=I('wd');
-    	if(''==$by){ $by='keyword';}
-    	if(''==$in){ $in='seq'; }
-    	if(''==$wd) $wd='';
+    	if(!in_array($by,array('cate','tag','keyword','sequence'))){ $by='keyword';}
+        if(!in_array($in,array('cate','tag','file'))){ $in='seq';}
+    	//if(''==$in){ $in='seq'; }
+    	if(''==trim($wd)) $wd='';
     	
     	//debug($in);
     	//传值

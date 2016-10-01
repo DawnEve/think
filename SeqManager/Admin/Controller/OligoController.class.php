@@ -98,6 +98,7 @@ array(22) {
                 'oligo_name'=>$oligo_name,
                 'oligo_order_no'=>I('oligo_order_no'),
                 'oligo_sequence'=>I('oligo_sequence'),
+                'oligo_sequence_only'=>dna_filter(I('oligo_sequence')),//过滤后的序列
                 'oligo_en_site'=>I('oligo_en_site'),
                 'oligo_note'=>I('oligo_note'),
                 'file_ids'=>$file_ids,
@@ -136,7 +137,9 @@ array(22) {
         //2.2获取标签数据
         $this->assign('tag_list',getlist('tag'));
         //2.3获取冰箱数据
-        $this->assign('fridge_list',getlist('fridge','fr',1));
+        //$this->assign('fridge_list',getlist('fridge','fr',1));
+        $this->assign('fridge_list',A('Fridge','Logic')->getList());
+        
         //2.4获取盒子数据
         $this->assign('box_list',getlist('box'));
         
@@ -208,6 +211,7 @@ array(22) {
                 'oligo_name'=>$oligo_name,
                 'oligo_order_no'=>I('oligo_order_no'),
                 'oligo_sequence'=>I('oligo_sequence'),
+                'oligo_sequence_only'=>dna_filter(I('oligo_sequence')),//过滤后的序列
                 'oligo_en_site'=>I('oligo_en_site'),
                 'oligo_note'=>I('oligo_note'),
                 'file_ids'=>$file_ids,
@@ -255,7 +259,8 @@ array(22) {
         //2.2获取标签数据
         $this->assign('tag_list',getlist('tag'));
         //2.3获取冰箱数据
-        $this->assign('fridge_list',getlist('fridge','fr',1));
+        //$this->assign('fridge_list',getlist('fridge','fr',1));
+        $this->assign('fridge_list',A('Fridge','Logic')->getList());
         //2.4获取盒子数据
         $this->assign('box_list',getlist('box'));
         

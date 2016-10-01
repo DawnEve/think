@@ -2,9 +2,7 @@
 namespace Admin\Logic;
 use Think\Controller;
 
-
 class SearchLogic extends Controller{
-    //
     function getData($info,$uid=0){
     	//获取搜索指标
     	$by=$info['by'];
@@ -79,6 +77,14 @@ class SearchLogic extends Controller{
 	    	          ' and ('.$prefix.'_name like "%'.$wd.'%" or '.$prefix.'_note like "%'.$wd.'%")')
 	    	       ->select();
     		}
+    	}elseif($by=='sequence'){
+    		//4.0从seq/oligo中的sequence字段按照dna序列匹配关键词wd，并返回。
+    		//4.1
+    		$data=$md 
+    		      ->where('`condition`>0 AND '.$prefix.'_uid='.$uid.
+    		          ' and '.$prefix.'_sequence_only REGEXP "'.$wd.'"')
+    		      ->select();
+    		
     	}else{
     	   return array(0,'没有匹配数据-.-');
     	}

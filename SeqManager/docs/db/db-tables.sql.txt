@@ -143,6 +143,9 @@ CREATE TABLE `wjl_seq` (
 PRIMARY KEY (`seq_id`) 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+alter table wjl_seq add `seq_sequence_only` text default '' after `seq_sequence`;
+
+
 
 DROP TABLE IF EXISTS `wjl_oligo`;
 CREATE TABLE `wjl_oligo` (
@@ -163,6 +166,10 @@ CREATE TABLE `wjl_oligo` (
 `oligo_uid` smallint(6) NULL,
 PRIMARY KEY (`oligo_id`) 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table wjl_seq add `oligo_sequence_only` text default '' after `oligo_sequence`;
+
+
 
 
 DROP TABLE IF EXISTS `wjl_file`;
@@ -185,6 +192,8 @@ CREATE TABLE `wjl_file` (
 PRIMARY KEY (`file_id`),
 UNIQUE KEY `file_path` (`file_path`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 -- 为独立上传的文件加一个数据库标示符号 isAttach(0是独立文件，1是附件(默认))
 
