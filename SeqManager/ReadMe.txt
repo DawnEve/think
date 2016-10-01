@@ -720,6 +720,31 @@ SELECT `fr_id`,`fr_name`,`fr_place`,`fr_note`,`fr_time`,`fr_mod_time` FROM wjl_f
     4)如果是测序、引物，则显示序列。
     
 
+>>dev0.9.3 登录页面GUI，找一个绚丽的页面。
+
+
+
+    >>dev0.9.4 统计一个文件夹下多少行代码。
+http://www.oschina.net/question/2611579_2148704
+
+find . -type f -name "*.rb" -exec cat {} \; | grep -v '^$' | wc -l
+
+
+find . -type f -name "*.php" -exec cat {} \; | grep -v '^$' | wc -l     8985    80929
+find . -type f -name "*.html" -exec cat {} \; | grep -v '^$' | wc -l        5253
+find . -type f -name "*.class.php" -exec cat {} \; | grep -v '^$' | wc -l   3645    36519
+find . -type f -name "*.txt" -exec cat {} \; | grep -v '^$' | wc -l   1494    
+find . -type f -name "*.css" -exec cat {} \; | grep -v '^$' | wc -l   314    
+find . -type f -name "*.js" -exec cat {} \; | grep -v '^$' | wc -l   314    
+
+
+
+
+
+
+
+
+
 
 
 ==============================================
@@ -738,15 +763,3 @@ todo list:
 
 9.RESTFull API供前端显示UI调用。
     https://www.web-tinker.com/article/21099.html
-    
--
-
-
-
-
-
-
-
-
-
-
