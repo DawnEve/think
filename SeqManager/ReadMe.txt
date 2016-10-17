@@ -719,11 +719,60 @@ SELECT `fr_id`,`fr_name`,`fr_place`,`fr_note`,`fr_time`,`fr_mod_time` FROM wjl_f
 >>dev0.9.2-8 按序列搜索 sequence, 后台数据返回    
     4)如果是测序、引物，则显示序列。
     
+>>dev0.9.3 关掉代码追踪,开始写文档。
+    //1.页面调试开关
+    //'SHOW_PAGE_TRACE' => true,
 
->>dev0.9.3 登录页面GUI，找一个绚丽的页面。
+    //2.开启调试模式 建议开发阶段开启, 部署阶段注释或者设为false
+    define('APP_DEBUG',false);
+
+
+>>dev0.9.4 添加安装文档。
+数据库表格设计图: 
+更详细的见sql文件：SeqManager/docs/db/db-tables.png
+建立表结构： SeqManager/docs/db/db_tables.sql
+添加权限初始化数据：SeqManager/docs/db/wjl_auth.sql
+添加超级管理员数据：INSERT INTO `wjl_manager` (`mg_id`, `mg_name`, `mg_pwd`, `mg_role_id`, `mg_time`, `mg_mod_time`, `condition`, `mg_uid`) VALUES (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 0, 1473501831, 1475049495, 1, 1);
+添加角色信息：
+INSERT INTO `wjl_role` (`role_id`, `role_name`, `role_auth_ids`, `role_auth_ac`, `auth_time`, `auth_mod_time`, `condition`, `role_uid`) VALUES (1, '教授', '1,11,12,14,15,13,16,2,17,18,20,21,19,22,3,23,25,26,68,24,27,4,28,30,31,29,32,34,35,33,5,36,38,39,37,40,42,43,41,6,44,46,47,65,67,45,8,57,58,59,9,60,61,10,62,63,64', 'Seq-showlist,Seq-detail,Seq-add,Seq-upd,Seq-del,Seq-search,Oligo-showlist,Oligo-detail,Oligo-add,Oligo-upd,Oligo-del,Oligo-search,File-showlist,File-add,File-upd,File-del,File-search,Cate-showlist,Cate-add,Cate-upd,Cate-del,Tag-showlist,Tag-add,Tag-upd,Tag-del,Fridge-showlist,Fridge-add,Fridge-upd,Fridge-del,Box-showlist,Box-add,Box-upd,Box-del,Manager-showlist,Manager-add,Manager-upd,Manager-del,Recycle-showlist,Recycle-restore,Recycle-delete,Search-index,Search-advSearch,Help-index,Help-article,Help-about,Manager-resetPwd,Manager-resetMyPwd,File-detail', 1473822930, 1473822931, 1, 1);
+INSERT INTO `wjl_role` (`role_id`, `role_name`, `role_auth_ids`, `role_auth_ac`, `auth_time`, `auth_mod_time`, `condition`, `role_uid`) VALUES (2, '研究生', '1,11,12,14,15,13,16,2,17,18,20,21,19,22,3,23,25,26,68,24,27,4,28,30,31,29,32,34,35,33,5,36,40,42,43,41,67,8,57,58,59,9,60,61,10,62,63,64', 'Seq-showlist,Seq-detail,Seq-add,Seq-upd,Seq-del,Seq-search,Oligo-showlist,Oligo-detail,Oligo-add,Oligo-upd,Oligo-del,Oligo-search,File-showlist,File-add,File-upd,File-del,File-search,Cate-showlist,Cate-add,Cate-upd,Cate-del,Tag-showlist,Tag-add,Tag-upd,Tag-del,Fridge-showlist,Box-showlist,Box-add,Box-upd,Box-del,Recycle-showlist,Recycle-restore,Recycle-delete,Search-index,Search-advSearch,Help-index,Help-article,Help-about,Manager-resetMyPwd,File-detail', 1473822930, 1473822931, 1, 1);
+INSERT INTO `wjl_role` (`role_id`, `role_name`, `role_auth_ids`, `role_auth_ac`, `auth_time`, `auth_mod_time`, `condition`, `role_uid`) VALUES (3, '本科生', '1,11,12,14,15,13,16,2,17,18,20,21,19,22,3,23,25,26,68,24,27,4,28,30,31,29,32,34,35,33,5,40,42,43,41,67,8,57,58,59,9,60,10,62,63,64', 'Seq-showlist,Seq-detail,Seq-add,Seq-upd,Seq-del,Seq-search,Oligo-showlist,Oligo-detail,Oligo-add,Oligo-upd,Oligo-del,Oligo-search,File-showlist,File-add,File-upd,File-del,File-search,Cate-showlist,Cate-add,Cate-upd,Cate-del,Tag-showlist,Tag-add,Tag-upd,Tag-del,Box-showlist,Box-add,Box-upd,Box-del,Recycle-showlist,Recycle-restore,Recycle-delete,Search-index,Help-index,Help-article,Help-about,Manager-resetMyPwd,File-detail', 1473822930, 1473822931, 1, 1);
+
+
+数据库配置
+SeqManager/Common/Conf/config.php中配置数据库信息：
+<?php
+return array(
+    //页面调试开关
+    //'SHOW_PAGE_TRACE' => true,
+    
+    //URL模式
+    'URL_MODEL'=>2,
+
+    //'配置项'=>'配置值'
+    //PDO连接方式是默认的，已经无法设置了。http://www.kancloud.cn/manual/thinkphp/1731
+    //数据库配置信息
+    'DB_TYPE'   => 'mysql', // 数据库类型
+    'DB_HOST'   => '127.0.0.1', // 服务器地址
+    'DB_NAME'   => 'think', // 数据库名
+    'DB_USER'   => 'root', // 用户名
+    'DB_PWD'    => '', // 密码
+    'DB_PORT'   => 3306, // 端口
+    'DB_PARAMS' =>  array(), // 数据库连接参数
+    'DB_PREFIX' => 'wjl_', // 数据库表前缀 
+    'DB_CHARSET'=> 'utf8', // 字符集
+    'DB_DEBUG'  =>  TRUE, // 数据库调试模式 开启后可以记录SQL日志
+);
 
 
 
+
+
+
+  
+  
+  
+  
     >>dev0.9.4 统计一个文件夹下多少行代码。
 http://www.oschina.net/question/2611579_2148704
 
@@ -746,11 +795,14 @@ find . -type f -name "*.js" -exec cat {} \; | grep -v '^$' | wc -l   314
 
 
 
-
 ==============================================
 todo list:
     1.搜索结果的显示 >>dev0.8.2
 2.登录页面GUI
+   登录页面GUI，找一个绚丽的页面。
+
+
+
 3.实时新建分类。
 [不可能了]4.合并Model中的File/id2name()和Oligo/id2name(); 无法合并了，又多出来一个Seq/id2name();
 
