@@ -1,7 +1,7 @@
 <?php
 return array(
     //页面调试开关
-    'SHOW_PAGE_TRACE' => true,
+    //'SHOW_PAGE_TRACE' => true,
     
     //URL模式
     'URL_MODEL'=>2,

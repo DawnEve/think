@@ -719,11 +719,19 @@ SELECT `fr_id`,`fr_name`,`fr_place`,`fr_note`,`fr_time`,`fr_mod_time` FROM wjl_f
 >>dev0.9.2-8 按序列搜索 sequence, 后台数据返回    
     4)如果是测序、引物，则显示序列。
     
+>>dev0.9.3 关掉代码追踪,开始写文档。
+    //1.页面调试开关
+    //'SHOW_PAGE_TRACE' => true,
 
->>dev0.9.3 登录页面GUI，找一个绚丽的页面。
+    //2.开启调试模式 建议开发阶段开启, 部署阶段注释或者设为false
+    define('APP_DEBUG',false);
 
 
 
+  
+  
+  
+  
     >>dev0.9.4 统计一个文件夹下多少行代码。
 http://www.oschina.net/question/2611579_2148704
 
@@ -746,11 +754,14 @@ find . -type f -name "*.js" -exec cat {} \; | grep -v '^$' | wc -l   314
 
 
 
-
 ==============================================
 todo list:
     1.搜索结果的显示 >>dev0.8.2
 2.登录页面GUI
+   登录页面GUI，找一个绚丽的页面。
+
+
+
 3.实时新建分类。
 [不可能了]4.合并Model中的File/id2name()和Oligo/id2name(); 无法合并了，又多出来一个Seq/id2name();
 
