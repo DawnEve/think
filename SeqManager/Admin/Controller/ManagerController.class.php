@@ -257,7 +257,7 @@ array(4) {
     }
     
     //重置密码
-    function resetPwd($mg_id){
+    function resetpwd($mg_id){
         $user=session('user');
         $uid=$user['mg_id'];
         

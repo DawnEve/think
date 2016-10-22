@@ -24,9 +24,13 @@ class AdminController extends Controller {
         //3.否则，进行验证
         $sql='select role_auth_ac from wjl_manager as a, wjl_role as b 
             where a.mg_role_id=b.role_id and a.mg_id='.$uid;
-        $auths=M()->query($sql);
+        //debug($sql);
+        $auths=M()->query($sql); //debug($auths);
+        
         //当前url是否在权限内
-        $rs=in_array($name,explode(',',$auths[0]['role_auth_ac']));
+        $auths_arr=explode(',',$auths[0]['role_auth_ac']); //debug($auths_arr);
+        $rs=in_array($name,$auths_arr); 
+        //debug($name);
         //如果没有权限，则报错并跳转
         if(!$rs){
             //$this->error('没有权限访问该url',U('Manager/index'));

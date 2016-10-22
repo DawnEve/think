@@ -766,25 +766,48 @@ return array(
 
 
 
-
-
+>dev0.9.5 fix bug.
+    写文档的时候又出现问题了。
+    
+    
 
   
   
   
   
-    >>dev0.9.4 统计一个文件夹下多少行代码。
-http://www.oschina.net/question/2611579_2148704
-
+>>dev0.9.6 统计一个文件夹下多少行代码。
+(1)http://www.oschina.net/question/2611579_2148704
 find . -type f -name "*.rb" -exec cat {} \; | grep -v '^$' | wc -l
 
-
-find . -type f -name "*.php" -exec cat {} \; | grep -v '^$' | wc -l     8985    80929
+find . -type f -name "*.php" -exec cat {} \; | grep -v '^$' | wc -l     9039    80929
 find . -type f -name "*.html" -exec cat {} \; | grep -v '^$' | wc -l        5253
-find . -type f -name "*.class.php" -exec cat {} \; | grep -v '^$' | wc -l   3645    36519
-find . -type f -name "*.txt" -exec cat {} \; | grep -v '^$' | wc -l   1494    
+find . -type f -name "*.class.php" -exec cat {} \; | grep -v '^$' | wc -l   3652    36519
+find . -type f -name "*.txt" -exec cat {} \; | grep -v '^$' | wc -l   1389    
 find . -type f -name "*.css" -exec cat {} \; | grep -v '^$' | wc -l   314    
-find . -type f -name "*.js" -exec cat {} \; | grep -v '^$' | wc -l   314    
+find . -type f -name "*.js" -exec cat {} \; | grep -v '^$' | wc -l   4    
+
+一共19 651行。
+
+(2)按照统计\n的方法，结果如下：
+http://www.cnblogs.com/taoweiji/p/3448008.html
+22 530matches in SeqManager
+
+差的很多，不过感觉方法二把空格行也算上了。以第一种统计为准。
+
+
+
+
+
+
+
+
+
+
+
+
+============================================================================================
+=================================     第一版备案    ========================================
+============================================================================================
 
 
 

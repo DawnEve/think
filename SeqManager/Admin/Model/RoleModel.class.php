@@ -4,7 +4,7 @@ use Think\Model;
 
 class RoleModel extends Model {
 	//
-	function saveAuth($auth_id_arr,$role_id){
+	function saveAuth($auth_id_arr,$role_id){ 
 		//接收到一维数组，代表当前权限信息
 		$auth_ids=implode(',', $auth_id_arr);//数组2字符串
 		//2.根据id查询具体 控制器-操作方法 名字
@@ -22,8 +22,10 @@ class RoleModel extends Model {
 	       'role_id'=>$role_id,
 	       'role_auth_ids'=>$auth_ids,
 	       'role_auth_ac'=>$auth_ac,
+	       'auth_mod_time'=>time()
 	   );
-	   if($this->save($data)){
+	   $rs=$this->save($data); //debug($rs);
+	   if($rs>0){
 	       return true;
 	   }else{
 	       return $this->getError();
