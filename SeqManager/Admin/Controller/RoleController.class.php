@@ -16,6 +16,7 @@ class RoleController extends AdminController {
         //0.0如果没有指定role_id，则跳转到showlist页面
         if($role_id<=0){
            $this->redirect('showlist','',2,'未指定对象错误！请先指定操作对象，2秒后跳转...');
+           die();
         }
         
         //0.1如果是提交数据
