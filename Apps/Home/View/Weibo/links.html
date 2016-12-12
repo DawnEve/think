@@ -5,7 +5,41 @@
 	body{font-family:'微软雅黑'; }
 	.wrap{ margin:10px auto; width:1000px; }
 	.item{ margin:5px; padding:10px; border:1px solid #eee;}
-	.item a{color:blue; padding-right:20px;}
+	.small{color: #eb7350;
+		line-height: 26px;
+	    white-space: nowrap;
+	    padding-right:20px;
+	    font-size:12px;
+	    text-decoration:none;
+    }
+	
+	.button {
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAkCAYAAABIdFAMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHhJREFUeNo8zjsOxCAMBFB/KEAUFFR0Cbng3nQPw68ArZdAlOZppPFIBhH5EAB8b+Tlt9MYQ6i1BuqFaq1CKSVcxZ2Acs6406KUgpt5/LCKuVgz5BDCSb13ZO99ZOdcZGvt4mJjzMVKqcha68iIePB86GAiOv8CDADlIUQBs7MD3wAAAABJRU5ErkJggg%3D%3D") repeat-x scroll 0 0 transparent;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 10px; 
+    padding: 5px 12px;
+    text-decoration: none;
+
+    
+	border-radius:10px;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 10px;
+	
+	box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+}
+.button.red {    background-color: #E33100;}
+.button:hover {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAyCAYAAACd+7GKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAClJREFUeNpi/v//vwMTAwPDfzjBgMpFI/7hFSOT9Y8qRuF3JLoHAQIMAHYtMmRA+CugAAAAAElFTkSuQmCC");
+}
+	
     .footer{    margin-top: 50px;
     padding: 20px 0;
     background: #000;
@@ -17,12 +51,12 @@
 
 
 <div class=wrap>
-	<h1>主流英文报纸、杂志的链接 <a target='_blank' href='{:U("Weibo/index")}'>Weibo</a></h1>
+	<h1>主流英文报纸、杂志的链接 <a class="small" target='_blank' href='{:U("Weibo/index")}'>GoBack to Weibo >></a></h1>
 	
 	<volist name="links" id="vo" empty="暂时没有数据">
 		<div class=item>
 			<p>
-				<a target='_blank' href="{$vo[0]}">{$vo[1]}</a>
+				<a class="button red" target='_blank' href="{$vo[0]}">{$vo[1]}</a>
 				<span>{$vo[2]}</span>
 			</p>
 		</div>

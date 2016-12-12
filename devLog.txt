@@ -62,9 +62,10 @@ Logic层不经过数据库，直接返回数据。
 http://tp.dawneve.cc/Goods/tag2
 
 >>L0.0.2 tp内置的Html标签库 
-http://tp.dawneve.cc/Goods/tag3
-
-
-
- 
+http://tp.dawneve.cc/Goods/tag3 
 ===========================================
+
+
+0.8 links的模板中修改button样式表。
+
+
