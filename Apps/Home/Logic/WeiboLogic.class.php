@@ -25,6 +25,7 @@ class WeiboLogic{
             array('http://www.scientificamerican.com/','科学美国人','准确预测全球科学未来的发展趋势，并将科研界的成果和人们的实际应用联系在一起，成为制订政府和企业科技政策和发展战略的首选参考，深入了解各领域科技动态的最佳指南。'),
             array('http://www.prevention.com/','美国预防杂志','杂志侧重实用和自我保健方面的知识，内容包含营养学、减肥方法、美容、预防医学和健身等.'),
             array('http://www.cnbc.com/','CNBC','Consumer News and Business Channel. In-depth world business news from Europe, the Asia-Pacific, Africa, the Middle East, Latin America and global market coverage.'),
+            array('http://www.cnbc.com/','CNBC','Consumer News and Business Channel. In-depth world business news from Europe, the Asia-Pacific, Africa, the Middle East, Latin America and global market coverage.'),
             
             
             array('http://www.nytimes.com/','The New York Times','Breaking News, World News & Multimedia'),
