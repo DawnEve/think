@@ -1,0 +1,102 @@
+<html>
+
+<body>
+<import file='js.order' />
+
+<!-- 
+	<br><a href="__URL__/add">添加</a>
+ -->
+<style>
+
+
+
+
+</style>
+	
+<div class='header'>
+	<div class='center'>
+		<include file="header" />
+		<div class='title'>请输入订单内容：</div>
+		<form method='post' action="__URL__/insert">
+			<div class=left>
+				供应商：<select id="mySelect" name='supplier_id'>
+					<volist name="supplier" id="vo" empty="暂时没有数据">
+						<option value='{$vo.supplier_id}'>{$vo.supplier_name}</option>
+					</volist>
+				</select>
+				订单时间：<input type="text" name="order_time">
+			</div>
+			
+			<table class=simpleTable>
+				<tr>
+
+					<th>名字</th>
+					<th>单位</th>
+					<th>数量</th>
+					<th>单价</th>
+					<th>金额</th>
+					<th>备注</th>
+				</tr>
+				
+				<tr>
+					<td><input type="text" name="order_name[]"></td>
+					<td><input type="text" name="order_unit[]"></td>
+					<td><input type="text" name="order_quantity[]"></td>
+					<td><input type="text" name="order_price[]"></td>
+					<td><span class=total></span></td>
+					<td><input type="text" name="order_note[]"></td>
+				</tr>
+				
+				
+
+			</table>
+			
+
+			<div class=right>
+				<input type='submit' name=send value='提交'>
+			</div>
+		</form>
+			
+	</div>
+</div>
+
+
+
+<div class=content>
+	<div class=center>
+	<h2>订单列表</h2>
+			<table class=simpleTable>
+				<tr>
+					<th>供货商</th>
+					<th>订货时间</th>
+					<th>名字</th>
+					<th>单位</th>
+					<th>数量</th>
+					<th>单价</th>
+					<th>金额</th>
+					<th>备注</th>
+				</tr>
+				
+		<volist name="order" id="vo" empty="暂时没有数据">
+		
+				<tr>
+					<td>{$vo.supplier_name}</td>
+					<td>{$vo.order_time|date='Y-m-d H:i:s',###}</td>
+					<td>{$vo.order_name}</td>
+					<td>{$vo.order_unit}</td>
+					<td>{$vo.order_quantity}</td>
+					<td>{$vo.order_price}</td>
+					<td>{$vo['order_quantity'] * $vo['order_order']}</td>
+					<td>{$vo.order_note}</td>
+				</tr>
+				
+		</volist>
+			</table>
+	</div>
+</div>
+
+
+<include file="footer" />
+
+</body>
+</html>

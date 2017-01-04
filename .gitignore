@@ -12,7 +12,7 @@ backup
 dustbin
 Uploads
 
-#zip(s)²»±¸·Ý
+#zip(s)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 *.rar
 *.backup.zip
 
@@ -29,3 +29,4 @@ Logs
 Runtime/Cache
 Runtime
 Public/Upload
+/nbproject/private/
