@@ -39,10 +39,11 @@ class Think {
 
       $runtimefile  = RUNTIME_PATH.APP_MODE.'~runtime.php';
       if(!APP_DEBUG && Storage::has($runtimefile)){
-          Storage::load($runtimefile);
+          Storage::load($runtimefile);//生产模式
       }else{
+      	//调试模式
           if(Storage::has($runtimefile))
-              Storage::unlink($runtimefile);
+              Storage::unlink($runtimefile);//调试模式删除配置汇总文件
           $content =  '';
           // 读取应用模式
           $mode   =   include is_file(CONF_PATH.'core.php')?CONF_PATH.'core.php':MODE_PATH.APP_MODE.'.php';
@@ -151,6 +152,9 @@ class Think {
             include self::$_map[$class];
         }elseif(false !== strpos($class,'\\')){
           $name           =   strstr($class, '\\', true);
+  	 
+  	      //是否是Think/Org等几个文件夹，或者是否在库文件ThinkPHP\Library/下
+  	      //LIB_PATH = F:\xampp\htdocs\think\ThinkPHP\Library/
           if(in_array($name,array('Think','Org','Behavior','Com','Vendor')) || is_dir(LIB_PATH.$name)){ 
               // Library目录下面的命名空间自动定位
               $path       =   LIB_PATH;

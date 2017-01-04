@@ -1,8 +1,10 @@
 <?php
 namespace Home\Logic;
-use Think\Model;
-class UserLogic extends Model{
-	function index(){
-	   echo 'UserLogic->index()';
+//use Think\Model;
+
+//class UserLogic extends Model{
+class UserLogic{
+	function getdata(){
+	   return 'UserLogic->index() data here';
     }
-} 
+}

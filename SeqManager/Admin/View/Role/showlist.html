@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <title>角色列表</title>
+        <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet" />
+        <link href="{$Think.const.CSS_URL}/mine.css" type="text/css" rel="stylesheet" />
+        <style>
+            .tr_color{background-color: #9F88FF}
+        </style>
+    </head>
+    <body>
+        <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
+            <tr height=28>
+                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：角色管理->角色列表 
+                    <span class='right'><a href="{:U('add')}">【添加角色】</a></span>
+                </td>
+            </tr>
+            <tr>
+                <td bgcolor=#b1ceef height=1></td></tr>
+            <tr height=20>
+                <td background={$Think.const.IMG_URL}/shadow_bg.jpg></td></tr>
+        </table>
+    
+
+        <div style="font-size: 13px; margin: 10px 5px;">
+            <table class="table_a" border="1" width="100%">
+                <tbody><tr style="font-weight: bold;">
+                        <td>ID</td>
+                        <td>名称</td>
+                        <td >操作</td>
+                    </tr>
+                    
+                  <foreach name="role_info" item="vo" >
+                     <tr id="product1">
+                        <td>{$vo.role_id}</td>
+                        <td>{$vo.role_name}</td>
+                        <td><a href='<?php echo U("Role/distribute",array("role_id"=>$vo['role_id'])) ;?>'>分配权限</a></td>
+                      </tr>
+                   </foreach>
+                   
+                </tbody>
+            </table>
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-weight:bold;">
+  
+ <tr>
+ <td style="height:28px;width:60%;">
+    页码
+    </td>
+    <td style="height:28px;width:60%;">
+    当前共有{$role_info_num}个角色</td></tr>
+</table>
+
+        </div>
+    </body>
+</html>

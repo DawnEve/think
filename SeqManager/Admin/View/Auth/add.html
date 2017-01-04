@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <title>添加权限</title>
+        <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet" />
+        <link href="{$Think.const.CSS_URL}/mine.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body>
+       <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
+            <tr height=28>
+                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：权限管理->添加权限</td>
+            </tr>
+            <tr>
+                <td bgcolor=#b1ceef height=1></td></tr>
+            <tr height=20>
+                <td background={$Think.const.IMG_URL}/shadow_bg.jpg></td></tr>
+        </table>
+        
+        
+        <div style="font-size: 13px; margin: 10px 5px;">
+        <form action="__SELF__" method="post" enctype="multipart/form-data">
+            <table class="table_a" border="1" width="100%">
+                
+                <tr>
+                    <td>权限名称:</td>
+                    <td><input type=text name='auth_name' size=50></td>
+                </tr>
+                <tr>
+                    <td>父权限:</td>
+                    <td>
+                       <select name=auth_pid style='width:200px;'>
+                            <option value='0'>根分类</options>
+						  <?php
+						  foreach($auth_select as $k=>$v){
+    							   echo "<option value ='".$k."'>$v</option>\n"; 
+                          }?>
+						</select> <span class=red>(默认是根分类, 父分类只能是根分类、一级、二级分类)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>控制器名:</td>
+                    <td>
+                        <input type=text name=auth_c size=50>
+                    </td>
+                </tr>
+                <tr>
+                    <td>操作名:</td>
+                    <td>
+                        <input type=text name=auth_a size=50>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td></td>
+                    <td><input type='submit' value='提交'>
+                    <input type='button' onclick="history.back(-1)" value='返回'></td>
+                </tr>
+            </table>
+           </form> 
+
+        </div>
+    </body>
+</html>

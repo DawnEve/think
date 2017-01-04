@@ -15,4 +15,8 @@ class UserController extends Controller {
 	function login($user, $pass){
 	   echo 'user:'.$user.'<br> pass:'.$pass;
 	}
+	
+   function number($num=200){
+       echo '<div style="color:red">当前共有'.$num.'万用户正在访问该网站！</div>';
+    }
 }

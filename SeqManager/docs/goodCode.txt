@@ -1,0 +1,100 @@
+本系统中多次使用到的好用的代码、接口等。
+
+==================================================
+>>v0.5.1 Oligo页面 add()。
+--------------------------------------------------
+    /**
+     * 更好用的获取列表的函数 goodcode
+     */
+    //获取数据列表array(1=>'1号冰箱',2=>'2号冰箱');
+    function getList($tb_name, $tb_prefix=null,$uid=0){
+        if($uid==0){ $user=session('user'); $uid=$user['mg_id'];}
+        if(strlen($tb_prefix)>0){}else{ $tb_prefix=$tb_name; }
+        $info_arr=M($tb_name)
+            ->field($tb_prefix.'_id,'.$tb_prefix.'_name')
+            ->where('`condition`>0 AND '.$tb_prefix.'_uid='.$uid)
+            ->select();   
+        return getOneArr($info_arr, $tb_prefix.'_id', $tb_prefix.'_name');
+    }
+    
+    调用 $m=getlist('manager','mg');
+    
+
+==================================================
+MySql 查询以逗号分隔的字符串的方法(正则)  
+--------------------------------------------------
+解决: select oligo_id, tag_ids from wjl_oligo where tag_ids REGEXP '(^|,)5($|,)';
+refer:http://blog.csdn.net/vvhesj/article/details/22299413
+
+2 3,5
+3 5,6
+5 3,5,7
+7 5,15
+10 5
+13 3,5,6
+14 3,5,7,8
+
+==================================================
+>>v0.5.6-2 Oligo页面 showlist(): (3)单击标签，显示该标签的列表。
+--------------------------------------------------
+array_key_exists() 定义和用法 
+array_key_exists() 函数判断某个数组中是否存在指定的 key，如果该 key 存在，则返回 true，否则返回 false。 
+
+语法 
+array_key_exists(key,array) 
+参数 描述 
+key 必需。规定键名。 
+array 必需。规定输入的数组。 
+
+
+==================================================
+>>dev0.7.1 思考搜索页面怎么实现。
+--------------------------------------------------
+比如
+File/search,  Search/index/in/File/by/xx1/wd/xx2
+Seq/search,   Search/index/in/Seq/by/xx1/wd/xx2
+Oligo/search, Search/index/in/Oligo/by/xx1/wd/xx2
+以及Search/index怎么搞。
+怎么搞？
+     (1) 2种分类方式by：cate、tag、keyword，默认是keyword
+     (2) 3种查询结果搜索in：seq/oligo/file，默认是seq
+     (3) 关键词是wd ，难点是怎么分词？
+     
+
+
+
+     
+==================================================
+OligoModel/getData($by,$id,$uid=0)
+--------------------------------------------------
+//uid
+if($uid==0){
+    $user=session('user');
+    $uid=$user['mg_id'];
+}
+
+
+==================================================
+顶部面包屑导航的链接
+--------------------------------------------------
+当前位置：文件管理-><a href='{:U("showlist")}'>文件列表</a> 
+
+==================================================
+带有换行的数据库文本进行html显示，换行变br
+--------------------------------------------------
+{$info.file_note|nl2br}
+
+
+>>dev0.7.2 File/detail() 仿照 Oligo/detail() 。nl2br。
+    (1)note都要正常显示，不要显示在textarea内。同时nl2br等。模仿Weibo系统。
+>>dev0.7.3 修改File、Oligo的upd()成功之后跳转到detail()。
+    
+    
+==================================================
+--------------------------------------------------
+
+
+==================================================
+--------------------------------------------------
+
+

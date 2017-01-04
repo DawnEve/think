@@ -112,7 +112,12 @@ class IndexController extends Controller {
 		echo '<hr>URL_MODEL: ', C('URL_MODEL');
 		echo '<hr>URL_MODEL: ', U();
 	}
-
+	
+	
+	//项目计划书
+    function plan(){
+        $this->display();
+    }
 
 }
 

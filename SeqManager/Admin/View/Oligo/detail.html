@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <title>引物详情</title>
+        <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet" />
+        <link href="{$Think.const.CSS_URL}/mine.css" type="text/css" rel="stylesheet" />
+        <link href="{$Think.const.CSS_URL}/tags.css" type="text/css" rel="stylesheet" />
+<style>
+.tag{
+        color: #1E50A2;
+    margin: 0 5px 0 0;
+    cursor: pointer;
+    background: aliceblue;
+    border-radius: 10px;
+    padding: 0px 5px;
+}
+.tag:hover{
+    background:#9ACCFF;
+}
+</style>
+    </head>
+    <body>
+       <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
+            <tr height=28>
+                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：引物管理-><a href='{:U("showlist")}'>引物列表</a>->引物详情
+                    <span class='right'><a href="{:U('upd',array('id'=>$info['oligo_id']))}">【修改该引物】</a></span>
+                </td>
+            </tr>
+            <tr>
+                <td bgcolor=#b1ceef height=1></td></tr>
+            <tr height=20>
+                <td background={$Think.const.IMG_URL}/shadow_bg.jpg></td></tr>
+        </table>
+        
+        
+        <div style="font-size: 13px; margin: 10px 5px;">
+            <table class="table_a" border="1" width="100%">
+
+
+<!-- ------------- -->
+<tr class=title><td colspan="2">核心信息</td></tr> 
+                <tr>
+                    <td>id:</td>
+                    <td>{$info.oligo_id}</td>
+                </tr>
+                <tr>
+                    <td>引物名称:</td>
+                    <td>{$info.oligo_name}</td>
+                </tr>
+                <tr>
+                    <td>订单号:</td>
+                    <td>{$info.oligo_order_no}</td>
+                </tr>
+                <tr>
+                    <td>序列:</td>
+                    <td><div class=code>{$info.oligo_sequence|nl2br}</div></td>
+                </tr>
+                <tr>
+                    <td>酶切位点:</td>
+                    <td>{$info.oligo_en_site}</td>
+                </tr>
+
+                <tr>
+                    <td>备注:</td>
+                    <td>{$info.oligo_note|nl2br}</td>
+                </tr>
+                
+                
+                <tr>
+                    <td>附件:</td>
+                    <td><span class=red>(保存文件：请右击链接，选择另存为即可。)</span><br>
+	                    {$info.file_links}
+                    </td>
+                </tr>
+                
+ 
+ 
+ 
+ 
+ 
+<!-- ------------- -->
+<tr class=title><td colspan="2">类别信息</td></tr>     
+                <tr>
+                    <td>分类:</td>
+                    <td><a href="{:U('Oligo/showlist', array('cate_id'=>$info['cate_id']))}">
+                            {$info.cate_name}</a></td>
+                </tr>
+                <tr>
+                    <td>标签:</td>
+                    <td>{$info.tag_name_links}</td>
+                </tr>
+
+
+
+
+
+
+ 
+ 
+<!-- ------------- -->
+<tr class=title><td colspan="2">位置信息</td></tr>
+    
+                <tr>
+                    <td>所在冰箱:
+                    </td>
+                    <td>
+                        <a href="{:U('Fridge/showlist',array('id'=>$info['fr_id']))}">{$info.fr_name}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>所在盒子:</td>
+                    <td>
+                        <a href="{:U('Box/showlist',array('id'=>$info['box_id']))}">{$info.box_name}</a>                        
+                    </td>
+                </tr>
+                <tr>
+                    <td>在盒子内的行列坐标:</td>
+                    <td>{$info.place|default="【这家伙很懒，什么也没有标记】"}
+                        <span class=red> [例:冻存管保存在第1行第8列就记做 (1,8)] </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                      <a href="{:U('upd',array('id'=>$info['oligo_id']))}"><input type='button' value='修改该引物'></a>
+                      <input type='button' onclick="history.back(-1)" value='返回'>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </body>
+</html>

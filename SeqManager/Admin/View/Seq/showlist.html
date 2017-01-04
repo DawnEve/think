@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <title>测序列表</title>
+        <link href="{$Think.const.CSS_URL}/admin.css" type="text/css" rel="stylesheet" />
+        <link href="{$Think.const.CSS_URL}/mine.css" type="text/css" rel="stylesheet" />
+<style>
+.tag{
+    color: #1E50A2;
+    margin: 0 5px 0 0;
+    cursor: pointer;
+    background: aliceblue;
+    border-radius: 10px;
+    padding: 0px 5px;
+}
+.tag:hover{
+    background:#9ACCFF;
+}
+</style>
+    </head>
+    
+    <body>
+       <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
+            <tr height=28>
+                <td background={$Think.const.IMG_URL}/title_bg1.jpg>当前位置：测序管理-><a href='{:U("showlist")}'>测序列表</a> 
+<?php 
+    if(!empty($hint_text)){ echo '->'.$hint_text; }
+?>              
+                    <span class='right'><a href="{:U('add')}">【添加测序】</a></span>
+                </td>
+            </tr>
+            <tr>
+                <td bgcolor=#b1ceef height=1></td></tr>
+            <tr height=20>
+                <td background={$Think.const.IMG_URL}/shadow_bg.jpg></td></tr>
+        </table>
+        
+        
+ 
+        <div style="font-size: 13px; margin: 10px 5px;">
+            <table class="table_a" border="1" width="100%">
+                <tbody><tr style="font-weight: bold;">
+                        <td>ID</td>
+                        <td>测序名称</td>
+                        <td>订单编号</td>
+                        <td>测序引物<br><span class=light>(鼠标悬停显示序列)</span></td>
+                        <td>分类</td>
+                        <td>标签</td>
+                        <td>备注</td>
+                        <td>附件数</td>
+                        <td>创建时间</td>
+                        <td>上次修改时间</td>
+                        <td >操作</td>
+                    </tr>
+                    
+                  <foreach name="info" item="vo" >
+                     <tr>
+                        <td>{$vo.seq_id}</td>
+                        <td>
+                            <a href="{:U('detail', array('id'=>$vo['seq_id']))}">{$vo.seq_name}</a>
+                        </td>
+                        <td>{$vo.seq_order_no}</td>
+                        <td>
+                            <a title='{$vo.seq_oligo_sequence}' href="{:U('Oligo/detail', array('id'=>$vo['seq_oligo_ids']))}">
+                            {$vo.seq_oligo_name}</a>
+                        </td>
+                        
+                        <td>
+                            <a href="{:U('Seq/showlist', array('by'=>'cate','id'=>$vo['cate_id']))}">
+                            {$vo.cate_name}</a>
+                        </td>
+                        <td>{$vo.tag_name_links}</td>
+                        
+                        
+                        <td>{$vo.seq_note|my_mb_substr}</td>
+                        <td>
+<?php 
+if($vo['file_ids']==''){ echo 0;}
+else{echo (substr_count($vo['file_ids'],',')+1);}
+?>
+                        </td>
+                        <td>{$vo.seq_time|date="Y-m-d H:i:s",###}</td>
+                        <td>{$vo.seq_mod_time|date="Y-m-d H:i:s",###}</td>
+                        <td>
+                            <a href='<?php echo U("upd",array('id'=>$vo['seq_id'])) ;?>'>修改</a> | 
+                            <a href='<?php echo U("del",array('id'=>$vo['seq_id'])) ;?>'>删除</a> 
+                        </td>
+                      </tr>
+                   </foreach>
+                   
+                </tbody>
+            </table>
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-weight:bold;">
+  
+ <tr>
+ <td style="height:28px;width:60%;">
+    页码
+    </td>
+    <td style="height:28px;width:60%;">
+    当前共有{$info_num}个条目</td></tr>
+</table>
+
+        </div>
+    </body>
+</html>
