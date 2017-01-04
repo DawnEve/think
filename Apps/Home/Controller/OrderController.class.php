@@ -38,10 +38,52 @@ class OrderController extends Controller {
     }
 
 
-    //插入
-    public function insert(){
-
-    }
+	//插入
+	public function insert(){
+		
+		//如果order_time为空，则补充为当前时间
+		$time=I("order_time");
+		if($time==""){
+			//
+			$_POST['order_time']=time();
+		}else{
+			$y=substr($time,0,4);
+			$m=substr($time,4,2);
+			$d=substr($time,6,2);
+			//int mktime(时, 分, 秒, 月, 日, 年)
+			$_POST['order_time']= mktime(0, 0, 0, $m, $d, $y);
+		}
+		
+		$data=array(
+			"supplier_id"=>I("supplier_id"),
+			"order_time"=>I("order_time"),
+			"order_status"=>1,
+			"add_time"=>time(),
+		);
+		
+		$result=1;
+		$form=D('order');
+		for($i=0;$i<count($_POST['order_name']);$i++){
+			$data['order_name']=$_POST['order_name'][$i];
+			$data['order_unit']=$_POST['order_unit'][$i];
+			$data['order_quantity']=$_POST['order_quantity'][$i];
+			$data['order_price']=$_POST['order_price'][$i];
+			$data['order_note']=$_POST['order_note'][$i];
+			
+			if($data['order_name']=="") continue;
+			
+			$form->create($data);
+			if(!$form->add()){
+				$result *= 0;
+			}
+		}
+		
+		if($result){
+			$this->success('添加成功');
+		}else{
+			$this->error('添加失败！');
+		}
+	}
 
 
     //显示全部

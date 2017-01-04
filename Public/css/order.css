@@ -11,23 +11,27 @@ body,div,p,textarea,ul,li,form,input{margin:0; padding:0;}
 	.header .title{font-size:12px;  padding:10px; background:#33CCFF; color:#fff;font-weight:600;}
 	
 	.content{ padding-top: 20px;}
-.header .left select {
-    font-size: 20px;
+.header .left select,.header .left input {
     margin: 5px;
     padding: 5px 10px;
 }
-.header .left input {
-    font-size: 20px;
-    margin: 5px;
-    padding: 5px 10px;
-}
-	.header .right input[type='submit']{margin:32px; padding:10px 25px;border:0; background:#33CCFF;}
-	.header .right input[type='submit']:hover{background:#01BFFE;}
+	.btn{margin:32px; padding:10px 25px;border:0; background:#33CCFF; cursor: pointer;}
+	.btn:hover{background:#01BFFE;}
+
+.footer{margin-top:50px;padding:20px 0;
+		background:#000;color:#fff; font-family:'微软雅黑'; 
+
+		text-align:center;
+		width:100%;
+	}
 	
-		
+	.footer a{color:#fff;}
+	
+			
 .simpleTable{ width:100%;border-collapse:collapse; padding:10px 0; background:#eee;}
 .simpleTable,.simpleTable tr,.simpleTable tr td{padding:0;margin:0;}
 .simpleTable{border:solid #add9c0; border-width:1px 0px 0px 1px;}
-.simpleTable input[type="text"]{width:80%; padding:10px 0px;} 
-.simpleTable tr td,.simpleTable tr th{text-align: center;
-border:solid #add9c0; border-width:0px 1px 1px 0px; } 
+.simpleTable input[type="text"]{width:80%; padding: 5px 10px; border: 0px;} 
+.simpleTable tr td,.simpleTable tr th{text-align: center;border:solid #add9c0; border-width:0px 1px 1px 0px; } 
+.simpleTable a{text-decoration:none; color:black; font-size:smaller;}
+.simpleTable a:hover{text-decoration:underline;}

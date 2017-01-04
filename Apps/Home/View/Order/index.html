@@ -8,7 +8,7 @@
  -->
 <style>
 
-
+.info{padding:0 20px 0 0;}
 
 
 </style>
@@ -17,19 +17,23 @@
 	<div class='center'>
 		<include file="header" />
 		<div class='title'>请输入订单内容：</div>
-		<form method='post' action="__URL__/insert">
+		<form method='post' action="__URL__/insert"  onsubmit="return checkFrom();" >
 			<div class=left>
-				供应商：<select id="mySelect" name='supplier_id'>
+				<span class=info>供应商：<select id="mySelect" name='supplier_id'>
 					<volist name="supplier" id="vo" empty="暂时没有数据">
 						<option value='{$vo.supplier_id}'>{$vo.supplier_name}</option>
 					</volist>
-				</select>
-				订单时间：<input type="text" name="order_time">
+					<option value=1000>其他</option>
+				</select></span>
+				
+				<span class=info>订单时间：<input type="text" name="order_time" placeholder="20170101"></span>
+				
+				<span class=info>总金额：<span id='total'>0</span>元</span>
 			</div>
 			
-			<table class=simpleTable>
+			<table class=simpleTable id=moreTr>
 				<tr>
-
+					<th>编号</th>
 					<th>名字</th>
 					<th>单位</th>
 					<th>数量</th>
@@ -39,21 +43,20 @@
 				</tr>
 				
 				<tr>
+					<td><span>1</span></td>
 					<td><input type="text" name="order_name[]"></td>
 					<td><input type="text" name="order_unit[]"></td>
-					<td><input type="text" name="order_quantity[]"></td>
-					<td><input type="text" name="order_price[]"></td>
-					<td><span class=total></span></td>
+					<td><input type="text" onchange="calc1(1)" name="order_quantity[]"></td>
+					<td><input type="text" onchange="calc1(1)" name="order_price[]"></td>
+					<td><input type="text" disabled=true value=0></span></td>
 					<td><input type="text" name="order_note[]"></td>
 				</tr>
-				
-				
-
 			</table>
 			
 
+			<span onclick="addTr()" class=btn style="float:left;">+</span>
 			<div class=right>
-				<input type='submit' name=send value='提交'>
+				<input type='submit' value='提交' class=btn>
 			</div>
 		</form>
 			
@@ -62,11 +65,18 @@
 
 
 
+
+
+
+
+
+
 <div class=content>
 	<div class=center>
-	<h2>订单列表</h2>
+	<h2>订单列表 <a href="{:U('Order/index')}">全部</a></h2>
 			<table class=simpleTable>
 				<tr>
+					<th>订单编号</th>
 					<th>供货商</th>
 					<th>订货时间</th>
 					<th>名字</th>
@@ -80,13 +90,16 @@
 		<volist name="order" id="vo" empty="暂时没有数据">
 		
 				<tr>
-					<td>{$vo.supplier_name}</td>
-					<td>{$vo.order_time|date='Y-m-d H:i:s',###}</td>
+					<td>{$vo.order_id}</td>
+					<td><a href="<?php 
+					echo U('Order/index',array('supplier_id'=>$vo['supplier_id']));
+					?>">{$vo.supplier_name}</a></td>
+					<td>{$vo.order_time|intval|date='Y-m-d',###}</td>
 					<td>{$vo.order_name}</td>
 					<td>{$vo.order_unit}</td>
 					<td>{$vo.order_quantity}</td>
 					<td>{$vo.order_price}</td>
-					<td>{$vo['order_quantity'] * $vo['order_order']}</td>
+					<td>{$vo['order_quantity']*$vo['order_price']}</td>
 					<td>{$vo.order_note}</td>
 				</tr>
 				

@@ -106,6 +106,8 @@ CREATE TABLE `think_supplier` (
 OrderV2.加入一个主界面。
 
 OrderV3.问题：怎么计算购物车每行的小结价格？
+OrderV4.基本完成主要功能。
+
 
 
 
