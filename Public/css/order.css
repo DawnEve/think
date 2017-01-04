@@ -2,7 +2,7 @@
 
 body,div,p,textarea,ul,li,form,input{margin:0; padding:0;}
 	body{background:#EFF5DD;}
-	.center{width:900px; margin:0 auto;overflow: hidden;}
+	.center{width:1200px; margin:0 auto;overflow: hidden;}
 	.right{float:right; }
 	h2{padding-top:10px;  padding:0;    margin-bottom:10px;}
 	h2>a{text-decoration:none; color:#000;}
@@ -27,11 +27,14 @@ body,div,p,textarea,ul,li,form,input{margin:0; padding:0;}
 	
 	.footer a{color:#fff;}
 	
+.light{color:#ccc;}
 			
-.simpleTable{ width:100%;border-collapse:collapse; padding:10px 0; background:#eee;}
+.simpleTable{ width:100%;border-collapse:collapse; padding:10px 0; background:#eee; font-size:15px;}
+.simpleTable tr.even{background:#F8FCED;}
+.simpleTable tr:hover{background:white;}
 .simpleTable,.simpleTable tr,.simpleTable tr td{padding:0;margin:0;}
 .simpleTable{border:solid #add9c0; border-width:1px 0px 0px 1px;}
-.simpleTable input[type="text"]{width:80%; padding: 5px 10px; border: 0px;} 
+.simpleTable input[type="text"]{ padding: 5px 10px; border: 0px;} 
 .simpleTable tr td,.simpleTable tr th{text-align: center;border:solid #add9c0; border-width:0px 1px 1px 0px; } 
 .simpleTable a{text-decoration:none; color:black; font-size:smaller;}
 .simpleTable a:hover{text-decoration:underline;}

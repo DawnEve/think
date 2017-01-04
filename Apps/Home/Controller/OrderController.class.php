@@ -13,18 +13,18 @@ class OrderController extends Controller {
         if($supplier_id>0){
             //http://tp.dawneve.com/order/index/supplier_id/1
             $data=M('order')->alias('a')
-                            ->field('order_id, order_name, order_unit, order_quantity, order_price, order_note, order_time, a.supplier_id,b.supplier_name')
+                            ->field('order_id, order_name, order_unit, order_quantity, order_price, order_note, order_time, add_time, a.supplier_id,b.supplier_name')
                             ->join('think_supplier b ON a.supplier_id = b.supplier_id', 'LEFT')
                             ->where('a.supplier_id=' . $supplier_id . ' and a.order_status >0')
-                            ->order('order_id DESC')
+                            ->order('order_time DESC')
                             ->select();
         }else{
             //http://tp.dawneve.com/order/
              $data=M('order')->alias('a')
-                            ->field('order_id, order_name, order_unit, order_quantity, order_price, order_note, order_time, a.supplier_id,b.supplier_name')
+                            ->field('order_id, order_name, order_unit, order_quantity, order_price, order_note, order_time, add_time, a.supplier_id,b.supplier_name')
                             ->join('think_supplier b ON a.supplier_id = b.supplier_id', 'LEFT')
                             ->where('a.order_status >0')
-                            ->order('order_id DESC')
+                            ->order('order_time DESC')
                             ->select();
         }
         //获取供应商信息

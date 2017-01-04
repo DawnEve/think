@@ -23,7 +23,7 @@
 					<volist name="supplier" id="vo" empty="暂时没有数据">
 						<option value='{$vo.supplier_id}'>{$vo.supplier_name}</option>
 					</volist>
-					<option value=1000>其他</option>
+					<option value=-1>其他</option>
 				</select></span>
 				
 				<span class=info>订单时间：<input type="text" name="order_time" placeholder="20170101"></span>
@@ -73,34 +73,44 @@
 
 <div class=content>
 	<div class=center>
-	<h2>订单列表 <a href="{:U('Order/index')}">全部</a></h2>
+	<h2>订单列表</h2>
+		<a class=btn style="font-size:smaller" href="{:U('Order/index')}">全部</a>
+	
+	<hr />
 			<table class=simpleTable>
 				<tr>
 					<th>订单编号</th>
 					<th>供货商</th>
 					<th>订货时间</th>
-					<th>名字</th>
+					<th>试剂、耗材名字</th>
 					<th>单位</th>
 					<th>数量</th>
 					<th>单价</th>
 					<th>金额</th>
 					<th>备注</th>
+					<th>添加日期</th>
 				</tr>
 				
-		<volist name="order" id="vo" empty="暂时没有数据">
+		<volist name="order" id="vo" empty="暂时没有数据" key="k">
 		
-				<tr>
+				<tr <if condition="$k%2=='0'">class="even"</if>>
 					<td>{$vo.order_id}</td>
-					<td><a href="<?php 
+					<td><?php if($vo['supplier_id']<0){ 
+						echo "其他"; } else{
+					
+					echo '<a href="'; 
 					echo U('Order/index',array('supplier_id'=>$vo['supplier_id']));
-					?>">{$vo.supplier_name}</a></td>
+					echo '">'.$vo['supplier_name'].'</a>';
+					 }?>
+					 </td>
 					<td>{$vo.order_time|intval|date='Y-m-d',###}</td>
-					<td>{$vo.order_name}</td>
+					<td style="text-align:left; padding-left:5px;">{$vo.order_name}</td>
 					<td>{$vo.order_unit}</td>
 					<td>{$vo.order_quantity}</td>
 					<td>{$vo.order_price}</td>
 					<td>{$vo['order_quantity']*$vo['order_price']}</td>
 					<td>{$vo.order_note}</td>
+					<td class=light><span title="{$vo.add_time|intval|date='Y-m-d H:i:s',###}">*</span></td>
 				</tr>
 				
 		</volist>
