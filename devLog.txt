@@ -69,7 +69,7 @@ http://tp.dawneve.cc/Goods/tag3
 0.8 links的模板中修改button样式表。
 
 0.9 links页修改样式表，view显示方式，logic页的数据格式
-
+0.9.1 links页面修改底部版权文字。add links。
 
 
 

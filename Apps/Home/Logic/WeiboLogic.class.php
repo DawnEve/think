@@ -9,15 +9,17 @@ class WeiboLogic{
 
 			array(0=>'新闻news',
 				1=>array(
-					array('http://www.bbc.com/news','BBC','BBC新闻'),
+					array('http://www.bbc.com/news','BBC','BBC新闻. http://www.bbc.co.uk/aboutthebbc/'),
 					array('https://www.yahoo.com/','雅虎新闻','门户新闻'),
 					array('http://www.usatoday.com/','今日美国','Latest World and US News'),
 					array('http://www.thetimes.co.uk/','The Times','News and opinion from The Times & The Sunday Times.【短小精悍，仅有预览】'),
 					array('http://edition.cnn.com/','CNN','Breaking News, Latest News and Videos'),
 					array('http://www.latimes.com/','洛杉矶时报','California, national and world news'),
-					array('http://www.51voa.com/','VOA','国内转载，听力材料。'),
+					array('http://www.51voa.com/','VOA','国内转载，听力材料。原VOA已经被屏蔽 https://www.voanews.com/ '),
 					array('http://www.newsweek.com/','Newsweek 新闻周刊','News, Analysis, Politics, Business, Technology, Lifestyle, Photos and Video'),
 					array('http://www.nytimes.com/','The New York Times','Breaking News, World News & Multimedia'),
+					array('https://www.washingtonpost.com/','The Washington Post','Breaking news and analysis on politics, business, world national news, entertainment more. In-depth DC, Virginia, Maryland news coverage including traffic, ...'),
+					array('http://www.dailymail.co.uk','Daily Mail','英国每日邮报（Daily Mail）MailOnline - all the latest news, sport, showbiz, science and health stories from around the world from the Daily Mail...'),
 			)),
 
 			
@@ -26,6 +28,8 @@ class WeiboLogic{
 				array(
 					array('https://www.economist.com/','经济学人','《经济学人》的主要读者群体是高级知识分子以及准备考研、考博的同学学习英语的阅读资料。在本科学生中，越来越多的同学也开始关注这份报纸,经济学人相比较于其他国内外语报纸的态度更客观，视角更宽。'),
 					array('https://hbr.org','哈佛商业评论','Ideas and Advice for Leaders 财经、管理类文章'),
+					array('https://www.ft.com/','FT','英国金融时报（Financial Times）是由James Sheridan及其兄弟于1888年创办的世界著名的国际性金融媒体。'),
+					array('http://www.ftchinese.com/channel/english.html','FTchinese','Finacial times金融时报中文双语版-【电台语音】每天听FT英语电台，你也能说一口正宗的伦敦腔'),
 					array('http://www.cnbc.com/','CNBC','Consumer News and Business Channel. In-depth world business news from Europe, the Asia-Pacific, Africa, the Middle East, Latin America and global market coverage.'),
 					array('https://www.wsj.com','华尔街日报','《华尔街日报》的读者主要为政治、经济、教育和医学界的人士，金融大亨和经营管理人员以及股票市场的投资者，其中包括20万名的董事长、总经理。美国500家最大企业的经理人员绝大部分订阅此报。'),
 					array('http://fortune.com/','美国财富杂志','Fortune 500 Daily & Breaking Business News'),
