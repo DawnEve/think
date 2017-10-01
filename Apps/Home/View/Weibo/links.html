@@ -1,7 +1,7 @@
 <charset='utf8'>
 
 <style>
-	div,p,a,span{padding:0; margin:0; }
+	div,p,a,span,h2{padding:0; margin:0; }
 	body{font-family:'微软雅黑'; }
 	.wrap{ margin:10px auto; width:1000px; }
 	.item{ margin:5px; padding:10px; border:1px solid #eee;}
@@ -12,8 +12,10 @@
 	    font-size:12px;
 	    text-decoration:none;
     }
-	
-	.button {
+
+.wrap h2{border-bottom:1px dashed #eee; margin-bottom:2px;}
+.wrap p span{font-size:10px;}
+.button {
     background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAkCAYAAABIdFAMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHhJREFUeNo8zjsOxCAMBFB/KEAUFFR0Cbng3nQPw68ArZdAlOZppPFIBhH5EAB8b+Tlt9MYQ6i1BuqFaq1CKSVcxZ2Acs6406KUgpt5/LCKuVgz5BDCSb13ZO99ZOdcZGvt4mJjzMVKqcha68iIePB86GAiOv8CDADlIUQBs7MD3wAAAABJRU5ErkJggg%3D%3D") repeat-x scroll 0 0 transparent;
     color: #FFFFFF;
     cursor: pointer;
@@ -51,20 +53,23 @@
 
 
 <div class=wrap>
-	<h1>主流英文报纸、杂志的链接 <a class="small" target='_blank' href='{:U("Weibo/index")}'>GoBack to Weibo >></a></h1>
+	<h1>主流英文报纸杂志 <a class="small" target='_blank' href='{:U("Weibo/index")}'>GoBack to Weibo >></a></h1>
 	
 	<volist name="links" id="vo" empty="暂时没有数据">
 		<div class=item>
-			<p>
-				<a class="button red" target='_blank' href="{$vo[0]}">{$vo[1]}</a>
-				<span>{$vo[2]}</span>
-			</p>
+			<h2>{$vo[0]}</h2>
+			<volist name="vo[1]" id="lk" empty="暂时没有数据">
+				<p>
+					<a class="button red" target='_blank' href="{$lk[0]}">{$lk[1]}</a>
+					<span>{$lk[2]}</span>
+				</p>
+			</volist>
 		</div>
 	</volist>
 </div>
 
 <div class=footer>
     <div class=wrap>
-    2016 &copy; 拂晓学术版权所有
+    2017 &copy; 拂晓学术版权所有
     </div>
 </div>
