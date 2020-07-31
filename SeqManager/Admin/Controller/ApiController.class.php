@@ -9,7 +9,7 @@ class ApiController extends Controller {
     	 array(1) {
   ["user"] => array(6) {
     ["mg_id"] => string(1) "5"
-    ["mg_name"] => string(9) "王军亮"
+    ["mg_name"] => string(9) "王某某"
     ["mg_role_id"] => string(1) "2"
     ["mg_time"] => string(10) "1473822134"
     ["mg_mod_time"] => string(10) "1474010238"

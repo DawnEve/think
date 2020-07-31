@@ -1,4 +1,9 @@
 ﻿
+net settings: 
+G:\xampp\apache\conf\extra
+C:\Windows\System32\drivers\etc
+
+
 2015-12-23 23:07:10
 m主要对数据库操作，也多用于处理接口，
 c控制器，控制逻辑，将v返回的数据做逻辑判断，去调用m
