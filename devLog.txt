@@ -1,4 +1,5 @@
 weibo项目
+	http://tp.dawneve.cc/weibo
 ----------------------------
 --微博信息表
 CREATE TABLE `think_weibo` (
@@ -8,6 +9,19 @@ CREATE TABLE `think_weibo` (
   `add_time` varchar(30) DEFAULT NULL,
   `cid` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+MariaDB [think]> desc think_weibo;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(10)     | NO   | PRI | NULL    | auto_increment |
+| uid      | int(20)     | NO   |     | NULL    |                |
+| content  | text        | YES  |     | NULL    |                |
+| add_time | varchar(30) | YES  |     | NULL    |                |
+| cid      | int(10)     | YES  |     | NULL    |                |
+| archive  | int(10)     | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+
 
 --微博分类表
 CREATE TABLE `think_weibo_category` (
@@ -70,6 +84,11 @@ http://tp.dawneve.cc/Goods/tag3
 
 0.9 links页修改样式表，view显示方式，logic页的数据格式
 0.9.1 去个人信息
-
+0.9.2 备份MySql 表内容:
+	> mysqldump -u root -p"" think > G:\DB_think.sql
+	> 默认本地登录没有密码。
+	#
+	恢复 MySQL 数据库: 要恢复 MySQL 数据库，可以使用以下命令：
+	> mysql -u username -p password database_name < backup_file.sql
 
 
