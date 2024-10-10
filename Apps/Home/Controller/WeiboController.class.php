@@ -59,11 +59,12 @@ class WeiboController extends Controller {
 	}
 	
 	
-	//显示全部
+	//显示 archive 为1
 	public function archive(){
 		$weibo=M('weibo')->alias('a')
 			->field('a.id, a.uid, a.content, a.add_time, a.cid, b.name, b.pid')
 			->join('think_weibo_category b ON a.cid = b.id', 'LEFT')
+			->where('a.archive is not null')
 			->order('add_time DESC')
 			->select();
 

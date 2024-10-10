@@ -74,6 +74,10 @@ var_dump($pos2);//bool(false)
 
 
 
+
+
+
+
 # weibo system info
 
 ## how to start
@@ -117,7 +121,22 @@ MariaDB [(none)]> show variables like 'character%';
 +--------------------------+--------------------------------+
 ```
 
+
 ## 已经掌握的单词
 
-> todo 归档功能：记住的单词和句子
+登录数据库
+
+```
+使用cmd，不能是powerShell:
+D:\xampp\mysql\bin>mysql -u root -p
+MariaDB [(none)]> use think;
+```
+
+已掌握的句子，设置 archive 为年月日
+`> update think_weibo set archive =20241010 where id=5;`
+
+又忘了，设置为null
+`> update think_weibo set archive=null where id=5;`
+
+
 

@@ -93,4 +93,4 @@ http://tp.dawneve.cc/Goods/tag3
 0.9.3 update css
 0.9.4 使用cmd，语句见 ReadMe.md:Backup DB
 	不能是power sehll，会中文乱码
-
+0.9.5 archive 字段为空，只在首页；有年月日，则只在archive页显示
