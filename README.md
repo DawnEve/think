@@ -70,3 +70,54 @@ var_dump($pos2);//bool(false)
 
 ```
 
+
+
+
+
+# weibo system info
+
+## how to start
+
+- create DB `think` at local mysql
+- add tables `think_weibo` and `think_weibo_category` in devLog.txt, or insert sql file from backup files.
+- put this project in XAMPP under htdocs/
+- set apache and hosts file
+- browse http://tp.dawneve.cc/weibo
+
+
+## Backup and recover DB
+
+```
+注意：使用cmd，不能是power sehll。后者会中文乱码。
+
+备份语句:
+> mysqldump -u root -p"" think > G:\DB_think.sql
+> 默认本地登录没有密码。
+
+恢复语句:
+> mysql -u root -p mydatabase < mydatabase_backup.sql
+```
+
+
+```
+查看字符集
+> .\mysql -uroot -p
+MariaDB [(none)]> show variables like 'character%';
++--------------------------+--------------------------------+
+| Variable_name            | Value                          |
++--------------------------+--------------------------------+
+| character_set_client     | gbk                            |
+| character_set_connection | gbk                            |
+| character_set_database   | latin1                         |
+| character_set_filesystem | binary                         |
+| character_set_results    | gbk                            |
+| character_set_server     | latin1                         |
+| character_set_system     | utf8                           |
+| character_sets_dir       | D:\xampp\mysql\share\charsets\ |
++--------------------------+--------------------------------+
+```
+
+## 已经掌握的单词
+
+> todo 归档功能：记住的单词和句子
+

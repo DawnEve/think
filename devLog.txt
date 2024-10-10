@@ -91,5 +91,6 @@ http://tp.dawneve.cc/Goods/tag3
 	恢复 MySQL 数据库: 要恢复 MySQL 数据库，可以使用以下命令：
 	> mysql -u username -p password database_name < backup_file.sql
 0.9.3 update css
-
+0.9.4 使用cmd，语句见 ReadMe.md:Backup DB
+	不能是power sehll，会中文乱码
 
